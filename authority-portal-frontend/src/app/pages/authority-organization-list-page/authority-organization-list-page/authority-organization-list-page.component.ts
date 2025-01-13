@@ -10,11 +10,13 @@
  * Contributors:
  *      sovity GmbH - initial implementation
  */
+import {Location} from '@angular/common';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {Title} from '@angular/platform-browser';
+import {ActivatedRoute} from '@angular/router';
 import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {take, takeUntil} from 'rxjs/operators';
 import {Store} from '@ngxs/store';
 import {
   OrganizationOverviewEntryDto,
@@ -58,6 +60,7 @@ export class AuthorityOrganizationListPageComponent
 {
   state = DEFAULT_AUTHORITY_ORGANIZATION_LIST_PAGE_STATE;
 
+  organizationId!: string | undefined;
   showDetail: boolean = false;
   slideOverConfig!: SlideOverConfig;
   componentToRender = AuthorityOrganizationDetailPageComponent;
@@ -75,16 +78,25 @@ export class AuthorityOrganizationListPageComponent
     private slideOverService: SlideOverService,
     private globalStateUtils: GlobalStateUtils,
     private titleService: Title,
+    private activatedRoute: ActivatedRoute,
+    private location: Location,
   ) {
     this.titleService.setTitle('Participant Management');
   }
 
   ngOnInit() {
-    this.initializeHeaderBar();
-    this.initializeFilterBar();
-    this.refresh();
-    this.startListeningToState();
-    this.startRefreshingOnEnvChange();
+    this.activatedRoute.params.pipe(take(1)).subscribe((params) => {
+      this.organizationId = params.organizationId;
+      if (this.organizationId) {
+        this.location.go('/authority/organizations');
+      }
+
+      this.initializeHeaderBar();
+      this.initializeFilterBar();
+      this.refresh();
+      this.startListeningToState();
+      this.startRefreshingOnEnvChange();
+    });
   }
 
   initializeHeaderBar() {
@@ -132,6 +144,19 @@ export class AuthorityOrganizationListPageComponent
       .subscribe((state) => {
         this.state = state;
         this.showDetail = state.showDetail;
+
+        if (this.state.organizations.state === 'ready' && this.organizationId) {
+          const entry: OrganizationOverviewEntryDto | undefined =
+            state.organizations.data.find(
+              (org) => org.id === this.organizationId,
+            );
+
+          if (entry) {
+            this.openDetailPage(entry);
+          }
+
+          this.organizationId = undefined;
+        }
       });
   }
 
