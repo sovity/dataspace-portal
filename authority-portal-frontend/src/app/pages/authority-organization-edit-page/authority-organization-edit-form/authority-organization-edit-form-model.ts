@@ -10,11 +10,13 @@
  * Contributors:
  *      sovity GmbH - initial implementation
  */
-import {ɵFormGroupRawValue} from '@angular/forms';
+import {FormControl, ɵFormGroupRawValue} from '@angular/forms';
 import {OrganizationEditFormModel} from '../../../shared/business/organization-edit-form/organization-edit-form-model';
 
-export interface AuthorityOrganizationEditPageFormModel
-  extends OrganizationEditFormModel {}
+export interface AuthorityOrganizationEditFormModel
+  extends OrganizationEditFormModel {
+  legalName: FormControl<string>;
+}
 
-export type AuthorityOrganizationEditPageFormValue =
-  ɵFormGroupRawValue<AuthorityOrganizationEditPageFormModel>;
+export type AuthorityOrganizationEditFormValue =
+  ɵFormGroupRawValue<AuthorityOrganizationEditFormModel>;

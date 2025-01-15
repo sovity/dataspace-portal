@@ -21,11 +21,11 @@ import {CustomRxjsOperators} from 'src/app/core/services/custom-rxjs-operators';
 import {Fetched} from 'src/app/core/utils/fetched';
 import {GlobalStateUtils} from '../../../core/global-state/global-state-utils';
 import {HeaderBarConfig} from '../../../shared/common/header-bar/header-bar.model';
-import {AuthorityOrganizationEditPageForm} from '../authority-organization-edit-page/authority-organization-edit-page.form';
+import {AuthorityOrganizationEditForm} from '../authority-organization-edit-form/authority-organization-edit-form';
 import {
   buildEditRequest,
   buildFormValue,
-} from '../authority-organization-edit-page/authority-organization-edit-page.form-mapper';
+} from '../authority-organization-edit-form/authority-organization-edit-form-mapper';
 import {
   Reset,
   SetOrganizationId,
@@ -118,8 +118,8 @@ export class AuthorityOrganizationEditPageStateImpl {
 
   private rebuildForm(
     data: OrganizationDetailsDto,
-  ): AuthorityOrganizationEditPageForm {
+  ): AuthorityOrganizationEditForm {
     const formValue = buildFormValue(data);
-    return new AuthorityOrganizationEditPageForm(this.formBuilder, formValue);
+    return new AuthorityOrganizationEditForm(this.formBuilder, formValue);
   }
 }

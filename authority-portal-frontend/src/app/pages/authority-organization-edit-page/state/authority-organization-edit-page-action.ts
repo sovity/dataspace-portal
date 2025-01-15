@@ -10,8 +10,8 @@
  * Contributors:
  *      sovity GmbH - initial implementation
  */
-import {AuthorityOrganizationEditPageForm} from '../authority-organization-edit-page/authority-organization-edit-page.form';
-import {AuthorityOrganizationEditPageFormValue} from '../authority-organization-edit-page/authority-organization-edit-page.form-model';
+import {AuthorityOrganizationEditForm} from '../authority-organization-edit-form/authority-organization-edit-form';
+import {AuthorityOrganizationEditFormValue} from '../authority-organization-edit-form/authority-organization-edit-form-model';
 
 const tag = 'AuthorityOrganizationEditPage';
 
@@ -28,7 +28,7 @@ export class Reset {
      * Function for setting the form. This is required because the form won't survive being frozen as all state values are
      */
     public setFormInComponent: (
-      form: AuthorityOrganizationEditPageForm | null,
+      form: AuthorityOrganizationEditForm | null,
     ) => void,
   ) {}
 }
@@ -36,5 +36,5 @@ export class Reset {
 export class Submit {
   static readonly type = `[${tag}] Submit`;
 
-  constructor(public formValue: AuthorityOrganizationEditPageFormValue) {}
+  constructor(public formValue: AuthorityOrganizationEditFormValue) {}
 }

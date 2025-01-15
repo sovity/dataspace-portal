@@ -15,6 +15,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Subject, takeUntil} from 'rxjs';
 import {take} from 'rxjs/operators';
 import {Store} from '@ngxs/store';
+import {AuthorityOrganizationEditForm} from '../authority-organization-edit-form/authority-organization-edit-form';
 import {
   Reset,
   SetOrganizationId,
@@ -25,7 +26,6 @@ import {
   DEFAULT_AUTHORITY_ORGANIZATION_EDIT_PAGE_STATE,
 } from '../state/authority-organization-edit-page-state';
 import {AuthorityOrganizationEditPageStateImpl} from '../state/authority-organization-edit-page-state-impl';
-import {AuthorityOrganizationEditPageForm} from './authority-organization-edit-page.form';
 
 @Component({
   selector: 'app-control-center-organization-edit-page',
@@ -34,7 +34,7 @@ import {AuthorityOrganizationEditPageForm} from './authority-organization-edit-p
 export class AuthorityOrganizationEditPageComponent
   implements OnInit, OnDestroy
 {
-  form: AuthorityOrganizationEditPageForm | null = null;
+  form: AuthorityOrganizationEditForm | null = null;
   state: AuthorityOrganizationEditPageState =
     DEFAULT_AUTHORITY_ORGANIZATION_EDIT_PAGE_STATE;
 

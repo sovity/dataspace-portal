@@ -1,0 +1,49 @@
+/*
+ * Copyright (c) 2024 sovity GmbH
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Apache License, Version 2.0 which is available at
+ * https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Contributors:
+ *      sovity GmbH - initial implementation
+ */
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {switchDisabledControls} from 'src/app/core/utils/form-utils';
+import {buildAuthorityOrganizationEditForm} from './authority-organization-edit-form-builder';
+import {authorityOrganizationEditFormEnabledCtrls} from './authority-organization-edit-form-enabled-ctrls';
+import {
+  AuthorityOrganizationEditFormModel,
+  AuthorityOrganizationEditFormValue,
+} from './authority-organization-edit-form-model';
+
+export class AuthorityOrganizationEditForm {
+  group = this.buildFormGroup();
+
+  get value(): AuthorityOrganizationEditFormValue {
+    return this.group.value as AuthorityOrganizationEditFormValue;
+  }
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private initialFormValue: AuthorityOrganizationEditFormValue,
+  ) {}
+
+  buildFormGroup(): FormGroup<AuthorityOrganizationEditFormModel> {
+    const group: FormGroup<AuthorityOrganizationEditFormModel> =
+      buildAuthorityOrganizationEditForm(
+        this.formBuilder,
+        this.initialFormValue,
+      );
+
+    switchDisabledControls<AuthorityOrganizationEditFormValue>(
+      group,
+      (value: AuthorityOrganizationEditFormValue) =>
+        authorityOrganizationEditFormEnabledCtrls(value),
+    );
+
+    return group;
+  }
+}

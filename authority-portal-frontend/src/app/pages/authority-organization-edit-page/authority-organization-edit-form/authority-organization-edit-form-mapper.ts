@@ -14,11 +14,11 @@ import {
   OrganizationDetailsDto,
   UpdateOrganizationDto,
 } from '@sovity.de/authority-portal-client';
-import {AuthorityOrganizationEditPageFormValue} from './authority-organization-edit-page.form-model';
+import {AuthorityOrganizationEditFormValue} from './authority-organization-edit-form-model';
 
 export function buildFormValue(
   organization: OrganizationDetailsDto,
-): AuthorityOrganizationEditPageFormValue {
+): AuthorityOrganizationEditFormValue {
   let billingAddressSameAsMain =
     organization.mainAddress === organization.billingAddress;
   let technicalContactSameAsMain =
@@ -27,6 +27,7 @@ export function buildFormValue(
     organization.mainContactEmail === organization.techContactEmail;
 
   return {
+    legalName: organization.name,
     website: organization.url ?? '',
     businessUnit: organization.businessUnit ?? '',
     industry: organization.industry ?? '',
@@ -55,9 +56,10 @@ export function buildFormValue(
 }
 
 export function buildEditRequest(
-  formValue: AuthorityOrganizationEditPageFormValue,
+  formValue: AuthorityOrganizationEditFormValue,
 ): UpdateOrganizationDto {
   return {
+    //name: formValue.legalName,
     url: formValue.website,
     businessUnit: formValue.businessUnit,
     industry: formValue.industry,
