@@ -32,6 +32,7 @@ import de.sovity.authorityportal.api.model.ProvidedConnectorOverviewResult
 import de.sovity.authorityportal.api.model.RegistrationRequestDto
 import de.sovity.authorityportal.api.model.ReserveConnectorRequest
 import de.sovity.authorityportal.api.model.UpdateOrganizationDto
+import de.sovity.authorityportal.api.model.UpdateOwnOrganizationDto
 import de.sovity.authorityportal.api.model.UpdateUserDto
 import de.sovity.authorityportal.api.model.UserDeletionCheck
 import de.sovity.authorityportal.api.model.UserDetailDto
@@ -444,7 +445,7 @@ interface UiResource {
     @Operation(description = "Update own organization information")
     fun updateOwnOrganizationDetails(
         @Valid @NotNull(message = "Update organization request cannot be null")
-        organizationDto: UpdateOrganizationDto
+        organizationDto: UpdateOwnOrganizationDto
     ): IdResponse
 
     @PUT

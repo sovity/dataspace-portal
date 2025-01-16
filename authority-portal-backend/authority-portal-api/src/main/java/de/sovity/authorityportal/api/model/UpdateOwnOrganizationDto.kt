@@ -16,12 +16,8 @@ package de.sovity.authorityportal.api.model
 import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.NotBlank
 
-@Schema(description = "Information about a Organization.")
-data class UpdateOrganizationDto(
-    @field:NotBlank(message = "Organization's name cannot be blank")
-    @field:Schema(description = "Organization's Legal name", requiredMode = Schema.RequiredMode.REQUIRED)
-    val name: String,
-
+@Schema(description = "Information about the own Organization.")
+data class UpdateOwnOrganizationDto(
     @field:NotBlank(message = "Organization's URL of the organization website cannot be blank")
     @field:Schema(description = "Organization's URL of the organization website", requiredMode = Schema.RequiredMode.REQUIRED)
     val url: String,

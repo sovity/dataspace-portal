@@ -12,7 +12,7 @@
  */
 import {Injectable} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
-import {EMPTY, NEVER, Observable} from 'rxjs';
+import {EMPTY, Observable} from 'rxjs';
 import {ignoreElements, switchMap, tap} from 'rxjs/operators';
 import {Action, State, StateContext} from '@ngxs/store';
 import {OrganizationDetailsDto} from '@sovity.de/authority-portal-client';
@@ -87,23 +87,21 @@ export class AuthorityOrganizationEditPageStateImpl {
   @Action(Submit)
   onSubmit(ctx: Ctx, action: Submit): Observable<never> {
     const request = buildEditRequest(action.formValue);
+    const organizationId = ctx.getState().organizationId;
 
-    /* TODO: implement update organization
     return this.apiService
-      .updateOwnOrganizationDetails(request)
+      .updateOrganizationDetails(organizationId, request)
       .pipe(
         this.customRxjsOperators.withBusyLock(ctx),
         this.customRxjsOperators.withToastResultHandling(
-          'Editing own organization',
+          'Editing organization',
         ),
         this.customRxjsOperators.onSuccessRedirect([
-          '/control-center/my-organization',
+          '/authority/organizations',
+          organizationId,
         ]),
         ignoreElements(),
       );
-     */
-
-    return NEVER;
   }
 
   private buildHeaderBarConfig(

@@ -14,6 +14,7 @@
 package de.sovity.authorityportal.web.services
 
 import de.sovity.authorityportal.api.model.UpdateOrganizationDto
+import de.sovity.authorityportal.api.model.UpdateOwnOrganizationDto
 import de.sovity.authorityportal.api.model.organization.OnboardingOrganizationUpdateDto
 import de.sovity.authorityportal.broker.dao.utils.eqAny
 import de.sovity.authorityportal.db.jooq.Tables
@@ -121,8 +122,27 @@ class OrganizationService(
         }
     }
 
+    fun updateOwnOrganization(organizationId: String, dto: UpdateOwnOrganizationDto) {
+        val organization = getOrganizationOrThrow(organizationId)
+        organization.url = dto.url.trim()
+        organization.description = dto.description.trim()
+        organization.businessUnit = dto.businessUnit.trim()
+        organization.industry = dto.industry.trim()
+        organization.address = dto.address.trim()
+        organization.billingAddress = dto.billingAddress.trim()
+
+        organization.mainContactName = dto.mainContactName.trim()
+        organization.mainContactEmail = dto.mainContactEmail.trim()
+        organization.mainContactPhone = dto.mainContactPhone.trim()
+        organization.techContactName = dto.techContactName.trim()
+        organization.techContactEmail = dto.techContactEmail.trim()
+        organization.techContactPhone = dto.techContactPhone.trim()
+        organization.update()
+    }
+
     fun updateOrganization(organizationId: String, dto: UpdateOrganizationDto) {
         val organization = getOrganizationOrThrow(organizationId)
+        organization.name = dto.name.trim()
         organization.url = dto.url.trim()
         organization.description = dto.description.trim()
         organization.businessUnit = dto.businessUnit.trim()

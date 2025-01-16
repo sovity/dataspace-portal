@@ -59,7 +59,7 @@ export function buildEditRequest(
   formValue: AuthorityOrganizationEditFormValue,
 ): UpdateOrganizationDto {
   return {
-    //name: formValue.legalName,
+    name: formValue.legalName,
     url: formValue.website,
     businessUnit: formValue.businessUnit,
     industry: formValue.industry,

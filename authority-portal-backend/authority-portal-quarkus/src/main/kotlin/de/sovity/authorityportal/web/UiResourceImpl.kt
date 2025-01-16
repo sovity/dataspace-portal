@@ -34,6 +34,7 @@ import de.sovity.authorityportal.api.model.ProvidedConnectorOverviewResult
 import de.sovity.authorityportal.api.model.RegistrationRequestDto
 import de.sovity.authorityportal.api.model.ReserveConnectorRequest
 import de.sovity.authorityportal.api.model.UpdateOrganizationDto
+import de.sovity.authorityportal.api.model.UpdateOwnOrganizationDto
 import de.sovity.authorityportal.api.model.UpdateUserDto
 import de.sovity.authorityportal.api.model.UserDeletionCheck
 import de.sovity.authorityportal.api.model.UserDetailDto
@@ -508,10 +509,10 @@ class UiResourceImpl(
     }
 
     @Transactional
-    override fun updateOwnOrganizationDetails(organizationDto: UpdateOrganizationDto): IdResponse {
+    override fun updateOwnOrganizationDetails(organizationDto: UpdateOwnOrganizationDto): IdResponse {
         authUtils.requiresRole(Roles.UserRoles.PARTICIPANT_ADMIN)
         authUtils.requiresMemberOfAnyOrganization()
-        return organizationUpdateApiService.updateOrganization(loggedInUser.organizationId!!, organizationDto)
+        return organizationUpdateApiService.updateOwnOrganization(loggedInUser.organizationId!!, organizationDto)
     }
 
     @Transactional
