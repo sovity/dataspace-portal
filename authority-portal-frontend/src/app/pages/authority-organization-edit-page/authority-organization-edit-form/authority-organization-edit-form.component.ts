@@ -13,7 +13,6 @@
 import {Component, Input, OnDestroy} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {Subject} from 'rxjs';
-import {LEGAL_ID_TYPES} from '../../../shared/business/organization-create-form/organization-create-form.component';
 import {AuthorityOrganizationEditFormModel} from './authority-organization-edit-form-model';
 
 @Component({
@@ -23,8 +22,6 @@ import {AuthorityOrganizationEditFormModel} from './authority-organization-edit-
 export class AuthorityOrganizationEditFormComponent implements OnDestroy {
   @Input()
   orgForm!: FormGroup<AuthorityOrganizationEditFormModel>;
-
-  idTypes = LEGAL_ID_TYPES;
 
   ngOnDestroy$ = new Subject();
 

@@ -280,7 +280,6 @@ export const AUTHORITY_PORTAL_ROUTES: Routes = [
         path: 'authority/organizations/:organizationId/edit',
         component: AuthorityOrganizationEditPageComponent,
         data: {
-          excludeFromTabs: true,
           requiresRole: ['AUTHORITY_ADMIN'] satisfies UserRoleDto[],
         },
         canActivate: [requiresRole],
