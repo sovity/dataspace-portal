@@ -149,6 +149,7 @@ class OrganizationService(
         organization.industry = dto.industry.trim()
         organization.address = dto.address.trim()
         organization.billingAddress = dto.billingAddress.trim()
+        updateLegalId(organization, dto.legalIdType.toDb(), dto.legalIdNumber, dto.commerceRegisterLocation)
 
         organization.mainContactName = dto.mainContactName.trim()
         organization.mainContactEmail = dto.mainContactEmail.trim()
@@ -168,7 +169,7 @@ class OrganizationService(
         organization.url = dto.url.trim()
         organization.description = dto.description.trim()
         organization.businessUnit = dto.businessUnit.trim()
-        organization.industry = dto.industry
+        organization.industry = dto.industry.trim()
         organization.address = dto.address.trim()
         organization.billingAddress = dto.billingAddress.trim()
         updateLegalId(organization, dto.legalIdType.toDb(), dto.legalIdNumber, dto.commerceRegisterLocation)

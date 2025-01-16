@@ -11,11 +11,15 @@
  *      sovity GmbH - initial implementation
  */
 import {FormControl, ɵFormGroupRawValue} from '@angular/forms';
+import {OrganizationLegalIdTypeDto} from '@sovity.de/authority-portal-client';
 import {OrganizationEditFormModel} from '../../../shared/business/organization-edit-form/organization-edit-form-model';
 
 export interface AuthorityOrganizationEditFormModel
   extends OrganizationEditFormModel {
   legalName: FormControl<string>;
+  legalIdType: FormControl<OrganizationLegalIdTypeDto>;
+  legalId: FormControl<string>;
+  commerceRegisterLocation: FormControl<string>;
 }
 
 export type AuthorityOrganizationEditFormValue =

@@ -30,6 +30,10 @@ export const authorityOrganizationEditFormEnabledCtrls = (
     billingAddressSameAsMain: true,
     billingAddress: billingAddressEnabled,
 
+    legalIdType: true,
+    legalId: true,
+    commerceRegisterLocation: true,
+
     mainContactName: true,
     mainContactPhoneNumber: true,
     mainContactEmail: true,

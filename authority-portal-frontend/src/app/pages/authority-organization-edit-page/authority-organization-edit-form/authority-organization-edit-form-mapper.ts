@@ -38,6 +38,9 @@ export function buildFormValue(
     billingAddress: billingAddressSameAsMain
       ? ''
       : organization.billingAddress ?? '',
+    legalIdType: organization.legalIdType ?? 'TAX_ID',
+    legalId: organization.legalId ?? '',
+    commerceRegisterLocation: organization.commerceRegisterLocation ?? '',
 
     mainContactName: organization.mainContactName ?? '',
     mainContactPhoneNumber: organization.mainContactPhone ?? '',
@@ -69,6 +72,9 @@ export function buildEditRequest(
     billingAddress: formValue.billingAddressSameAsMain
       ? formValue.mainAddress
       : formValue.billingAddress,
+    legalIdType: formValue.legalIdType,
+    legalIdNumber: formValue.legalId,
+    commerceRegisterLocation: formValue.commerceRegisterLocation,
 
     mainContactName: formValue.mainContactName,
     mainContactPhone: formValue.mainContactPhoneNumber,

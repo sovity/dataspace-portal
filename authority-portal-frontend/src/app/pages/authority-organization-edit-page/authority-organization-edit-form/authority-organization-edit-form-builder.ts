@@ -53,6 +53,15 @@ export const buildAuthorityOrganizationEditForm = (
       initialOrganization.billingAddress,
       [Validators.required, Validators.maxLength(128), notBlankValidator()],
     ],
+    legalIdType: [initialOrganization.legalIdType, [Validators.required]],
+    legalId: [
+      initialOrganization.legalId,
+      [Validators.required, Validators.maxLength(128), notBlankValidator()],
+    ],
+    commerceRegisterLocation: [
+      initialOrganization.commerceRegisterLocation,
+      [Validators.required, Validators.maxLength(128), notBlankValidator()],
+    ],
     mainContactName: [
       initialOrganization.mainContactName,
       [Validators.required, Validators.maxLength(128), notBlankValidator()],
