@@ -1,3 +1,7 @@
+---
+icon: hand-wave
+---
+
 # General Overview
 
 This guide provides a general overview of the main sections and features of the portal, helping you navigate and understand the various components available.

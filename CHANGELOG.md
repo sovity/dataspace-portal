@@ -13,6 +13,8 @@ please see [changelog_updates.md](docs/dev/changelog_updates.md).
 
 #### Minor
 
+- Added deleting of organizations for Authority Admins
+
 #### Patch
 
 - Fixed Keycloak dev realm for local E2E development ([PR #405](https://github.com/sovity/authority-portal/pull/405))

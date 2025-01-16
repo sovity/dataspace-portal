@@ -100,11 +100,11 @@ class UserDeletionApiServiceTest {
     fun `checkUserDeletion as last participant admin and organization creator`() {
         // arrange
         val lastParticipantAdmin = KeycloakUserDto(dummyDevUserUuid(0), "Test", "User", "test.user@test.sovity.io")
-        val lastAuthorityUser = KeycloakUserDto(dummyDevUserUuid(99), "Authority", "User", "authority@test.sovity.io")
+        val lastAuthorityAdmin = KeycloakUserDto(dummyDevUserUuid(99), "Authority", "Admin", "authority@test.sovity.io")
 
         useDevUser(0, 0, setOf(Roles.UserRoles.PARTICIPANT_ADMIN))
 
-        whenever(keycloakService.getAuthorityAdmins()).thenReturn(listOf(lastAuthorityUser))
+        whenever(keycloakService.getAuthorityAdmins()).thenReturn(listOf(lastAuthorityAdmin))
         whenever(keycloakService.getParticipantAdmins(eq(dummyDevOrganizationId(0)))).thenReturn(listOf(lastParticipantAdmin))
 
         ScenarioData().apply {
@@ -132,11 +132,11 @@ class UserDeletionApiServiceTest {
         // arrange
         val keycloakUser = KeycloakUserDto(dummyDevUserUuid(0), "Test", "User", "test.user@test.sovity.io")
         val possibleSuccessor = KeycloakUserDto(dummyDevUserUuid(1), "Max", "Mustermann", "max.mustermann@test.sovity.io")
-        val lastAuthorityUser = KeycloakUserDto(dummyDevUserUuid(99), "Authority", "User", "authority@test.sovity.io")
+        val lastAuthorityAdmin = KeycloakUserDto(dummyDevUserUuid(99), "Authority", "Admin", "authority@test.sovity.io")
 
         useDevUser(0, 0, setOf(Roles.UserRoles.PARTICIPANT_ADMIN))
 
-        whenever(keycloakService.getAuthorityAdmins()).thenReturn(listOf(lastAuthorityUser))
+        whenever(keycloakService.getAuthorityAdmins()).thenReturn(listOf(lastAuthorityAdmin))
         whenever(keycloakService.getParticipantAdmins(eq(dummyDevOrganizationId(0)))).thenReturn(listOf(keycloakUser, possibleSuccessor))
 
         ScenarioData().apply {
@@ -178,12 +178,12 @@ class UserDeletionApiServiceTest {
 
         val keycloakUser = KeycloakUserDto(dummyDevUserUuid(0), "Test", "User", "test.user@test.sovity.io")
         val possibleSuccessor = KeycloakUserDto(dummyDevUserUuid(1), "Max", "Mustermann", "max.mustermann@test.sovity.io")
-        val lastAuthorityUser = KeycloakUserDto(dummyDevUserUuid(99), "Authority", "User", "authority@test.sovity.io")
+        val lastAuthorityAdmin = KeycloakUserDto(dummyDevUserUuid(99), "Authority", "Admin", "authority@test.sovity.io")
 
         useDevUser(0, 0, setOf(Roles.UserRoles.PARTICIPANT_ADMIN))
         useMockNow(now)
 
-        whenever(keycloakService.getAuthorityAdmins()).thenReturn(listOf(lastAuthorityUser))
+        whenever(keycloakService.getAuthorityAdmins()).thenReturn(listOf(lastAuthorityAdmin))
         whenever(keycloakService.getParticipantAdmins(eq(dummyDevOrganizationId(0)))).thenReturn(listOf(keycloakUser, possibleSuccessor))
         doNothing().whenever(keycloakService).deleteUser(eq(dummyDevUserUuid(0)))
 
@@ -220,14 +220,14 @@ class UserDeletionApiServiceTest {
         val now = OffsetDateTime.now()
 
         val keycloakUser = KeycloakUserDto(dummyDevUserUuid(0), "Test", "User", "test.user@test.sovity.io")
-        val lastAuthorityUser = KeycloakUserDto(dummyDevUserUuid(99), "Authority", "User", "authority@test.sovity.io")
+        val lastAuthorityAdmin = KeycloakUserDto(dummyDevUserUuid(99), "Authority", "Admin", "authority@test.sovity.io")
 
         val dapsClient = mock<DapsClient>()
 
         useDevUser(0, 0, setOf(Roles.UserRoles.PARTICIPANT_ADMIN))
         useMockNow(now)
 
-        whenever(keycloakService.getAuthorityAdmins()).thenReturn(listOf(lastAuthorityUser))
+        whenever(keycloakService.getAuthorityAdmins()).thenReturn(listOf(lastAuthorityAdmin))
         whenever(keycloakService.getParticipantAdmins(eq(dummyDevOrganizationId(0)))).thenReturn(listOf(keycloakUser))
         whenever(dapsClientService.forEnvironment(any())).thenReturn(dapsClient)
         doNothing().whenever(keycloakService).deleteUser(eq(dummyDevUserUuid(0)))
@@ -236,8 +236,10 @@ class UserDeletionApiServiceTest {
 
         ScenarioData().apply {
             organization(0, 0)
+            organization(1, 99)
             user(0, 0)
             user(1, 0)
+            user(99, 1)
             connector(0, 0, 0)
             component(0, 0, 0)
             scenarioInstaller.install(this)

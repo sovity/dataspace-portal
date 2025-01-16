@@ -1,3 +1,7 @@
+---
+icon: user
+---
+
 # Manage the Data Space components
 
 Besides the Data Space Authority roles, there are two other application roles that are able to manage elements of the Data Space.
@@ -23,7 +27,11 @@ Currently, the Service Partner Admin role grants the following rights in additio
 
 #### 1. View a list of provided connectors
 
-As a Service Partner Admin a user is able to access the "Provided Connectors" page where all provided connectors are displayed.
+A Service Partner Admin is able to access the "Provided Connectors" page, where all provided connectors are displayed. On this page, connectors are categorized by their types. The types of connectors include:
+- Own: Connectors registered and maintained directly by the organization.
+- Provided: Connectors supplied by a third-party service partner.
+- CaaS: Connector as a Service - Managed connectors.
+- Configure Button: The Connector needs further configuration for being set up.
 
 ![provide-connector](images/provide-connectors-overview.png)
 
@@ -33,20 +41,15 @@ When clicking on the button "Provide Connector" in the upper right corner a mask
 
 ![provide-connector](images/provide-connector.png)
 
-To provide a connector in the Authority Portal all fields of the mask must be submitted. The process is identical to the registration of connectors for users without any application role but registers the connector for another organization who is named in the slightly changed registration mask. 
+To provide a connector in the Authority Portal all fields of the mask must be submitted.
+After clicking on the "Create Connector" the list of provided connectors appears, where an added connector can be found which has to be configured further at some point in time.
 
-You might generate the required certificate within the browser or alternatively via a Linux shell with `openssl` and `keytool` installed:
+![provide-connector](images/provide-connectors-list.png)
 
-```bash
-$ openssl req -x509 -newkey rsa:2048 -keyout key.pem -out connector-certificate.crt -nodes -days 1825
-$ openssl pkcs12 -export -in connector-certificate.crt -inkey key.pem -out connector-certificate.p12
-$ keytool -importkeystore -srckeystore connector-certificate.p12 -srcstoretype pkcs12 -destkeystore connector-certificate.jks
-```
-
-> [!TIP]  
-> By ticking the checkbox "Use the Connector's JWKS URL [...]", you can define a JWKS endpoint to automatically fetch the certificate from and thus skip the certificate step. sovity's CaaS (Connector-as-a-Service) are equipped with this functionality.
-
-After clicking on the register button the list of provided connectors appears, where the added connector can be found.
+By clicking in the list on "Configure", the additional data for the connector must be entered, such as the URL at which the frontend of the connector can be accessed.
+The most important entry  is the connector endpoint, the DSP-endpoint, so that the connector's offers can be searched and displayed in the authority portal, since the authority portal also crawls the connectors in the dataspace for available offers which the authority portal's crawler is allowed to access.
+The process of the further configuration guides you through the necessary steps and needed information to specify the URLs or enter valid information about the connector certificate.
+Please follow the steps in the dialog.
 
 #### 3. Assign Service Partner Admin role to users within own organization
 

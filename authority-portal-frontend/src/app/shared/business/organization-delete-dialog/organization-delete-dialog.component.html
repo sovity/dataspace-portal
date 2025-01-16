@@ -1,0 +1,52 @@
+<mat-dialog-content class="p-4 !flex flex-col">
+  <p class="confirmation-dialog-title">Delete Organization</p>
+
+  <app-loading-element
+    *ngIf="modalData.isLoading"
+    class="flex-1 px-4 py-3"></app-loading-element>
+
+  <app-error-element
+    *ngIf="modalData.isError"
+    class="flex-1 px-4 py-3"
+    [errorMessage]="modalData.error.failureMessage"></app-error-element>
+
+  <div *ngIf="modalData.isReady" class="px-4 py-3 confirmation-dialog-prose">
+    <div *ngIf="!modalData.data.canBeDeleted" class="space-y-1">
+      <p>This organization cannot be deleted.</p>
+    </div>
+    <div
+      *ngIf="modalData.data.canBeDeleted"
+      class="space-y-1">
+      <p>
+        You are trying to delete
+        <span class="italic">{{ data.organizationName }}</span
+        >.
+      </p>
+      <p>
+        This will result in irreversibly deleting the whole organization,
+        including all of its users, connectors and central components.
+      </p>
+      <p>Are you sure you want to proceed?</p>
+    </div>
+  </div>
+
+  <div class="px-4 py-3 flex justify-end gap-2">
+    <button class="btn-outline" type="button" (click)="onDismiss()">
+      Cancel
+    </button>
+    <button
+      class="btn-accent-danger flex items-center gap-1.5"
+      type="button"
+      [disabledBtn]="
+        isBusy ||
+        !modalData.dataOrUndefined?.canBeDeleted ||
+        !modalData.isReady
+      "
+      (click)="onConfirmDeleteOrganizationClick()">
+      <div
+        *ngIf="isBusy"
+        class="border-4 border-gray-300 border-t-0 border-l-0 rounded-full w-4 h-4 animate-spin"></div>
+      Delete
+    </button>
+  </div>
+</mat-dialog-content>

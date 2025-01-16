@@ -370,6 +370,16 @@ export class ApiService {
     return toObservable(() => this.api().getComponentsStatus({environmentId}));
   }
 
+  checkOrganizationDeletion(organizationId: string) {
+    return toObservable(() =>
+      this.api().checkOrganizationDeletion({organizationId}),
+    );
+  }
+
+  deleteOrganization(organizationId: string): Observable<IdResponse> {
+    return toObservable(() => this.api().deleteOrganization({organizationId}));
+  }
+
   private api(): UiApi {
     return this.apiClientFactory.newAuthorityPortalClient().uiApi;
   }

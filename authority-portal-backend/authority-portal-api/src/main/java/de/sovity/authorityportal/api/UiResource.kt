@@ -39,6 +39,7 @@ import de.sovity.authorityportal.api.model.UserInfo
 import de.sovity.authorityportal.api.model.UserRegistrationStatusResult
 import de.sovity.authorityportal.api.model.UserRoleDto
 import de.sovity.authorityportal.api.model.organization.OnboardingOrganizationUpdateDto
+import de.sovity.authorityportal.api.model.organization.OrganizationDeletionCheck
 import de.sovity.authorityportal.api.model.organization.OrganizationDetailsDto
 import de.sovity.authorityportal.api.model.organization.OrganizationOverviewResult
 import de.sovity.authorityportal.api.model.organization.OwnOrganizationDetailsDto
@@ -497,4 +498,18 @@ interface UiResource {
         @Valid @NotBlank(message = "EnvironmentId cannot be blank")
         environmentId: String
     ): ComponentStatusOverview
+
+    @GET
+    @Path("/authority/organizations/{organizationId}/check-delete")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(description = "Check under which conditions a organization can be deleted.")
+    fun checkOrganizationDeletion(@PathParam("organizationId") organizationId: String): OrganizationDeletionCheck
+
+    @DELETE
+    @Path("/authority/organizations/{organizationId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(description = "Delete organization with respect to users and connectors associated with them.")
+    fun deleteOrganization(
+        @PathParam("organizationId") organizationId: String,
+    ): IdResponse
 }

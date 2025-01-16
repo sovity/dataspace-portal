@@ -12,7 +12,7 @@
 
   <div *ngIf="modalData.isReady" class="px-4 py-3 confirmation-dialog-prose">
     <div *ngIf="!modalData.data.canBeDeleted" class="space-y-1">
-      <p>The user cannot be deleted.</p>
+      <p>This user cannot be deleted.</p>
     </div>
     <div
       *ngIf="modalData.data.canBeDeleted && isLastParticipantAdmin"
@@ -23,10 +23,10 @@
         >.
       </p>
       <p>
-        This will result in deleting the whole organization, including all of
-        its users, connectors and central components.
+        This will result in irreversibly deleting the whole organization,
+        including all of its users, connectors and central components.
       </p>
-      <p>Are you sure, you want to proceed?</p>
+      <p>Are you sure you want to proceed?</p>
     </div>
     <div *ngIf="modalData.data.canBeDeleted && !isLastParticipantAdmin">
       <div *ngIf="isOrganizationCreator" class="space-y-1">

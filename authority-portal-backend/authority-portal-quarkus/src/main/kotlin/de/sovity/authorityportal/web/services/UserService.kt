@@ -202,4 +202,14 @@ class UserService(
             .where(u.ID.eq(userId))
             .execute()
     }
+
+    fun userExistsOutsideOrg(userIds: List<String>, organizationId: String): Boolean {
+        val u = Tables.USER
+        val otherOrgUsers = dsl
+            .selectOne()
+            .from(u)
+            .where(u.ID.eqAny(userIds), u.ORGANIZATION_ID.notEqual(organizationId))
+
+        return dsl.fetchExists(otherOrgUsers)
+    }
 }

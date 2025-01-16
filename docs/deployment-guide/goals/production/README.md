@@ -1,3 +1,7 @@
+---
+icon: square-dashed-circle-plus
+---
+
 Deploying the Authority Portal in Production
 ============
 

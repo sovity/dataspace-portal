@@ -47,6 +47,8 @@ import {ConnectorRegisteringSuccessMessagePageComponent} from './business/connec
 import {ConnectorStatusLedComponent} from './business/connector-status-led/connector-status-led.component';
 import {DeleteConnectorModalComponent} from './business/delete-connector-modal/delete-connector-modal.component';
 import {OrganizationCreateFormComponent} from './business/organization-create-form/organization-create-form.component';
+import {OrganizationDeleteDialogComponent} from './business/organization-delete-dialog/organization-delete-dialog.component';
+import {OrganizationDeleteDialogService} from './business/organization-delete-dialog/organization-delete-dialog.service';
 import {OrganizationEditFormComponent} from './business/organization-edit-form/organization-edit-form.component';
 import {SharedConnectorDetailComponent} from './business/shared-connector-detail/shared-connector-detail.component';
 import {SharedOrganizationDetailComponent} from './business/shared-organization-detail/shared-organization-detail.component';
@@ -119,6 +121,7 @@ const COMPONENTS = [
   ConnectorStatusLedComponent,
   DeleteConnectorModalComponent,
   OrganizationCreateFormComponent,
+  OrganizationDeleteDialogComponent,
   OrganizationEditFormComponent,
   SharedConnectorDetailComponent,
   SharedOrganizationDetailComponent,
@@ -241,7 +244,7 @@ const MODULES = [
     ...MODULES,
   ],
   exports: [...COMPONENTS, ...MODULES],
-  providers: [UserDeleteDialogService],
+  providers: [UserDeleteDialogService, OrganizationDeleteDialogService],
 })
 export class SharedModule {
   constructor(private svgIconServiceService: SvgIconServiceService) {

@@ -31,6 +31,7 @@ import {
   NavigationType,
 } from 'src/app/shared/common/slide-over/slide-over.model';
 import {FormatService} from '../../../core/services/format.service';
+import {OrganizationDeleteDialogService} from '../../../shared/business/organization-delete-dialog/organization-delete-dialog.service';
 import {UserDeleteDialogService} from '../../../shared/business/user-delete-dialog/user-delete-dialog.service';
 import {
   CloseOrganizationDetail,
@@ -68,6 +69,7 @@ export class AuthorityOrganizationDetailPageComponent
   slideOverContent!: AuthorityOrganizationDetailTab;
   userDetailPageConfig!: UserDetailPageConfig;
   currentUserId: string = '';
+  isCurrentUserAuthorityAdmin: boolean = false;
 
   constructor(
     private store: Store,
@@ -75,6 +77,7 @@ export class AuthorityOrganizationDetailPageComponent
     private globalStateUtils: GlobalStateUtils,
     private slideOverService: SlideOverService,
     private userDeleteDialogService: UserDeleteDialogService,
+    private organizationDialogService: OrganizationDeleteDialogService,
     private formatService: FormatService,
   ) {
     this.organizationId = childComponentInput.id;
@@ -90,15 +93,17 @@ export class AuthorityOrganizationDetailPageComponent
     this.startListeningToState();
     this.startListeningToSlideOverState();
     this.startRefreshingOnEnvChange();
-    this.startListeningToCurrentUserId();
+    this.startListeningToUserInfo();
   }
 
-  startListeningToCurrentUserId() {
+  startListeningToUserInfo() {
     this.globalStateUtils.userInfo$
       .pipe(
         takeUntil(this.ngOnDestroy$),
         tap((info: UserInfo) => {
           this.currentUserId = info.userId;
+          this.isCurrentUserAuthorityAdmin =
+            info.roles.includes('AUTHORITY_ADMIN');
         }),
       )
       .subscribe();
@@ -216,6 +221,24 @@ export class AuthorityOrganizationDetailPageComponent
               this.store.dispatch(CloseOrganizationDetail);
             },
             isDisabled: !['PENDING'].includes(organization.registrationStatus),
+          },
+          {
+            label: 'Delete Organization',
+            icon: 'delete',
+            event: () =>
+              this.organizationDialogService.showDeleteOrganizationModal(
+                {
+                  organizationId: organization.id,
+                  organizationName: organization.name,
+                  onDeleteSuccess: () => {
+                    this.store.dispatch(CloseOrganizationDetail);
+                    this.slideOverService.slideOverReset();
+                    this.store.dispatch(RefreshOrganizations);
+                  },
+                },
+                this.ngOnDestroy$,
+              ),
+            isDisabled: !this.isCurrentUserAuthorityAdmin,
           },
         ],
       },
