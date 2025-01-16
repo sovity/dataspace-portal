@@ -23,8 +23,8 @@ import {GlobalStateUtils} from '../../../core/global-state/global-state-utils';
 import {HeaderBarConfig} from '../../../shared/common/header-bar/header-bar.model';
 import {ControlCenterOrganizationEditPageForm} from '../control-center-organization-edit-page/control-center-organization-edit-page.form';
 import {
-  buildEditRequest,
-  buildFormValue,
+  buildControlCenterOrganizationEditPageFormValue,
+  buildUpdateOwnOrganizationRequest,
 } from '../control-center-organization-edit-page/control-center-organization-edit-page.form-mapper';
 import {Reset, Submit} from './control-center-organization-edit-page-action';
 import {
@@ -71,7 +71,7 @@ export class ControlCenterOrganizationEditPageStateImpl {
 
   @Action(Submit)
   onSubmit(ctx: Ctx, action: Submit): Observable<never> {
-    const request = buildEditRequest(action.formValue);
+    const request = buildUpdateOwnOrganizationRequest(action.formValue);
     return this.apiService
       .updateOwnOrganizationDetails(request)
       .pipe(
@@ -99,7 +99,7 @@ export class ControlCenterOrganizationEditPageStateImpl {
   private rebuildForm(
     data: OwnOrganizationDetailsDto,
   ): ControlCenterOrganizationEditPageForm {
-    const formValue = buildFormValue(data);
+    const formValue = buildControlCenterOrganizationEditPageFormValue(data);
     return new ControlCenterOrganizationEditPageForm(
       this.formBuilder,
       formValue,

@@ -10,36 +10,17 @@
  * Contributors:
  *      sovity GmbH - initial implementation
  */
+import {organizationEditFormEnabledCtrls} from '../../../shared/business/organization-edit-form/organization-edit-form-enabled-ctrls';
 import {AuthorityOrganizationEditFormValue} from './authority-organization-edit-form-model';
 
 export const authorityOrganizationEditFormEnabledCtrls = (
   value: AuthorityOrganizationEditFormValue,
 ): Record<keyof AuthorityOrganizationEditFormValue, boolean> => {
-  const billingAddressEnabled = !value.billingAddressSameAsMain;
-  const technicalContactEnabled = !value.technicalContactSameAsMain;
-
   return {
     legalName: true,
-    website: true,
-    businessUnit: true,
-    industry: true,
-    description: true,
-
-    mainAddress: true,
-
-    billingAddressSameAsMain: true,
-    billingAddress: billingAddressEnabled,
-
     legalIdType: true,
     legalId: true,
     commerceRegisterLocation: true,
-
-    mainContactName: true,
-    mainContactPhoneNumber: true,
-    mainContactEmail: true,
-    technicalContactSameAsMain: true,
-    technicalContactName: technicalContactEnabled,
-    technicalContactPhoneNumber: technicalContactEnabled,
-    technicalContactEmail: technicalContactEnabled,
+    ...organizationEditFormEnabledCtrls(value),
   };
 };

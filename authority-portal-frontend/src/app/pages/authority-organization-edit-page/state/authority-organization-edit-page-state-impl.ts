@@ -23,8 +23,8 @@ import {GlobalStateUtils} from '../../../core/global-state/global-state-utils';
 import {HeaderBarConfig} from '../../../shared/common/header-bar/header-bar.model';
 import {AuthorityOrganizationEditForm} from '../authority-organization-edit-form/authority-organization-edit-form';
 import {
-  buildEditRequest,
-  buildFormValue,
+  buildAuthorityOrganizationEditFormValue,
+  buildUpdateOrganizationRequest,
 } from '../authority-organization-edit-form/authority-organization-edit-form-mapper';
 import {
   Reset,
@@ -86,7 +86,7 @@ export class AuthorityOrganizationEditPageStateImpl {
 
   @Action(Submit)
   onSubmit(ctx: Ctx, action: Submit): Observable<never> {
-    const request = buildEditRequest(action.formValue);
+    const request = buildUpdateOrganizationRequest(action.formValue);
     const organizationId = ctx.getState().organizationId;
 
     return this.apiService
@@ -117,7 +117,7 @@ export class AuthorityOrganizationEditPageStateImpl {
   private rebuildForm(
     data: OrganizationDetailsDto,
   ): AuthorityOrganizationEditForm {
-    const formValue = buildFormValue(data);
+    const formValue = buildAuthorityOrganizationEditFormValue(data);
     return new AuthorityOrganizationEditForm(this.formBuilder, formValue);
   }
 }

@@ -14,6 +14,7 @@ import {Component, Input, OnDestroy} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {LEGAL_ID_TYPES} from '../../../shared/business/organization-create-form/organization-create-form.component';
+import {OrganizationEditFormModel} from '../../../shared/business/organization-edit-form/organization-edit-form-model';
 import {AuthorityOrganizationEditFormModel} from './authority-organization-edit-form-model';
 
 @Component({
@@ -22,12 +23,17 @@ import {AuthorityOrganizationEditFormModel} from './authority-organization-edit-
 })
 export class AuthorityOrganizationEditFormComponent implements OnDestroy {
   @Input()
-  orgForm!: FormGroup<AuthorityOrganizationEditFormModel>;
+  authorityOrgForm!: FormGroup<AuthorityOrganizationEditFormModel>;
 
   idTypes = LEGAL_ID_TYPES;
 
-  ngOnDestroy$ = new Subject();
+  get orgForm(): FormGroup<OrganizationEditFormModel> {
+    // this only requires a cast because A extends B does not imply T<A> extend T<B>
+    return this
+      .authorityOrgForm as unknown as FormGroup<OrganizationEditFormModel>;
+  }
 
+  ngOnDestroy$ = new Subject();
   ngOnDestroy() {
     this.ngOnDestroy$.next(null);
     this.ngOnDestroy$.complete();

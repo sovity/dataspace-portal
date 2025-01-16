@@ -12,8 +12,8 @@
  */
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {notBlankValidator} from 'src/app/core/utils/validators/not-blank-validator';
-import {phoneNumberValidator} from 'src/app/core/utils/validators/phone-number-validator';
-import {urlValidator} from 'src/app/core/utils/validators/url-validator';
+import {mergeFormGroups} from '../../../core/utils/form-utils';
+import {buildOrganizationEditForm} from '../../../shared/business/organization-edit-form/organization-edit-form-builder';
 import {
   AuthorityOrganizationEditFormModel,
   AuthorityOrganizationEditFormValue,
@@ -23,84 +23,22 @@ export const buildAuthorityOrganizationEditForm = (
   formBuilder: FormBuilder,
   initialOrganization: AuthorityOrganizationEditFormValue,
 ): FormGroup<AuthorityOrganizationEditFormModel> => {
-  return formBuilder.nonNullable.group({
-    legalName: [
-      initialOrganization.legalName,
-      [Validators.required, Validators.maxLength(128), notBlankValidator()],
-    ],
-    website: [
-      initialOrganization.website,
-      [Validators.required, Validators.maxLength(128), urlValidator],
-    ],
-    businessUnit: [
-      initialOrganization.businessUnit,
-      [Validators.required, Validators.maxLength(128), notBlankValidator()],
-    ],
-    industry: [initialOrganization.industry, [Validators.required]],
-    description: [
-      initialOrganization.description,
-      [Validators.required, Validators.maxLength(4096), notBlankValidator()],
-    ],
-    mainAddress: [
-      initialOrganization.mainAddress,
-      [Validators.required, Validators.maxLength(128), notBlankValidator()],
-    ],
-    billingAddressSameAsMain: [
-      initialOrganization.billingAddressSameAsMain,
-      [Validators.required],
-    ],
-    billingAddress: [
-      initialOrganization.billingAddress,
-      [Validators.required, Validators.maxLength(128), notBlankValidator()],
-    ],
-    legalIdType: [initialOrganization.legalIdType, [Validators.required]],
-    legalId: [
-      initialOrganization.legalId,
-      [Validators.required, Validators.maxLength(128), notBlankValidator()],
-    ],
-    commerceRegisterLocation: [
-      initialOrganization.commerceRegisterLocation,
-      [Validators.required, Validators.maxLength(128), notBlankValidator()],
-    ],
-    mainContactName: [
-      initialOrganization.mainContactName,
-      [Validators.required, Validators.maxLength(128), notBlankValidator()],
-    ],
-    mainContactPhoneNumber: [
-      initialOrganization.mainContactPhoneNumber,
-      [
-        Validators.required,
-        phoneNumberValidator,
-        Validators.minLength(5),
-        Validators.maxLength(28),
-        notBlankValidator(),
+  return mergeFormGroups(
+    buildOrganizationEditForm(formBuilder, initialOrganization),
+    formBuilder.nonNullable.group({
+      legalName: [
+        initialOrganization.legalName,
+        [Validators.required, Validators.maxLength(128), notBlankValidator()],
       ],
-    ],
-    mainContactEmail: [
-      initialOrganization.mainContactEmail,
-      [Validators.required, Validators.maxLength(128), Validators.email],
-    ],
-    technicalContactSameAsMain: [
-      initialOrganization.technicalContactSameAsMain,
-      [Validators.required],
-    ],
-    technicalContactName: [
-      initialOrganization.technicalContactName,
-      [Validators.required, Validators.maxLength(128), notBlankValidator()],
-    ],
-    technicalContactPhoneNumber: [
-      initialOrganization.technicalContactPhoneNumber,
-      [
-        Validators.required,
-        phoneNumberValidator,
-        Validators.minLength(5),
-        Validators.maxLength(28),
-        notBlankValidator(),
+      legalIdType: [initialOrganization.legalIdType, [Validators.required]],
+      legalId: [
+        initialOrganization.legalId,
+        [Validators.required, Validators.maxLength(128), notBlankValidator()],
       ],
-    ],
-    technicalContactEmail: [
-      initialOrganization.technicalContactEmail,
-      [Validators.required, Validators.maxLength(128), Validators.email],
-    ],
-  });
+      commerceRegisterLocation: [
+        initialOrganization.commerceRegisterLocation,
+        [Validators.required, Validators.maxLength(128), notBlankValidator()],
+      ],
+    }),
+  );
 };

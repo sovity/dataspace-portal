@@ -6,83 +6,7 @@
     ctrlId="formEditLegalName"
     placeholder="Other Org LLC"
     required
-    [ctrl]="orgForm.controls.legalName"></app-text-input>
-</div>
-
-<div class="flex gap-4 flex-wrap">
-  <!-- Website -->
-  <app-text-input
-    class="flex-1"
-    label="Website"
-    ctrlId="formEditWebsite"
-    placeholder="https://www.my-org.com"
-    required
-    [ctrl]="orgForm.controls.website"></app-text-input>
-</div>
-
-<div class="flex gap-4 flex-wrap">
-  <!-- Business Unit -->
-  <app-text-input
-    class="flex-1"
-    label="Business Unit"
-    ctrlId="formEditBusinessUnit"
-    placeholder="My Department"
-    required
-    [ctrl]="orgForm.controls.businessUnit"></app-text-input>
-</div>
-
-<div class="flex gap-4 flex-wrap">
-  <app-industry-select
-    class="flex-1"
-    required
-    [ctrl]="orgForm.controls.industry"></app-industry-select>
-</div>
-
-<div class="flex flex-col">
-  <app-text-area
-    class="flex-1"
-    label="Main Adddress"
-    placeholder="Example Street 10b, 12345 Frankfurt am Main, Germany"
-    ctrlId="formEditMainAddress"
-    required
-    [ctrl]="orgForm.controls.mainAddress"></app-text-area>
-
-  <mat-checkbox
-    id="formEditBillingDifferent"
-    class="mb-2"
-    [formControl]="orgForm.controls.billingAddressSameAsMain"
-    ><div class="flex gap-2 items-center">
-      <span class="text-sm">Billing address is same as main address</span>
-      <mat-icon
-        fontIcon="info"
-        matTooltip="Only for administrative purposes - the MDS is free of charge until 2025"
-        matTooltipClass="text-sm"
-        aria-label="info"></mat-icon>
-    </div>
-  </mat-checkbox>
-</div>
-
-<div
-  *ngIf="!orgForm.controls.billingAddressSameAsMain.value"
-  class="flex flex-col gap-4">
-  <app-text-area
-    class="flex-1"
-    label="Billing Adddress"
-    placeholder="Example Street 10b, 12345 Frankfurt am Main, Germany"
-    ctrlId="formEditBillingAddress"
-    required
-    [ctrl]="orgForm.controls.billingAddress"></app-text-area>
-</div>
-
-<div class="flex gap-4 flex-wrap">
-  <!-- Description -->
-  <app-text-area
-    class="flex-1"
-    label="Organization Description"
-    ctrlId="formEditOrganizationDescription"
-    placeholder="What does Your organization do?"
-    required
-    [ctrl]="orgForm.controls.description"></app-text-area>
+    [ctrl]="authorityOrgForm.controls.legalName"></app-text-input>
 </div>
 
 <div class="flex flex-col gap-1">
@@ -91,7 +15,7 @@
     <div class="flex flex-col flex-1">
       <label class="w-full mb-2 text-sm">Legal ID Type</label>
       <mat-form-field appearance="outline">
-        <mat-select [formControl]="orgForm.controls.legalIdType">
+        <mat-select [formControl]="authorityOrgForm.controls.legalIdType">
           <mat-option *ngFor="let type of idTypes" [value]="type.value">
             {{ type.viewValue }}
           </mat-option>
@@ -107,114 +31,28 @@
       ctrlId="formRegIdNumber"
       required
       [placeholder]="
-        orgForm.controls.legalIdType.value === 'TAX_ID'
+        authorityOrgForm.controls.legalIdType.value === 'TAX_ID'
           ? 'Tax ID Number'
           : 'Commercial Register Number'
       "
-      [ctrl]="orgForm.controls.legalId"></app-text-input>
+      [ctrl]="authorityOrgForm.controls.legalId"></app-text-input>
     <!-- ID Number -->
 
     <!-- Commercial Register Location -->
     <app-text-input
-      *ngIf="orgForm.controls.legalIdType.value === 'COMMERCE_REGISTER_INFO'"
+      *ngIf="
+        authorityOrgForm.controls.legalIdType.value === 'COMMERCE_REGISTER_INFO'
+      "
       class="flex-1"
       label="Commercial Register Location"
       ctrlId="formRegCommerceRegisterLocation"
       placeholder="Commercial Register Location"
       required
-      [ctrl]="orgForm.controls.commerceRegisterLocation"></app-text-input>
+      [ctrl]="
+        authorityOrgForm.controls.commerceRegisterLocation
+      "></app-text-input>
     <!-- Commercial Register Location -->
   </div>
 </div>
 
-<h3 class="wizard-step-title pb-6">Contacts</h3>
-
-<div class="flex flex-col gap-4">
-  <!-- Main Contact Form -->
-  <div class="flex gap-4 flex-wrap">
-    <h3 class="wizard-step-title">Main Contact</h3>
-    <mat-icon
-      fontIcon="info"
-      matTooltip="Main Contact is needed for purposes such as use cases, events, membership etc."
-      matTooltipClass="text-sm"></mat-icon>
-  </div>
-
-  <!-- User's Full Name -->
-  <app-text-input
-    class="flex-1"
-    label="Main Full Name"
-    ctrlId="formEditMainName"
-    placeholder="John Doe"
-    required
-    [ctrl]="orgForm.controls.mainContactName"></app-text-input>
-
-  <div class="flex gap-4 flex-wrap">
-    <!-- User's PhoneNumber -->
-    <app-text-input
-      class="flex-1"
-      label="Phone Number"
-      ctrlId="formEditMainPhoneNumber"
-      placeholder="+49 1234 567890"
-      required
-      [ctrl]="orgForm.controls.mainContactPhoneNumber"></app-text-input>
-
-    <!-- User's Email -->
-    <app-text-input
-      class="flex-1"
-      label="Email"
-      ctrlId="formEditMainEmail"
-      placeholder="john.doe@my-org.com"
-      required
-      [ctrl]="orgForm.controls.mainContactEmail"></app-text-input>
-  </div>
-</div>
-
-<!-- Technical Contact Form -->
-<div class="flex flex-col gap-4">
-  <div class="flex gap-4 flex-wrap">
-    <h3 class="wizard-step-title">Technical Contact</h3>
-    <mat-icon
-      fontIcon="info"
-      matTooltip="A technical contact will get notified in case of IT related topics"
-      matTooltipClass="text-sm"></mat-icon>
-  </div>
-  <mat-checkbox
-    id="formEditMcSameAsTc"
-    class="mb-2"
-    [formControl]="orgForm.controls.technicalContactSameAsMain"
-    ><div class="flex gap-2 items-center">
-      <span class="text-sm">Same as Main Contact</span>
-    </div>
-  </mat-checkbox>
-
-  <ng-container *ngIf="!orgForm.controls.technicalContactSameAsMain.value">
-    <!-- User's Full Name -->
-    <app-text-input
-      class="flex-1"
-      label="Technical Full Name"
-      ctrlId="formEditTechnicalName"
-      placeholder="John Doe"
-      required
-      [ctrl]="orgForm.controls.technicalContactName"></app-text-input>
-
-    <div class="flex gap-4 flex-wrap">
-      <!-- User's PhoneNumber -->
-      <app-text-input
-        class="flex-1"
-        label="Phone Number"
-        ctrlId="formEditTechnicalPhoneNumber"
-        placeholder="+49 1234 567890"
-        required
-        [ctrl]="orgForm.controls.technicalContactPhoneNumber"></app-text-input>
-
-      <!-- User's Email -->
-      <app-text-input
-        class="flex-1"
-        label="Email"
-        ctrlId="formEditTechnicalEmail"
-        placeholder="john.doe@my-org.com"
-        required
-        [ctrl]="orgForm.controls.technicalContactEmail"></app-text-input>
-    </div>
-  </ng-container>
-</div>
+<app-organization-edit-form [orgForm]="orgForm"></app-organization-edit-form>
