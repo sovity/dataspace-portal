@@ -23,7 +23,6 @@ import de.sovity.authorityportal.db.jooq.enums.OrganizationRegistrationStatus
 import de.sovity.authorityportal.seeds.utils.ScenarioData
 import de.sovity.authorityportal.seeds.utils.ScenarioInstaller
 import de.sovity.authorityportal.seeds.utils.dummyDevOrganizationId
-import de.sovity.authorityportal.seeds.utils.dummyDevOrganizationName
 import de.sovity.authorityportal.web.Roles
 import de.sovity.authorityportal.web.pages.organizationmanagement.toDb
 import de.sovity.authorityportal.web.tests.useDevUser
@@ -230,7 +229,7 @@ class OrganizationUpdateApiServiceTest {
 
     @Test
     @TestTransaction
-    fun `update own organization`() {
+    fun `update own organization as participant admin appropriately`() {
         // arrange
         val now = OffsetDateTime.now()
 
@@ -284,7 +283,7 @@ class OrganizationUpdateApiServiceTest {
 
     @Test
     @TestTransaction
-    fun `update organization`() {
+    fun `update organization as authority admin appropriately`() {
         // arrange
         val now = OffsetDateTime.now()
 
