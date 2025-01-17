@@ -38,6 +38,7 @@ import {
   ReserveConnectorRequest,
   UiApi,
   UpdateOrganizationDto,
+  UpdateOwnOrganizationDto,
   UpdateUserDto,
   UserDetailDto,
   UserInfo,
@@ -66,6 +67,7 @@ export class ApiService {
       this.api().changeParticipantRole({userId, body: role}),
     );
   }
+
   updateApplicationRole(userId: string, role: UserRoleDto) {
     return toObservable(() =>
       this.api().changeApplicationRole({userId, body: role as UserRoleDto}),
@@ -166,10 +168,22 @@ export class ApiService {
   }
 
   updateOwnOrganizationDetails(
+    updateOwnOrganizationDto: UpdateOwnOrganizationDto,
+  ): Observable<IdResponse> {
+    return toObservable(() =>
+      this.api().updateOwnOrganizationDetails({updateOwnOrganizationDto}),
+    );
+  }
+
+  updateOrganizationDetails(
+    organizationId: string,
     updateOrganizationDto: UpdateOrganizationDto,
   ): Observable<IdResponse> {
     return toObservable(() =>
-      this.api().updateOwnOrganizationDetails({updateOrganizationDto}),
+      this.api().updateOrganizationDetails({
+        organizationId,
+        updateOrganizationDto,
+      }),
     );
   }
 

@@ -29,6 +29,7 @@ import {provideAppConfig} from './core/services/config/app-config-initializer';
 import {AuthorityConnectorDetailPageModule} from './pages/authority-connector-detail-page/authority-connector-detail-page.module';
 import {AuthorityConnectorListPageModule} from './pages/authority-connector-list-page/authority-connector-list-page.module';
 import {AuthorityOrganizationDetailPageModule} from './pages/authority-organization-detail-page/authority-organization-detail-page.module';
+import {AuthorityOrganizationEditPageModule} from './pages/authority-organization-edit-page/authority-organization-edit-page.module';
 import {AuthorityOrganizationListPageModule} from './pages/authority-organization-list-page/authority-organization-list-page.module';
 import {CatalogPageModule} from './pages/catalog-page/catalog-page.module';
 import {CentralComponentListPageModule} from './pages/central-component-list-page/central-component-list-page.module';
@@ -93,6 +94,7 @@ import {SharedModule} from './shared/shared.module';
     AuthorityConnectorListPageModule,
     AuthorityOrganizationDetailPageModule,
     AuthorityOrganizationListPageModule,
+    AuthorityOrganizationEditPageModule,
     CatalogPageModule,
     CentralComponentListPageModule,
     ChooseParticipantCaasModule,

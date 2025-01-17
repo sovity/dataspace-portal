@@ -1,0 +1,58 @@
+<div class="flex gap-4 flex-wrap">
+  <!-- Name -->
+  <app-text-input
+    class="flex-1"
+    label="Organization Name"
+    ctrlId="formEditLegalName"
+    placeholder="Other Org LLC"
+    required
+    [ctrl]="authorityOrgForm.controls.legalName"></app-text-input>
+</div>
+
+<div class="flex flex-col gap-1">
+  <div class="flex gap-4 flex-wrap">
+    <!-- ID Type -->
+    <div class="flex flex-col flex-1">
+      <label class="w-full mb-2 text-sm">Legal ID Type</label>
+      <mat-form-field appearance="outline">
+        <mat-select [formControl]="authorityOrgForm.controls.legalIdType">
+          <mat-option *ngFor="let type of idTypes" [value]="type.value">
+            {{ type.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!-- ID Type -->
+
+    <!-- ID Number -->
+    <app-text-input
+      class="flex-1"
+      label="Legal ID Number"
+      ctrlId="formRegIdNumber"
+      required
+      [placeholder]="
+        authorityOrgForm.controls.legalIdType.value === 'TAX_ID'
+          ? 'Tax ID Number'
+          : 'Commercial Register Number'
+      "
+      [ctrl]="authorityOrgForm.controls.legalId"></app-text-input>
+    <!-- ID Number -->
+
+    <!-- Commercial Register Location -->
+    <app-text-input
+      *ngIf="
+        authorityOrgForm.controls.legalIdType.value === 'COMMERCE_REGISTER_INFO'
+      "
+      class="flex-1"
+      label="Commercial Register Location"
+      ctrlId="formRegCommerceRegisterLocation"
+      placeholder="Commercial Register Location"
+      required
+      [ctrl]="
+        authorityOrgForm.controls.commerceRegisterLocation
+      "></app-text-input>
+    <!-- Commercial Register Location -->
+  </div>
+</div>
+
+<app-organization-edit-form [orgForm]="orgForm"></app-organization-edit-form>

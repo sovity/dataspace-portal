@@ -73,14 +73,14 @@
               <ng-container
                 *ngIf="
                   state.organizations.data.length > 0 &&
-                    (state.organizations.data | sortingFilter : filter).length >
+                    (state.organizations.data | sortingFilter : organizationFilter).length >
                       0;
                   else noRows
                 ">
                 <tbody
                   *ngFor="
                     let organization of state.organizations.data
-                      | sortingFilter : filter
+                      | sortingFilter : organizationFilter
                   "
                   class="bg-white divide-y divide-gray-200"
                   (click)="openDetailPage(organization)">

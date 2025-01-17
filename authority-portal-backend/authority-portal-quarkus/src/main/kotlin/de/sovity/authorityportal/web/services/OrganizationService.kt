@@ -14,6 +14,7 @@
 package de.sovity.authorityportal.web.services
 
 import de.sovity.authorityportal.api.model.UpdateOrganizationDto
+import de.sovity.authorityportal.api.model.UpdateOwnOrganizationDto
 import de.sovity.authorityportal.api.model.organization.OnboardingOrganizationUpdateDto
 import de.sovity.authorityportal.broker.dao.utils.eqAny
 import de.sovity.authorityportal.db.jooq.Tables
@@ -121,46 +122,69 @@ class OrganizationService(
         }
     }
 
-    fun updateOrganization(organizationId: String, dto: UpdateOrganizationDto) {
-        val organization = getOrganizationOrThrow(organizationId)
-        organization.url = dto.url.trim()
-        organization.description = dto.description.trim()
-        organization.businessUnit = dto.businessUnit.trim()
-        organization.industry = dto.industry.trim()
-        organization.address = dto.address.trim()
-        organization.billingAddress = dto.billingAddress.trim()
+    fun updateOwnOrganization(organizationId: String, dto: UpdateOwnOrganizationDto) {
+        getOrganizationOrThrow(organizationId).also {
+            it.url = dto.url.trim()
+            it.description = dto.description.trim()
+            it.businessUnit = dto.businessUnit.trim()
+            it.industry = dto.industry.trim()
+            it.address = dto.address.trim()
+            it.billingAddress = dto.billingAddress.trim()
 
-        organization.mainContactName = dto.mainContactName.trim()
-        organization.mainContactEmail = dto.mainContactEmail.trim()
-        organization.mainContactPhone = dto.mainContactPhone.trim()
-        organization.techContactName = dto.techContactName.trim()
-        organization.techContactEmail = dto.techContactEmail.trim()
-        organization.techContactPhone = dto.techContactPhone.trim()
-        organization.update()
+            it.mainContactName = dto.mainContactName.trim()
+            it.mainContactEmail = dto.mainContactEmail.trim()
+            it.mainContactPhone = dto.mainContactPhone.trim()
+            it.techContactName = dto.techContactName.trim()
+            it.techContactEmail = dto.techContactEmail.trim()
+            it.techContactPhone = dto.techContactPhone.trim()
+            it.update()
+        }
+    }
+
+    fun updateOrganization(organizationId: String, dto: UpdateOrganizationDto) {
+        getOrganizationOrThrow(organizationId).also {
+            it.name = dto.name.trim()
+            it.url = dto.url.trim()
+            it.description = dto.description.trim()
+            it.businessUnit = dto.businessUnit.trim()
+            it.industry = dto.industry.trim()
+            it.address = dto.address.trim()
+            it.billingAddress = dto.billingAddress.trim()
+            updateLegalId(it, dto.legalIdType.toDb(), dto.legalIdNumber, dto.commerceRegisterLocation)
+
+            it.mainContactName = dto.mainContactName.trim()
+            it.mainContactEmail = dto.mainContactEmail.trim()
+            it.mainContactPhone = dto.mainContactPhone.trim()
+            it.techContactName = dto.techContactName.trim()
+            it.techContactEmail = dto.techContactEmail.trim()
+            it.techContactPhone = dto.techContactPhone.trim()
+            it.update()
+        }
     }
 
     fun onboardOrganization(organizationId: String, dto: OnboardingOrganizationUpdateDto) {
-        val organization = getOrganizationOrThrow(organizationId)
-        organization.name = dto.name.trim()
-        organization.registrationStatus = OrganizationRegistrationStatus.ACTIVE
-        organization.createdAt = timeUtils.now()
+        getOrganizationOrThrow(organizationId).also {
+            it.name = dto.name.trim()
+            it.registrationStatus = OrganizationRegistrationStatus.ACTIVE
+            it.createdAt = timeUtils.now()
 
-        organization.url = dto.url.trim()
-        organization.description = dto.description.trim()
-        organization.businessUnit = dto.businessUnit.trim()
-        organization.industry = dto.industry
-        organization.address = dto.address.trim()
-        organization.billingAddress = dto.billingAddress.trim()
-        updateLegalId(organization, dto.legalIdType.toDb(), dto.legalIdNumber, dto.commerceRegisterLocation)
+            it.url = dto.url.trim()
+            it.description = dto.description.trim()
+            it.businessUnit = dto.businessUnit.trim()
+            it.industry = dto.industry.trim()
+            it.address = dto.address.trim()
+            it.billingAddress = dto.billingAddress.trim()
+            updateLegalId(it, dto.legalIdType.toDb(), dto.legalIdNumber, dto.commerceRegisterLocation)
 
-        organization.mainContactName = dto.mainContactName.trim()
-        organization.mainContactEmail = dto.mainContactEmail.trim()
-        organization.mainContactPhone = dto.mainContactPhone.trim()
-        organization.techContactName = dto.techContactName.trim()
-        organization.techContactEmail = dto.techContactEmail.trim()
-        organization.techContactPhone = dto.techContactPhone.trim()
+            it.mainContactName = dto.mainContactName.trim()
+            it.mainContactEmail = dto.mainContactEmail.trim()
+            it.mainContactPhone = dto.mainContactPhone.trim()
+            it.techContactName = dto.techContactName.trim()
+            it.techContactEmail = dto.techContactEmail.trim()
+            it.techContactPhone = dto.techContactPhone.trim()
 
-        organization.update()
+            it.update()
+        }
     }
 
     private fun updateLegalId(
