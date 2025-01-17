@@ -1,0 +1,32 @@
+<section class="container my-10 px-20 mx-auto flex flex-col gap-4">
+  <app-loading-element
+    *ngIf="state.organization.isLoading"></app-loading-element>
+
+  <app-error-element
+    *ngIf="state.organization.isError"
+    errorMessage="organization"></app-error-element>
+
+  <app-header
+    *ngIf="state.headerBarConfig"
+    [headerConfig]="state.headerBarConfig"></app-header>
+
+  <app-authority-organization-edit-form
+    *ngIf="form"
+    [authorityOrgForm]="form.group"></app-authority-organization-edit-form>
+
+  <div *ngIf="form" class="flex justify-end gap-4 mt-6">
+    <a
+      class="btn-accent"
+      type="button"
+      routerLink="/authority/organizations/{{ state.organization.data.id }}">
+      Back
+    </a>
+    <button
+      class="btn-accent"
+      type="button"
+      [disabledBtn]="!form.group.valid || state.busy"
+      (click)="onSubmitClick()">
+      Update
+    </button>
+  </div>
+</section>

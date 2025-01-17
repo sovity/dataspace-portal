@@ -15,6 +15,7 @@ import {ActivatedRouteSnapshot, RouterModule, Routes} from '@angular/router';
 import {UserRoleDto} from '@sovity.de/authority-portal-client';
 import {requiresRole} from './core/services/auth/requires-role-guard';
 import {AuthorityConnectorListPageComponent} from './pages/authority-connector-list-page/authority-connector-list-page/authority-connector-list-page.component';
+import {AuthorityOrganizationEditPageComponent} from './pages/authority-organization-edit-page/authority-organization-edit-page/authority-organization-edit-page.component';
 import {AuthorityOrganizationListPageComponent} from './pages/authority-organization-list-page/authority-organization-list-page/authority-organization-list-page.component';
 import {CatalogPageComponent} from './pages/catalog-page/catalog-page/catalog-page.component';
 import {CentralComponentListPageComponent} from './pages/central-component-list-page/central-component-list-page/central-component-list-page.component';
@@ -264,6 +265,22 @@ export const AUTHORITY_PORTAL_ROUTES: Routes = [
         component: AuthorityOrganizationListPageComponent,
         data: {
           requiresRole: ['AUTHORITY_USER'] satisfies UserRoleDto[],
+        },
+        canActivate: [requiresRole],
+      },
+      {
+        path: 'authority/organizations/:organizationId',
+        component: AuthorityOrganizationListPageComponent,
+        data: {
+          requiresRole: ['AUTHORITY_USER'] satisfies UserRoleDto[],
+        },
+        canActivate: [requiresRole],
+      },
+      {
+        path: 'authority/organizations/:organizationId/edit',
+        component: AuthorityOrganizationEditPageComponent,
+        data: {
+          requiresRole: ['AUTHORITY_ADMIN'] satisfies UserRoleDto[],
         },
         canActivate: [requiresRole],
       },

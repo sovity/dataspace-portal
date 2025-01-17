@@ -23,8 +23,3 @@ export interface UserDetailPageConfig {
   userId: string;
   organizationId: string;
 }
-
-export interface UserDetailPageConfig {
-  userId: string;
-  organizationId: string;
-}

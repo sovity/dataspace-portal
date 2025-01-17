@@ -13,7 +13,8 @@ please see [changelog_updates.md](docs/dev/changelog_updates.md).
 
 #### Minor
 
-- Added deleting of organizations for Authority Admins
+- Added deleting of organizations for Authority Admins ([PR #404](https://github.com/sovity/authority-portal/pull/404))
+- Added editing of organizations for Authority Admins ([PR #413](https://github.com/sovity/authority-portal/pull/413))
 
 #### Patch
 

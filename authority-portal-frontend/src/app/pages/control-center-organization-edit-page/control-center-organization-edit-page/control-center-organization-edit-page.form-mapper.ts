@@ -12,11 +12,11 @@
  */
 import {
   OwnOrganizationDetailsDto,
-  UpdateOrganizationDto,
+  UpdateOwnOrganizationDto,
 } from '@sovity.de/authority-portal-client';
 import {ControlCenterOrganizationEditPageFormValue} from './control-center-organization-edit-page.form-model';
 
-export function buildFormValue(
+export function buildControlCenterOrganizationEditPageFormValue(
   organization: OwnOrganizationDetailsDto,
 ): ControlCenterOrganizationEditPageFormValue {
   let billingAddressSameAsMain =
@@ -54,9 +54,9 @@ export function buildFormValue(
   };
 }
 
-export function buildEditRequest(
+export function buildUpdateOwnOrganizationRequest(
   formValue: ControlCenterOrganizationEditPageFormValue,
-): UpdateOrganizationDto {
+): UpdateOwnOrganizationDto {
   return {
     url: formValue.website,
     businessUnit: formValue.businessUnit,

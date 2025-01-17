@@ -11,6 +11,7 @@
  *      sovity GmbH - initial implementation
  */
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {Subject, distinctUntilChanged, map, takeUntil, tap} from 'rxjs';
 import {take} from 'rxjs/operators';
 import {Store} from '@ngxs/store';
@@ -79,6 +80,7 @@ export class AuthorityOrganizationDetailPageComponent
     private userDeleteDialogService: UserDeleteDialogService,
     private organizationDialogService: OrganizationDeleteDialogService,
     private formatService: FormatService,
+    private router: Router,
   ) {
     this.organizationId = childComponentInput.id;
   }
@@ -221,6 +223,17 @@ export class AuthorityOrganizationDetailPageComponent
               this.store.dispatch(CloseOrganizationDetail);
             },
             isDisabled: !['PENDING'].includes(organization.registrationStatus),
+          },
+          {
+            label: 'Edit Organization',
+            icon: 'edit',
+            event: () => {
+              this.store.dispatch(CloseOrganizationDetail);
+              this.router.navigate([
+                `/authority/organizations/${organization.id}/edit`,
+              ]);
+            },
+            isDisabled: !this.isCurrentUserAuthorityAdmin,
           },
           {
             label: 'Delete Organization',

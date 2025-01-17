@@ -13,17 +13,11 @@
 
 package de.sovity.authorityportal.api.model
 
-import de.sovity.authorityportal.api.model.organization.OrganizationLegalIdTypeDto
 import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.NotBlank
-import jakarta.validation.constraints.NotNull
 
-@Schema(description = "Information about a Organization.")
-data class UpdateOrganizationDto(
-    @field:NotBlank(message = "Organization's name cannot be blank")
-    @field:Schema(description = "Organization's Legal name", requiredMode = Schema.RequiredMode.REQUIRED)
-    val name: String,
-
+@Schema(description = "Information about the own Organization.")
+data class UpdateOwnOrganizationDto(
     @field:NotBlank(message = "Organization's URL of the organization website cannot be blank")
     @field:Schema(description = "Organization's URL of the organization website", requiredMode = Schema.RequiredMode.REQUIRED)
     val url: String,
@@ -44,20 +38,6 @@ data class UpdateOrganizationDto(
     @field:NotBlank(message = "Organization's Billing Address cannot be blank")
     @field:Schema(description = "Organization's Billing Address", requiredMode = Schema.RequiredMode.REQUIRED)
     val billingAddress: String,
-
-    @NotNull(message = "Organization's ID type cannot be null")
-    @field:Schema(description = "Organization's legal ID type", requiredMode = Schema.RequiredMode.REQUIRED)
-    val legalIdType: OrganizationLegalIdTypeDto,
-
-    @field:NotBlank(message = "Organization's legal ID number cannot be blank")
-    @field:Schema(
-        description = "Organization's legal ID number - either Tax ID or Commerce register number",
-        requiredMode = Schema.RequiredMode.REQUIRED
-    )
-    val legalIdNumber: String,
-
-    @field:Schema(description = "Organization's Commerce Register Location", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-    val commerceRegisterLocation: String?,
 
     @field:NotBlank(message = "Organization's Main Contact Name cannot be blank")
     @field:Schema(description = "Organization's Main Contact Name", requiredMode = Schema.RequiredMode.REQUIRED)
