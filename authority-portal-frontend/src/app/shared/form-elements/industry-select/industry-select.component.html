@@ -3,10 +3,14 @@
 }}</label>
 <mat-form-field appearance="outline">
   <mat-select
+    data-testid="industry-selector"
     [placeholder]="'Select ' + label"
     [id]="ctrlId"
     [formControl]="ctrl">
-    <mat-option *ngFor="let industry of industries" [value]="industry">
+    <mat-option
+      *ngFor="let industry of industries"
+      data-testid="industry-selector-option"
+      [value]="industry">
       {{ industry }}
     </mat-option>
     <mat-option
