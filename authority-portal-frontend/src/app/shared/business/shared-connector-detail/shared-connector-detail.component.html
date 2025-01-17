@@ -4,7 +4,7 @@
     <mat-icon class="material-icons-outlined">label</mat-icon>
     Connector ID
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="connector-details-connectorid">
     {{ connector.connectorId }}
   </div>
 </div>
@@ -15,7 +15,7 @@
     <mat-icon class="material-icons-outlined">power</mat-icon>
     Connector Name
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="connector-details-connectorname">
     {{ connector.connectorName }}
   </div>
 </div>
@@ -26,7 +26,7 @@
     <mat-icon class="material-icons-outlined">corporate_fare</mat-icon>
     Organization
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="connector-details-organization">
     {{ connector.organizationName }}, {{ connector.organizationId }}
   </div>
 </div>
@@ -37,7 +37,7 @@
     <mat-icon class="material-icons-outlined">cloud_circle</mat-icon>
     Environment
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="connector-details-environment">
     {{ connector.environment.title }}
   </div>
 </div>
@@ -48,7 +48,7 @@
     <mat-icon class="material-icons-outlined">cloud</mat-icon>
     Status
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="connector-details-status">
     {{ getConnectorStatusText(connector.status) }}
   </div>
 </div>
@@ -59,7 +59,7 @@
     <mat-icon class="material-icons-outlined">location_on</mat-icon>
     Location
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="connector-details-location">
     {{ connector.location }}
   </div>
 </div>
@@ -70,7 +70,7 @@
     <mat-icon class="material-icons-outlined">corporate_fare</mat-icon>
     Hosted By
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="connector-details-hostedby">
     {{ connector.hostOrganizationName }}, {{ connector.hostOrganizationId }}
   </div>
 </div>
@@ -81,7 +81,7 @@
     <mat-icon class="material-icons-outlined">link</mat-icon>
     Frontend URL
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="connector-details-frontendurl">
     <a
       *ngIf="connector.frontendUrl"
       class="flex items-center gap-1 active:scale-[0.99] select-none group"
@@ -106,6 +106,7 @@
   </div>
   <div
     class="details-row-value flex gap-1 items-center cursor-pointer active:scale-[0.99] select-none"
+    data-testid="connector-details-endpointurl"
     (click)="copyToClipboard(connector.endpointUrl)">
     <div>{{ connector.endpointUrl }}</div>
     <mat-icon class="!text-[17px] !mt-[7px]">content_copy</mat-icon>
@@ -120,6 +121,7 @@
   </div>
   <div
     class="details-row-value flex gap-1 items-center cursor-pointer active:scale-[0.99] select-none"
+    data-testid="connector-details-managementurl"
     (click)="copyToClipboard(connector.managementUrl)">
     <div>{{ connector.managementUrl }}</div>
     <mat-icon class="!text-[17px] !mt-[7px]">content_copy</mat-icon>

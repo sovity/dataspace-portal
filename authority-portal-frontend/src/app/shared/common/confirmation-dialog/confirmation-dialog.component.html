@@ -1,11 +1,14 @@
 <p class="confirmation-dialog-title">{{ confirmationDialog.title }}</p>
 
 <mat-dialog-content class="mat-typography">
-  <p>{{ confirmationDialog.messageBody }}</p>
+  <p data-testid="confirmation-dialog-message">
+    {{ confirmationDialog.messageBody }}
+  </p>
 </mat-dialog-content>
 <mat-dialog-actions class="flex gap-3" align="end">
   <button
     *ngFor="let button of confirmationDialog.actionButtons"
+    data-testid="confirmation-dialog-btn"
     [ngClass]="button?.style || 'btn-accent-outline'"
     (click)="actionHandler(button.action)">
     {{ button.label }}

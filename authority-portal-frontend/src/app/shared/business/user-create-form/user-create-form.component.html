@@ -5,6 +5,7 @@
       class="flex-1"
       label="First Name"
       ctrlId="formRegFirstName"
+      data-testid="formRegFirstName"
       placeholder="John"
       required
       [ctrl]="userForm.controls.firstName"></app-text-input>
@@ -14,6 +15,7 @@
       class="flex-1"
       label="Last Name"
       ctrlId="formRegLastName"
+      data-testid="formRegLastName"
       placeholder="Doe"
       required
       [ctrl]="userForm.controls.lastName"></app-text-input>
@@ -25,6 +27,7 @@
       class="flex-1"
       label="Job Title"
       ctrlId="formRegJobTitle"
+      data-testid="formRegJobTitle"
       placeholder="Analyst"
       required
       [ctrl]="userForm.controls.jobTitle"></app-text-input>
@@ -34,6 +37,7 @@
       class="flex-1"
       label="Phone Number"
       ctrlId="formRegPhoneNumber"
+      data-testid="formRegPhoneNumber"
       placeholder="+49 1234 567890"
       required
       [ctrl]="userForm.controls.phoneNumber"></app-text-input>
@@ -44,6 +48,7 @@
         class="flex-1"
         label="Email"
         ctrlId="formRegEmail"
+        data-testid="formRegEmail"
         placeholder="john.doe@my-org.com"
         required
         [ctrl]="userForm.controls.email"></app-text-input>
@@ -55,12 +60,14 @@
     <app-password-input
       class="flex-1"
       required
+      data-testid="formRegPassword"
       [ctrl]="userForm.controls.password"></app-password-input>
 
     <!-- Confirm password -->
     <app-password-repeat-input
       class="flex-1"
       required
+      data-testid="formRegConfirmPassword"
       [ctrl]="userForm.controls.confirmPassword"
       [parentFormGroup]="userForm"></app-password-repeat-input>
   </div>

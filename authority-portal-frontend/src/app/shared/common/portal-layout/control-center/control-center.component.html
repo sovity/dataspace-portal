@@ -1,5 +1,6 @@
 <div
   class="flex gap-4 py-2 px-4 items-center h-full"
+  data-testid="control-center-btn"
   [matMenuTriggerFor]="menu"
   (menuOpened)="userMenuOpen = true"
   (menuClosed)="userMenuOpen = false">
@@ -21,7 +22,9 @@
   <div class="flex gap-4 my-4">
     <app-avatar [name]="userAvatar"></app-avatar>
     <div>
-      <p class="text-gray-700 leading-5 font-bold">
+      <p
+        class="text-gray-700 leading-5 font-bold"
+        data-testid="control-center-username">
         {{ userData.firstName + ' ' + userData.lastName }}
       </p>
       <p class="text-gray-700 leading-5">{{ userData.roleString }}</p>
@@ -31,6 +34,7 @@
   <div>
     <a
       class="flex gap-2 justify-start items-center p-2 hover:text-brand-highlight"
+      data-testid="control-center-my-profile-link"
       routerLink="control-center/my-profile">
       <mat-icon svgIcon="user"></mat-icon>
       <span>My Profile</span>
@@ -39,12 +43,14 @@
   <div>
     <a
       class="flex gap-2 justify-start items-center p-2 hover:text-brand-highlight"
+      data-testid="control-center-my-organization-link"
       routerLink="control-center/my-organization">
       <mat-icon svgIcon="briefcase"></mat-icon>
       <span>My Organization</span>
     </a>
     <a
       class="flex gap-2 justify-start items-center p-2 hover:text-brand-highlight"
+      data-testid="control-center-users-and-roles-link"
       routerLink="control-center/users-and-roles">
       <mat-icon svgIcon="users"></mat-icon>
       <span>Users and Roles</span>
@@ -55,6 +61,7 @@
   <div>
     <a
       class="flex gap-2 justify-start items-center p-2 hover:text-brand-highlight"
+      data-testid="control-center-logout-link"
       [href]="logoutUrl">
       <mat-icon svgIcon="arrow-left-on-rectangle"></mat-icon>
       <span>Logout</span>
