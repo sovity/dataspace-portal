@@ -5,8 +5,7 @@ npmVersion = "8.15.0"
 
 sovity-edcCe = "10.5.0"
 
-quarkus = "3.9.2"
-quarkus-keycloakAdminClientReactive = "3.6.6"
+quarkus = "3.18.1"
 quarkus-jooq = "2.0.0"
 
 jakarta-servletApi = "5.0.0"
@@ -31,7 +30,6 @@ commons-lang = "3.14.0"
 sovity-edc-wrapperCommonApi = { module = "de.sovity.edc:wrapper-common-api", version.ref = "sovity-edcCe" }
 
 quarkus-universeBom = { module = "io.quarkus.platform:quarkus-bom", version.ref = "quarkus" }
-quarkus-keycloakAdminClientReactive = { module = "io.quarkus:quarkus-keycloak-admin-client-reactive", version.ref = "quarkus-keycloakAdminClientReactive" }
 quarkus-jooq = { module = "io.quarkiverse.jooq:quarkus-jooq", version.ref = "quarkus-jooq" }
 
 jakarta-servletApi = { module = "jakarta.servlet:jakarta.servlet-api", version.ref = "jakarta-servletApi" }
