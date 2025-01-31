@@ -24,9 +24,9 @@ Keycloak 26 compatibility update
 
 #### Compatible Versions
 
-- Authority Portal Backend Docker Image: `ghcr.io/sovity/authority-portal-ee-backend:4.1.5`
-- Authority Portal Frontend Docker Image: `ghcr.io/sovity/authority-portal-ee-frontend:4.1.5`
-- Catalog Crawler CE: `ghcr.io/sovity/authority-portal-ee-crawler:4.1.5`
+- Authority Portal Backend Docker Image: `ghcr.io/sovity/authority-portal-backend:4.1.5`
+- Authority Portal Frontend Docker Image: `ghcr.io/sovity/authority-portal-frontend:4.1.5`
+- Catalog Crawler CE: `ghcr.io/sovity/catalog-crawler-ce:10.5.0`
 - sovity EDC CE: [`v10.5.0`](https://github.com/sovity/edc-ce/releases/tag/v10.5.0)
 - Keycloak: 26.0.7
 
