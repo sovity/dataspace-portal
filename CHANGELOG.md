@@ -3,42 +3,38 @@
 For documentation on how to update this changelog,
 please see [changelog_updates.md](docs/dev/changelog_updates.md).
 
-## Unreleased - YYYY-MM-DD
+## [v4.1.5] - 2025-01-31
 
 ### Overview
 
+Keycloak 26 compatibility update
+
 ### Detailed Changes
 
-#### Major
-
-#### Minor
-
 #### Patch
+
+- Updated backend framework for Keycloak 26 compatibility
 
 ### Known issues
 
 ### Deployment Migration Notes
 
+- To maintain compatibility, update **Keycloak** to version **26.0.7** and **oauth2-proxy** to **7.7.1**
+  - If you encounter issues keeping the user session alive, configure your auth proxy to either no longer require a nonce in the access token or add the legacy nonce mapper to your oauth-proxy client. Consult the Keycloak documentation for more information.
+
 #### Compatible Versions
 
-- Authority Portal Backend Docker Image: `ghcr.io/sovity/authority-portal-backend:{{ version }}`
-- Authority Portal Frontend Docker Image: `ghcr.io/sovity/authority-portal-frontend:{{ version }}`
-- Catalog Crawler CE: `ghcr.io/sovity/authority-portal-crawler:{{ version }}`
-- Sovity EDC CE: {{ CE Release Link }}
+- Authority Portal Backend Docker Image: `ghcr.io/sovity/authority-portal-ee-backend:4.1.5`
+- Authority Portal Frontend Docker Image: `ghcr.io/sovity/authority-portal-ee-frontend:4.1.5`
+- Catalog Crawler CE: `ghcr.io/sovity/authority-portal-ee-crawler:4.1.5`
+- sovity EDC CE: [`v10.5.0`](https://github.com/sovity/edc-ce/releases/tag/v10.5.0)
+- Keycloak: 26.0.7
 
 ## [v4.1.4] - 2024-12-13
 
 ### Overview
 
 ### Detailed Changes
-
-#### Major
-
-#### Minor
-
-#### Patch
-
-### Known issues
 
 ### Deployment Migration Notes
 
