@@ -27,6 +27,8 @@ The Data Space Portal is not just about managing participants. It also provides 
 
 As a Dataspace administration tool, the Data Space Portal necessitates technical connections with other dataspace components, including the CaaS component. This integration ensures a smooth and efficient operation, enhancing the overall user experience.
 
+<b>Note:</b> This component was previously known as Authority Portal (AP) and has been renamed to Data Space Portal (DSPortal). The functionality remains unchanged.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Development
