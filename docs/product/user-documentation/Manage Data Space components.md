@@ -14,7 +14,7 @@ Besides the Data Space Authority roles, there are two other application roles th
 ### General
 
 The Service Partner Admin is an application role to represent the provider of connectors in a Data Space. A service partner of a Data Space provides connectors for Data Space participants by deploying and registering these connectors for other entities within the Data Space.
-As such, the service partner has direct access to all provided connectors and the application role of Service Partner Admin aims to mirror those capabilities within the Authority Portal.
+As such, the service partner has direct access to all provided connectors and the application role of Service Partner Admin aims to mirror those capabilities within the Data Space Portal.
 The Service Partner Admin role is an application role and assigned to certain users individually by Authority Admins.
 
 ### Rights for Service Partner Admins
@@ -41,13 +41,13 @@ When clicking on the button "Provide Connector" in the upper right corner a mask
 
 ![provide-connector](images/provide-connector.png)
 
-To provide a connector in the Authority Portal all fields of the mask must be submitted.
+To provide a connector in the Data Space Portal all fields of the mask must be submitted.
 After clicking on the "Create Connector" the list of provided connectors appears, where an added connector can be found which has to be configured further at some point in time.
 
 ![provide-connector](images/provide-connectors-list.png)
 
 By clicking in the list on "Configure", the additional data for the connector must be entered, such as the URL at which the frontend of the connector can be accessed.
-The most important entry  is the connector endpoint, the DSP-endpoint, so that the connector's offers can be searched and displayed in the authority portal, since the authority portal also crawls the connectors in the dataspace for available offers which the authority portal's crawler is allowed to access.
+The most important entry  is the connector endpoint, the DSP-endpoint, so that the connector's offers can be searched and displayed in the Data Space Portal, since the Data Space Portal also crawls the connectors in the dataspace for available offers which the Data Space Portal's crawler is allowed to access.
 The process of the further configuration guides you through the necessary steps and needed information to specify the URLs or enter valid information about the connector certificate.
 Please follow the steps in the dialog.
 
@@ -63,7 +63,7 @@ Please follow the steps in the dialog.
 
 ### General
 
-The Operator Admin is an application role to represent the operator of the Mobility Data Space. The operator of the Mobility Data Space deploys the central components of the Data Space in the infrastructure and manages the different environments of the Data Space. As such, the operator has direct access to all central components and the application role of Operator Admin aims to mirror those capabilities within the Authority Portal.
+The Operator Admin is an application role to represent the operator of the Mobility Data Space. The operator of the Mobility Data Space deploys the central components of the Data Space in the infrastructure and manages the different environments of the Data Space. As such, the operator has direct access to all central components and the application role of Operator Admin aims to mirror those capabilities within the Data Space Portal.
 The Operator Admin role is an application role and assigned to certain users individually by Authority Admins.
 
 ### Rights for Operator Admins
@@ -86,7 +86,7 @@ When clicking on the button "Provide Central Component" in the upper right corne
 
 ![provide-central-component](images/provide-central-component.png)
 
-To register a central component in the Authority Portal all fields of the mask must be submitted.
+To register a central component in the Data Space Portal all fields of the mask must be submitted.
 After clicking on the register button the list of central components appears, where the added central component can be found.
 
 #### 3. Assign Operator Admin role to users within own organization
