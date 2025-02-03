@@ -2,7 +2,7 @@
 <br />
 <div align="center">
 
-<h3 align="center">Authority Portal</h3>
+<h3 align="center">Data Space Portal</h3>
 <p align="center" style="padding-bottom:16px">
 Custom Keycloak Theme
 <br />
@@ -21,11 +21,11 @@ An MDS-Themed Kecyloak.
 
 ## Why does this component exist?
 
-The Authority Portal uses the Keycloak Login Page. This is due to identity federation and SSO.
+The Data Space Portal uses the Keycloak Login Page. This is due to identity federation and SSO.
 
 For consistency, the MDS wanted a custom theming.
 
-Registration processes, however, will be fully handled by the Authority Portal.
+Registration processes, however, will be fully handled by the Data Space Portal.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
