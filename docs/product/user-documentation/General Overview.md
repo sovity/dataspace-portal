@@ -8,13 +8,13 @@ This guide provides a general overview of the main sections and features of the 
 
 ## Navigation Overview
 
-The Authority Portal is structured into six main sections, each serving a distinct purpose. You can access each section from the left navigation panel. Below is a brief description of each:
+The Data Space Portal is structured into six main sections, each serving a distinct purpose. You can access each section from the left navigation panel. Below is a brief description of each:
 
 ### 1. Home
-The Home section is your landing page within the Authority Portal if no direct links are used. It provides an overview of the system with the Dashboard and quick access to the Data Catalog.
+The Home section is your landing page within the Data Space Portal if no direct links are used. It provides an overview of the system with the Dashboard and quick access to the Data Catalog.
 
 #### Data Catalog
-The Data Catalog of the Authority Portal is designed to allow you to browse a comprehensive list of data offers available within a data space. It serves as a centralized interface where participants can discover, access, and evaluate various data offers.
+The Data Catalog of the Data Space Portal is designed to allow you to browse a comprehensive list of data offers available within a data space. It serves as a centralized interface where participants can discover, access, and evaluate various data offers.
 
 #### Dashboard
 The Dashboard provides a snapshot of the current status and uptime history of the components in the data space. It is a central place to monitor key indicators, like online and offline status of connectors, online status of the DAPS, the Logging House or the Catalog Crawler.
@@ -51,7 +51,7 @@ This section enables the service parnter with direct access to all provided conn
 **To learn more about the Service Partner Admin role, please read the section [Application role: Service Partner Admin](Manage%20Data%20Space%20components.md#application-role-service-partner-admin).**
 
 ### 5. Authority Section
-This section is intended for administrators of the data space and includes advanced features for managing the authority portal and the organizations in the data space.
+This section is intended for administrators of the data space and includes advanced features for managing the Data Space Portal and the organizations in the data space.
 
 #### Organizations
 As a data space authority, all organizations registered in the data space can be viewed and managed here. New organizations can also be invited.
@@ -62,4 +62,4 @@ This is a central point for viewing all connectors and their status and further 
 **To learn more about the Authority section, please read the documentation: [Authority Section](Authority%20Section.md).**
 
 ### 6. Support
-The Support section is intended to assist users with any issues or inquiries they might have while using the Authority Portal. Please note that this section requires integration with a support system of your choice to be fully functional.
+The Support section is intended to assist users with any issues or inquiries they might have while using the Data Space Portal. Please note that this section requires integration with a support system of your choice to be fully functional.
