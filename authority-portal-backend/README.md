@@ -9,7 +9,7 @@
 <img src="https://raw.githubusercontent.com/sovity/edc-ui/main/src/assets/images/sovity_logo.svg" alt="Logo" width="300">
 </a>
 
-<h3 align="center">Authority Portal</h3>
+<h3 align="center">Data Space Portal</h3>
 <p align="center" style="padding-bottom:16px">
 Backend + Frontend + E2E Tests
 <br />
@@ -21,7 +21,7 @@ Backend + Frontend + E2E Tests
 
 ## About This Component
 
-Backend for the Authority Portal. Built with Quarkus, Kotlin and JOOQ.
+Backend for the Data Space Portal. Built with Quarkus, Kotlin and JOOQ.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
