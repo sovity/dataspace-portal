@@ -9,9 +9,9 @@
 <img src="https://raw.githubusercontent.com/sovity/edc-ui/main/src/assets/images/sovity_logo.svg" alt="Logo" width="300">
 </a>
 
-<h3 align="center">Authority Portal</h3>
+<h3 align="center">Data Space Portal</h3>
 <p align="center" style="padding-bottom:16px">
-Manage your Dataspace
+ Collaboration and governance for all participants
 <br />
 <a href="https://github.com/sovity/authority-portal/issues/new?assignees=&labels=kind%2Fbug&projects=&template=bug_report.yaml">Report Bug</a>
 ·
@@ -21,11 +21,11 @@ Manage your Dataspace
 
 ## About The Project
 
-The **Authority Portal** is an open-source Software as a Service (SaaS) solution designed to streamline the management of your Dataspace. This innovative tool serves as a comprehensive Dataspace Administration Tool, offering a platform where you can seamlessly invite organizations and their users to participate in your Dataspace.
+The **Data Space Portal** is an open-source Software as a Service (SaaS) solution designed to streamline the management of your Dataspace. This innovative tool serves as a comprehensive Dataspace Administration Tool, offering a platform where you can seamlessly invite organizations and their users to participate in your Dataspace.
 
-The Authority Portal is not just about managing participants. It also provides multiple avenues to add or acquire connectors and service partners. These partners can offer their own Connector-as-a-Service (CaaS), extending the functionality and versatility of your Dataspace.
+The Data Space Portal is not just about managing participants. It also provides multiple avenues to add or acquire connectors and service partners. These partners can offer their own Connector-as-a-Service (CaaS), extending the functionality and versatility of your Dataspace.
 
-As a Dataspace administration tool, the Authority Portal necessitates technical connections with other dataspace components, including the CaaS component. This integration ensures a smooth and efficient operation, enhancing the overall user experience.
+As a Dataspace administration tool, the Data Space Portal necessitates technical connections with other dataspace components, including the CaaS component. This integration ensures a smooth and efficient operation, enhancing the overall user experience.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -73,7 +73,7 @@ see [Frontend Local E2E Development](authority-portal-frontend/README.md#local-e
 
 ### Productive Deployment Guide
 
-There is a guide on [How to deploy the Authority Portal for Production](docs/deployment-guide/goals/production/README.md) in this
+There is a guide on [How to deploy the Data Space Portal for Production](docs/deployment-guide/goals/production/README.md) in this
 repository.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -86,6 +86,6 @@ See [`LICENSE`](./LICENSE) for more information.
 
 ## Contact
 
-If you're interested in deploying the Authority Portal for productive use, we at sovity are ready to assist you. Our team is committed to providing the support you need to make the most of this powerful tool. Contact us today to learn more about how the Authority Portal can transform your dataspace management: contact@sovity.de
+If you're interested in deploying the Data Space Portal for productive use, we at sovity are ready to assist you. Our team is committed to providing the support you need to make the most of this powerful tool. Contact us today to learn more about how the Data Space Portal can transform your dataspace management: contact@sovity.de
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
