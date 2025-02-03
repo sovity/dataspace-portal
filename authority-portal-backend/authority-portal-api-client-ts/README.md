@@ -5,7 +5,7 @@
     <img src="https://raw.githubusercontent.com/sovity/edc-ui/main/src/assets/images/sovity_logo.svg" alt="Logo" width="300">
   </a>
 
-<h3 align="center">Authority Portal API TypeScript Client Library</h3>
+<h3 align="center">Data Space Portal API TypeScript Client Library</h3>
 
   <p align="center">
     <a href="https://github.com/sovity/authority-portal/issues/new?template=bug_report.md">Report Bug</a>
@@ -16,7 +16,7 @@
 
 ## About this component
 
-TypeScript Client Library to access APIs of our Authority Portal Backend.
+TypeScript Client Library to access APIs of our Data Space Portal Backend.
 
 ## How to install
 
@@ -28,7 +28,7 @@ npm i --save @sovity.de/authority-portal-client
 
 ## How to use
 
-Configure your Authority Portal Client and use endpoints of our Authority Portal
+Configure your Data Space Portal Client and use endpoints of our Data Space Portal
 API:
 
 ```typescript
