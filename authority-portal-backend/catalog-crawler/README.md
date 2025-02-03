@@ -19,14 +19,14 @@
 The Catalog Crawler is an additional deployment unit needed to determine the online status of registered connectors and populate the Data Catalog:
 
 - It is a modified EDC connector with the task to crawl the other connectors' public data offers.
-- It periodically checks the Authority Portal's connector list for its environment.
+- It periodically checks the Data Space Portal's connector list for its environment.
 - It crawls the given connectors in regular intervals.
-- It writes the data offers and connector statuses into the Authority Portal DB.
-- Each environment configured in the Authority Portal requires its own Catalog Crawler with credentials for that environment's DAPS.
+- It writes the data offers and connector statuses into the Data Space Portal DB.
+- Each environment configured in the Data Space Portal requires its own Catalog Crawler with credentials for that environment's DAPS.
 
 ## Why does this component exist?
 
-The Authority Portal uses a non-EDC stack and thus it cannot read the catalogs of participating connectors directly.
+The Data Space Portal uses a non-EDC stack and thus it cannot read the catalogs of participating connectors directly.
 
 ## Deployment
 
