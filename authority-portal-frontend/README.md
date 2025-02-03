@@ -16,10 +16,10 @@
 <img src="https://raw.githubusercontent.com/sovity/edc-ui/main/src/assets/images/sovity_logo.svg" alt="Logo" width="300">
 </a>
 
-<h3 align="center">Authority Portal</h3>
+<h3 align="center">Data Space Portal</h3>
 
   <p align="center">
-    Frontend (UI) of Authority Portal
+    Frontend (UI) of Data Space Portal
     <br />
     <a href="https://github.com/sovity/authority-portal/issues">Report Bug</a>
     ·
@@ -52,7 +52,7 @@
 
 ## About This Component
 
-Frontend for sovity's Dataspace Authority Portal, written in Angular with
+Frontend for sovity's Dataspace Data Space Portal, written in Angular with
 TypeScript, NGXS State Management and TailwindCSS Framework.
 
 <p align="right">(<a href="#readme-top">back to top</a>)
