@@ -12,9 +12,9 @@ Any user is able to edit their own information by maneuvering to his own profile
 First name, last name, job title, email and phone number can be updated and changes persisted by clicking "Update".
 
 Also, a user can see the roles assigned to him/her by clicking on the Tab "Users and Roles".
-As a participant in the AP, you can have one of the following roles:
+As a participant in the Data Space Portal, you can have one of the following roles:
 
-- _User_: The basic role that allows a person to open multiple participant related sections in the AP, but basically cannot change anything
+- _User_: The basic role that allows a person to open multiple participant related sections in the Data Space Portal, but basically cannot change anything
 - _Key User_: The role allows creating and editing connectors for the user's organization
 - _Admin_: Can additionally manage users, invite new users and deactivate existing users
 
