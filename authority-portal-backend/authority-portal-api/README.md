@@ -5,7 +5,7 @@
     <img src="https://raw.githubusercontent.com/sovity/edc-ui/main/src/assets/images/sovity_logo.svg" alt="Logo" width="300">
   </a>
 
-<h3 align="center">Authority Portal API Specification</h3>
+<h3 align="center">Data Space Portal API Specification</h3>
 
   <p align="center">
     <a href="https://github.com/sovity/authority-portal/issues/new?template=bug_report.md">Report Bug</a>
@@ -16,7 +16,7 @@
 
 ## About this component
 
-Specification of Authority Portal API endpoints, for example endpoints for the Authority Portal UI.
+Specification of Data Space Portal API endpoints, for example endpoints for the Data Space Portal UI.
 
 ## License
 
