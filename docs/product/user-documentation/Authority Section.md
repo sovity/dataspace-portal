@@ -10,7 +10,7 @@ Organization management is only available to Authority Admins and Authority User
 
 ![organizations-page](images/organizations-list.png)
 
-On the Organization page you can see all organizations registered in the Authority Portal. They can be filtered by:
+On the Organization page you can see all organizations registered in the Data Space Portal. They can be filtered by:
 
 - _Active_: Fully registered organizations
 - _Invited_: Organization invitation has been sent, but was not yet accepted
@@ -46,12 +46,12 @@ The process is as follows:
 
 ## Connector overview
 
-Under "All Connectors", Authority Users and Admins can see all registered connectors of all organizations in the Authority Portal.
+Under "All Connectors", Authority Users and Admins can see all registered connectors of all organizations in the Data Space Portal.
 Also, the connector details can be accessed from here.
 
 Additionally, the status of each connector is displayed, providing insights into their current operational state. Each Connector can have the following statuses:
 - Online: The connector is reachable and operational.
-- Offline: The connector is not reachable by the Authority Portal crawler.
+- Offline: The connector is not reachable by the Data Space Portal crawler.
 
 Connectors of type CAAS (Connector as a Service) can also support extended operational statuses. These additional statuses provide more granular insights into the state of Connector as a Service Connectors, reflecting their dynamic and managed nature.
 - Init: The connector is in the initialization process.
