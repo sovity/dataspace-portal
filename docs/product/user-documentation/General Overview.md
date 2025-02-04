@@ -14,7 +14,7 @@ When not logged in, you can see a page where you can choose between "Login" and 
 - "Login" redirects you to the Keycloak Login page
 - "Register Organization" redirects you to the registration form
 
-![Image: DSPortal Landing Page](DSPortal-Landing-Page.jpeg)
+![DSPortal-Landing-Page](https://github.com/user-attachments/assets/a94d6c9d-26b0-4713-98b7-27b0cd101695)
 
 ## Login Page
 The login page is powered by Keycloak page adapted to sovity's infrastructure. You can login or reset your password.
@@ -23,7 +23,7 @@ The login page is powered by Keycloak page adapted to sovity's infrastructure. Y
 
 Assuming successful login, let's take a look at the features of the DSPortal.
 
-![Image: DSPortal Navigation Overview](DSPortal-Navigation-Overview.png)
+![DSPortal-Navigation-Overview](https://github.com/user-attachments/assets/4051439a-b7a1-4902-ab5f-4b76b7b5e7bd)
 
 ## Header Navigation Overview
 
