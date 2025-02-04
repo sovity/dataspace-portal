@@ -27,11 +27,12 @@ Assuming successful login, let's take a look at the features of the DSPortal.
 
 ## Header Navigation Overview
 
-
-
 ### Environment Switcher
 
-- You can switch between available deployment environments in the switcher at the top right of the page.  
+- You can switch between available deployment environments in the switcher at the top right of the page.
+
+![image](https://github.com/user-attachments/assets/54aad725-dc80-4a0a-a168-ccc629e8e7bb)
+
 - Every deployment environment has its own central components and its own connectors. Only organizations and users are shared.
   - Because the connectors are separated, every environment has its own catalog with its own data offers.
 
@@ -41,6 +42,9 @@ On the left side of the UI, the Data Space Portal is structured into six main se
 
 ### 1. Home
 The Home section is your landing page within the Data Space Portal if no direct links are used. It provides an overview of the system with the Dashboard and quick access to the Data Catalog.
+
+![image](https://github.com/user-attachments/assets/5162c54d-11d4-40f3-8b82-d8ea8f035557)
+
 
 #### Data Catalog
 - You can view all public data offers in the dataspace in an overview
@@ -62,6 +66,9 @@ The Home section is your landing page within the Data Space Portal if no direct 
 
 ### 2. Your Organization
 This section is designed to manage and view the organization participating in the data space. Here, you can see detailed information about your organization, your data offers and the connectors of your organization.
+
+![image](https://github.com/user-attachments/assets/2420a6da-c833-4a33-ba6e-d5f39b1b974a)
+
 
 #### My Organization
 This section allows users to view and manage their organization’s details. It provides a centralized interface to view and update organizational information, manage users, and configure settings.
@@ -114,6 +121,8 @@ This section enables the service parnter with direct access to all provided conn
 
 ### 5. Authority Section
 This section is intended for administrators of the data space and includes advanced features for managing the Data Space Portal and the organizations in the data space.
+
+![image](https://github.com/user-attachments/assets/4128f942-4b3f-4a8c-9acb-7b58d8521583)
 
 #### Organizations
 As a data space authority, all organizations registered in the data space can be viewed and managed here. New organizations can also be invited.
