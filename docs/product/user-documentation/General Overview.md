@@ -14,12 +14,20 @@ When not logged in, you can see a page where you can choose between "Login" and 
 - "Login" redirects you to the Keycloak Login page
 - "Register Organization" redirects you to the registration form
 
+![Image: DSPortal Landing Page](DSPortal-Landing-Page.jpeg)
+
 ## Login Page
 The login page is powered by Keycloak page adapted to sovity's infrastructure. You can login or reset your password.
 
-## Header Navigation Overview
+---
 
 Assuming successful login, let's take a look at the features of the DSPortal.
+
+![Image: DSPortal Navigation Overview](DSPortal-Navigation-Overview.png)
+
+## Header Navigation Overview
+
+
 
 ### Environment Switcher
 
