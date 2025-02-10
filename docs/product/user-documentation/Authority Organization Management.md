@@ -28,16 +28,11 @@ Click in the row of an organization to view the organization details. Quickly sw
 
 From the organization detail page, Authority Users and Admins are able to manage the organization of interest and e.g. approve or reject an organization or see the different users of it.
 
-### As an Authority User you have the rights to:
+## Approve or reject pending organizations' requests
 
-- See the list of all registered, pending & invited organizations
-- Invite new organizations and their respective initial Admin
-- Accept & reject pending organizations' requests
-- Access any organization's profile
-
-### As an Authority Admin you can additionally:
-
-- Manage application roles (Authority Admin/User, Service Partner and Operator) of users of any organization via the user list of each organization
+- Click on the horizontal burger button icon
+- Click on "Approve Participant" or "Reject Participant"
+  ![Approve or Reject Pending Organization's Requests](https://github.com/user-attachments/assets/77aea012-ab2c-4814-9569-257c3b901ae3)
 
 ## Invite Organizations
 
