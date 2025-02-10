@@ -33,6 +33,8 @@ The Register Organization page enables participating organizations to register t
 ## Step 3: Email Verification
 
 * You will be requested to verify your email address.
-* Please check your email inbox and click the "Finish" button.
+* Please check your email inbox for next activation steps and click the "Finish" button.
+
+   {% hint style="info" %} We advise you to take immediate actions on the email you receive so that you activate your DSPortal account soonest. {% endhint %} 
   ![image](https://github.com/user-attachments/assets/4e037412-1f8f-4ada-bf61-a6cd88e08824)
 
