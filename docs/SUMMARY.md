@@ -13,7 +13,7 @@
 * [Authority Section](product/user-documentation/Authority%20Section.md)
   * [Organization Management](product/user-documentation/Authority%20Organization%20Management.md)
   * [Connector Overview](product/user-documentation/Authority%20Connector%20Overview.md)
-* [Administration and Support](product/user-documentation/Administration%20and%20Support.md)
+* [Administration of Participating Organizations](product/user-documentation/Administration%20of%20Participating%20Organizations.md)
 
 ## FAQ
 * [FAQ](product/user-documentation/faq.md)
