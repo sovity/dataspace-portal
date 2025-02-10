@@ -28,7 +28,7 @@ Click in the row of an organization to view the organization details. Quickly sw
 
 From the organization detail page, Authority Users and Admins are able to manage the organization of interest and e.g. approve or reject an organization or see the different users of it.
 
-## Approve or reject pending organizations' requests
+### Approve or reject pending organizations' requests
 
 - Click on the horizontal burger button icon
 - Click on "Approve Participant" or "Reject Participant"
