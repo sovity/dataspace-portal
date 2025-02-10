@@ -20,8 +20,8 @@ The DSPortal uses the cocept of "Application Role" to enable the Authority Organ
 As an Authority User you have the rights to:
 
 - See the list of all registered, pending & invited organizations
+- Approve & reject pending organizations' requests
 - Invite new organizations and their respective initial Admin
-- Accept & reject pending organizations' requests
 - Access any organization's profile
 
 ## Application Role: Authority Admin
