@@ -6,13 +6,13 @@ icon: user
 
 In any sovity DS Portal, there are three types of organizations that enable successful data sharing among the community:
 
-1. Authority Organization
+1. **Authority Organization**
    * has the most rights within the DSPortal, including the ability to invite Participating Organizations and revoke their participation.
    * has the ability provision CaaS on behalf of Participating Organizations.
-2. Service Partner Organization
+2. **Service Partner Organization**
    * acts as the default provider of CaaS within the DSPortal.
    * has the ability provision CaaS on behalf of Participating Organizations.
-3. Participating Organization
+3. **Participating Organization**
    * has the ability to request CaaS for its own organization accordingly to the CaaS limits defined by the Authority Organization.
    * has the ability to advertize data offers to other Participating Organizations, view data offers from other Participating Organizations and access their relevant details for further consumption within the CaaS.
 
