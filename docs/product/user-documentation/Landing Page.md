@@ -1,5 +1,5 @@
 ---
-icon: hand-wave
+icon: user
 ---
 
 ## Landing Page
