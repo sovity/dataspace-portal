@@ -2,17 +2,18 @@
 icon: user
 ---
 
-# Administration and Support
+# Administration of Participating Organizations
 
-## Profile & Roles
+## Profile Management
 
 A user can see their profile by clicking on their name in the top right corner and then "My Profile".
 
 Any user is able to edit their own information by maneuvering to his own profile and clicking "Edit".
 First name, last name, job title, email and phone number can be updated and changes persisted by clicking "Update".
 
-Also, a user can see the roles assigned to him/her by clicking on the Tab "Users and Roles".
-As a participant in the Data Space Portal, you can have one of the following roles:
+## Organization Roles
+Also, a user can see the Organization Roles assigned to him/her by clicking on the Tab "Users and Roles".
+As a participant in the Data Space Portal, you can have one of the following Organization Roles:
 
 - _User_: The basic role that allows a person to open multiple participant related sections in the Data Space Portal, but basically cannot change anything
 - _Key User_: The role allows creating and editing connectors for the user's organization
@@ -20,17 +21,18 @@ As a participant in the Data Space Portal, you can have one of the following rol
 
 ## User Management
 
-To manage the users in your organization, maneuver to the list of users by
+{% hint style="info" %} Only Admins have the rights to make changes here! {% endhint %}
 
-a) clicking on your name in the top right corner and then "Users and Roles"
-or b) Click on "My Organization" and then "Users and Roles"
+To manage the users in your organization, maneuver to the list of users
+
+a) _either_ by clicking on your name in the top right corner and then "Users and Roles"
+
+b) _or_ by clicking on "My Organization" and then "Users and Roles"
 
 ![user-management](images/user-management.png)
 
 The "User & Roles" list shows a list of all registered members in your organization.
 To manage a user, click somewhere in the row the user of interest is listed in.
-
-Only Admins have the rights to make changes here!
 
 ![users-list](images/users-list.png)
 
@@ -42,7 +44,7 @@ As an Admin you are able to:
 
 ### User Invitation
 
-As described above, to invite new users into your organization, you must have the role Admin!
+As described above, to invite new users into your organization, you must have the Organization Role Admin!
 New users can be invited by clicking on "Invite User".
 
 ![invitation-form](images/invitation-form.png)
@@ -56,6 +58,8 @@ The invited user will receive an invitation email with a link.
 When clicking the link, the user will be asked to set a password for their account and to set up two-factor authentication.
 
 ## Dashboard & Reporting
+
+{% hint style="info" %} By default this functionality is disabled. If you would like to activate this section, please contact your relevant DSPortal contact or the sovity team. {% endhint %}
 
 The Dashboard provides an overview over the current status of central Data Space Components as well as the organization's connectors.
 Also, it is possible to download reports about connectors, data offers and system stability from here.
