@@ -42,7 +42,7 @@ As an Admin you are able to:
 - Delete, deactivate or reactivate users (via user details)
 - Invite new users to your organization
 
-### User Invitation
+### Invite Users
 
 As described above, to invite new users into your organization, you must have the Organization Role Admin!
 New users can be invited by clicking on "Invite User".
