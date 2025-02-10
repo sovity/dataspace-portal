@@ -2,12 +2,35 @@
 icon: user
 ---
 
-# Manage the Data Space components
+{% hint style="info" %} This section is **ONLY RELEVANT IF** you are acting as an Admin for the Authority Organization or the Service Partner Organization. {% endhint %}
 
-Besides the Data Space Authority roles, there are two other application roles that are able to manage elements of the Data Space.
+# Application Roles
 
+The DSPortal uses the cocept of "Application Role" to enable the Authority Organization or the Service Partner Organization to manage elements of the Data Space. Currently there are three Application Roles:
+
+- Application Admin
+- Application User
 - Service Partner Admin
-- Operator Admin
+- Operator Admin **(Currently not in use. Information in the user guide below may be outdated.)**
+
+## Application Role: Application Admin
+
+### Rights for Application Admin
+
+Currently, the Application Admin role grants the following rights in addition to a user's organization role:
+
+1. View a list of all organizations in the DSPortal
+2. Approve organizations that registered themselves to the DSPortal
+3. Provide and delete provided connectors
+4. Assign Application Roles to other users
+
+{% hint style="info" %} We will update the content of this section soon. Thank you for your patience. {% endhint %}
+
+## Application Role: Application User
+
+### Rights for Application User
+
+{% hint style="info" %} We will update the content of this section soon. Thank you for your patience. {% endhint %}
 
 ## Application role: Service Partner Admin
 
@@ -58,6 +81,9 @@ Please follow the steps in the dialog.
 3. Select a user's profile of the user that shall become a Service Partner Admin.
 4. Edit the application role and change it to Service Partner Admin.
 5. Result: An additional Service Partner Admin has been created.
+
+---
+{% hint style="info" %} We are in the process of changing this Application Role. Information may be out of date and does not affect your current DSPortal. {% endhint %}
 
 ## Application role: Operator Admin
 
