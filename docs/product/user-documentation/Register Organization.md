@@ -35,7 +35,8 @@ The Register Organization page enables participating organizations to register t
 * You will be requested to verify your email address.
 * Please check your email inbox for next activation steps.
 
-   {% hint style="info" %} We advise you to take immediate actions on the email you receive so that you activate your DSPortal account soonest. {% endhint %} 
+   {% hint style="info" %} We advise you to take immediate actions on the email you receive so that you activate your DSPortal account soonest. {% endhint %}
+  
   ![image](https://github.com/user-attachments/assets/4e037412-1f8f-4ada-bf61-a6cd88e08824)
 * Assuming you have received an email from sovity, please click on the activation link.
   ![Activation Link](https://github.com/user-attachments/assets/70932d91-1448-4761-b086-f1e495701d95)
