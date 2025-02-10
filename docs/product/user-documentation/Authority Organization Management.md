@@ -34,6 +34,8 @@ From the organization detail page, Authority Users and Admins are able to manage
 - Click on "Approve Participant" or "Reject Participant"
   ![Approve or Reject Pending Organization's Requests](https://github.com/user-attachments/assets/77aea012-ab2c-4814-9569-257c3b901ae3)
 
+{% hint style="info" %} We are in the process of updating the content of this section soon. Thank you for your patience. {% endhint %}
+
 ## Invite Organizations
 
 Organizations can be invited by Authority Users and Authority Admins.
