@@ -27,7 +27,7 @@ To manage the users in your organization, maneuver to the list of users
 
 a) _either_ by clicking on your name in the top right corner and then "Users and Roles"
 
-b) _or_ by clicking on "My Organization" and then "Users and Roles"
+b) _or_ by clicking on "My Organization" in the Left Navigation Panel > Click "Users and Roles" tab
 
 ![user-management](images/user-management.png)
 
@@ -42,20 +42,27 @@ As an Admin you are able to:
 - Delete, deactivate or reactivate users (via user details)
 - Invite new users to your organization
 
-### Invite Users
+## Invite Users
 
-As described above, to invite new users into your organization, you must have the Organization Role Admin!
-New users can be invited by clicking on "Invite User".
+To invite new users into your organization, you must have the Organization Role Admin.
+
+1. Click on the "Invite User" button in the top right corner of the "My Organizations" UI.
+
+![image](https://github.com/user-attachments/assets/068278f2-96a3-464b-b11a-4957827e5e5b)
+
+2. Following the instructions on the next screen
+   - Specify the user's name, email and role.
+   - Click on "Send invitation" to add the user to the list of registered users.
 
 ![invitation-form](images/invitation-form.png)
 
-Specify the user's name, email and role.
-Click on "Send invitation" to add the user to the list of registered users.
+3. The invited user will receive an invitation email with a link. Until the user accepts the invitation, the user will have the "Invited" status on the DSPortal.
 
-![invited-user](images/invited-user.png)
+   ![invited-user](images/invited-user.png)
 
-The invited user will receive an invitation email with a link.
-When clicking the link, the user will be asked to set a password for their account and to set up two-factor authentication.
+   {% hint style="info" %} We recommend that you encourage invitees to activate their accounts within the timebox for which the invitation link is enabled. For security reasons, the default timebox for the invitation link is 12 hours. We plan to increase this limit in the future. {% endhint %}
+
+When clicking the invitation link, the user will be asked to set a password for their account and to set up two-factor authentication.
 
 ## Dashboard & Reporting
 
