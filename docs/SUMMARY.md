@@ -12,7 +12,7 @@
   * [Application Roles](product/user-documentation/Application%20Roles.md)
 * [Authority Section](product/user-documentation/Authority%20Section.md)
   * [Organization Management](product/user-documentation/Authority%20Organization%20Management.md)
-    * [Test View]
+  * [Connector Overview](product/user-documentation/Authority%20Connector%20Overview.md)
 * [Administration and Support](product/user-documentation/Administration%20and%20Support.md)
 
 ## FAQ
