@@ -8,17 +8,6 @@ icon: hand-wave
 
 This guide provides a general overview of the main sections and features of the portal, helping you navigate and understand the various components available.
 
-## Landing Page
-
-When not logged in, you can see a page where you can choose between "Login" and "Register Organization"
-- "Login" redirects you to the Keycloak Login page
-- "Register Organization" redirects you to the registration form
-
-![DSPortal-Landing-Page](https://github.com/user-attachments/assets/a94d6c9d-26b0-4713-98b7-27b0cd101695)
-
-## Login Page
-The login page is powered by Keycloak page adapted to sovity's infrastructure. You can login or reset your password.
-
 ---
 
 Assuming successful login, let's take a look at the features of the DSPortal.
