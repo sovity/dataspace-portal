@@ -8,29 +8,32 @@ icon: user
 
 The DSPortal uses the cocept of "Application Role" to enable the Authority Organization or the Service Partner Organization to manage elements of the Data Space. Currently there are three Application Roles:
 
-- Application Admin
-- Application User
+- Authority User
+- Authority Admin
 - Service Partner Admin
 - Operator Admin **(Currently not in use. Information in the user guide below may be outdated.)**
 
-## Application Role: Application Admin
+## Application Role: Authority User
 
-### Rights for Application Admin
+### Rights for Authority User
 
-Currently, the Application Admin role grants the following rights in addition to a user's organization role:
+As an Authority User you have the rights to:
 
-1. View a list of all organizations in the DSPortal
-2. Approve organizations that registered themselves to the DSPortal
-3. Provide and delete provided connectors
-4. Assign Application Roles to other users
+- See the list of all registered, pending & invited organizations
+- Invite new organizations and their respective initial Admin
+- Accept & reject pending organizations' requests
+- Access any organization's profile
+
+## Application Role: Authority Admin
+
+### Rights for Authority Admin
+
+As an Authority Admin, in addition to the same rights as Authority User role you can :
+
+- Manage application roles (Authority Admin/User, Service Partner and Operator) of users of any organization via the user list of each organization
 
 {% hint style="info" %} We will update the content of this section soon. Thank you for your patience. {% endhint %}
 
-## Application Role: Application User
-
-### Rights for Application User
-
-{% hint style="info" %} We will update the content of this section soon. Thank you for your patience. {% endhint %}
 
 ## Application role: Service Partner Admin
 
