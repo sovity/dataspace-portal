@@ -2,7 +2,7 @@
 icon: user
 ---
 
-{% hint style="info" %} This section is **ONLY RELEVANT IF** you are acting as an Admin for the Authority Organization or the Service Partner Organization. {% endhint %}
+{% hint style="info" %} This section is ONLY RELEVANT IF you are acting as an Admin for the Authority Organization or the Service Partner Organization. {% endhint %}
 
 # Application Roles
 
