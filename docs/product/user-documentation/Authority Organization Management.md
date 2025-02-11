@@ -24,18 +24,19 @@ Click in the row of an organization to view the organization details. Quickly sw
 
 ![Organization Detail Page](images/organization-detail-page.png)
 
-## Take actions on organizations
+## Organization Details and Actions
 
-From the organization detail page, Authority Users and Admins are able to manage the organization of interest and e.g. approve or reject an organization or see the different users of it.
+On the organization detail page, Authority Users and Admins can manage the organization, review its information, and access a list of associated users.
 
-### Approve or reject pending organizations' requests
+### Available Details and Actions
 
-- Click on the horizontal burger button icon
-- Click on "Approve Participant" or "Reject Participant"
+- Organization Details (clickable):  Displays key information such as the legal name, description, and main address.
+- Organization Members (clickable): Lists users associated with the organization, including their username, role, and status.
+- Organization Connector Count: Shows the total number of connectors associated with the organization.
+- Organization Data Offer Count: Displays the number of available data offers of the organization.
+- Organization Actions: "Edit Organization", "Delete Organization" and in case of a newly registered organization: "Approve Participant" and "Reject Participant"
 
 ![Pending Request](images/organization2.png)
-
-{% hint style="info" %} We are in the process of updating the content of this section soon. Thank you for your patience. {% endhint %}
 
 ## Invite Organizations
 
