@@ -26,7 +26,7 @@ Assuming you are successfully logged-in, let's take a look at the features of th
 On the left side of the UI, the Data Space Portal is structured into six main sections, each serving a distinct purpose. You can access each section from the left navigation panel. Below is a brief description of each:
 
 ### 1. Home
-The Home section is your landing page within the Data Space Portal if no direct links are used. It provides an overview of the system with the Dashboard and quick access to the Data Catalog.
+The Home section and its Data Catalog is your landing page within the Data Space Portal if no direct links are used.
 
 ![Home Navigation Section](images/navigation-3.png)
 
