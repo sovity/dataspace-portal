@@ -2,7 +2,7 @@
 icon: user
 ---
 
-{% hint style="info" %} This section is **ONLY RELEVANT IF** you are acting as an Admin for the Authority Organization or the Service Partner Organization. {% endhint %}
+{% hint style="info" %} This section is ONLY RELEVANT IF you are acting as an Admin for the Authority Organization or the Service Partner Organization. {% endhint %}
 
 # Application Roles
 
@@ -59,18 +59,18 @@ A Service Partner Admin is able to access the "Provided Connectors" page, where 
 - CaaS: Connector as a Service - Managed connectors.
 - Configure Button: The Connector needs further configuration for being set up.
 
-![provide-connector](images/provide-connectors-overview.png)
+![Provided Connectors](images/provide-connectors-overview.png)
 
 #### 2. Register and delete connectors
 
 When clicking on the button "Provide Connector" in the upper right corner a mask to register a new connector opens.
 
-![provide-connector](images/provide-connector.png)
+![Provide Connector](images/provide-connector.png)
 
 To provide a connector in the Data Space Portal all fields of the mask must be submitted.
 After clicking on the "Create Connector" the list of provided connectors appears, where an added connector can be found which has to be configured further at some point in time.
 
-![provide-connector](images/provide-connectors-list.png)
+![List of Provided Connectors](images/provide-connectors-list.png)
 
 By clicking in the list on "Configure", the additional data for the connector must be entered, such as the URL at which the frontend of the connector can be accessed.
 The most important entry  is the connector endpoint, the DSP-endpoint, so that the connector's offers can be searched and displayed in the Data Space Portal, since the Data Space Portal also crawls the connectors in the dataspace for available offers which the Data Space Portal's crawler is allowed to access.
@@ -107,13 +107,13 @@ Currently, the Operator Admin role grants the following rights in addition to a 
 
 As an Operator Admin a user is able to access the "Central Components" page where all registered central components are displayed.
 
-![central-components](images/central-components-list.png)
+![Central Components](images/central-components-list.png)
 
 #### 2. Register and delete central components
 
 When clicking on the button "Provide Central Component" in the upper right corner a mask to register a central component opens.
 
-![provide-central-component](images/provide-central-component.png)
+![Provide Central Component](images/provide-central-component.png)
 
 To register a central component in the Data Space Portal all fields of the mask must be submitted.
 After clicking on the register button the list of central components appears, where the added central component can be found.
