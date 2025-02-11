@@ -2,7 +2,7 @@
 icon: user
 ---
 
-# Connector overview
+# Connector Overview
 
 Under "All Connectors", Authority Users and Admins can see all registered connectors of all organizations in the Data Space Portal.
 Also, the connector details can be accessed from here.
@@ -19,6 +19,8 @@ Connectors of type CAAS (Connector as a Service) can also support extended opera
 - Unknown: Connector has been deleted via other systems and no longer exists. 
 
 In rare cases, additional statuses may appear, reflecting specific scenarios or exceptions in the system's operation.
+
+![Connector Overview](images/authority-connectors.png)
 
 ## Dashboard & Reporting
 
