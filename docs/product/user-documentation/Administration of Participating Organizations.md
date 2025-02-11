@@ -29,12 +29,12 @@ a) _either_ by clicking on your name in the top right corner and then "Users and
 
 b) _or_ by clicking on "My Organization" in the Left Navigation Panel > Click "Users and Roles" tab
 
-![user-management](images/user-management.png)
+![User Management](images/user-management.png)
 
 The "User & Roles" list shows a list of all registered members in your organization.
 To manage a user, click somewhere in the row the user of interest is listed in.
 
-![users-list](images/users-list.png)
+![Users List](images/users-list.png)
 
 As an Admin you are able to:
 
@@ -48,19 +48,19 @@ To invite new users into your organization, you must have the Organization Role 
 
 1. Click on the "Invite User" button in the top right corner of the "My Organizations" UI.
 
-![image](https://github.com/user-attachments/assets/068278f2-96a3-464b-b11a-4957827e5e5b)
+![Organizations Page](images/admin-1.png)
 
 2. Following the instructions on the next screen
    - Specify the user's name, email and role.
    - Click on "Send invitation" to add the user to the list of registered users.
 
-![invitation-form](images/invitation-form.png)
+![Invitation Form](images/invitation-form.png)
 
 3. The invited user will receive an invitation email with a link. Until the user accepts the invitation, the user will have the "Invited" status on the DSPortal.
 
-   ![invited-user](images/invited-user.png)
+![Invited User](images/invited-user.png)
 
-   {% hint style="info" %} We recommend that you encourage invitees to activate their accounts within the timebox for which the invitation link is enabled. For security reasons, the default timebox for the invitation link is 12 hours. We plan to increase this limit in the future. {% endhint %}
+{% hint style="info" %} We recommend that you encourage invitees to activate their accounts within the timebox for which the invitation link is enabled. For security reasons, the default timebox for the invitation link is 12 hours. We plan to increase this limit in the future. {% endhint %}
 
 When clicking the invitation link, the user will be asked to set a password for their account and to set up two-factor authentication.
 
@@ -71,7 +71,7 @@ When clicking the invitation link, the user will be asked to set a password for 
 The Dashboard provides an overview over the current status of central Data Space Components as well as the organization's connectors.
 Also, it is possible to download reports about connectors, data offers and system stability from here.
 
-![dashboard](images/dashboard.png)
+![Dashboard](images/dashboard.png)
 
 ## Ticket System
 
