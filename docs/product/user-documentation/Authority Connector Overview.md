@@ -21,11 +21,3 @@ Connectors of type CAAS (Connector as a Service) can also support extended opera
 In rare cases, additional statuses may appear, reflecting specific scenarios or exceptions in the system's operation.
 
 ![Connector Overview](images/authority-connectors.png)
-
-## Dashboard & Reporting
-
-Additionally Authority Users and Admins have access to the following features on the Dashboard:
-
-- They can download a report about all users and their roles.
-- Instead of only their own, all connectors are respected in the connector report.
-- Instead of only their own, they see the status of all connectors.
