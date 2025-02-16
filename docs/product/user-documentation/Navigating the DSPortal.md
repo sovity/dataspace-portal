@@ -48,6 +48,7 @@ The Home section and its Data Catalog is your landing page within the Data Space
   - Information about all public data offers in the dataspace
   - Historical information about component downtimes and system stability
 
+---
 ### 2. Your Organization
 This section is designed to manage and view the organization participating in the data space. Here, you can see detailed information about your organization, your data offers and the connectors of your organization.
 
@@ -83,6 +84,7 @@ This section provides a filtered view of the Data Catalog, allowing to specifica
 #### My Connectors
 This section provides an overview of all connectors of your organization that have been set up, enabling to monitor their status and ensure proper integration with the dataspace. It also allows for creating and adding new connectors.
 
+---
 ### 3. Operator Section
 This section is dedicated to the operators of a data space who deploy and manage the central components of the data space in the infrastructure and manage the different environments of the Data Space.
 
@@ -90,10 +92,11 @@ This section is dedicated to the operators of a data space who deploy and manage
 As an operator, this area provides you with an overview of the different connectors, their type and status.
 
 #### Central Components
-As an operator, this area provides you with an overview of the central components in the data space you provide and enables you to provide additional central components. 
+As an operator, this area provides you with an overview of the central components in the data space you provide and enables you to provide additional central components such as a digital clearing house or other future components  
 
-**To learn more about the Operator Admin role, please read the section [Application role: Operator Admin](Manage%20Data%20Space%20components.md#application-role-operator-admin).**
+**To learn more about the Operator Admin role, please read the section [Application role: Operator Admin](Application%20Roles.md#application-role-operator-admin).**
 
+---
 ### 4. Service Partner Section
 The Service Partner section is dedicated to service partners of the data space, who provide connectors for other data space participants by deploying and registering these connectors for other entities within the data space.
 
@@ -102,6 +105,7 @@ This section enables the service parnter with direct access to all provided conn
 
 **To learn more about the Service Partner Admin role, please read the section [Application role: Service Partner Admin](Manage%20Data%20Space%20components.md#application-role-service-partner-admin).**
 
+---
 ### 5. Authority Section
 This section is intended for administrators of the data space and includes advanced features for managing the Data Space Portal and the organizations in the data space.
 
@@ -115,5 +119,6 @@ This is a central point for viewing all connectors and their status and further 
 
 **To learn more about the Authority section, please read the documentation: [Authority Section](Authority%20Section.md).**
 
+---
 ### 6. Support
 The Support section is intended to assist users with any issues or inquiries they might have while using the Data Space Portal. Please note that this section requires integration with a support system of your choice to be fully functional.
