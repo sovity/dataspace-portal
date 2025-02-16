@@ -15,8 +15,8 @@
   * [Connector Overview](product/user-documentation/Authority%20Connector%20Overview.md)
 * [Administration of Participating Organizations](product/user-documentation/Administration%20of%20Participating%20Organizations.md)
 * [Provision your CaaS](product/user-documentation/Provision%20your%20CaaS.md)
-  * I have a connector
-  * I need a connector 
+  * [I have a connector](product/user-documentation/I%20have%20a%20connector.md)
+  * [I need a connector](product/user-documentation/I%20need%20a%20connector.md)
 
 ## FAQ
 * [FAQ](product/user-documentation/faq.md)
