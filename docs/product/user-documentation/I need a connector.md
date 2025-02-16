@@ -14,9 +14,9 @@ After you have chosen the option "I need a connector" on the previous screen, yo
 {% hint style="info" %} The numbers indicated next to "Request CaaS" indicate how many of the CaaS limit per organization you have used within a given DSPortal according to the limit defined by the Authority Organization. {% endhint %}
 
 3. On the next screen, enter the details requested:
-   - Connector Title: Indicates the name of the CaaS. Helps users within your organization to distinguish the CaaS among other CaaS that your organization might own.
-   - Connector Subdomain: Acts as unique identifier (ID) for the CaaS. **Important:** This field only supports lowercase latin characters, numbers and dashes. No space allowed.
-   - Description: Enables you to provide description about the CaaS and its purpose.
+   - **Connector Title**: Indicates the name of the CaaS. Helps users within your organization to distinguish the CaaS among other CaaS that your organization might own.
+   - **Connector Subdomain**: Acts as unique identifier (ID) for the CaaS. **Important:** This field only supports lowercase latin characters, numbers and dashes. No space allowed.
+   - **Description**: Enables you to provide description about the CaaS and its purpose.
 
      ![image](https://github.com/user-attachments/assets/1aee8d89-4049-45ba-95a4-9010bfa2ed67)
 
