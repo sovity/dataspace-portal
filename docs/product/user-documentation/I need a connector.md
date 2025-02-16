@@ -22,4 +22,5 @@ After you have chosen the option "I need a connector" on the previous screen, yo
 
 4. Click on "Request CaaS" button.
 5. Success! You have provisioned your CaaS. Please give it 10 minutes to start and be productive. The indicator under the "Connector ID" field will change from orange to green.
+   
    ![image](https://github.com/user-attachments/assets/8e4651b2-a8a2-4d0e-9291-6fe6537bac4b)
