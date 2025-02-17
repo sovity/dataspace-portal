@@ -10,7 +10,7 @@ This section is designed to provide quick and clear answers to the most common q
 
 The connector online status is determined and set by the catalog crawler. If the crawler can fetch the catalog, it will set the connector to ONLINE, on a failure to OFFLINE. Keep in mind that the catalog crawler only crawls connectors in the same environment as the crawler itself.
 
-## Can a user with the same email address be registered in multiple organizations?
+### Can a user with the same email address be registered in multiple organizations?
 
 Currently, this feature is not supported in DSPortal. We will consider this enhancement in a future iteration of the DSPortal when we have gathered sufficient market evidence for prioritizing this feature.
 
