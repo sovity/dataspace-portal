@@ -9,3 +9,15 @@ This section is designed to provide quick and clear answers to the most common q
 ### How does the availability check for the connectors work?
 
 The connector online status is determined and set by the catalog crawler. If the crawler can fetch the catalog, it will set the connector to ONLINE, on a failure to OFFLINE. Keep in mind that the catalog crawler only crawls connectors in the same environment as the crawler itself.
+
+## Can a user with the same email address be registered in multiple organizations?
+
+Currently, this feature is not supported in DSPortal. We will consider this enhancement in a future iteration of the DSPortal when we have gathered sufficient market evidence for prioritizing this feature.
+
+Workaround Solution: If the user's email address is a Microsoft or Google email address, they can use the "plus addressing" feature that Microsoft and Google offer to create unique variations of their email address while still being linked to the same inbox. 
+
+For example, if a user's primary email is: `firstname.lastname@abc.com`, they can create different email variations for different organizations, such as:
+- `firstname.lastname+fictionalorganization1admin@abc.com`
+- `firstname.lastname+fictionalorganization1user@abc.com`
+
+These addresses will all be routed to `firstname.lastname@abc.com`, allowing the user to register multiple personas while maintaining a single email inbox.
