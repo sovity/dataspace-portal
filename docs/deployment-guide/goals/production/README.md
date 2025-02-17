@@ -9,6 +9,8 @@ Deploying the Data Space Portal in Production
 
 This is a productive deployment guide for deploying the Data Space Portal from scratch.
 
+For the latest Data Space Portal version and compatible other components see: [Latest releases](https://github.com/sovity/dataspace-portal/releases)
+
 ## Prerequisites
 
 ### Technical Skills
