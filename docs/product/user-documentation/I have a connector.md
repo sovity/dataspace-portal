@@ -19,7 +19,7 @@ After you have chosen the option "I have a connector" on the previous screen, yo
 
 ## Step 2: Generate Certificate
 
-### If you DO NOT already have a certificate for your connector
+### If you DO NOT have a certificate for your connector
 1. Do not click on "I already have a certificate"
    ![image](https://github.com/user-attachments/assets/630b2215-bbc0-43bf-8063-aac9b17a9694)
 2. Input data in the mandatory fields as requested.
