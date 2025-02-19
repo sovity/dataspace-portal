@@ -9,6 +9,7 @@ To leverage the maximum benefits of the DSPortal, as a user belonging to a Parti
 1. To provision Data Offers, please read the documentation [HERE](https://edc.docs.sovity.de/frontend/providing/create-data-offer).
 
    **Important:** Please snsure that you make Data Offers publicly available by using the "always-true" policy. This will ensure that the data offer appears on the Data Catalog of the DSPortal for other participants.
+   
 
 2. To check that your Data Offer is visible to other participants of the DSPortal, please check the Data Catalog page.
 
