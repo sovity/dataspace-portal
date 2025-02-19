@@ -17,6 +17,7 @@
 * [Provision your CaaS](product/user-documentation/Provision%20your%20CaaS.md)
   * [I have a connector](product/user-documentation/I%20have%20a%20connector.md)
   * [I need a connector](product/user-documentation/I%20need%20a%20connector.md)
+* [Provide Data Offers](product/user-documentation/Provide%20Data%20Offers.md)
 
 ## FAQ
 * [FAQ](product/user-documentation/faq.md)
