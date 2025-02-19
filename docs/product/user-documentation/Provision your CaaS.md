@@ -4,7 +4,7 @@ icon: user
 
 # Provision your CaaS
 
-To leverage the maximum benefits of the DSPortal, as a user belonging to a Participant Organization you are encouraged to make as many Data Offers as possible available to other Participant Organizations. On this page, we explain to you how to make the Data Offers of your organization visible to other Participant Organizations.
+You need to provision your CaaS to enable other participants to see your Data Offers in the DSPortal. On this page, we explain to you how to provision CaaS.
 
 1. On the "My Connectors" page, click on the "Add Connector" button
    ![image](https://github.com/user-attachments/assets/a3dbce24-6dce-4e45-94f9-0599152f3ef0)
