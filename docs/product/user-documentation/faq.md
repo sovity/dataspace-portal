@@ -10,6 +10,7 @@ This section is designed to provide quick and clear answers to the most common q
 
 The connector online status is determined and set by the catalog crawler. If the crawler can fetch the catalog, it will set the connector to ONLINE, on a failure to OFFLINE. Keep in mind that the catalog crawler only crawls connectors in the same environment as the crawler itself.
 
+---
 ### Can a user with the same email address be registered in multiple organizations?
 
 Currently, this feature is not supported in DSPortal. We will consider this enhancement in a future iteration of the DSPortal when we have gathered sufficient market evidence for prioritizing this feature.
@@ -21,3 +22,11 @@ For example, if a user's primary email is: `firstname.lastname@abc.com`, they ca
 - `firstname.lastname+fictionalorganization1user@abc.com`
 
 These addresses will all be routed to `firstname.lastname@abc.com`, allowing the user to register multiple personas while maintaining a single email inbox.
+
+---
+### Is EDC-API control available for a connector provisioned via the "Request CaaS" functionality?If it is available, how can I check the API key?
+
+Yes EDC-API control is for a connector provisioned via the "Request CaaS" functionality. To request for the API key,
+- Click on "Support" button on the left navigation panel
+- Write your request. **For example: **"Please provide me with the API Key for "Connector Name":
+- Please provide us with the relevant Connector Name (You can find this information on "My Connectors" page)
