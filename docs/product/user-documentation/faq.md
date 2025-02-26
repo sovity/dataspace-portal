@@ -30,3 +30,8 @@ Yes EDC-API control is for a connector provisioned via the "Request CaaS" functi
 - Click on "Support" button on the left navigation panel
 - Write your request. **For example: **"Please provide me with the API Key for "Connector Name":
 - Please provide us with the relevant Connector Name (You can find this information on "My Connectors" page)
+
+---
+### Organization- and User-Registration: How should I fill in required fields if certain data is not available?
+
+In cases where specific required information is not available, you can use a placeholder value. For example, if a "Legal ID Number" is not applicable in your country or you are intending to set up demo organizations, you may enter "00000" or another suitable placeholder. This principle applies to all required fields in general, including cases when registering individuals instead of organizations. The key requirement is that the provided data allows for proper validation and approval by the Data Space Authority in the concrete use-case.
