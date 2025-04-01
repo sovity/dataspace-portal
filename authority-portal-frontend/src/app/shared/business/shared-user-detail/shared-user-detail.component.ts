@@ -1,14 +1,19 @@
 /*
- * Copyright (c) 2024 sovity GmbH
+ * Data Space Portal
+ * Copyright (C) 2025 sovity GmbH
  *
- * This program and the accompanying materials are made available under the
- * terms of the Apache License, Version 2.0 which is available at
- * https://www.apache.org/licenses/LICENSE-2.0
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * SPDX-License-Identifier: Apache-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- * Contributors:
- *      sovity GmbH - initial implementation
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import {Component, HostBinding, Input} from '@angular/core';
 import {FormControl} from '@angular/forms';
@@ -36,7 +41,7 @@ export class SharedUserDetailComponent {
   @Input()
   config!: UserDetailConfig;
 
-  applicationRoleCtrl = new FormControl<UserRoleDto | null>(null);
+  applicationRoleCtrl = new FormControl<UserRoleDto[]>([]);
   participantRoleCtrl = new FormControl<UserRoleDto>('USER');
 
   roleFormToggled = false;
@@ -50,7 +55,7 @@ export class SharedUserDetailComponent {
 
   onRoleEditShowClick() {
     this.roleFormToggled = true;
-    this.applicationRoleCtrl.reset(this.config.roles.currentApplicationRole);
+    this.applicationRoleCtrl.reset(this.config.roles.currentApplicationRoles);
 
     this.participantRoleCtrl.enable();
     this.participantRoleCtrl.reset(this.config.roles.currentParticipantRole);
@@ -65,9 +70,10 @@ export class SharedUserDetailComponent {
   }
 
   onRoleEditSubmitClick() {
-    const newApplicationRole = this.applicationRoleCtrl.value;
-    const hasNewApplicationRole =
-      newApplicationRole !== this.config.roles.currentApplicationRole;
+    const newApplicationRole = this.applicationRoleCtrl.value ?? [];
+    const hasNewApplicationRoles =
+      JSON.stringify(newApplicationRole) !==
+      JSON.stringify(this.config.roles.currentApplicationRoles);
 
     const newParticipantRole = this.participantRoleCtrl.value;
     const hasNewParticipantRole =
@@ -79,8 +85,8 @@ export class SharedUserDetailComponent {
     }
 
     const requests$: Observable<never>[] = [];
-    if (hasNewApplicationRole) {
-      requests$.push(this.updateApplicationRole(newApplicationRole));
+    if (hasNewApplicationRoles) {
+      requests$.push(this.updateApplicationRoles(newApplicationRole));
     }
     if (hasNewParticipantRole) {
       requests$.push(this.updateParticipantRole(newParticipantRole));
@@ -108,14 +114,14 @@ export class SharedUserDetailComponent {
     }
   }
 
-  private updateApplicationRole(newApplicationRole: UserRoleDto | null) {
+  private updateApplicationRoles(newApplicationRoles: UserRoleDto[]) {
     let request$: Observable<IdResponse>;
-    if (newApplicationRole == null) {
-      request$ = this.apiService.clearApplicationRole(this.config.userId);
+    if (!newApplicationRoles || newApplicationRoles.length === 0) {
+      request$ = this.apiService.clearApplicationRoles(this.config.userId);
     } else {
-      request$ = this.apiService.updateApplicationRole(
+      request$ = this.apiService.updateApplicationRoles(
         this.config.userId,
-        newApplicationRole,
+        newApplicationRoles,
       );
     }
     return request$.pipe(

@@ -2,10 +2,6 @@
 java = "17"
 kotlin = "1.9.22"
 npmVersion = "8.15.0"
-
-edcGroup = "org.eclipse.edc"
-sovityCatalogCrawlerGroup = "de.sovity.edc.catalog.crawler"
-sovityEdcExtensionGroup = "de.sovity.edc.ext"
 sovityEdcGroup = "de.sovity.edc"
 
 sovity-edcCe = "0.0.1-SNAPSHOT"
@@ -16,8 +12,7 @@ junit = "5.10.0"
 flyway = "9.0.1"
 jsonAssert = "1.5.1"
 
-quarkus = "3.9.2"
-quarkus-keycloakAdminClientReactive = "3.6.6"
+quarkus = "3.18.1"
 quarkus-jooq = "2.0.0"
 
 jakarta-servletApi = "5.0.0"
@@ -39,6 +34,9 @@ awaitility = "4.2.1"
 commons-lang = "3.14.0"
 restAssured = "5.4.0"
 
+openApiYamlGen = "2.2.21"
+openApiCodeGen = "6.6.0"
+
 [libraries]
 sovity-edc-wrapperCommonApi = { module = "de.sovity.edc:wrapper-common-api", version.ref = "sovity-edcCe" }
 sovity-edc-wrapperCommonMappers = { module = "de.sovity.edc:wrapper-common-mappers", version.ref = "sovity-edcCe" }
@@ -48,10 +46,20 @@ sovity-edc-config = { module = "de.sovity.edc:config", version.ref = "sovity-edc
 sovity-edc-ext-postgresFlywayCore = { module = "de.sovity.edc.ext:postgres-flyway-core", version.ref = "sovity-edcCe" }
 sovity-edc-ext-testUtils = { module = "de.sovity.edc.ext:test-utils", version.ref = "sovity-edcCe" }
 
-quarkus-universeBom = { module = "io.quarkus.platform:quarkus-bom", version.ref = "quarkus" }
-quarkus-keycloakAdminClientReactive = { module = "io.quarkus:quarkus-keycloak-admin-client-reactive", version.ref = "quarkus-keycloakAdminClientReactive" }
-quarkus-jooq = { module = "io.quarkiverse.jooq:quarkus-jooq", version.ref = "quarkus-jooq" }
+edc-controlPlaneSpi = { module = "org.eclipse.edc:control-plane-spi", version.ref = "edc" }
+edc-managementApiConfiguration = { module = "org.eclipse.edc:management-api-configuration", version.ref = "edc" }
+edc-apiObservability = { module = "org.eclipse.edc:api-observability", version.ref = "edc" }
+edc-monitorJdkLogger = { module = "org.eclipse.edc:monitor-jdk-logger", version.ref = "edc" }
+edc-oauth2Core = { module = "org.eclipse.edc:oauth2-core", version.ref = "edc" }
+edc-controlPlaneCore = { module = "org.eclipse.edc:control-plane-core", version.ref = "edc" }
+edc-dataPlaneSelectorCore = { module = "org.eclipse.edc:data-plane-selector-core", version.ref = "edc" }
+edc-controlPlaneAggregateServices = { module = "org.eclipse.edc:control-plane-aggregate-services", version.ref = "edc" }
+edc-http = { module = "org.eclipse.edc:http", version.ref = "edc" }
+edc-dsp = { module = "org.eclipse.edc:dsp", version.ref = "edc" }
+edc-jsonLd = { module = "org.eclipse.edc:json-ld", version.ref = "edc" }
 
+quarkus-universeBom = { module = "io.quarkus.platform:quarkus-bom", version.ref = "quarkus" }
+quarkus-jooq = { module = "io.quarkiverse.jooq:quarkus-jooq", version.ref = "quarkus-jooq" }
 jakarta-servletApi = { module = "jakarta.servlet:jakarta.servlet-api", version.ref = "jakarta-servletApi" }
 jakarta-validation = { module = "jakarta.validation:jakarta.validation-api", version.ref = "jakarta-validation" }
 jakarta-wsRsApi = { module = "jakarta.ws.rs:jakarta.ws.rs-api", version.ref = "jakarta-wsRsApi" }
@@ -74,61 +82,10 @@ awaitility = { module = "org.awaitility:awaitility", version.ref = "awaitility" 
 
 commons-lang3 = { module = "org.apache.commons:commons-lang3", version.ref = "commons-lang" }
 
-edc-apiCore = { module = "org.eclipse.edc:api-core", version.ref = "edc" }
-edc-apiObservability = { module = "org.eclipse.edc:api-observability", version.ref = "edc" }
-edc-authSpi = { module = "org.eclipse.edc:auth-spi", version.ref = "edc" }
-edc-authTokenbased = { module = "org.eclipse.edc:auth-tokenbased", version.ref = "edc" }
-edc-boot = { module = "org.eclipse.edc:boot", version.ref = "edc" }
-edc-configurationFilesystem = { module = "org.eclipse.edc:configuration-filesystem", version.ref = "edc" }
-edc-connectorCore = { module = "org.eclipse.edc:connector-core", version.ref = "edc" }
-edc-contractDefinitionApi = { module = "org.eclipse.edc:contract-definition-api", version.ref = "edc" }
-edc-contractNegotiationStoreSql = { module = "org.eclipse.edc:contract-negotiation-store-sql", version.ref = "edc" }
-edc-contractSpi = { module = "org.eclipse.edc:contract-spi", version.ref = "edc" }
-edc-controlPlaneAggregateServices = { module = "org.eclipse.edc:control-plane-aggregate-services", version.ref = "edc" }
-edc-controlPlaneCore = { module = "org.eclipse.edc:control-plane-core", version.ref = "edc" }
-edc-controlPlaneSpi = { module = "org.eclipse.edc:control-plane-spi", version.ref = "edc" }
-edc-controlPlaneSql = { module = "org.eclipse.edc:control-plane-sql", version.ref = "edc" }
-edc-coreSpi = { module = "org.eclipse.edc:core-spi", version.ref = "edc" }
-edc-dataPlaneCore = { module = "org.eclipse.edc:data-plane-core", version.ref = "edc" }
-edc-dataPlaneFramework = { module = "org.eclipse.edc:data-plane-framework", version.ref = "edc" }
-edc-dataPlaneHttp = { module = "org.eclipse.edc:data-plane-http", version.ref = "edc" }
-edc-dataPlaneSelectorClient = { module = "org.eclipse.edc:data-plane-selector-client", version.ref = "edc" }
-edc-dataPlaneSelectorCore = { module = "org.eclipse.edc:data-plane-selector-core", version.ref = "edc" }
-edc-dataPlaneUtil = { module = "org.eclipse.edc:data-plane-util", version.ref = "edc" }
-edc-dsp = { module = "org.eclipse.edc:dsp", version.ref = "edc" }
-edc-dspApiConfiguration = { module = "org.eclipse.edc:dsp-api-configuration", version.ref = "edc" }
-edc-dspNegotiationTransform = { module = "org.eclipse.edc:dsp-negotiation-transform", version.ref = "edc" }
-edc-dspHttpSpi = { module = "org.eclipse.edc:dsp-http-spi", version.ref = "edc" }
-edc-dspHttpCore = { module = "org.eclipse.edc:dsp-http-core", version.ref = "edc" }
-edc-http = { module = "org.eclipse.edc:http", version.ref = "edc" }
-edc-httpSpi = { module = "org.eclipse.edc:http-spi", version.ref = "edc" }
-edc-iamMock = { module = "org.eclipse.edc:iam-mock", version.ref = "edc" }
-edc-jsonLd = { module = "org.eclipse.edc:json-ld", version.ref = "edc" }
-edc-jsonLdSpi = { module = "org.eclipse.edc:json-ld-spi", version.ref = "edc" }
-edc-junit = { module = "org.eclipse.edc:junit", version.ref = "edc" }
-edc-managementApi = { module = "org.eclipse.edc:management-api", version.ref = "edc" }
-edc-managementApiConfiguration = { module = "org.eclipse.edc:management-api-configuration", version.ref = "edc" }
-edc-monitorJdkLogger = { module = "org.eclipse.edc:monitor-jdk-logger", version.ref = "edc" }
-edc-oauth2Core = { module = "org.eclipse.edc:oauth2-core", version.ref = "edc" }
-edc-policyDefinitionApi = { module = "org.eclipse.edc:policy-definition-api", version.ref = "edc" }
-edc-policyEngineSpi = { module = "org.eclipse.edc:policy-engine-spi", version.ref = "edc" }
-edc-policyModel = { module = "org.eclipse.edc:policy-model", version.ref = "edc" }
-edc-policySpi = { module = "org.eclipse.edc:policy-spi", version.ref = "edc" }
-edc-runtimeMetamodel = { module = "org.eclipse.edc:runtime-metamodel", version = "0.2.1" }
-edc-sqlCore = { module = "org.eclipse.edc:sql-core", version.ref = "edc" }
-edc-transactionLocal = { module = "org.eclipse.edc:transaction-local", version.ref = "edc" }
-edc-transferDataPlane = { module = "org.eclipse.edc:transfer-data-plane", version.ref = "edc" }
-edc-transferProcessApi = { module = "org.eclipse.edc:transfer-process-api", version.ref = "edc" }
-edc-transferProcessStoreSql = { module = "org.eclipse.edc:transfer-process-store-sql", version.ref = "edc" }
-edc-transferSpi = { module = "org.eclipse.edc:transfer-spi", version.ref = "edc" }
-edc-transformCore = { module = "org.eclipse.edc:transform-core", version.ref = "edc" }
-edc-transformSpi = { module = "org.eclipse.edc:transform-spi", version.ref = "edc" }
-edc-vaultFilesystem = { module = "org.eclipse.edc:vault-filesystem", version.ref = "edc" }
 quartz-quartz = { module = "org.quartz-scheduler:quartz", version.ref = "quartz" }
 
 junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
 junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
-junit-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit" }
 
 jsonAssert = { module = "org.skyscreamer:jsonassert", version.ref = "jsonAssert" }
 
@@ -147,5 +104,5 @@ jooq = { id = "nu.studer.jooq", version = "7.1.1" }
 
 shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
 
-openapiYamlGen =  { id = "io.swagger.core.v3.swagger-gradle-plugin", version = "2.2.21" }
-openapiCodegen = { id = "org.openapi.generator", version = "6.6.0" }
+openapiYamlGen = { id = "io.swagger.core.v3.swagger-gradle-plugin", version.ref = "openApiYamlGen" }
+openapiCodegen = { id = "org.openapi.generator", version.ref = "openApiCodeGen" }

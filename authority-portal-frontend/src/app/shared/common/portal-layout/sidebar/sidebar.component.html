@@ -31,6 +31,7 @@
 
           <app-sidebar-element
             *ngFor="let menu of section.menus"
+            data-testid="nav-item"
             class="my-6"
             #tooltip="matTooltip"
             matTooltipPosition="right"

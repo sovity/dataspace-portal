@@ -1,14 +1,19 @@
 /*
- * Copyright (c) 2024 sovity GmbH
+ * Data Space Portal
+ * Copyright (C) 2025 sovity GmbH
  *
- * This program and the accompanying materials are made available under the
- * terms of the Apache License, Version 2.0 which is available at
- * https://www.apache.org/licenses/LICENSE-2.0
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * SPDX-License-Identifier: Apache-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- * Contributors:
- *      sovity GmbH - initial implementation
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package de.sovity.authorityportal.web
@@ -164,7 +169,7 @@ class UiResourceImpl(
 
     // Organization management (Authority)
     @Transactional
-    override fun changeApplicationRole(userId: String, role: UserRoleDto): IdResponse {
+    override fun changeApplicationRoles(userId: String, roles: List<UserRoleDto>): IdResponse {
         authUtils.requiresAnyRole(
             Roles.UserRoles.AUTHORITY_ADMIN,
             Roles.UserRoles.OPERATOR_ADMIN,
@@ -174,11 +179,11 @@ class UiResourceImpl(
         if (!authUtils.hasRole(Roles.UserRoles.AUTHORITY_ADMIN)) {
             authUtils.requiresMemberOfSameOrganizationAs(userId)
         }
-        return userRoleApiService.changeApplicationRole(userId, role, loggedInUser.userId, loggedInUser.roles)
+        return userRoleApiService.changeApplicationRoles(userId, roles, loggedInUser.userId, loggedInUser.roles)
     }
 
     @Transactional
-    override fun clearApplicationRole(userId: String): IdResponse {
+    override fun clearApplicationRoles(userId: String): IdResponse {
         authUtils.requiresAnyRole(
             Roles.UserRoles.AUTHORITY_ADMIN,
             Roles.UserRoles.OPERATOR_ADMIN,
@@ -188,7 +193,7 @@ class UiResourceImpl(
         if (!authUtils.hasRole(Roles.UserRoles.AUTHORITY_ADMIN)) {
             authUtils.requiresMemberOfSameOrganizationAs(userId)
         }
-        return userRoleApiService.clearApplicationRole(userId, loggedInUser.userId)
+        return userRoleApiService.clearApplicationRoles(userId, loggedInUser.userId)
     }
 
     @Transactional

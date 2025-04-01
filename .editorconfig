@@ -12,6 +12,9 @@ end_of_line = lf
 [*.json]
 indent_size = 2
 
+[{*.yaml,*.yml}]
+indent_size = 2
+
 [*.ts]
 quote_type = single
 

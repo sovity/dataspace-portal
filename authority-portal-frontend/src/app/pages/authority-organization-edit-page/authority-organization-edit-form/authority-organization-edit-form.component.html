@@ -33,25 +33,25 @@
       [placeholder]="
         authorityOrgForm.controls.legalIdType.value === 'TAX_ID'
           ? 'Tax ID Number'
-          : 'Commercial Register Number'
+          : 'Commerce Register Number'
       "
       [ctrl]="authorityOrgForm.controls.legalId"></app-text-input>
     <!-- ID Number -->
 
-    <!-- Commercial Register Location -->
+    <!-- Commerce Register Location -->
     <app-text-input
       *ngIf="
         authorityOrgForm.controls.legalIdType.value === 'COMMERCE_REGISTER_INFO'
       "
       class="flex-1"
-      label="Commercial Register Location"
+      label="Commerce Register Location"
       ctrlId="formRegCommerceRegisterLocation"
-      placeholder="Commercial Register Location"
+      placeholder="Commerce Register Location"
       required
       [ctrl]="
         authorityOrgForm.controls.commerceRegisterLocation
       "></app-text-input>
-    <!-- Commercial Register Location -->
+    <!-- Commerce Register Location -->
   </div>
 </div>
 

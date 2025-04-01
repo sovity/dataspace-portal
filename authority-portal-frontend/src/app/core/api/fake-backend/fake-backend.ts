@@ -1,14 +1,19 @@
 /*
- * Copyright (c) 2024 sovity GmbH
+ * Data Space Portal
+ * Copyright (C) 2025 sovity GmbH
  *
- * This program and the accompanying materials are made available under the
- * terms of the Apache License, Version 2.0 which is available at
- * https://www.apache.org/licenses/LICENSE-2.0
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * SPDX-License-Identifier: Apache-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- * Contributors:
- *      sovity GmbH - initial implementation
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import {
   CaasAvailabilityResponseToJSON,
@@ -82,10 +87,10 @@ import {
 } from './impl/fake-organizations';
 import {
   cascadeDeleteUser,
-  changeApplicationRole,
+  changeApplicationRoles,
   changeParticipantRole,
   checkUserDeletion,
-  clearApplicationRole,
+  clearApplicationRoles,
   deactivateUser,
   getUserInfo,
   getUserOrThrow,
@@ -270,16 +275,16 @@ export const AUTHORITY_PORTAL_FAKE_BACKEND: FetchAPI = async (
       return ok(IdResponseToJSON(result));
     })
 
-    .url('authority/users/*/role')
+    .url('authority/users/*/roles')
     .on('PUT', (userId: string) => {
-      const result = changeApplicationRole({body: body, userId});
+      const result = changeApplicationRoles({userRoleDto: body, userId});
 
       return ok(IdResponseToJSON(result));
     })
 
-    .url('authority/users/*/role')
+    .url('authority/users/*/roles')
     .on('DELETE', (userId: string) => {
-      const result = clearApplicationRole({userId});
+      const result = clearApplicationRoles({userId});
 
       return ok(IdResponseToJSON(result));
     })

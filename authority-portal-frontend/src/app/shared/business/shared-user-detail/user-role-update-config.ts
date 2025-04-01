@@ -1,14 +1,19 @@
 /*
- * Copyright (c) 2024 sovity GmbH
+ * Data Space Portal
+ * Copyright (C) 2025 sovity GmbH
  *
- * This program and the accompanying materials are made available under the
- * terms of the Apache License, Version 2.0 which is available at
- * https://www.apache.org/licenses/LICENSE-2.0
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * SPDX-License-Identifier: Apache-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- * Contributors:
- *      sovity GmbH - initial implementation
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import {
   UserDetailDto,
@@ -16,8 +21,8 @@ import {
   UserRoleDto,
 } from '@sovity.de/authority-portal-client';
 import {
+  getApplicationRoles,
   getAvailableRoles,
-  getHighestApplicationRole,
   getHighestParticipantRole,
   getHighestRolesString,
   isApplicationRole,
@@ -28,7 +33,7 @@ export interface UserRoleUpdateConfig {
   canEdit: boolean;
 
   currentParticipantRole: UserRoleDto;
-  currentApplicationRole: UserRoleDto | null;
+  currentApplicationRoles: UserRoleDto[];
 
   canChangeApplicationRole: boolean;
   canChangeParticipantRole: boolean;
@@ -59,7 +64,7 @@ export function buildUserRoleUpdateConfig(options: {
     onRoleUpdateSuccessful,
   } = options;
 
-  const currentApplicationRole = getHighestApplicationRole(targetRoles);
+  const currentApplicationRoles = getApplicationRoles(targetRoles);
   const currentParticipantRole = getHighestParticipantRole(targetRoles);
 
   const availableRoles = getAvailableRoles(
@@ -71,24 +76,27 @@ export function buildUserRoleUpdateConfig(options: {
 
   const filterAvailableRoles = (
     filter: (role: UserRoleDto) => boolean,
-    mustInclude: UserRoleDto | null,
+    mustInclude: UserRoleDto[],
   ) => {
     const available = availableRoles.filter(filter);
-    if (mustInclude && !available.includes(mustInclude)) {
-      available.push(mustInclude);
+
+    for (const role of mustInclude) {
+      if (!available.includes(role)) {
+        available.push(role);
+      }
     }
+
     return available;
   };
 
   const availableApplicationRoles = filterAvailableRoles(
     isApplicationRole,
-    currentApplicationRole,
+    currentApplicationRoles,
   );
 
-  const availableParticipantRoles = filterAvailableRoles(
-    isParticipantRole,
+  const availableParticipantRoles = filterAvailableRoles(isParticipantRole, [
     currentParticipantRole,
-  );
+  ]);
 
   const readableRoleList = getHighestRolesString(targetRoles);
 
@@ -96,7 +104,7 @@ export function buildUserRoleUpdateConfig(options: {
     canEdit:
       ownUserId !== targetUserId &&
       (canChangeApplicationRole || canChangeParticipantRole),
-    currentApplicationRole,
+    currentApplicationRoles,
     currentParticipantRole,
     canChangeApplicationRole,
     canChangeParticipantRole,

@@ -22,12 +22,17 @@
         <p>Are you sure you want to delete this connector?</p>
       </div>
       <div class="px-4 py-3 flex justify-end gap-2">
-        <button class="btn-outline" type="button" (click)="cancel.emit(null)">
+        <button
+          class="btn-outline"
+          type="button"
+          data-testid="delete-connector-dialog-cancel-btn"
+          (click)="cancel.emit(null)">
           Cancel
         </button>
         <button
           class="btn-accent-danger"
           type="button"
+          data-testid="delete-connector-dialog-confirm-btn"
           (click)="confirm.emit(null)">
           Delete
         </button>

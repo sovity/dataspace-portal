@@ -1,14 +1,19 @@
 /*
- * Copyright (c) 2024 sovity GmbH
+ * Data Space Portal
+ * Copyright (C) 2025 sovity GmbH
  *
- * This program and the accompanying materials are made available under the
- * terms of the Apache License, Version 2.0 which is available at
- * https://www.apache.org/licenses/LICENSE-2.0
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * SPDX-License-Identifier: Apache-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- * Contributors:
- *      sovity GmbH - initial implementation
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package de.sovity.edc.ext.catalog.crawler;
@@ -200,36 +205,20 @@ public class CrawlerConfigProps {
         .defaultValueFn(MY_EDC_PARTICIPANT_ID::getRaw)
     );
 
-    public static final ConfigProp EDC_KEYSTORE = addCeProp(builder -> builder
-        .category(CrawlerConfigProps.Category.C2C_IAM)
-        .property("edc.keystore")
-        .description("File-Based Vault: Keystore file (.jks)")
-        .relevantIf(props -> MY_EDC_C2C_IAM_TYPE.getRaw(props).startsWith("daps"))
-        .required(true)
-    );
-
-    public static final ConfigProp EDC_KEYSTORE_PASSWORD = addCeProp(builder -> builder
-        .category(CrawlerConfigProps.Category.C2C_IAM)
-        .property("edc.keystore.password")
-        .description("File-Based Vault: Keystore password")
-        .relevantIf(props -> MY_EDC_C2C_IAM_TYPE.getRaw(props).startsWith("daps"))
-        .required(true)
-    );
-
     public static final ConfigProp EDC_OAUTH_CERTIFICATE_ALIAS = addCeProp(builder -> builder
         .category(CrawlerConfigProps.Category.C2C_IAM)
         .property("edc.oauth.certificate.alias")
-        .description("OAuth2 / DAPS: Certificate Vault Entry for the Public Key. Default: '1'")
+        .description("OAuth2 / DAPS: Certificate Vault Entry for the Public Key")
         .relevantIf(props -> MY_EDC_C2C_IAM_TYPE.getRaw(props).startsWith("daps"))
-        .defaultValue("1")
+        .defaultValue("daps-cert")
     );
 
     public static final ConfigProp EDC_OAUTH_PRIVATE_KEY_ALIAS = addCeProp(builder -> builder
         .category(CrawlerConfigProps.Category.C2C_IAM)
         .property("edc.oauth.private.key.alias")
-        .description("OAuth2 / DAPS: Certificate Vault Entry for the Private Key. Default: '1'")
+        .description("OAuth2 / DAPS: Certificate Vault Entry for the Private Key")
         .relevantIf(props -> MY_EDC_C2C_IAM_TYPE.getRaw(props).startsWith("daps"))
-        .defaultValue("1")
+        .defaultValue("daps-priv")
     );
 
     public static final ConfigProp EDC_OAUTH_PROVIDER_AUDIENCE = addCeProp(builder -> builder

@@ -34,21 +34,28 @@
                     firstName: user.firstName,
                     lastName: user.lastName
                   }"></app-avatar>
-                <span>{{ user.firstName }} {{ user.lastName }}</span>
+                <span data-testid="user-list-name"
+                  >{{ user.firstName }} {{ user.lastName }}</span
+                >
               </td>
               <td
                 class="px-4 py-4 text-sm font-medium whitespace-nowrap text-center text-gray-700">
-                <span *ngIf="user.applicationRole"
+                <span
+                  *ngIf="user.applicationRole"
+                  data-testid="user-list-application-role"
                   >{{ user.applicationRole }},
                 </span>
-                <span *ngIf="user.participantRole">{{
-                  user.participantRole
-                }}</span>
+                <span
+                  *ngIf="user.participantRole"
+                  data-testid="user-list-participant-role"
+                  >{{ user.participantRole }}
+                </span>
               </td>
               <td
                 class="px-4 py-4 text-sm font-medium whitespace-nowrap text-center">
                 <div
                   class="inline px-3 py-1 text-sm font-normal rounded-full gap-x-2"
+                  data-testid="user-list-registration-status"
                   [ngClass]="
                     getOrganizationUserRegistrationStatusClasses(
                       user.registrationStatus

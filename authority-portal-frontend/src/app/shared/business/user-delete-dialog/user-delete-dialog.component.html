@@ -44,11 +44,13 @@
             color="accent">
             <mat-select
               placeholder="Select Successor"
+              data-testid="delete-user-successor-selector"
               [formControl]="deleteOrganizationCreatorForm.controls.successor">
               <mat-option
                 *ngFor="
                   let successor of modalData.data.possibleCreatorSuccessors
                 "
+                data-test-id="delete-user-successor-selector-option"
                 [value]="successor.userId"
                 >{{ successor.firstName }} {{ successor.lastName }}</mat-option
               >
@@ -74,12 +76,17 @@
   </div>
 
   <div class="px-4 py-3 flex justify-end gap-2">
-    <button class="btn-outline" type="button" (click)="onDismiss()">
+    <button
+      class="btn-outline"
+      type="button"
+      data-testid="delete-user-dialog-cancel-btn"
+      (click)="onDismiss()">
       Cancel
     </button>
     <button
       class="btn-accent-danger flex items-center gap-1.5"
       type="button"
+      data-testid="delete-user-dialog-confirm-btn"
       [disabledBtn]="
         (!isLastParticipantAdmin &&
           isOrganizationCreator &&

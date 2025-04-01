@@ -6,7 +6,9 @@
     [placeholder]="'Select ' + label"
     [id]="ctrlId"
     [formControl]="ctrl">
-    <mat-option *ngFor="let industry of industries" [value]="industry">
+    <mat-option
+      *ngFor="let industry of industries"
+      [value]="industry">
       {{ industry }}
     </mat-option>
     <mat-option

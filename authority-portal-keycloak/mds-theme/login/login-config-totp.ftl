@@ -51,8 +51,9 @@
 
         <form action="${url.loginAction}" class="${properties.kcFormClass!} formContainer" id="kc-totp-settings-form" method="post">
             <div class="${properties.kcFormGroupClass!}">
-                <div class="${properties.kcInputWrapperClass!}">
-                    <label for="totp" class="control-label">${msg("authenticatorCode")}</label> <span class="required">*</span>
+                <div class="form-group-row ${properties.kcInputWrapperClass!}">
+                    <label for="totp" class="control-label">${msg("authenticatorCode")}</label> 
+                    <span class="required">*</span>
                 </div>
                 <div class="${properties.kcInputWrapperClass!}">
                     <input type="text" id="totp" name="totp" autocomplete="off" class="${properties.kcInputClass!}"
@@ -60,11 +61,11 @@
                     />
 
                     <#if messagesPerField.existsError('totp')>
-                        <span id="input-error-otp-code" class="${properties.kcInputErrorMessageClass!}" aria-live="polite">
-                            ${kcSanitize(messagesPerField.get('totp'))?no_esc}
-                        </span>
+                            <span id="input-error-otp-code" class="${properties.kcInputErrorMessageClass!}" aria-live="polite">
+                                ${kcSanitize(messagesPerField.get('totp'))?no_esc}
+                            </span>
                     </#if>
-
+                    
                 </div>
                 <input type="hidden" id="totpSecret" name="totpSecret" value="${totp.totpSecret}" />
                 <#if mode??><input type="hidden" id="mode" name="mode" value="${mode}"/></#if>

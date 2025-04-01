@@ -47,27 +47,27 @@ The respective compatible versions can be found in the [CHANGELOG.md](../../../.
 
 ### Deployment Units
 
-| Deployment Unit                       | Version / Details                                                                                 |
-|---------------------------------------|---------------------------------------------------------------------------------------------------|
-| Reverse Proxy / Ingress               | _Infrastructure dependent_                                                                        |
-| Keycloak Deployment                   | Version 24.0.4 or compatible version                                                              |
-| OAuth2 Proxy                          | quay.io/oauth2-proxy/oauth2-proxy:7.5.0                                                           |
-| Caddy behind OAuth2 Proxy             | caddy:2.7                                                                                         |
-| Data Space Portal Backend              | authority-portal-backend, see [CHANGELOG.md](../../../../CHANGELOG.md) for compatible versions.   |
-| Data Space Portal Frontend             | authority-portal-frontend, see  [CHANGELOG.md](../../../../CHANGELOG.md) for compatible versions. |
-| Catalog Crawler (one per environment) | authority-portal-crawler, see [CHANGELOG.md](../../../../CHANGELOG.md) for compatible versions.   |
-| Postgresql                            | Version 16 or compatible version                                                                  |
+| Deployment Unit                       | Version / Details                                                                          |
+|---------------------------------------|--------------------------------------------------------------------------------------------|
+| Reverse Proxy / Ingress               | _Infrastructure dependent_                                                                 |
+| Keycloak Deployment                   | Version 24.0.4 or compatible version                                                       |
+| OAuth2 Proxy                          | quay.io/oauth2-proxy/oauth2-proxy:7.5.0                                                    |
+| Caddy behind OAuth2 Proxy             | caddy:2.7                                                                                  |
+| Data Space Portal Backend             | ds-portal-backend, see [CHANGELOG.md](../../../../CHANGELOG.md) for compatible versions.   |
+| Data Space Portal Frontend            | ds-portal-frontend, see  [CHANGELOG.md](../../../../CHANGELOG.md) for compatible versions. |
+| Catalog Crawler (one per environment) | ds-portal-crawler, see [CHANGELOG.md](../../../../CHANGELOG.md) for compatible versions.   |
+| Postgresql                            | Version 16 or compatible version                                                           |
 
 ### Configuration
 
 #### Reverse Proxy / Ingress
 
 - Data Space Portal needs to be deployed with TLS/HTTPS.
-- The domain under which the Data Space Portal should be reachable on the internet will be referred to as `[DSPORTAL_FQDN]` in this
+- The domain under which the Data Space Portal should be reachable on the internet will be referred to as `[AP_FQDN]` in this
   guide.
 - Path mapping: 
-  - Frontend: `https://[DSPORTAL_FQDN]` -> `caddy:8080` -> `frontend:8080`
-  - Backend: `https://[DSPORTAL_FQDN]/api` -> `caddy:8080` -> `oauth2-proxy:8080` -> `caddy:8081` -> `backend:8080/api`
+  - Frontend: `https://[AP_FQDN]` -> `caddy:8080` -> `frontend:8080`
+  - Backend: `https://[AP_FQDN]/api` -> `caddy:8080` -> `oauth2-proxy:8080` -> `caddy:8081` -> `backend:8080/api`
 
 #### Keycloak IAM Deployment
 
@@ -82,7 +82,7 @@ The respective compatible versions can be found in the [CHANGELOG.md](../../../.
 - Consider consulting Keycloak's [server administration guide](https://www.keycloak.org/docs/latest/server_admin/).
 - You need to have a running Keycloak with the aforementioned compatible version.
 - The domain under which the Keycloak should be reachable on the internet will be referred to as `[KC_FQDN]` in this
-  guide and should differ from the `[DSPORTAL_FQDN]`.
+  guide and should differ from the `[AP_FQDN]`.
 - The steps to set up the realm are the following
   - sovity theme
       1. Copy [sovity-theme](../../../../authority-portal-keycloak/sovity-theme) directory to `{keycloakRoot}/themes/` directory
@@ -93,7 +93,7 @@ The respective compatible versions can be found in the [CHANGELOG.md](../../../.
           - `Valid Redirect URIs`: (Relative) callback URL of auth proxy, e.g. `/oauth2/callback`
           - `Valid post logout redirect URIs`: `/*`
       4. Adjust settings for `authority-portal-client` client (Clients > `authority-portal-client` > Settings)
-          - `Root URL`: URL of the Data Space Portal, e.g. `https://authority-portal.example.url`
+          - `Root URL`: URL of the authority portal, e.g. `https://authority-portal.example.url`
           - `Home URL`: (Most likely) same as `Root URL`
       5. Regenerate client secrets for `oauth2-proxy` and `authority-portal-client` clients
           - Clients > `[client]` > Credentials > Regenerate (Client secret)
@@ -103,25 +103,6 @@ The respective compatible versions can be found in the [CHANGELOG.md](../../../.
           - Realm settings > Themes > Email theme: Select `sovity-theme`
       7. Add email settings (Realm settings > Email)
           - At least `From` and `Host` are required
-  - MDS theme
-    1. Copy [mds-theme](../../../../authority-portal-keycloak/mds-theme) directory to `{keycloakRoot}/themes/` directory
-    2. Import [realm-mds.json](../../../../authority-portal-backend/authority-portal-quarkus/src/main/resources/realm-mds.json) to create the `mds-portal` realm
-    3. Adjust settings for `oauth2-proxy` client (Clients > `oauth2-proxy` > Settings)
-       - `Root URL`: URL of the auth proxy, e.g. `https://authority-portal.example.url`
-       - `Home URL`: (Relative) sign in URL of auth proxy, e.g. `/oauth2/sign_in`
-       - `Valid Redirect URIs`: (Relative) callback URL of auth proxy, e.g. `/oauth2/callback`
-       - `Valid post logout redirect URIs`: `/*`
-    4. Adjust settings for `authority-portal-client` client (Clients > `authority-portal-client` > Settings)
-       - `Root URL`: URL of the Data Space Portal, e.g. `https://authority-portal.example.url`
-       - `Home URL`: (Most likely) same as `Root URL`
-    5. Regenerate client secrets for `oauth2-proxy` and `authority-portal-client` clients
-       - Clients > `[client]` > Credentials > Regenerate (Client secret)
-    6. Select MDS theme for login & email templates
-       - Select `mds-portal` realm
-       - Realm settings > Themes > Login theme: Select `mds-theme`
-       - Realm settings > Themes > Email theme: Select `mds-theme`
-    7. Add email settings (Realm settings > Email)
-       - At least `From` and `Host` are required
 
 #### Caddy
 
@@ -159,7 +140,7 @@ OAUTH2_PROXY_HTTP_ADDRESS: 0.0.0.0:8080
 OAUTH2_PROXY_PASS_ACCESS_TOKEN: "true"
 OAUTH2_PROXY_SKIP_PROVIDER_BUTTON: "true"
 OAUTH2_PROXY_SHOW_DEBUG_ON_ERROR: "true"
-OAUTH2_PROXY_REDIRECT_URL: https://[DSPORTAL_FQDN]/oauth2/callback
+OAUTH2_PROXY_REDIRECT_URL: https://[AP_FQDN]/oauth2/callback
 OAUTH2_PROXY_SCOPE: openid profile
 OAUTH2_PROXY_WHITELIST_DOMAINS: [KC_FQDN]
 OAUTH2_PROXY_CUSTOM_TEMPLATES_DIR: [CUSTOM_TEMPLATES_DIR]
@@ -204,7 +185,7 @@ quarkus.keycloak.admin-client.realm: "[KC_REALM]"
 # Keycloak Admin Client: Client ID
 quarkus.keycloak.admin-client.client-id: "authority-portal-client"
 # Keycloak Admin Client: Client secret
-quarkus.keycloak.admin-client.client-secret: "[DSPORTAL_CLIENT_SECRET]"
+quarkus.keycloak.admin-client.client-secret: "[AP_CLIENT_SECRET]"
 # Keycloak Admin Client: Grant type
 quarkus.keycloak.admin-client.grant-type: "CLIENT_CREDENTIALS"
 
@@ -226,10 +207,10 @@ authority-portal.caas.sovity.limit-per-organization: "1"
 quarkus.oidc-client.sovity.client-enabled: true
 
 # Must equal the root URL/home URl from the Keycloak configuration - see above)
-authority-portal.base-url: "https://[DSPORTAL_FQDN]"
+authority-portal.base-url: "https://[AP_FQDN]"
 
 # API key to protect config endpoints, like /api/config/log-level
-authority-portal.config.api-key: "[DSPORTAL_CONFIG_API_KEY]"
+authority-portal.config.api-key: "[AP_CONFIG_API_KEY]"
 
 # Invitation link expiration time in seconds. (Must equal the value in Keycloak configuration)
 authority-portal.invitation.expiration: "43200"
@@ -305,12 +286,12 @@ curl -X PUT 'https://authority-portal.example.com/api/config/log-level?level=DEB
 - Set environment variables according to the following table (mandatory)
 
 ```yaml
-AUTHORITY_PORTAL_FRONTEND_BACKEND_URL: https://[DSPORTAL_FQDN] # Data Space Portal URL
-AUTHORITY_PORTAL_FRONTEND_LOGIN_URL: https://[DSPORTAL_FQDN]/oauth2/start?rd=https%3A%2F%2F[DSPORTAL_FQDN] # Auth Proxy: Login URL (with redirect to the Data Space Portal)
+AUTHORITY_PORTAL_FRONTEND_BACKEND_URL: https://[AP_FQDN] # Data Space Portal URL
+AUTHORITY_PORTAL_FRONTEND_LOGIN_URL: https://[AP_FQDN]/oauth2/start?rd=https%3A%2F%2F[AP_FQDN] # Auth Proxy: Login URL (with redirect to the Data Space Portal)
 # Following is the URL to signal the Auth Proxy to log out the user.
-# Example: https://[DSPORTAL_FQDN]/oauth2/sign_out?rd=https%3A%2F%2F[KC_FQDN]%2Frealms%2F[KC_REALM]l%2Fprotocol%2Fopenid-connect%2Flogout%3Fclient_id%3Doauth2-proxy%26post_logout_redirect_uri%3Dhttps%253A%252F%252F[DSPORTAL_FQDN]
+# Example: https://[AP_FQDN]/oauth2/sign_out?rd=https%3A%2F%2F[KC_FQDN]%2Frealms%2F[KC_REALM]l%2Fprotocol%2Fopenid-connect%2Flogout%3Fclient_id%3Doauth2-proxy%26post_logout_redirect_uri%3Dhttps%253A%252F%252F[AP_FQDN]
 AUTHORITY_PORTAL_FRONTEND_LOGOUT_URL: (...) # Auth Proxy: Logout URL
-AUTHORITY_PORTAL_FRONTEND_INVALIDATE_SESSION_COOKIES_URL: https://[DSPORTAL_FQDN]/oauth2/sign_out # Auth Proxy: URL to invalidate sessions cookies
+AUTHORITY_PORTAL_FRONTEND_INVALIDATE_SESSION_COOKIES_URL: https://[AP_FQDN]/oauth2/sign_out # Auth Proxy: URL to invalidate sessions cookies
 AUTHORITY_PORTAL_FRONTEND_LEGAL_NOTICE_URL: https://yourdataspace.com/legal-notice # Legal Notice URL
 AUTHORITY_PORTAL_FRONTEND_PRIVACY_POLICY_URL: https://yourdataspace.com/privacy-policy # Privacy policy URL
 AUTHORITY_PORTAL_FRONTEND_SUPPORT_URL: https://support.yourdataspace.com # Support page URL
@@ -319,7 +300,7 @@ AUTHORITY_PORTAL_FRONTEND_DATASPACE_SHORT_NAME: ExDS # Short Dataspace name, use
 AUTHORITY_PORTAL_FRONTEND_PORTAL_DISPLAY_NAME: "Data Space Portal" # Portal name displayed in various texts
 AUTHORITY_PORTAL_FRONTEND_ENABLE_DASHBOARD: true # Enables or disables the status uptime dashboard
 # Direct URL to the UPDATE_PASSWORD required action in Keycloak
-AUTHORITY_PORTAL_FRONTEND_UPDATE_PASSWORD_URL: https://[KC_FQDN]/realms/authority-portal/protocol/openid-connect/auth?response_type=code&client_id=oauth2-proxy&scope=openid&kc_action=UPDATE_PASSWORD&redirect_uri=https%3A%2F%2F[DSPORTAL_FQDN]%2Foauth2%2Fcallback
+AUTHORITY_PORTAL_FRONTEND_UPDATE_PASSWORD_URL: https://[KC_FQDN]/realms/authority-portal/protocol/openid-connect/auth?response_type=code&client_id=oauth2-proxy&scope=openid&kc_action=UPDATE_PASSWORD&redirect_uri=https%3A%2F%2F[AP_FQDN]%2Foauth2%2Fcallback
 
 ```
 
@@ -360,13 +341,18 @@ CRAWLER_DB_JDBC_USER: portal
 CRAWLER_DB_JDBC_PASSWORD: portal
 
 # Required: DAPS credentials
-EDC_OAUTH_TOKEN_URL: 'https://daps.yourdataspace.com/token'
-EDC_OAUTH_PROVIDER_JWKS_URL: 'https://daps.yourdataspace.com/jwks'
-EDC_OAUTH_CLIENT_ID: '_your SKI/AKI_'
-EDC_KEYSTORE: '_your keystore file_' # Needs to be available as file in the running container
-EDC_KEYSTORE_PASSWORD: '_your keystore password_'
-EDC_OAUTH_CERTIFICATE_ALIAS: 1
-EDC_OAUTH_PRIVATE_KEY_ALIAS: 1
+edc.oauth.token.url: 'https://daps.yourdataspace.com/token'
+edc.oauth.provider.jwks.url: 'https://daps.yourdataspace.com/jwks'
+edc.oauth.client.id: '_your SKI/AKI_'
+sovity.vault.in-memory.init.daps-cert: |
+    sovity.vault.in-memory.init.daps-cert: |
+      -----BEGIN CERTIFICATE-----
+      MIIFE...
+      -----END CERTIFICATE-----
+sovity.vault.in-memory.init.daps-priv: |
+    -----BEGIN PRIVATE KEY-----
+    MIIJQ...
+    -----END PRIVATE KEY-----
 ```
 
 You can also optionally override the following defaults:

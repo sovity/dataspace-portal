@@ -2,6 +2,7 @@
   <ng-container *ngIf="!sidebarMenu.isExternalLink; else externalLinkTemplate">
     <a
       class="p-5 my-1 w-auto rounded-md hover:bg-sidebar-selected-color hover:!text-sidebar-text-selected-color flex items-center text-sidebar-text-color cursor-pointer"
+      data-testid="sidebar-element-external"
       routerLinkActive="bg-sidebar-selected-color !text-sidebar-text-selected-color"
       [ngClass]="isExpandedMenu ? 'w-auto space-x-6' : ' w-fit space-x-0'"
       [routerLink]="sidebarMenu.rLink"
@@ -18,6 +19,7 @@
   <ng-template #externalLinkTemplate>
     <a
       class="p-5 my-1 rounded-md hover:bg-sidebar-selected-color hover:!text-sidebar-text-selected-color flex items-center text-sidebar-text-color cursor-pointer"
+      data-testid="sidebar-element"
       target="_blank"
       [ngClass]="isExpandedMenu ? 'w-auto space-x-6' : 'w-fit space-x-0'"
       [href]="sidebarMenu.rLink">

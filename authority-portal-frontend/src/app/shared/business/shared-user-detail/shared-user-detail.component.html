@@ -1,21 +1,10 @@
-<!-- full name -->
-<div class="details-row">
-  <div class="details-row-key">
-    <mat-icon class="material-icons-outlined">badge</mat-icon>
-    Name
-  </div>
-  <div class="details-row-value">
-    {{ config.user.firstName }} {{ config.user.lastName }}
-  </div>
-</div>
-
 <!-- organization name -->
 <div class="details-row">
   <div class="details-row-key">
     <mat-icon class="material-icons-outlined">corporate_fare</mat-icon>
     Organization
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="user-details-organization">
     {{ config.user.organizationName }}, {{ config.user.organizationId }}
   </div>
 </div>
@@ -26,7 +15,7 @@
     <mat-icon class="material-icons-outlined">person</mat-icon>
     Position
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="user-details-position">
     {{ config.user.position }}
   </div>
 </div>
@@ -37,7 +26,7 @@
     <mat-icon class="material-icons-outlined">admin_panel_settings</mat-icon>
     Portal Role
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="user-details-portalrole">
     <div *ngIf="!roleFormToggled" class="flex justify-between">
       <div>
         <span>{{ config.roles.readableRolesAsString }} </span>
@@ -56,8 +45,10 @@
           <app-application-roles-tooltip></app-application-roles-tooltip>
         </div>
         <mat-form-field class="w-full" appearance="outline">
-          <mat-select placeholder="None" [formControl]="applicationRoleCtrl">
-            <mat-option>None</mat-option>
+          <mat-select
+            placeholder="None"
+            multiple
+            [formControl]="applicationRoleCtrl">
             <mat-option
               *ngFor="let role of config.roles.availableApplicationRoles"
               [value]="role">
@@ -113,7 +104,7 @@
     <mat-icon class="material-icons-outlined">mail</mat-icon>
     Email
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="user-details-email">
     {{ config.user.email }}
   </div>
 </div>
@@ -124,7 +115,7 @@
     <mat-icon class="material-icons-outlined">phone_iphone</mat-icon>
     Phone
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="user-details-phone">
     {{ config.user.phone }}
   </div>
 </div>
@@ -135,7 +126,7 @@
     <mat-icon class="material-icons-outlined">person </mat-icon>
     Invited By
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="user-details-invitedby">
     {{ config.user.invitingUserFirstName ?? '' }}
     {{ config.user.invitingUserLastName ?? '' }}
   </div>
@@ -147,7 +138,7 @@
     <mat-icon class="material-icons-outlined">sell</mat-icon>
     Onboarding Type
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="user-details-onboardingtype">
     {{ onboardingType(config.user.onboardingType) }}
   </div>
 </div>
@@ -158,7 +149,7 @@
     <mat-icon class="material-icons-outlined">calendar_month</mat-icon>
     Onboarded Since
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="user-details-onboardedsince">
     {{ config.user.creationDate | date : 'mediumDate' }}
   </div>
 </div>

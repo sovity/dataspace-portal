@@ -1,9 +1,11 @@
 <div
-  class="flex justify-center items-center border border-gray-200 rounded-full px-2 py-1 gap-2 mr-3">
+  class="flex justify-center items-center border border-gray-200 rounded-full px-2 py-1 gap-2 mr-3"
+  data-testid="env-switcher">
   <button
     *ngFor="let environment of deploymentEnvironments"
     id="{{ environment.environmentId }}"
     class="px-3 py-1 text-gray-500 text-sm rounded-full transition-colors duration-300 ease-in-out"
+    data-testid="env-switcher-item"
     [class.bg-brand-highlight]="
       selectedEnvironmentId === environment.environmentId
     "

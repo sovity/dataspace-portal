@@ -1,6 +1,7 @@
 <div class="flex justify-center">
   <mat-slide-toggle
     name="hasCertificate"
+    data-testid="bring-own-cert-toggle"
     [formControl]="group.controls.bringOwnCert"
     >I already have a certificate
   </mat-slide-toggle>
@@ -13,6 +14,7 @@
     <app-text-input
       class="flex-1"
       ctrlId="formCertGenOrganizationalUnit"
+      data-testid="formCertGenOrganizationalUnit"
       label="Organizational Unit"
       placeholder="Business Unit 1"
       required
@@ -21,6 +23,7 @@
     <app-text-input
       class="flex-1"
       ctrlId="formCertGenEmail"
+      data-testid="formCertGenEmail"
       label="E-Mail"
       placeholder="contact@my-org.com"
       required
@@ -30,6 +33,7 @@
     <app-text-input
       class="flex-1"
       ctrlId="formCertGenCity"
+      data-testid="formCertGenCity"
       label="City"
       placeholder="Frankfurt am Main"
       required
@@ -39,6 +43,7 @@
     <app-text-input
       class="flex-1"
       ctrlId="formCertGenState"
+      data-testid="formCertGenState"
       label="State / Province"
       placeholder="Hessen"
       required
@@ -48,6 +53,7 @@
     <app-password-input
       class="flex-1"
       ctrlId="formCertGenPassword"
+      data-testid="formCertGenPassword"
       label="Password for .p12 File"
       required
       [ctrl]="group.controls.password"></app-password-input>
@@ -56,6 +62,7 @@
     <app-password-repeat-input
       class="flex-1"
       ctrlId="formCertGenConfirmPassword"
+      data-testid="formCertGenConfirmPassword"
       label="Confirm Password for .p12 File"
       required
       [ctrl]="group.controls.confirmPassword"
@@ -82,18 +89,21 @@
     <!-- Organizational Legal name -->
     <app-readonly-text-input
       ctrlId="formCertGenOrganizationalName"
+      data-testid="formCertGenOrganizationalName"
       label="Organization Legal Name"
       [value]="organizationLegalName"></app-readonly-text-input>
 
     <!-- Common Name  -->
     <app-readonly-text-input
       ctrlId="formCertGenCommonName"
+      data-testid="formCertGenCommonName"
       label="Common Name"
       [value]="commonName"></app-readonly-text-input>
 
     <!-- Country-->
     <app-readonly-text-input
       ctrlId="formCertGenCountry"
+      data-testid="formCertGenCountry"
       label="Country"
       [value]="location"></app-readonly-text-input>
 
@@ -102,6 +112,7 @@
       class="flex-1"
       label="Generated Certificate"
       ctrlId="formCertGenCertificate"
+      data-testid="formCertGenCertificate"
       [placeholder]="
         isGenerating
           ? 'Generating...'
@@ -118,4 +129,5 @@
   class="flex-1"
   label="Your Certificate"
   ctrlId="formCertOwnCertificate"
+  data-testid="formCertOwnCertificate"
   [ctrl]="group.controls.ownCertificate"></app-certificate-input>

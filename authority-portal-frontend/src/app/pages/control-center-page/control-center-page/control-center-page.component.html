@@ -10,7 +10,8 @@
       routerLinkActive
       #rla="routerLinkActive"
       [routerLink]="tab.routerLink"
-      [active]="rla.isActive">
+      [active]="rla.isActive"
+      [attr.data-testid]="'control-center-tab-' + toKebabCase(tab.title)">
       {{ tab.title }}
     </a>
   </nav>

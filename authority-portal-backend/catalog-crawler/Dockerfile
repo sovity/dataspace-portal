@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jre-alpine
+FROM --platform=linux/amd64 eclipse-temurin:17-jre-alpine
 
 # Install curl for healthcheck, bash for entrypoint
 RUN apk add --no-cache curl bash
@@ -9,14 +9,14 @@ RUN adduser -D -H -s /sbin/nologin edc
 USER edc:edc
 
 # Which app.jar to include
-ARG CONNECTOR_NAME="catalog-crawler-ce"
+ARG LAUNCHER_NAME="catalog-crawler-launcher"
 
 # For last-commit-info extension
 ARG EDC_LAST_COMMIT_INFO_ARG="The docker container was built outside of github actions and you didn't provide the build arg EDC_LAST_COMMIT_INFO_ARG, so there's no last commit info."
 ARG EDC_BUILD_DATE_ARG="The docker container was built outside of github actions and you didn't provide the build arg EDC_BUILD_DATE_ARG, so there's no build date."
 
 WORKDIR /app
-COPY ./authority-portal-backend/catalog-crawler/${CONNECTOR_NAME}-launcher/build/libs/app.jar /app
+COPY ./authority-portal-backend/catalog-crawler/${LAUNCHER_NAME}/build/libs/app.jar /app
 COPY ./authority-portal-backend/catalog-crawler/logging.properties /app
 COPY ./authority-portal-backend/catalog-crawler/logging.dev.properties /app
 

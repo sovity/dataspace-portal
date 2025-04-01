@@ -12,7 +12,7 @@
 <br />
 
 <div align="center">
-<a href="https://github.com/sovity/authority-portal">
+<a href="https://github.com/sovity/dataspace-portal">
 <img src="https://raw.githubusercontent.com/sovity/edc-ui/main/src/assets/images/sovity_logo.svg" alt="Logo" width="300">
 </a>
 
@@ -21,9 +21,9 @@
   <p align="center">
     Frontend (UI) of Data Space Portal
     <br />
-    <a href="https://github.com/sovity/authority-portal/issues">Report Bug</a>
+    <a href="https://github.com/sovity/dataspace-portal/issues">Report Bug</a>
     ·
-    <a href="https://github.com/sovity/authority-portal/issues">Request Feature</a>
+    <a href="https://github.com/sovity/dataspace-portal/issues">Request Feature</a>
     <br />
     <br />
     <a href="https://angular.io"><img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="angular.io" /></a>
@@ -52,7 +52,7 @@
 
 ## About This Component
 
-Frontend for sovity's Dataspace Data Space Portal, written in Angular with
+Frontend for sovity's Data Space Portal, written in Angular with
 TypeScript, NGXS State Management and TailwindCSS Framework.
 
 <p align="right">(<a href="#readme-top">back to top</a>)

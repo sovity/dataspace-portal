@@ -5,17 +5,17 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-<a href="https://github.com/sovity/authority-portal">
+<a href="https://github.com/sovity/dataspace-portal">
 <img src="https://raw.githubusercontent.com/sovity/edc-ui/main/src/assets/images/sovity_logo.svg" alt="Logo" width="300">
 </a>
 
 <h3 align="center">Data Space Portal</h3>
 <p align="center" style="padding-bottom:16px">
- Collaboration and governance for all participants
+Manage your Dataspace
 <br />
-<a href="https://github.com/sovity/authority-portal/issues/new?assignees=&labels=kind%2Fbug&projects=&template=bug_report.yaml">Report Bug</a>
+<a href="https://github.com/sovity/dataspace-portal/issues/new?assignees=&labels=kind%2Fbug&projects=&template=bug_report.yaml">Report Bug</a>
 ·
-<a href="https://github.com/sovity/authority-portal/issues/new?template=feature_request.md">Request Feature</a>
+<a href="https://github.com/sovity/dataspace-portal/issues/new?template=feature_request.md">Request Feature</a>
 </p>
 </div>
 
@@ -26,8 +26,6 @@ The **Data Space Portal** is an open-source Software as a Service (SaaS) solutio
 The Data Space Portal is not just about managing participants. It also provides multiple avenues to add or acquire connectors and service partners. These partners can offer their own Connector-as-a-Service (CaaS), extending the functionality and versatility of your Dataspace.
 
 As a Dataspace administration tool, the Data Space Portal necessitates technical connections with other dataspace components, including the CaaS component. This integration ensures a smooth and efficient operation, enhancing the overall user experience.
-
-<b>Note:</b> This component was previously known as Authority Portal (AP) and has been renamed to Data Space Portal (DSPortal). The functionality remains unchanged.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
