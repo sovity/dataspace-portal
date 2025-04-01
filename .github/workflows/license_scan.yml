@@ -31,8 +31,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: npm install (authority-portal-api-client-ts)
-        run: cd authority-portal-backend/authority-portal-api-client-ts && npm install
       - name: npm install (authority-portal-frontend)
         run: cd authority-portal-frontend && npm install
       - name: Run license scanner

@@ -123,7 +123,7 @@ h1#kc-page-title {
 }
 
 #kc-content {
-  width: 35rem;
+  width: 100%;
 }
 
 #kc-attempted-username {
@@ -144,7 +144,12 @@ h1#kc-page-title {
 }
 
 #kc-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   font-size: 13px;
+  margin-top: 30px;
 }
 
 #kc-form-options span {
@@ -219,14 +224,13 @@ ul#kc-totp-supported-apps {
 .card-pff {
   margin: 0 auto;
   padding: 10px 20px !important;
-  max-width: 500px;
+  max-width: 350px;
   border-radius: 25px;
   max-height: calc(100vh - 100px);
-  overflow-y: auto;
 }
 
 .login-pf-page .login-pf-signup {
-  font-size: 15px;
+  font-size: 12px;
   color: #72767b;
 }
 #kc-content-wrapper .row {
@@ -268,10 +272,16 @@ ul#kc-totp-supported-apps {
 }
 
 .form-group {
-  align-items: center;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
   color: black;
   margin-bottom: 0;
+  column-gap: 8px;
+  margin: 2px 20px;
+}
+
+.form-group input {
+  margin: 3px 0px;
 }
 
 .no-bottom-margin {
@@ -303,7 +313,6 @@ ul#kc-totp-supported-apps {
 }
 
 .text-input {
-  width: 100%;
   border: 1px solid #474747;
   margin: 10px auto;
   color: rgb(0, 0, 0);
@@ -311,6 +320,9 @@ ul#kc-totp-supported-apps {
   text-align: center;
   border-radius: 0.5rem;
   padding: 1.5rem;
+  width: 100%;
+  max-width: 350px;
+  height: 5px;
 }
 
 #kc-logout-confirm {
@@ -330,23 +342,26 @@ ul#kc-totp-supported-apps {
   background-image: url(../img/sovity_logo.svg);
   background-repeat: no-repeat;
   background-position: top;
-  height: 110px;
-  max-width: 400px;
+  height: 80px;
+  width: 350px;
+  max-width: 350px;
   background-size: 63%;
 }
 
 div.form-group.login-pf-settings {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 25px;
   margin-right: 0px !important;
+  width: 306px;
 }
 
 .col-xs-12.col-sm-12.col-md-12.col-lg-12 {
   position: relative;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
   min-height: 1px;
 }
 
@@ -354,10 +369,17 @@ div.form-group.login-pf-settings {
   color: black;
 }
 
+.form-group-row {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: start;
+  align-items: start;
+}
+
 .pf-c-button.pf-m-primary.pf-m-block.btn-lg {
   margin-top: 10px !important;
   margin-bottom: 10px !important;
-  width: 200px;
+  width: 211px;
   height: 40px;
   background-color: black;
   color: white;
@@ -430,7 +452,7 @@ div.form-group.login-pf-settings {
   margin: 0 10px 0 6px;
 }
 
-.kc-login-tooltip {
+#kc-login-tooltip {
   display: flex;
   justify-content: center;
 }
@@ -446,6 +468,92 @@ div.form-group.login-pf-settings {
 }
 
 .legal-notices {
+  display: flex;
+  column-gap: 5px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  min-width: 16px;
+  min-height: 16px;
+}
+
+/* Keycloak 26 */
+/* sorry for the styles, but it's the only way to make it work 
+  without refactoring the whole Keycloak theme */
+
+body {
+  font-size: 12px;
+  line-height: 1.66666667;
+  color: #363636;
+}
+
+.alert-warning {
+  color: #363636;
+  background-color: #fdf2e5;
+  border-color: #ec7a08;
+}
+
+#kc-totp-settings-form {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}
+
+.formContainer .form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.form-group input {
+  line-height: 20px;
+  border-radius: 3px;
+  border: 1px solid black;
+}
+
+#rememberMe {
+  width: 20px !important;
+}
+
+#kc-form-login .text-input {
+  width: 260px;
+}
+
+.legal-notices p {
+  margin: 0;
+}
+
+#kc-login {
+  width: auto;
+}
+
+#kc-form-buttons {
+  align-items: center;
+}
+
+#kc-reset-password-form .form-group {
+  align-items: normal;
+}
+
+#username {
+  width: 256px;
+}
+
+#otp {
+  width: 260px;
+}
+
+#password-new,
+#password-confirm {
+  width: 260px;
+}
+
+#reset-login {
   display: flex;
   justify-content: center;
 }

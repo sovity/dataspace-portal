@@ -39,6 +39,7 @@
 
             <!-- Accept Privacy Policy Checkbox -->
             <app-tos-check
+              data-testid="user-onboarding-tos-check"
               *ngIf="state.onboardingType === 'USER_ONBOARDING'"
               [ctrl]="userForm.controls.acceptedTos"></app-tos-check>
           </div>
@@ -47,6 +48,7 @@
             class="border-t border-gray-900/10 pt-6 mt-6 flex items-center justify-end gap-x-6">
             <button
               *ngIf="state.onboardingType === 'USER_ORGANIZATION_ONBOARDING'"
+              data-testid="user-onboarding-next-btn"
               class="btn-accent"
               matStepperNext
               [disabledBtn]="!userForm.valid">
@@ -54,6 +56,7 @@
             </button>
             <button
               *ngIf="state.onboardingType === 'USER_ONBOARDING'"
+              data-testid="user-onboarding-submit-btn"
               class="btn-accent"
               [disabledBtn]="!userForm.valid || state.state === 'submitting'"
               (click)="submit()">
@@ -82,12 +85,13 @@
 
           <div
             class="border-t border-gray-900/10 pt-6 mt-6 mb-24 flex items-center justify-end gap-x-6">
-            <button class="btn-accent-outline" matStepperPrevious type="button">
+            <button class="btn-accent-outline" matStepperPrevious type="button" data-testid="org-onboarding-back-btn">
               Back
             </button>
 
             <button
               class="btn-accent"
+              data-testid="org-onboarding-submit-btn"
               [disabledBtn]="
                 !userForm.valid ||
                 !orgForm.valid ||
@@ -108,12 +112,12 @@
           <h3 class="wizard-end-title text-center">
             Thank you for onboarding on the {{ appConfig.portalName }}!
           </h3>
-          <p class="wizard-end-prose max-w-3xl text-center">
+          <p class="wizard-end-prose max-w-3xl text-center" data-testid="onboarding-success-message">
             Congratulations on successfully onboarding to our platform! We're
             thrilled to have you as part of our community. Explore our platform
             and discover services tailored just for you.
           </p>
-          <button class="btn-accent" routerLink="/">Finish</button>
+          <button class="btn-accent" routerLink="/" data-testid="onboarding-success-finish-btn">Finish</button>
         </div>
       </mat-step>
       <!-- final step -->

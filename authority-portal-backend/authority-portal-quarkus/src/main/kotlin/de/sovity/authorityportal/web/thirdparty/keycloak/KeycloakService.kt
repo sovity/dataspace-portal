@@ -1,14 +1,19 @@
 /*
- * Copyright (c) 2024 sovity GmbH
+ * Data Space Portal
+ * Copyright (C) 2025 sovity GmbH
  *
- * This program and the accompanying materials are made available under the
- * terms of the Apache License, Version 2.0 which is available at
- * https://www.apache.org/licenses/LICENSE-2.0
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * SPDX-License-Identifier: Apache-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- * Contributors:
- *      sovity GmbH - initial implementation
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 package de.sovity.authorityportal.web.thirdparty.keycloak
@@ -250,20 +255,20 @@ class KeycloakService(
     }
 
     /**
-     * Join the user to an application role group.
-     * Can also be used to change the user's role in the authority or application.
+     * Set the application roles of a user.
+     * Can also be used to change the user's roles in the authority or application.
      *
      * @param userId The user's ID
-     * @param role The user's role in the authority
+     * @param roles The user's roles in the authority
      */
-    fun joinApplicationRole(userId: String, role: ApplicationRole) {
+    fun setApplicationRoles(userId: String, roles: List<ApplicationRole>) {
         val user = keycloak.realm(keycloakRealm).users().get(userId)
 
         ApplicationRole.entries.forEach {
             val roleGroupId = keycloak.realm(keycloakRealm).groups()
                 .groups(it.kcGroupName, 0, 1).firstOrNull()!!.id
 
-            if (it == role) {
+            if (roles.contains(it)) {
                 user.joinGroup(roleGroupId)
             } else {
                 user.leaveGroup(roleGroupId)
@@ -271,7 +276,7 @@ class KeycloakService(
         }
     }
 
-    fun clearApplicationRole(userId: String) {
+    fun clearApplicationRoles(userId: String) {
         val user = keycloak.realm(keycloakRealm).users().get(userId)
 
         ApplicationRole.entries.forEach {

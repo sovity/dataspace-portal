@@ -4,6 +4,7 @@
     class="flex-1"
     label="Website"
     ctrlId="formEditWebsite"
+    data-testid="formEditWebsite"
     placeholder="https://www.my-org.com"
     required
     [ctrl]="orgForm.controls.website"></app-text-input>
@@ -15,6 +16,7 @@
     class="flex-1"
     label="Business Unit"
     ctrlId="formEditBusinessUnit"
+    data-testid="formEditBusinessUnit"
     placeholder="My Department"
     required
     [ctrl]="orgForm.controls.businessUnit"></app-text-input>
@@ -33,6 +35,7 @@
     label="Main Adddress"
     placeholder="Example Street 10b, 12345 Frankfurt am Main, Germany"
     ctrlId="formEditMainAddress"
+    data-testid="formEditMainAddress"
     required
     [ctrl]="orgForm.controls.mainAddress"></app-text-area>
 
@@ -59,6 +62,7 @@
     label="Billing Adddress"
     placeholder="Example Street 10b, 12345 Frankfurt am Main, Germany"
     ctrlId="formEditBillingAddress"
+    data-testid="formEditBillingAddress"
     required
     [ctrl]="orgForm.controls.billingAddress"></app-text-area>
 </div>
@@ -69,6 +73,7 @@
     class="flex-1"
     label="Organization Description"
     ctrlId="formEditOrganizationDescription"
+    data-testid="formEditOrganizationDescription"
     placeholder="What does Your organization do?"
     required
     [ctrl]="orgForm.controls.description"></app-text-area>
@@ -91,6 +96,7 @@
     class="flex-1"
     label="Main Full Name"
     ctrlId="formEditMainName"
+    data-testid="formEditMainName"
     placeholder="John Doe"
     required
     [ctrl]="orgForm.controls.mainContactName"></app-text-input>
@@ -101,6 +107,7 @@
       class="flex-1"
       label="Phone Number"
       ctrlId="formEditMainPhoneNumber"
+      data-testid="formEditMainPhoneNumber"
       placeholder="+49 1234 567890"
       required
       [ctrl]="orgForm.controls.mainContactPhoneNumber"></app-text-input>
@@ -110,6 +117,7 @@
       class="flex-1"
       label="Email"
       ctrlId="formEditMainEmail"
+      data-testid="formEditMainEmail"
       placeholder="john.doe@my-org.com"
       required
       [ctrl]="orgForm.controls.mainContactEmail"></app-text-input>
@@ -140,6 +148,7 @@
       class="flex-1"
       label="Technical Full Name"
       ctrlId="formEditTechnicalName"
+      data-testid="formEditTechnicalName"
       placeholder="John Doe"
       required
       [ctrl]="orgForm.controls.technicalContactName"></app-text-input>
@@ -150,6 +159,7 @@
         class="flex-1"
         label="Phone Number"
         ctrlId="formEditTechnicalPhoneNumber"
+        data-testid="formEditTechnicalPhoneNumber"
         placeholder="+49 1234 567890"
         required
         [ctrl]="orgForm.controls.technicalContactPhoneNumber"></app-text-input>
@@ -159,6 +169,7 @@
         class="flex-1"
         label="Email"
         ctrlId="formEditTechnicalEmail"
+        data-testid="formEditTechnicalEmail"
         placeholder="john.doe@my-org.com"
         required
         [ctrl]="orgForm.controls.technicalContactEmail"></app-text-input>

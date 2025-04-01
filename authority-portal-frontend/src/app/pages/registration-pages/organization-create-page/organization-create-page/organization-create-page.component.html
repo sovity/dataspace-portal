@@ -27,12 +27,13 @@
             [userForm]="userForm"></app-user-create-form>
           <div
             class="border-t border-gray-900/10 pt-6 mt-6 flex items-center justify-end gap-x-6">
-            <button class="btn-accent-outline" type="button" routerLink="/">
+            <button class="btn-accent-outline" type="button" routerLink="/" data-testid="register-org-user-details-cancel-btn">
               Cancel
             </button>
 
             <button
               class="btn-accent"
+              data-testid="register-org-user-details-next-btn"
               matStepperNext
               [disabledBtn]="!userForm.valid">
               Next
@@ -59,11 +60,12 @@
 
           <div
             class="border-t border-gray-900/10 pt-6 mt-6 mb-24 flex items-center justify-end gap-x-6">
-            <button class="btn-accent-outline" type="button" routerLink="/">
+            <button class="btn-accent-outline" type="button" routerLink="/" data-testId="register-org-page-cancel-btn">
               Cancel
             </button>
 
             <button
+              data-testId="register-org-page-register-btn"
               class="btn-accent"
               [disabledBtn]="!userForm.valid || !orgForm.valid || loading"
               (click)="submit()">
@@ -84,7 +86,7 @@
             You will need to verify your email to complete registration. An
             email has been sent to {{ state.email }} with a verification link.
           </p>
-          <button class="btn-accent" (click)="finish()">Finish</button>
+          <button class="btn-accent" (click)="finish()" data-testid="register-org-page-finish-btn">Finish</button>
         </div>
       </mat-step>
       <!-- final step -->

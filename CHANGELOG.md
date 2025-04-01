@@ -13,13 +13,7 @@ please see [changelog_updates.md](docs/dev/changelog_updates.md).
 
 #### Minor
 
-- Added deleting of organizations for Authority Admins ([PR #404](https://github.com/sovity/authority-portal/pull/404))
-- Added editing of organizations for Authority Admins ([PR #413](https://github.com/sovity/authority-portal/pull/413))
-
 #### Patch
-
-- Fixed Keycloak dev realm for local E2E development ([PR #405](https://github.com/sovity/authority-portal/pull/405))
-- Fixed Operator Admins being unable to delete connectors ([PR #408](https://github.com/sovity/authority-portal/pull/408))
 
 ### Known issues
 
@@ -29,10 +23,48 @@ _No special migration steps required_
 
 #### Compatible Versions
 
-- Authority Portal Backend Docker Image: `ghcr.io/sovity/authority-portal-backend:{{ version }}`
-- Authority Portal Frontend Docker Image: `ghcr.io/sovity/authority-portal-frontend:{{ version }}`
-- Catalog Crawler CE: `ghcr.io/sovity/authority-portal-crawler:{{ version }}`
+- Authority Portal Backend Docker Image: `ghcr.io/sovity/ds-portal-backend:{{ version }}`
+- Authority Portal Frontend Docker Image: `ghcr.io/sovity/ds-portal-frontend:{{ version }}`
+- Catalog Crawler CE: `ghcr.io/sovity/ds-portal-crawler:{{ version }}`
 - Sovity EDC CE: {{ CE Release Link }}
+
+## [v6.0.0] - 2025-04-01
+
+### Overview
+
+This update changes the license of the Data Space Portal to the AGPL-3.0 license.
+
+#### License
+
+Starting with version 6.0.0, the Data Space Portal is licensed under the GNU Affer General Public License v3.0 (AGPL-3.0).
+All contributions to the Data Space Portal will also be licensed under the same, aforementioned license.
+
+#### Contributor License Agreement
+
+When first contributing to the Data Space Portal, you will be asked to sign a Contributor License Agreement (CLA), which explains the details as to how your contribution will be licensed.
+
+### Detailed Changes
+
+#### Minor
+
+- Added deleting of organizations for Authority Admins ([PR #404](https://github.com/sovity/authority-portal/pull/404))
+- Added editing of organizations for Authority Admins ([PR #413](https://github.com/sovity/authority-portal/pull/413))
+
+#### Patch
+
+- Fixed Keycloak dev realm for local E2E development ([PR #405](https://github.com/sovity/authority-portal/pull/405))
+- Fixed Operator Admins being unable to delete connectors ([PR #408](https://github.com/sovity/authority-portal/pull/408))
+
+### Deployment Migration Notes
+
+- The image names have been changed from `authority-portal-*` to `ds-portal-*`. Please remember to use the correct images when trying to deploy this version.
+
+#### Compatible Versions
+
+- Authority Portal Backend Docker Image: `ghcr.io/sovity/ds-portal-backend:6.0.0`
+- Authority Portal Frontend Docker Image: `ghcr.io/sovity/ds-portal-frontend:6.0.0`
+- Catalog Crawler CE: `ghcr.io/sovity/ds-portal-crawler:6.0.0`
+- Sovity EDC CE: [`v10.5.1`](https://github.com/sovity/edc-ce/releases/tag/v10.5.1)
 
 ## [v5.0.0] - 2024-12-17
 
@@ -62,27 +94,27 @@ This release introduces some quality of life changes and moves the catalog crawl
 
 - The Crawler image name and version changed due to the crawler being moved into the AP repository and versions being aligned
 
-  - Previously: `ghcr.io/sovity/catalog-crawler-ce`
-  - Now: `ghcr.io/sovity/authority-portal-crawler`
+    - Previously: `ghcr.io/sovity/catalog-crawler-ce`
+    - Now: `ghcr.io/sovity/authority-portal-crawler`
 
 - Portal Backend
-  - Following variables are now optional and can be removed from the configuration if not used:
-    - `authority-portal.kuma.metrics-url`
-    - `authority-portal.kuma.api-key`
-    - `authority-portal.deployment.environments.test.data-catalog.kuma-name`
-    - `authority-portal.deployment.environments.test.daps.kuma-name`
-    - `authority-portal.deployment.environments.test.logging-house.kuma-name`
+    - Following variables are now optional and can be removed from the configuration if not used:
+        - `authority-portal.kuma.metrics-url`
+        - `authority-portal.kuma.api-key`
+        - `authority-portal.deployment.environments.test.data-catalog.kuma-name`
+        - `authority-portal.deployment.environments.test.daps.kuma-name`
+        - `authority-portal.deployment.environments.test.logging-house.kuma-name`
 - Portal Frontend
-  - New mandatory variables:
-    ```yaml
-    # Enables or disables the status uptime dashboard
-    AUTHORITY_PORTAL_FRONTEND_ENABLE_DASHBOARD: true
-    # Direct URL to the UPDATE_PASSWORD required action in Keycloak
-    AUTHORITY_PORTAL_FRONTEND_UPDATE_PASSWORD_URL: https://[KC_FQDN]/realms/authority-portal/protocol/openid-connect/auth?response_type=code&client_id=oauth2-proxy&scope=openid&kc_action=UPDATE_PASSWORD&redirect_uri=[AP_FQDN_URL_ENCODED]%2Foauth2%2Fcallback
-    ```
-  - Removed variables:
-    - `AUTHORITY_PORTAL_FRONTEND_IFRAME_URL`
-  - The MDS theme is no longer available, so configurations using `mds-open-source` will revert to the default sovity theme
+    - New mandatory variables:
+      ```yaml
+      # Enables or disables the status uptime dashboard
+      AUTHORITY_PORTAL_FRONTEND_ENABLE_DASHBOARD: true
+      # Direct URL to the UPDATE_PASSWORD required action in Keycloak
+      AUTHORITY_PORTAL_FRONTEND_UPDATE_PASSWORD_URL: https://[KC_FQDN]/realms/authority-portal/protocol/openid-connect/auth?response_type=code&client_id=oauth2-proxy&scope=openid&kc_action=UPDATE_PASSWORD&redirect_uri=[AP_FQDN_URL_ENCODED]%2Foauth2%2Fcallback
+      ```
+    - Removed variables:
+        - `AUTHORITY_PORTAL_FRONTEND_IFRAME_URL`
+    - The MDS theme is no longer available, so configurations using `mds-open-source` will revert to the default sovity theme
 
 #### Compatible Versions
 
@@ -187,8 +219,8 @@ Quality of Life improvements
 
 - Adjusted the table header on the Organization overview page ([#286](https://github.com/sovity/authority-portal/issues/286))
 - Adjusted data source availability naming in the CSV report ([#283](https://github.com/sovity/authority-portal/issues/283))
-  - `LIVE` -> `Available`
-  - `ON_REQUEST` -> `On Request`
+    - `LIVE` -> `Available`
+    - `ON_REQUEST` -> `On Request`
 - Changed the error message on user/organization invite failures to be more descriptive ([#290](https://github.com/sovity/authority-portal/issues/290))
 - Fixed UI issues after deleting the last user of an organization ([#289](https://github.com/sovity/authority-portal/issues/289))
 
@@ -242,13 +274,13 @@ Check the deployment migration notes to ensure that you configured everything co
 #### Minor
 
 - Catalog
-  - Added copyable contact email and subject fields in the data offer detail dialog
-  - Organization filter is no longer split into ID and name
-  - Connector filter is no longer split into ID and endpoint
-  - Removed dataspace filter when only one dataspace is configured
+    - Added copyable contact email and subject fields in the data offer detail dialog
+    - Organization filter is no longer split into ID and name
+    - Connector filter is no longer split into ID and endpoint
+    - Removed dataspace filter when only one dataspace is configured
 - Service provider
-  - Service providers can now provide connectors using a Connector JWKS URL instead of a certificate ([#272](https://github.com/sovity/authority-portal/pull/272))
-  - The configuration summary after registering a connector now shows the value for `EDC_OAUTH_CLIENT_ID`
+    - Service providers can now provide connectors using a Connector JWKS URL instead of a certificate ([#272](https://github.com/sovity/authority-portal/pull/272))
+    - The configuration summary after registering a connector now shows the value for `EDC_OAUTH_CLIENT_ID`
 - Added a message on the CaaS request page to inform the user in case the feature is not configured
 
 #### Patch
@@ -258,13 +290,13 @@ Check the deployment migration notes to ensure that you configured everything co
 - Fixed Dashboard showing uptimes of over 100% ([#262](https://github.com/sovity/authority-portal/issues/262))
 - Organization list: Data offer and connector counts now show the correct numbers according to the active environment ([#255](https://github.com/sovity/authority-portal/issues/255))
 - Fixed provider organization ID not showing up on CaaS connectors ([#206](https://github.com/sovity/authority-portal/issues/206))
-  - Keep in mind that sovity needs to be registered in the portal for the ID to show up.
-  - Already registered connectors will be updated automatically, this process can take up to 24 hours
+    - Keep in mind that sovity needs to be registered in the portal for the ID to show up.
+    - Already registered connectors will be updated automatically, this process can take up to 24 hours
 - Fixed the close button on the self-hosted/CaaS connector choice page ([#258](https://github.com/sovity/authority-portal/issues/258))
 - Adjusted connector status naming for more consistency ([#270](https://github.com/sovity/authority-portal/issues/270))
-  - `RUNNING (CaaS) -> ONLINE`
-  - `STOPPED (CaaS) -> OFFLINE`
-  - `DEAD -> OFFLINE`
+    - `RUNNING (CaaS) -> ONLINE`
+    - `STOPPED (CaaS) -> OFFLINE`
+    - `DEAD -> OFFLINE`
 - Breadcrumbs now show "Catalogue" properly when using the MDS theme
 - Removed requirement for an environment with ID `test`
 
@@ -278,16 +310,16 @@ If you configure the optional variables incorrectly, you might end up with an in
 Environment variable changes:
 
 - Renamed variables:
-  - `authority-portal.caas.sovity.limit-per-mdsid` to `authority-portal.caas.sovity.limit-per-organization`
+    - `authority-portal.caas.sovity.limit-per-mdsid` to `authority-portal.caas.sovity.limit-per-organization`
 - New optional configuration variables - the values assigned here are the ones you should use to retain the current behavior:
-  - ```yaml
+    - ```yaml
     # Organization ID configuration (example: prefix: MDS & length: 4 would generate Ids in the format MDSL1234XX)
     # The 'L' stands for 'Legal' and is added automatically after the prefix - the last 2 characters are the checksum
     authority-portal.organization.id.prefix: "MDS"
     authority-portal.organization.id.length: "4"
     ```
 - New **mandatory** configuration variables:
-  - ```yaml
+    - ```yaml
     # Enables the client to connect to the CaaS service. If you weren't provided credentials for the feature by sovity, set this to false
     quarkus.oidc-client.sovity.client-enabled: true
     ```
@@ -297,7 +329,7 @@ Environment variable changes:
 Environment variable changes:
 
 - New **mandantory** configuration variables - the values assigned here are the ones you should use to retain the current behavior:
-  - ```yaml
+    - ```yaml
     # UI Branding profile
     AUTHORITY_PORTAL_FRONTEND_ACTIVE_PROFILE: mds-open-source
     # Short Dataspace name, used in some explanatory texts
@@ -371,12 +403,12 @@ MDS 2.2 intermediate release
 
 - All brokers can be undeployed including their databases.
 - Keycloak
-  - Keycloak IAM must be updated to version `24.0.4`. Follow the [Keycloak upgrade guide](https://www.keycloak.org/docs/24.0.5/upgrading/index.html) for more information.
+    - Keycloak IAM must be updated to version `24.0.4`. Follow the [Keycloak upgrade guide](https://www.keycloak.org/docs/24.0.5/upgrading/index.html) for more information.
 - Portal Backend
 
-  - Following environment variables have been added and **must be configured** for each environment
+    - Following environment variables have been added and **must be configured** for each environment
 
-    - ```yaml
+        - ```yaml
       # Time after which offline data offers are hidden from the Data Catalog
       authority-portal.deployment.environments.{environmentId}.data-catalog.hide-offline-data-offers-after: 15m
 
@@ -394,8 +426,8 @@ MDS 2.2 intermediate release
       authority-portal.deployment.environments.test.data-catalog.dataspace-names.connectorIds."MDSL1234XX.C1234XX": Mobilithek
       ```
 
-  - Following environment variables have been removed and **can be removed from the configuration**
-    - ```yaml
+    - Following environment variables have been removed and **can be removed from the configuration**
+        - ```yaml
       # the broker has been removed, as the catalog is now a part of the authority portal
       authority-portal.deployment.environments.{environmentId}.broker.url: ...
       authority-portal.deployment.environments.{environmentId}.broker.admin-api-key: ...
@@ -404,12 +436,12 @@ MDS 2.2 intermediate release
       ```
 
 - The Broker as a stand-alone deployment unit has been removed in favor of the Catalog Crawler.
-  - Any broker's database is not required anymore and can be undeployed.
-  - A Catalog Crawler must be deployed for each environment to fill the catalog with live data.
-  - Just like the broker, the Catalog Crawler is a modified EDC connector. As such, it can only fetch the catalogs from connectors registered in the same DAPS environment.
-  - There is a dedicated [Catalog Crawler Productive Deployment Guide](https://github.com/sovity/edc-ce/blob/v10.0.0/docs/deployment-guide/goals/catalog-crawler-production/README.md)
-  - Running Uptime Kuma instances must be reconfigured to track the status of the catalog crawler instead of the Broker.
-  - While the Catalog Crawler is similar to the broker, please note, that many environment variables have been renamed or removed. It is recommended to do a fresh deployment using the deployment guide.
+    - Any broker's database is not required anymore and can be undeployed.
+    - A Catalog Crawler must be deployed for each environment to fill the catalog with live data.
+    - Just like the broker, the Catalog Crawler is a modified EDC connector. As such, it can only fetch the catalogs from connectors registered in the same DAPS environment.
+    - There is a dedicated [Catalog Crawler Productive Deployment Guide](https://github.com/sovity/edc-ce/blob/v10.0.0/docs/deployment-guide/goals/catalog-crawler-production/README.md)
+    - Running Uptime Kuma instances must be reconfigured to track the status of the catalog crawler instead of the Broker.
+    - While the Catalog Crawler is similar to the broker, please note, that many environment variables have been renamed or removed. It is recommended to do a fresh deployment using the deployment guide.
 
 #### Compatible Versions
 
@@ -461,17 +493,17 @@ This release includes fixes for several minor issues and security vulnerabilitie
 ### Deployment Migration Notes
 
 - Added environment variables
-  - Portal Frontend
-    ```yaml
-    # Support page URL
-    AUTHORITY_PORTAL_FRONTEND_SUPPORT_URL: https://support.mobility-dataspace.eu
-    ```
-  - Keycloak
-    ```yaml
-    # Privacy policy and legal notice URLs
-    KEYCLOAK_PRIVACY_POLICY_URL: https://mobility-dataspace.online/privacy-policy-mds-portal
-    KEYCLOAK_LEGAL_NOTICE_URL: https://mobility-dataspace.eu/legal-notice
-    ```
+    - Portal Frontend
+      ```yaml
+      # Support page URL
+      AUTHORITY_PORTAL_FRONTEND_SUPPORT_URL: https://support.mobility-dataspace.eu
+      ```
+    - Keycloak
+      ```yaml
+      # Privacy policy and legal notice URLs
+      KEYCLOAK_PRIVACY_POLICY_URL: https://mobility-dataspace.online/privacy-policy-mds-portal
+      KEYCLOAK_LEGAL_NOTICE_URL: https://mobility-dataspace.eu/legal-notice
+      ```
 
 #### Compatible Versions
 
@@ -503,12 +535,12 @@ This release addresses several security issues and adds minor improvements to th
 ### Deployment Migration Notes
 
 - Keycloak
-  - Change SSL settings
-    - Realm settings > General > Require SSL: `All requests`
+    - Change SSL settings
+        - Realm settings > General > Require SSL: `All requests`
 - Caddy
 
-  - Headers to improve security are now set
-  - Modified Caddyfile:
+    - Headers to improve security are now set
+    - Modified Caddyfile:
 
   ```
   # UI Requests: Internet -> Caddy 8080 -> Frontend
@@ -573,8 +605,8 @@ This release addresses several issues and adds minor improvements to the Authori
 
 - Enable users to delete themselves ([#127](https://github.com/sovity/authority-portal/issues/127))
 - Added an API endpoint to set the backend log level during runtime: `https://[AP_FQDN]/api/config/log-level?level=[LOG_LEVEL]` ([#2](https://github.com/sovity/authority-portal/issues/2))
-  - `x-api-key` header must be set correctly to access this endpoint
-  - Example:
+    - `x-api-key` header must be set correctly to access this endpoint
+    - Example:
   ```bash
   curl -X PUT 'https://authority-portal.example.com/api/config/log-level?level=DEBUG' --header 'x-api-key: uYtR_wNsvXU4EbV9GioACnj!NHML_HRX'
   ```
@@ -597,20 +629,20 @@ This release addresses several issues and adds minor improvements to the Authori
 ### Deployment Migration Notes
 
 - Portal Backend
-  - Environment variables
+    - Environment variables
   ```yaml
   # Added
   # API key to protect config endpoints, like /api/config/log-level
   authority-portal.config.api-key: [API_KEY]
   ```
 - Auth Proxy
-  - Environment variables
+    - Environment variables
   ```yaml
   # Changed
   OAUTH2_PROXY_SKIP_AUTH_ROUTES: "^(/oauth2|/api/registration|/api/config)"
   ```
 - Keycloak
-  - Replace [MDS theme](authority-portal-keycloak/mds-theme) with the new version
+    - Replace [MDS theme](authority-portal-keycloak/mds-theme) with the new version
 
 #### Compatible Versions
 
@@ -656,38 +688,38 @@ This release addresses several issues and adds minor improvements to the Authori
 ### Deployment Migration Notes
 
 - Keycloak
-  - Change realm ID and name
-    - Realm settings > General > Realm ID: `mds-portal`
-    - Realm settings > General > Display name: `MDS Portal`
-  - Change the configuration for the oauth2-proxy client
-    - Clients > oauth2-proxy > Settings > Home URL: `/oauth2/sign_in`
-  - Set Access Token Lifespan to 1 minute (Realm Settings -> Tokens -> Access Token Lifespan)
-  - Replace [MDS theme](authority-portal-keycloak/mds-theme) with the new version
+    - Change realm ID and name
+        - Realm settings > General > Realm ID: `mds-portal`
+        - Realm settings > General > Display name: `MDS Portal`
+    - Change the configuration for the oauth2-proxy client
+        - Clients > oauth2-proxy > Settings > Home URL: `/oauth2/sign_in`
+    - Set Access Token Lifespan to 1 minute (Realm Settings -> Tokens -> Access Token Lifespan)
+    - Replace [MDS theme](authority-portal-keycloak/mds-theme) with the new version
 - Auth Proxy
-  - Copy the contents from [resources](authority-portal-oauth2-proxy/resources) to a directory the OAuth2 proxy can access (`CUSTOM_TEMPLATES_DIR`)
-  - Environment variables
-    ```yaml
-    # Changed
-    OAUTH2_PROXY_OIDC_ISSUER_URL: https://[KC_FQDN]/realms/mds-portal
-    OAUTH2_PROXY_COOKIE_REFRESH: 30s
-    OAUTH2_PROXY_CUSTOM_TEMPLATES_DIR: [CUSTOM_TEMPLATES_DIR]
-    ```
+    - Copy the contents from [resources](authority-portal-oauth2-proxy/resources) to a directory the OAuth2 proxy can access (`CUSTOM_TEMPLATES_DIR`)
+    - Environment variables
+      ```yaml
+      # Changed
+      OAUTH2_PROXY_OIDC_ISSUER_URL: https://[KC_FQDN]/realms/mds-portal
+      OAUTH2_PROXY_COOKIE_REFRESH: 30s
+      OAUTH2_PROXY_CUSTOM_TEMPLATES_DIR: [CUSTOM_TEMPLATES_DIR]
+      ```
 - Portal Backend
-  - Environment variables
-    ```yaml
-    # Changed
-    # Base URL of the OIDC server (Keycloak). Must contain the '/realms/{realm}' part of the URL
-    quarkus.oidc.auth-server-url: https://[KC_FQDN]/realms/mds-portal
-    # Keycloak Admin Client: Realm
-    quarkus.keycloak.admin-client.realm: mds-portal
-    ```
+    - Environment variables
+      ```yaml
+      # Changed
+      # Base URL of the OIDC server (Keycloak). Must contain the '/realms/{realm}' part of the URL
+      quarkus.oidc.auth-server-url: https://[KC_FQDN]/realms/mds-portal
+      # Keycloak Admin Client: Realm
+      quarkus.keycloak.admin-client.realm: mds-portal
+      ```
 - Portal Frontend
-  - Environment variables
-    ```yaml
-    # Changed
-    # Auth Proxy: Logout URL (please replace ALL placeholders: [EXAMPLE])
-    AUTHORITY_PORTAL_FRONTEND_LOGOUT_URL: https://[AP_FQDN]/oauth2/sign_out?rd=https%3A%2F%2F[KC_FQDN]%2Frealms%2Fmds-portal%2Fprotocol%2Fopenid-connect%2Flogout%3Fclient_id%3Doauth2-proxy%26post_logout_redirect_uri%3Dhttps%253A%252F%252F[AP_FQDN]
-    ```
+    - Environment variables
+      ```yaml
+      # Changed
+      # Auth Proxy: Logout URL (please replace ALL placeholders: [EXAMPLE])
+      AUTHORITY_PORTAL_FRONTEND_LOGOUT_URL: https://[AP_FQDN]/oauth2/sign_out?rd=https%3A%2F%2F[KC_FQDN]%2Frealms%2Fmds-portal%2Fprotocol%2Fopenid-connect%2Flogout%3Fclient_id%3Doauth2-proxy%26post_logout_redirect_uri%3Dhttps%253A%252F%252F[AP_FQDN]
+      ```
 
 #### Compatible Versions
 
@@ -732,17 +764,17 @@ First bugfix release for version 2.1.0.
 - Removed "Control Center" from breadcrumb path to improve UX ([#54](https://github.com/sovity/authority-portal/issues/54))
 - Restricted user re-/deactivation to appropriate statuses ([#82](https://github.com/sovity/authority-portal/issues/82))
 - Cleaned up the repository for open-source release:
-  - Removed internal tools and utilities
-  - Rebased the entire history to remove secrets and unrelated code
-  - Cleaned up dead links
-  - Adjusted the release issue template
+    - Removed internal tools and utilities
+    - Rebased the entire history to remove secrets and unrelated code
+    - Cleaned up dead links
+    - Adjusted the release issue template
 
 ### Known issues
 
 ### Deployment Migration Notes
 
 - Keycloak
-  - Replace [MDS theme](authority-portal-keycloak/mds-theme) with the new version
+    - Replace [MDS theme](authority-portal-keycloak/mds-theme) with the new version
 
 #### Compatible Versions
 
@@ -791,12 +823,12 @@ Final feature release for the first Go-Live of the MDS.
 ### Deployment Migration Notes
 
 - Portal Frontend
-  - Environment Variables
-    ```yaml
-    # Added
-    # Authority Portal Legal Notice URL
-    AUTHORITY_PORTAL_FRONTEND_LEGAL_NOTICE_URL: https://mobility-dataspace.eu/legal-notice
-    ```
+    - Environment Variables
+      ```yaml
+      # Added
+      # Authority Portal Legal Notice URL
+      AUTHORITY_PORTAL_FRONTEND_LEGAL_NOTICE_URL: https://mobility-dataspace.eu/legal-notice
+      ```
 
 #### Compatible Versions
 
@@ -815,12 +847,12 @@ Major release, containing a UI rework and several new features.
 #### Major
 
 - Redesigned the entire Portal UI
-  - Redesigned connector overview pages
-  - Added detail panes for connectors, organizations & users
-  - Redesigned registration and onboarding processes for organizations & users
-  - Added a new "unauthenticated page", registration now happens in the Authority Portal without Keycloak.
-  - Redesigned authority participant management Section
-  - Redesigned the landing page to display information provided by MDS
+    - Redesigned connector overview pages
+    - Added detail panes for connectors, organizations & users
+    - Redesigned registration and onboarding processes for organizations & users
+    - Added a new "unauthenticated page", registration now happens in the Authority Portal without Keycloak.
+    - Redesigned authority participant management Section
+    - Redesigned the landing page to display information provided by MDS
 - Added a feature to request a Connector-as-a-Service from the sovity portal
 - Upgraded Keycloak to version 23.0.4
 
@@ -830,18 +862,18 @@ Major release, containing a UI rework and several new features.
 - Organization admins can now edit their organization's information
 - Updated processes to be compatible with the new Broker API
 - Changed the connector registration flow
-  - Registration now fails when attempting to use a certificate that is already in use
-  - Registration no longer fails when an error occurs while registering it to the Broker
-  - Connectors now regularly try to re-register to Broker if previous attempts failed
-  - Connector URLs can now be configured independently
+    - Registration now fails when attempting to use a certificate that is already in use
+    - Registration no longer fails when an error occurs while registering it to the Broker
+    - Connectors now regularly try to re-register to Broker if previous attempts failed
+    - Connector URLs can now be configured independently
 - Updated the organization member list to display more details
 - Connector status is now displayed in real-time
 - Added the ability for organization & authority admins to delete users
 - Added a link to own organization's data offers in the sidebar
 - Renamed participant roles:
-  - Participant Admin -> Admin
-  - Participant Curator -> Key User
-  - Participant User -> User
+    - Participant Admin -> Admin
+    - Participant Curator -> Key User
+    - Participant User -> User
 - Operator admins can now access an overview of all connectors and have the ability to delete them
 - Privacy policy link is now displayed on all pages and required to be accepted during registration flows
 - Updated catalog link to redirect to the correct broker url based on environment
@@ -859,98 +891,98 @@ Major release, containing a UI rework and several new features.
 
 - Keycloak
 
-  - Replace [MDS theme](authority-portal-keycloak/mds-theme) with the new version
-  - Keycloak IAM needs to be upgraded to version 23.0.4
+    - Replace [MDS theme](authority-portal-keycloak/mds-theme) with the new version
+    - Keycloak IAM needs to be upgraded to version 23.0.4
 
 - Portal Backend
 
-  - Added environment variables
+    - Added environment variables
 
-    ```yaml
-    # CaaS Portal API Client Auth
-    # will be provided by sovity
-    quarkus.oidc-client.sovity.auth-server-url: https://[CAAS_KC_FQDN]/realms/[REALM]
-    quarkus.oidc-client.sovity.client-id: [CAAS_CLIENT_ID]
-    quarkus.oidc-client.sovity.credentials.secret: [CAAS_CLIENT_SECRET]
-    # CaaS Portal URL
-    authority-portal.caas.sovity.url: https://[CAAS_PORTAL_FQDN]
+      ```yaml
+      # CaaS Portal API Client Auth
+      # will be provided by sovity
+      quarkus.oidc-client.sovity.auth-server-url: https://[CAAS_KC_FQDN]/realms/[REALM]
+      quarkus.oidc-client.sovity.client-id: [CAAS_CLIENT_ID]
+      quarkus.oidc-client.sovity.credentials.secret: [CAAS_CLIENT_SECRET]
+      # CaaS Portal URL
+      authority-portal.caas.sovity.url: https://[CAAS_PORTAL_FQDN]
+  
+      # CaaS Limit: Amount of free sovity CaaS per participant
+      authority-portal.caas.sovity.limit-per-mdsid: 1
+  
+      # Uptime Kuma Configuration
+      authority-portal.kuma.metrics-url: https://[UPTIME_KUMA_FQDN]
+      authority-portal.kuma.api-key: [UPTIME_KUMA_API_KEY]
+      # Description of a component in Uptime Kuma (ENVIRONMENT: test, prod, etc.; COMPONENT: broker, daps, logging-house)
+      authority-portal.deployment.environments.{ENVIRONMENT}.{COMPONENT}.kuma-name:
+        [KUMA_NAME]
+  
+      # Logging House URL (ENVIRONMENT: test, prod, etc.)
+      authority-portal.deployment.environments.{ENVIRONMENT}.logging-house.url: https://[LOGGING_HOUSE_FQDN]
+      ```
 
-    # CaaS Limit: Amount of free sovity CaaS per participant
-    authority-portal.caas.sovity.limit-per-mdsid: 1
-
-    # Uptime Kuma Configuration
-    authority-portal.kuma.metrics-url: https://[UPTIME_KUMA_FQDN]
-    authority-portal.kuma.api-key: [UPTIME_KUMA_API_KEY]
-    # Description of a component in Uptime Kuma (ENVIRONMENT: test, prod, etc.; COMPONENT: broker, daps, logging-house)
-    authority-portal.deployment.environments.{ENVIRONMENT}.{COMPONENT}.kuma-name:
-      [KUMA_NAME]
-
-    # Logging House URL (ENVIRONMENT: test, prod, etc.)
-    authority-portal.deployment.environments.{ENVIRONMENT}.logging-house.url: https://[LOGGING_HOUSE_FQDN]
-    ```
-
-  - Removed environment variables
-    - ~~`authority-portal.connectors.url.frontend`~~
-    - ~~`authority-portal.connectors.url.management`~~
-    - ~~`authority-portal.connectors.url.endpoint`~~
+    - Removed environment variables
+        - ~~`authority-portal.connectors.url.frontend`~~
+        - ~~`authority-portal.connectors.url.management`~~
+        - ~~`authority-portal.connectors.url.endpoint`~~
 
 - Portal Frontend
-  - Added environment variables
-    ```yaml
-    # Auth Proxy: Login URL (with redirect to the Authority Portal)
-    AUTHORITY_PORTAL_FRONTEND_LOGIN_URL: https://[AP_FQDN]/oauth2/start?rd=https%3A%2F%2F[AP_FQDN]
-    # MDS Dashboard iFrame URL
-    AUTHORITY_PORTAL_FRONTEND_IFRAME_URL: https://mobility-dataspa-5n9px2qi7r.live-website.com/mds-news
-    # MDS Privacy Policy URL
-    AUTHORITY_PORTAL_FRONTEND_PRIVACY_POLICY_URL: https://mobility-dataspace.online/privacy-policy-mds-portal
-    ```
+    - Added environment variables
+      ```yaml
+      # Auth Proxy: Login URL (with redirect to the Authority Portal)
+      AUTHORITY_PORTAL_FRONTEND_LOGIN_URL: https://[AP_FQDN]/oauth2/start?rd=https%3A%2F%2F[AP_FQDN]
+      # MDS Dashboard iFrame URL
+      AUTHORITY_PORTAL_FRONTEND_IFRAME_URL: https://mobility-dataspa-5n9px2qi7r.live-website.com/mds-news
+      # MDS Privacy Policy URL
+      AUTHORITY_PORTAL_FRONTEND_PRIVACY_POLICY_URL: https://mobility-dataspace.online/privacy-policy-mds-portal
+      ```
 - Connectors now have configurable URLs for the Frontend, Endpoint and Management API. Please check existing connectors for their correct URLs. If needed, remove affected connectors and re-register them with a correct URL configuration.
 
 - The infrastructure was changed in a way that the Portal Frontend is now publicly reachable to enable participant self-registration.
-  - UI Requests: Internet -> Caddy 8080 -> Frontend
-  - Backend Requests: Internet -> Caddy 8080 -> Auth Proxy -> Caddy 8081 -> Backend
+    - UI Requests: Internet -> Caddy 8080 -> Frontend
+    - Backend Requests: Internet -> Caddy 8080 -> Auth Proxy -> Caddy 8081 -> Backend
 - Caddy
 
-  - The Caddy configuration needs to be updated, as it now serves as the **main entry point for the Authority Portal**.
-  - Added environment variable `OAUTH_PROXY_UPSTREAM_HOST: [Auth Proxy service]`
-  - Modified Caddyfile
+    - The Caddy configuration needs to be updated, as it now serves as the **main entry point for the Authority Portal**.
+    - Added environment variable `OAUTH_PROXY_UPSTREAM_HOST: [Auth Proxy service]`
+    - Modified Caddyfile
 
-    - Configuration for `:8080`
+        - Configuration for `:8080`
 
-      ```
-      :8080 {
-        map {path} {target_host} {target_port} {
-          ~^/api/.*      {$AUTH_PROXY_UPSTREAM_HOST}   8080
-          ~^/oauth2/.*   {$AUTH_PROXY_UPSTREAM_HOST}   8080
-          default        {$FRONTEND_UPSTREAM_HOST}     8080
-        }
-
-        reverse_proxy {target_host}:{target_port}
-      }
-      ```
-
-    - Configuration for `:8081`
-      ```
-      :8081 {
-          reverse_proxy {$BACKEND_UPSTREAM_HOST}:8080 {
-              header_up Authorization "Bearer {header.X-Forwarded-Access-Token}"
+          ```
+          :8080 {
+            map {path} {target_host} {target_port} {
+              ~^/api/.*      {$AUTH_PROXY_UPSTREAM_HOST}   8080
+              ~^/oauth2/.*   {$AUTH_PROXY_UPSTREAM_HOST}   8080
+              default        {$FRONTEND_UPSTREAM_HOST}     8080
+            }
+    
+            reverse_proxy {target_host}:{target_port}
           }
-      }
-      ```
-    - The productive deployment guide contains the full file.
+          ```
+
+        - Configuration for `:8081`
+          ```
+          :8081 {
+              reverse_proxy {$BACKEND_UPSTREAM_HOST}:8080 {
+                  header_up Authorization "Bearer {header.X-Forwarded-Access-Token}"
+              }
+          }
+          ```
+        - The productive deployment guide contains the full file.
 
 - Auth Proxy
 
-  - Environment variables
+    - Environment variables
 
-    ```yaml
-    # Added
-    OAUTH2_PROXY_API_ROUTES: "^/api/"
-
-    # Changed
-    OAUTH2_PROXY_UPSTREAMS: http://[Caddy service]:8081/
-    OAUTH2_PROXY_SKIP_AUTH_ROUTES: "^(/oauth2|/api/registration)"
-    ```
+      ```yaml
+      # Added
+      OAUTH2_PROXY_API_ROUTES: "^/api/"
+  
+      # Changed
+      OAUTH2_PROXY_UPSTREAMS: http://[Caddy service]:8081/
+      OAUTH2_PROXY_SKIP_AUTH_ROUTES: "^(/oauth2|/api/registration)"
+      ```
 
 #### Compatible Versions
 
@@ -989,8 +1021,8 @@ Bug- and styling fixes. Also fixes the user documentation.
 ### Deployment Migration Notes
 
 - Keycloak IAM
-  - Set OTP reset policy to "Remove all" (Authentication -> Flows -> reset credentials -> Reset OTP -> Gear Icon)
-  - To temporarily disable self-registration of participants go to: Realm Settings -> Login -> User Registration (deactivate switch)
+    - Set OTP reset policy to "Remove all" (Authentication -> Flows -> reset credentials -> Reset OTP -> Gear Icon)
+    - To temporarily disable self-registration of participants go to: Realm Settings -> Login -> User Registration (deactivate switch)
 
 _For further information check out our [Productive Deployment Guide](README.md#productive-deployment-guide)._
 
@@ -1017,8 +1049,8 @@ Added overview of all registered connectors in the Authority Section and fixed s
 - Fixed an issue where rejected users would be shown a blank screen
 - Service partners can now provide connectors again
 - Addressed security issues
-  - Updated dependencies
-  - Upgraded Keycloak to version 22.0.2
+    - Updated dependencies
+    - Upgraded Keycloak to version 22.0.2
 
 **Other**
 
@@ -1100,14 +1132,14 @@ Added central component management, fixed multiple bugs and pushing organization
 ### Deployment Migration Notes
 
 - Portal Backend
-  - Added an environment variable `authority-portal.invitation.expiration: 43200`
-  - Added an environment variable `authority-portal.base-url: https://authority-portal.my-org.com`
-  - The `authority-portal-client` in Keycloak needs to be updated with new configuration
-    - Root URL: same as the environment variable `authority-portal.base-url`
-    - Home URL: same as the root URL
+    - Added an environment variable `authority-portal.invitation.expiration: 43200`
+    - Added an environment variable `authority-portal.base-url: https://authority-portal.my-org.com`
+    - The `authority-portal-client` in Keycloak needs to be updated with new configuration
+        - Root URL: same as the environment variable `authority-portal.base-url`
+        - Home URL: same as the root URL
 - Keycloak
-  - Replace [MDS theme](authority-portal-keycloak/mds-theme) with new version
-  - Select new email template (Realm Settings -> Themes -> Email theme)
+    - Replace [MDS theme](authority-portal-keycloak/mds-theme) with new version
+    - Select new email template (Realm Settings -> Themes -> Email theme)
 
 _For further information check out our [Productive Deployment Guide](README.md#productive-deployment-guide)._
 
@@ -1143,9 +1175,9 @@ Patch release, regarding bugfixes and styling issues.
 ### Deployment Migration Notes
 
 - Portal Backend
-  - Add environment variable `authority-portal.connectors.url.frontend: /`
-  - Add environment variable `authority-portal.connectors.url.management: /api/management`
-  - Add environment variable `authority-portal.connectors.url.endpoint: /api/dsp`
+    - Add environment variable `authority-portal.connectors.url.frontend: /`
+    - Add environment variable `authority-portal.connectors.url.management: /api/management`
+    - Add environment variable `authority-portal.connectors.url.endpoint: /api/dsp`
 
 _For further information check out our [Productive Deployment Guide](README.md#productive-deployment-guide)._
 
@@ -1203,15 +1235,15 @@ Reworked initial deployment guide, fixed many bugs and styling issues.
 ### Deployment Migration Notes
 
 - Please check out the reworked [Initial Deployment Guide](README.md#productive-deployment-guide).
-  - Please check if everything is configured as intended.
+    - Please check if everything is configured as intended.
 - Keycloak
-  - Replace [MDS theme](authority-portal-keycloak/mds-theme) with new version
-  - Add "Remember me" settings (Realm settings > Sessions)
-    - SSO Session Idle Remember Me: `7 days`
-    - SSO Session Max Remember Me: `7 days`
+    - Replace [MDS theme](authority-portal-keycloak/mds-theme) with new version
+    - Add "Remember me" settings (Realm settings > Sessions)
+        - SSO Session Idle Remember Me: `7 days`
+        - SSO Session Max Remember Me: `7 days`
 - OAuth2 Proxy
-  - Add environment variable `OAUTH2_PROXY_COOKIE_REFRESH: 4m` (Access Token Lifespan - 1 minute)
-  - Add environment variable `OAUTH2_PROXY_COOKIE_EXPIRE: 30m` (Client Session Idle / SSO Session Idle)
+    - Add environment variable `OAUTH2_PROXY_COOKIE_REFRESH: 4m` (Access Token Lifespan - 1 minute)
+    - Add environment variable `OAUTH2_PROXY_COOKIE_EXPIRE: 30m` (Client Session Idle / SSO Session Idle)
 
 #### Compatible Versions
 
@@ -1255,8 +1287,8 @@ Patch release, adding missing buttons.
 ### Deployment Migration Notes
 
 - Upgrade Authority Portal to this version
-  - Shut down current version
-  - Restart with new images
+    - Shut down current version
+    - Restart with new images
 
 #### Compatible Versions
 
@@ -1293,8 +1325,8 @@ Second Authority Portal MVP Release, providing extended features, mainly to enab
 
 - Upgrade Broker to version 1.2.0
 - Upgrade Authority Portal to this version
-  - Shut down current version
-  - Restart with new images
+    - Shut down current version
+    - Restart with new images
 
 #### Compatible Versions
 
@@ -1316,18 +1348,18 @@ Initial Authority Portal MVP Release with a minimalistic feature set.
 #### Major
 
 - Implemented an Authority Portal MVP
-  - User registration process via Keycloak
-  - Organization registration process
-  - Organization review process
-  - Connector registration for own and other organization(s)
-  - Roles and respective permissions
-    - Authority Admin
-    - Authority User
-    - Participant Admin
-    - Participant Curator
-    - Participant User
-    - Service Partner Admin
-    - Operator Admin (not yet used)
+    - User registration process via Keycloak
+    - Organization registration process
+    - Organization review process
+    - Connector registration for own and other organization(s)
+    - Roles and respective permissions
+        - Authority Admin
+        - Authority User
+        - Participant Admin
+        - Participant Curator
+        - Participant User
+        - Service Partner Admin
+        - Operator Admin (not yet used)
 
 ### Deployment Migration Notes
 

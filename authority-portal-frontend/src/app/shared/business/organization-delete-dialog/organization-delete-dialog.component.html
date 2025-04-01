@@ -14,9 +14,7 @@
     <div *ngIf="!modalData.data.canBeDeleted" class="space-y-1">
       <p>This organization cannot be deleted.</p>
     </div>
-    <div
-      *ngIf="modalData.data.canBeDeleted"
-      class="space-y-1">
+    <div *ngIf="modalData.data.canBeDeleted" class="space-y-1">
       <p>
         You are trying to delete
         <span class="italic">{{ data.organizationName }}</span
@@ -31,16 +29,19 @@
   </div>
 
   <div class="px-4 py-3 flex justify-end gap-2">
-    <button class="btn-outline" type="button" (click)="onDismiss()">
+    <button
+      class="btn-outline"
+      type="button"
+      data-testid="delete-org-dialog-cancel-btn"
+      (click)="onDismiss()">
       Cancel
     </button>
     <button
       class="btn-accent-danger flex items-center gap-1.5"
       type="button"
+      data-testid="delete-org-dialog-confirm-btn"
       [disabledBtn]="
-        isBusy ||
-        !modalData.dataOrUndefined?.canBeDeleted ||
-        !modalData.isReady
+        isBusy || !modalData.dataOrUndefined?.canBeDeleted || !modalData.isReady
       "
       (click)="onConfirmDeleteOrganizationClick()">
       <div

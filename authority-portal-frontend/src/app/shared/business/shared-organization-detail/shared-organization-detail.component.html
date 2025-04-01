@@ -1,21 +1,10 @@
-<!-- Organization ID -->
-<div class="details-row">
-  <div class="details-row-key">
-    <mat-icon class="material-icons-outlined">label</mat-icon>
-    Organization ID
-  </div>
-  <div class="details-row-value">
-    {{ organization.id }}
-  </div>
-</div>
-
 <!-- Legal Name -->
 <div class="details-row">
   <div class="details-row-key">
     <mat-icon class="material-icons-outlined">corporate_fare</mat-icon>
     Legal Name
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="org-details-legalname">
     {{ organization.name }}
   </div>
 </div>
@@ -26,7 +15,7 @@
     <mat-icon class="material-icons-outlined">corporate_fare</mat-icon>
     Business Unit
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="org-details-businessunit">
     {{ organization.businessUnit }}
   </div>
 </div>
@@ -37,7 +26,7 @@
     <mat-icon class="material-icons-outlined">settings</mat-icon>
     Industry
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="org-details-industry">
     {{ organization.industry }}
   </div>
 </div>
@@ -48,7 +37,7 @@
     <mat-icon class="material-icons-outlined">link</mat-icon>
     Website
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="org-details-website">
     <a
       target="_blank"
       rel="noopener noreferrer"
@@ -64,7 +53,7 @@
     <mat-icon class="material-icons-outlined">notes</mat-icon>
     Description
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="org-details-description">
     {{ organization.description }}
   </div>
 </div>
@@ -75,7 +64,7 @@
     <mat-icon class="material-icons-outlined">home</mat-icon>
     Main Address
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="org-details-mainaddress">
     {{ organization.mainAddress }}
   </div>
 </div>
@@ -86,7 +75,7 @@
     <mat-icon class="material-icons-outlined">home</mat-icon>
     Billing Address
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="org-details-billingaddress">
     {{ organization.billingAddress }}
   </div>
 </div>
@@ -97,7 +86,7 @@
     <mat-icon class="material-icons-outlined">gavel</mat-icon>
     Tax ID
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="org-details-taxid">
     {{ organization.legalId }}
   </div>
 </div>
@@ -110,7 +99,7 @@
     <mat-icon class="material-icons-outlined">account_balance</mat-icon>
     Commerce Register Number
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="org-details-commerceregisterinfo">
     {{ organization.legalId }}, registered in
     {{ organization.commerceRegisterLocation }}
   </div>
@@ -122,7 +111,7 @@
     <mat-icon class="material-icons-outlined">link</mat-icon>
     Main Contact
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="org-details-maincontact">
     <p>{{ organization.mainContactName }}</p>
     <p>{{ organization.mainContactEmail }}</p>
     <p>{{ organization.mainContactPhone }}</p>
@@ -135,7 +124,7 @@
     <mat-icon class="material-icons-outlined">link</mat-icon>
     Technical Contact
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="org-details-technicalcontact">
     <p>{{ organization.techContactName }}</p>
     <p>{{ organization.techContactEmail }}</p>
     <p>{{ organization.techContactPhone }}</p>
@@ -149,7 +138,7 @@
     </mat-icon>
     Created By
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="org-details-createdby">
     {{ organization.createdByFirstName }}
     {{ organization.createdByLastName }}
   </div>
@@ -161,7 +150,7 @@
     <mat-icon class="material-icons-outlined">mail_lock</mat-icon>
     Onboarded Since
   </div>
-  <div class="details-row-value">
+  <div class="details-row-value" data-testid="org-details-onboardedsince">
     {{ organization.createdAt | date : 'medium' }}
   </div>
 </div>

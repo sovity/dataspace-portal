@@ -2,10 +2,12 @@
   <div
     class="-ml-4 -mt-4 flex flex-wrap items-center justify-between sm:flex-nowrap">
     <div class="ml-4 mt-4">
-      <h3 class="text-base font-semibold text-black leading-6">
+      <h3
+        class="text-base font-semibold text-black leading-6"
+        data-testid="header-title">
         {{ headerConfig.title }}
       </h3>
-      <p class="mt-1 text-sm text-gray-500">
+      <p class="mt-1 text-sm text-gray-500" data-testid="header-subtitle">
         {{ headerConfig.subtitle }}
       </p>
     </div>
@@ -14,6 +16,7 @@
         <button
           *ngIf="action.permissions | hasAnyRole | async"
           class="btn-accent"
+          data-testid="header-action-btn"
           type="button"
           [disabledBtn]="disabled"
           (click)="action.action()">

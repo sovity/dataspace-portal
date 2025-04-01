@@ -1,7 +1,11 @@
 <div class="p-2">
   <!-- close button -->
   <div class="flex w-full justify-end">
-    <button mat-icon-button mat-dialog-close aria-label="close">
+    <button
+      mat-icon-button
+      mat-dialog-close
+      data-testid="invite-new-user-close-btn"
+      aria-label="close">
       <mat-icon>close</mat-icon>
     </button>
   </div>
@@ -26,6 +30,7 @@
           class="flex-1"
           label="First Name"
           ctrlId="formRegFirstName"
+          data-testid="formRegFirstName"
           placeholder="John"
           required
           [ctrl]="group.controls.firstName"></app-text-input>
@@ -36,6 +41,7 @@
           class="flex-1"
           label="Last Name"
           ctrlId="formRegLastName"
+          data-testid="formRegLastName"
           placeholder="Doe"
           required
           [ctrl]="group.controls.lastName"></app-text-input>
@@ -46,6 +52,7 @@
           class="flex-1"
           label="Email"
           ctrlId="formRegEmail"
+          data-testid="formRegEmail"
           placeholder="john.doe@my-org.com"
           required
           [ctrl]="group.controls.email"></app-text-input>
@@ -59,10 +66,11 @@
           </div>
           <mat-form-field class="w-full" appearance="outline">
             <mat-select
+              data-testid="invite-user-role-selector"
               placeholder="Select Role"
               [formControl]="group.controls.role">
               <mat-option *ngFor="let role of assignableRoles" [value]="role"
-                >{{ mapToReadable(role) }}
+              >{{ mapToReadable(role) }}
               </mat-option>
             </mat-select>
             <mat-error
@@ -80,13 +88,18 @@
     <!-- Action Section -->
     <mat-dialog-actions align="end">
       <div class="flex gap-4">
-        <button class="btn-accent-outline" type="button" mat-dialog-close>
+        <button
+          class="btn-accent-outline"
+          type="button"
+          mat-dialog-close
+          data-testid="invite-new-user-back-btn">
           Back
         </button>
 
         <button
           class="btn-accent"
           type="submit"
+          data-testid="invite-new-user-send-invitation-btn"
           [disabledBtn]="!group.valid || state.state === 'submitting'"
           (click)="submit()">
           Send Invitation

@@ -13,7 +13,7 @@
     "build": "ng build",
     "generate-config": "node config-generator.js",
     "format-all": "prettier --write .",
-    "dev:build-lib": "cd ../authority-portal-backend && node ../authority-portal-frontend/cross-platform-gradlew.cjs :authority-portal-api:clean :authority-portal-api:build && cd authority-portal-api-client-ts && npm i && npm run build"
+    "dev:build-lib": "cd ../authority-portal-backend && node ../authority-portal-frontend/cross-platform-gradlew.cjs :authority-portal-api:clean :authority-portal-api:build"
   },
   "private": true,
   "dependencies": {
@@ -28,7 +28,6 @@
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
     "@ngxs/store": "^3.8.1",
-    "@sovity.de/authority-portal-client": "file:../authority-portal-backend/authority-portal-api-client-ts",
     "clean-deep": "^3.4.0",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.1",

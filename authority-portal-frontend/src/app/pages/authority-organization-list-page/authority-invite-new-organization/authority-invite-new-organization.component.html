@@ -1,7 +1,7 @@
 <div class="p-2">
   <!-- close button -->
   <div class="flex w-full justify-end">
-    <button mat-icon-button mat-dialog-close aria-label="close">
+    <button mat-icon-button mat-dialog-close aria-label="close" data-testid="authority-invite-new-org-dialog-close-btn">
       <mat-icon>close</mat-icon>
     </button>
   </div>
@@ -26,6 +26,7 @@
           class="flex-1"
           label="First Name"
           ctrlId="formRegFirstName"
+          data-testid="formRegFirstName"
           placeholder="John"
           required
           [ctrl]="group.controls.userFirstName"></app-text-input>
@@ -36,6 +37,7 @@
           class="flex-1"
           label="Last Name"
           ctrlId="formRegLastName"
+          data-testid="formRegLastName"
           placeholder="Doe"
           required
           [ctrl]="group.controls.userLastName"></app-text-input>
@@ -46,6 +48,7 @@
           class="flex-1"
           label="Organization Name"
           ctrlId="formRegOrgName"
+          data-testid="formRegOrgName"
           placeholder="Other Org LLC"
           required
           [ctrl]="group.controls.orgName"></app-text-input>
@@ -56,6 +59,7 @@
           class="flex-1"
           label="Email"
           ctrlId="formRegUserEmail"
+          data-testid="formRegUserEmail"
           placeholder="john.doe@other-org.com"
           required
           [ctrl]="group.controls.userEmail"></app-text-input>
@@ -67,6 +71,7 @@
           class="flex-1"
           label="Job Title"
           ctrlId="formRegUserJobTitle"
+          data-testid="formRegUserJobTitle"
           placeholder="Analyst"
           [ctrl]="group.controls.userJobTitle"></app-text-input>
         <!-- Job Title -->
@@ -76,6 +81,7 @@
           class="flex-1"
           label="Phone Number"
           ctrlId="formRegUserPhoneNumber"
+          data-testid="formRegUserPhoneNumber"
           placeholder="+49 1234 567890"
           [ctrl]="group.controls.userPhoneNumber"></app-text-input>
 
@@ -87,13 +93,14 @@
     <!-- Action Section -->
     <mat-dialog-actions align="end">
       <div class="flex gap-4">
-        <button class="btn-accent-outline" type="button" mat-dialog-close>
+        <button class="btn-accent-outline" type="button" mat-dialog-close data-testid="authority-invite-new-org-dialog-back-btn">
           Back
         </button>
 
         <button
           class="btn-accent"
           type="submit"
+          data-testid="authority-invite-new-org-dialog-submit-btn"
           [disabledBtn]="!group.valid || state.state === 'submitting'"
           (click)="submit()">
           Send Invitation

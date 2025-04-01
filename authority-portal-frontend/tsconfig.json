@@ -6,7 +6,6 @@
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": false,
     "strictPropertyInitialization": true,
     "noImplicitReturns": true,
@@ -21,7 +20,10 @@
     "module": "ES2022",
     "useDefineForClassFields": false,
     "lib": ["es2023", "dom"],
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@sovity.de/authority-portal-client": ["src/app/core/api/client/index.ts"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

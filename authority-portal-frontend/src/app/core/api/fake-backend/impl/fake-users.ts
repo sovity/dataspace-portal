@@ -1,19 +1,24 @@
 /*
- * Copyright (c) 2024 sovity GmbH
+ * Data Space Portal
+ * Copyright (C) 2025 sovity GmbH
  *
- * This program and the accompanying materials are made available under the
- * terms of the Apache License, Version 2.0 which is available at
- * https://www.apache.org/licenses/LICENSE-2.0
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- * SPDX-License-Identifier: Apache-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- * Contributors:
- *      sovity GmbH - initial implementation
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import {
-  ChangeApplicationRoleRequest,
+  ChangeApplicationRolesRequest,
   ChangeParticipantRoleRequest,
-  ClearApplicationRoleRequest,
+  ClearApplicationRolesRequest,
   IdResponse,
   InviteParticipantUserRequest,
   MemberInfo,
@@ -415,22 +420,18 @@ export const changeParticipantRole = (
   return {id: request.userId, changedDate: new Date()};
 };
 
-export const changeApplicationRole = (
-  request: ChangeApplicationRoleRequest,
+export const changeApplicationRoles = (
+  request: ChangeApplicationRolesRequest,
 ): IdResponse => {
   patchUser(request.userId, (user) => {
     let participantRoles: UserRoleDto[] = user.roles.filter(isParticipantRole);
-    let applicationRoles: UserRoleDto[] = [];
+    let applicationRoles: UserRoleDto[] = request.userRoleDto;
 
-    const newRole = request.body;
-    if (newRole === 'AUTHORITY_ADMIN') {
-      applicationRoles = ['AUTHORITY_ADMIN', 'AUTHORITY_USER'];
-    } else if (newRole === 'AUTHORITY_USER') {
-      applicationRoles = ['AUTHORITY_USER'];
-    } else if (newRole === 'SERVICE_PARTNER_ADMIN') {
-      applicationRoles = ['SERVICE_PARTNER_ADMIN'];
-    } else if (newRole === 'OPERATOR_ADMIN') {
-      applicationRoles = ['OPERATOR_ADMIN'];
+    if (
+      applicationRoles.includes('AUTHORITY_ADMIN') &&
+      !applicationRoles.includes('AUTHORITY_USER')
+    ) {
+      applicationRoles.push('AUTHORITY_USER');
     }
 
     return {
@@ -440,8 +441,8 @@ export const changeApplicationRole = (
   return {id: request.userId, changedDate: new Date()};
 };
 
-export const clearApplicationRole = (
-  request: ClearApplicationRoleRequest,
+export const clearApplicationRoles = (
+  request: ClearApplicationRolesRequest,
 ): IdResponse => {
   patchUser(request.userId, (user) => ({
     roles: user.roles.filter(isParticipantRole),

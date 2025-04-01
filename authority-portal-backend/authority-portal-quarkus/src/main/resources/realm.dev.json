@@ -840,7 +840,7 @@
       "firstName": "Authority",
       "lastName": "Admin",
       "email": "user1@org1.null",
-      "emailVerified": false,
+      "emailVerified": true,
       "createdTimestamp": 1692872833738,
       "enabled": true,
       "totp": false,
@@ -852,9 +852,8 @@
       ],
       "notBefore": 0,
       "groups": [
-        "/MDSL000001/Participant User",
-        "/ROLE_AUTHORITY_ADMIN",
-        "/ROLE_AUTHORITY_USER"
+        "/MDSL000001/Participant Admin",
+        "/ROLE_AUTHORITY_ADMIN"
       ]
     },
     {
@@ -863,7 +862,7 @@
       "firstName": "Authority",
       "lastName": "User",
       "email": "user2@org1.null",
-      "emailVerified": false,
+      "emailVerified": true,
       "createdTimestamp": 1692872833738,
       "enabled": true,
       "totp": false,
@@ -885,7 +884,7 @@
       "firstName": "Participant",
       "lastName": "Admin",
       "email": "user3@org2.null",
-      "emailVerified": false,
+      "emailVerified": true,
       "createdTimestamp": 1692872833738,
       "enabled": true,
       "totp": false,
@@ -897,9 +896,7 @@
       ],
       "notBefore": 0,
       "groups": [
-        "/MDSL000002/Participant Admin",
-        "/MDSL000002/Participant Curator",
-        "/MDSL000002/Participant User"
+        "/MDSL000002/Participant Admin"
       ]
     },
     {
@@ -908,7 +905,7 @@
       "firstName": "Participat",
       "lastName": "User",
       "email": "user4@org2.null",
-      "emailVerified": false,
+      "emailVerified": true,
       "createdTimestamp": 1692872833738,
       "enabled": true,
       "totp": false,
@@ -941,9 +938,7 @@
       ],
       "notBefore": 0,
       "groups": [
-        "/MDSL000003/Participant Admin",
-        "/MDSL000003/Participant Curator",
-        "/MDSL000003/Participant User"
+        "/MDSL000003/Participant Admin"
       ]
     },
     {
@@ -971,7 +966,7 @@
       "firstName": "Service Partner",
       "lastName": "Admin",
       "email": "user7@org4.null",
-      "emailVerified": false,
+      "emailVerified": true,
       "createdTimestamp": 1692872833738,
       "enabled": true,
       "totp": false,
@@ -984,8 +979,6 @@
       "notBefore": 0,
       "groups": [
         "/MDSL000004/Participant Admin",
-        "/MDSL000004/Participant Curator",
-        "/MDSL000004/Participant User",
         "/ROLE_SERVICE_PARTNER_ADMIN"
       ]
     },
@@ -995,7 +988,7 @@
       "firstName": "Operator",
       "lastName": "Admin",
       "email": "user8@org5.null",
-      "emailVerified": false,
+      "emailVerified": true,
       "createdTimestamp": 1692872833738,
       "enabled": true,
       "totp": false,
@@ -2064,14 +2057,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "oidc-usermodel-property-mapper",
-            "oidc-full-name-mapper",
-            "saml-role-list-mapper",
-            "oidc-sha256-pairwise-sub-mapper",
-            "saml-user-attribute-mapper",
             "oidc-usermodel-attribute-mapper",
+            "oidc-address-mapper",
+            "oidc-sha256-pairwise-sub-mapper",
+            "oidc-full-name-mapper",
+            "saml-user-attribute-mapper",
             "saml-user-property-mapper",
-            "oidc-address-mapper"
+            "saml-role-list-mapper",
+            "oidc-usermodel-property-mapper"
           ]
         }
       },
@@ -2083,14 +2076,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "oidc-address-mapper",
-            "saml-role-list-mapper",
-            "oidc-sha256-pairwise-sub-mapper",
-            "saml-user-property-mapper",
-            "saml-user-attribute-mapper",
             "oidc-usermodel-attribute-mapper",
             "oidc-usermodel-property-mapper",
-            "oidc-full-name-mapper"
+            "oidc-full-name-mapper",
+            "oidc-sha256-pairwise-sub-mapper",
+            "saml-role-list-mapper",
+            "oidc-address-mapper",
+            "saml-user-property-mapper",
+            "saml-user-attribute-mapper"
           ]
         }
       },
