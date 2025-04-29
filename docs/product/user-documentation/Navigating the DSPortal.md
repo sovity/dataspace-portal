@@ -103,7 +103,7 @@ The Service Partner section is dedicated to service partners of the data space, 
 #### Provided Connectors
 This section enables the service parnter with direct access to all provided connectors and their status. 
 
-**To learn more about the Service Partner Admin role, please read the section [Application role: Service Partner Admin](Manage%20Data%20Space%20components.md#application-role-service-partner-admin).**
+**To learn more about the Service Partner Admin role, please read the section [Application role: Service Partner Admin](Application%20Roles.md#application-role-service-partner-admin).**
 
 ---
 ### 5. Authority Section
