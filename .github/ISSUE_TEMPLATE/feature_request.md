@@ -1,6 +1,6 @@
 ---
-name: (leaving soon) Feature Request
-about: Leaving soon. Please user the "Feature Request Form" instead. Help us with new features
+name: Feature Request
+about: Please user the "Feature Request Form" instead. Help us with new features
 title: ""
 labels: "kind/enhancement"
 assignees: ""
