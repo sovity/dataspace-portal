@@ -1,6 +1,7 @@
 # Table of contents
 
 * [Welcome](product/user-documentation/General%20Overview.md)
+* [Initial Onboarding](product/user-documentation/initial-onboarding.md)
 
 ## User Guide
 
