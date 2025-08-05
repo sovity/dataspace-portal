@@ -1,6 +1,6 @@
 name: "(Form) Documentation Update Request"
 description: Help us improve our documentation.
-labels: ["task/documentation"]
+type: Documentation
 body:
   - type: checkboxes
     id: description
@@ -20,7 +20,7 @@ body:
   - type: input
     id: other_specification
     attributes:
-      label: If you selected Other above, please specify.
+      label: If you selected 'Other' above, please specify.
   - type: dropdown
     id: justification
     attributes:
