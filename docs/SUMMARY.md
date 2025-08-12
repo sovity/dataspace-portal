@@ -15,6 +15,11 @@
   * [Organization Management](product/user-documentation/Authority%20Organization%20Management.md)
   * [Connector Overview](product/user-documentation/Authority%20Connector%20Overview.md)
 * [Administration of Participating Organizations](product/user-documentation/Administration%20of%20Participating%20Organizations.md)
+  * User Profile Management & Organization Roles
+  * User Management
+  * Invite Users to DS Portal
+  * Dashboard & Reporting
+  * Support & Service Desk
 * [Provision your CaaS](product/user-documentation/Provision%20your%20CaaS.md)
   * [I have a connector](product/user-documentation/I%20have%20a%20connector.md)
   * [I need a connector](product/user-documentation/I%20need%20a%20connector.md)
