@@ -15,11 +15,11 @@
   * [Organization Management](product/user-documentation/Authority%20Organization%20Management.md)
   * [Connector Overview](product/user-documentation/Authority%20Connector%20Overview.md)
 * [Administration of Participating Organizations](product/user-documentation/Administration%20of%20Participating%20Organizations.md)
-  * User Profile Management & Organization Roles
-  * User Management
-  * Invite Users to DS Portal
-  * Dashboard & Reporting
-  * Support & Service Desk
+  * [User Profile Management & Organization Roles](product/user-documentation/User%20Profile%20Management%20&%20Organization%20Roles.md)
+  * [User Management](product/user-documentation/User%20Management)
+  * [Invite Users to DS Portal & sovity Hub](product/user-documentation/Invite%20Users%20to%20DS%20Portal%20&%20sovity%20Hub.md)
+  * [Dashboard & Reporting](product/user-documentation/Dashboard%20&%20Reporting.md)
+  * [Support & Service Desk](product/user-documentation/Support%20&%20Service%20Desk.md)
 * [Provision your CaaS](product/user-documentation/Provision%20your%20CaaS.md)
   * [I have a connector](product/user-documentation/I%20have%20a%20connector.md)
   * [I need a connector](product/user-documentation/I%20need%20a%20connector.md)
