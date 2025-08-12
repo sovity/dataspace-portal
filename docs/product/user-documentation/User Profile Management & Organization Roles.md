@@ -8,6 +8,8 @@ icon: user
 
 A user can see their profile by clicking on their name in the top right corner and then "My Profile".
 
+![Profile Management](https://github.com/user-attachments/assets/8b86df93-54f4-4b1a-a20b-20168907407f)
+
 Any user is able to self-edit their own information by maneuvering to his own profile and clicking "Edit".
 First name, last name, job title, email and phone number can be updated and changes persisted by clicking "Update".
 
