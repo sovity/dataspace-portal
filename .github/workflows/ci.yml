@@ -36,7 +36,7 @@ jobs:
     env:
       # For Docker Image
       IMAGE_NAME: ds-portal-ce-backend
-      IMAGE_TITLE: Data Space Portal (CE) Backend
+      IMAGE_TITLE: Data Space Portal Backend
       IMAGE_DESCRIPTION: Backend for the sovity Data Space Portal
 
       # For JooQ Codegen
@@ -53,10 +53,10 @@ jobs:
       quarkus.flyway.clean-at-start: true
     steps:
       - uses: actions/checkout@v3
-      - name: "Set up JDK 17"
+      - name: "Set up JDK 21"
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
       - name: "Gradle: Validate Gradle Wrapper"
         uses: gradle/actions/wrapper-validation@v3
@@ -92,7 +92,7 @@ jobs:
             type=sha
             type=raw,value=latest,enable={{is_default_branch}}
             type=raw,value=release,enable=${{ startsWith(github.ref, 'refs/tags/') }}
-      - name: "Docker: Build and Push Image (ds-portal-backend)"
+      - name: "Docker: Build and Push Image (ds-portal-ce-backend)"
         uses: docker/build-push-action@v4
         with:
           file: authority-portal-backend/authority-portal-quarkus/src/main/docker/Dockerfile.jvm
@@ -110,7 +110,7 @@ jobs:
           image-base-name: ${{ env.IMAGE_NAME_BASE }}
           image-name: "ds-portal-ce-crawler"
           launcher-name: "catalog-crawler-launcher"
-          title: "Catalog Crawler (CE)"
+          title: "Catalog Crawler"
           description: "sovity Catalog Crawler for the sovity Data Space Portal. Requires DAPS dataspace credentials to join an existing dataspace."
 
   frontend:
@@ -123,14 +123,14 @@ jobs:
     env:
       # For Docker Image
       IMAGE_NAME: ds-portal-ce-frontend
-      IMAGE_TITLE: Data Space Portal (CE) Frontend
+      IMAGE_TITLE: Data Space Portal Frontend
       IMAGE_DESCRIPTION: Frontend for the sovity Data Space Portal
     steps:
       - uses: actions/checkout@v3
-      - name: "Set up JDK 17"
+      - name: "Set up JDK 21"
         uses: actions/setup-java@v3
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'temurin'
       - name: "Gradle: Validate Gradle Wrapper"
         uses: gradle/actions/wrapper-validation@v3
@@ -141,14 +141,13 @@ jobs:
           GPR_KEY: ${{ secrets.GHCR_READONLY_TOKEN }}
         with:
           build-root-directory: authority-portal-backend
-          arguments: :authority-portal-api:build
+          arguments: :authority-portal-api:openApiGenerateTypeScriptClient
       - name: "Set up Node 16"
         uses: actions/setup-node@v3
         with:
           node-version: '16'
           cache: 'npm'
           cache-dependency-path: |
-            authority-portal-backend/authority-portal-api-client-ts/package-lock.json
             authority-portal-frontend/package-lock.json
       - name: "Set up Chrome"
         uses: browser-actions/setup-chrome@v1

@@ -18,10 +18,11 @@
 
 package de.sovity.edc.ext.catalog.crawler;
 
-import de.sovity.edc.utils.config.SovityEdcRuntime;
+import de.sovity.edc.utils.config.CrawlerRuntime;
 
 public class Main {
     public static void main(String[] args) {
-        SovityEdcRuntime.boot(CrawlerConfigProps.ALL_CRAWLER_PROPS);
+        var runtime = new CrawlerRuntime();
+        runtime.boot(CrawlerConfigProps.ALL_CRAWLER_PROPS, args, true);
     }
 }

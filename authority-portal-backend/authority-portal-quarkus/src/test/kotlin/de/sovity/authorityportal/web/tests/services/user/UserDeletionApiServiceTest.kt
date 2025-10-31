@@ -190,7 +190,7 @@ class UserDeletionApiServiceTest {
 
         whenever(keycloakService.getAuthorityAdmins()).thenReturn(listOf(lastAuthorityAdmin))
         whenever(keycloakService.getParticipantAdmins(eq(dummyDevOrganizationId(0)))).thenReturn(listOf(keycloakUser, possibleSuccessor))
-        doNothing().whenever(keycloakService).deleteUser(eq(dummyDevUserUuid(0)))
+        doNothing().whenever(keycloakService).deleteUserSafely(eq(dummyDevUserUuid(0)))
 
         ScenarioData().apply {
             organization(0, 0)
@@ -235,7 +235,7 @@ class UserDeletionApiServiceTest {
         whenever(keycloakService.getAuthorityAdmins()).thenReturn(listOf(lastAuthorityAdmin))
         whenever(keycloakService.getParticipantAdmins(eq(dummyDevOrganizationId(0)))).thenReturn(listOf(keycloakUser))
         whenever(dapsClientService.forEnvironment(any())).thenReturn(dapsClient)
-        doNothing().whenever(keycloakService).deleteUser(eq(dummyDevUserUuid(0)))
+        doNothing().whenever(keycloakService).deleteUserSafely(eq(dummyDevUserUuid(0)))
         doNothing().whenever(keycloakService).deleteOrganization(eq(dummyDevOrganizationId(0)))
         doNothing().whenever(dapsClient).deleteClient(any())
 

@@ -1,12 +1,15 @@
 <div
-  data-testid="title-bar"
-  class="flex flex-col md:flex-row flex-start md:justify-between px-2 py-2 md:px-8 gap-4 md:gap-0 items-center relative bg-[#fcfcfc]">
+  class="flex flex-col md:flex-row flex-start md:justify-between px-2 py-2 md:px-8 gap-4 md:gap-0 items-center relative bg-[#fcfcfc]"
+  data-testid="title-bar">
   <div class="absolute inset-x-0 top-0 h-1/2 bg-gray-100 z-0"></div>
   <div class="flex gap-1 z-10 justify-center items-center">
-    <mat-icon class="larger-icon" [svgIcon]="titleBarConfig.icon" data-testId="title-bar-icon"></mat-icon>
+    <mat-icon
+      class="larger-icon"
+      data-testId="title-bar-icon"
+      [svgIcon]="titleBarConfig.icon"></mat-icon>
     <h2
-      data-testId="title-bar-title"
       class="text-2xl font-semibold text-black leading-8 overflow-hidden px-2 text-ellipsis whitespace-nowrap"
+      data-testId="title-bar-title"
       #title
       matTooltipClass="modified-tooltip"
       [style.max-width]="getTitleMaxWidthPx()"
@@ -14,16 +17,19 @@
       [matTooltip]="titleBarConfig.title">
       {{ titleBarConfig.title }}
     </h2>
-    <span class="status" [ngClass]="titleBarConfig.statusStyle" data-testId="title-bar-status">{{
-        titleBarConfig.status
-      }}</span>
+    <span
+      class="status"
+      data-testId="title-bar-status"
+      [ngClass]="titleBarConfig.statusStyle"
+      >{{ titleBarConfig.status }}</span
+    >
   </div>
 
   <div class="flex gap-2 z-10">
     <button
-      data-testId="title-bar-button"
       *ngFor="let tab of titleBarConfig.tabs"
       class="min-w-16 overflow-visible button flex items-center justify-center gap-2 bg-black text-white rounded-full px-2 py-1 text-sm hover:bg-brand-highlight"
+      data-testId="title-bar-button"
       matTooltipClass="whitespace-pre-line"
       [ngClass]="{
         'bg-brand-highlight': selectedTab === tab.view && !tab.isDisabled,
@@ -32,17 +38,16 @@
       [disabled]="tab.isDisabled"
       [matTooltip]="tab.tooltip !== undefined ? tab.tooltip : ''"
       (click)="tabChanged(tab.view)">
-      <mat-icon class="smaller-icon material-icons-outlined text-base">{{
-          tab.icon
-        }}
+      <mat-icon class="smaller-icon material-icons-outlined text-base"
+        >{{ tab.icon }}
       </mat-icon>
       <span *ngIf="tab?.value !== undefined">{{ tab.value }}</span>
     </button>
 
     <button
-      data-testId="title-bar-button-2"
       *ngIf="titleBarConfig?.actionMenu && !isAllDisabled(titleBarConfig)"
       class="min-w-16 overflow-visible button flex items-center justify-center gap-2 bg-black text-white rounded-full px-2 py-1 text-sm hover:bg-brand-highlight disabled:bg-gray-300"
+      data-testId="title-bar-button-2"
       [matMenuTriggerFor]="menu">
       <mat-icon class="smaller-icon material-icons-outlined">
         more_horiz
@@ -52,8 +57,8 @@
       <ng-container
         *ngFor="let menuItem of titleBarConfig?.actionMenu?.menuOptions">
         <button
-          data-testId="title-bar-menu-item"
           *ngIf="!menuItem.isDisabled"
+          data-testId="title-bar-menu-item"
           mat-menu-item
           (click)="menuActionPressed(menuItem)">
           <mat-icon class="material-icons-outlined">

@@ -27,7 +27,8 @@ let centralComponents: Record<string, CentralComponentDto[]> = {
       centralComponentId: 'MDSL1234XX.C0001XX',
       name: 'Broker',
       homepageUrl: 'https://broker.dev.my-dataspace.sovity.io',
-      endpointUrl: 'https://broker.dev.my-dataspace.sovity.io/backend/api/dsp',
+      endpointUrl:
+        'https://broker.dev.my-dataspace.sovity.io/backend/api/v1/dsp',
       createdByUserFullName: 'Your Name',
       createdByOrgName: 'Your Org Name',
       createdByOrganizationId: 'MDSL1234XX',
@@ -36,7 +37,8 @@ let centralComponents: Record<string, CentralComponentDto[]> = {
       centralComponentId: 'MDSL1234XX.C0002XX',
       name: 'Broker MDS 2.0 Test',
       homepageUrl: 'https://broker2.dev.my-dataspace.sovity.io',
-      endpointUrl: 'https://broker2.dev.my-dataspace.sovity.io/backend/api/dsp',
+      endpointUrl:
+        'https://broker2.dev.my-dataspace.sovity.io/backend/api/v1/dsp',
       createdByUserFullName: 'Your Name',
       createdByOrgName: 'Your Org Name',
       createdByOrganizationId: 'MDSL1234XX',

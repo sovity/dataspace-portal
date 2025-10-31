@@ -56,7 +56,7 @@ class UnconfirmedUserDeletionService(
         val deletedUsersAmount = userService.deleteUnconfirmedUsers(unconfirmedUserIds)
         Log.info("Deleted unconfirmed users in DB. amount=$deletedUsersAmount.")
         unconfirmedUserIds.forEach { userId ->
-            keycloakService.deleteUser(userId)
+            keycloakService.deleteUserSafely(userId)
             Log.info("Deleted unconfirmed user in Keycloak. userId=$userId.")
         }
     }

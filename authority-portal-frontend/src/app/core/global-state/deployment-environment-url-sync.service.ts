@@ -20,9 +20,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, combineLatest, takeUntil} from 'rxjs';
 import {take} from 'rxjs/operators';
 import {Store} from '@ngxs/store';
+import {DeploymentEnvironmentDto} from '@sovity.de/authority-portal-client';
 import {SwitchEnvironment} from './global-state-actions';
 import {GlobalStateUtils} from './global-state-utils';
-import {DeploymentEnvironmentDto} from "@sovity.de/authority-portal-client";
 
 @Injectable({providedIn: 'root'})
 export class DeploymentEnvironmentUrlSyncService {

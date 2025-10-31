@@ -33,6 +33,7 @@ import {
 import {GlobalStateUtils} from 'src/app/core/global-state/global-state-utils';
 import {APP_CONFIG, AppConfig} from 'src/app/core/services/config/app-config';
 import {ClipboardUtils} from 'src/app/core/utils/clipboard-utils';
+import {EDC_CONFIG} from '../../../../core/services/config/connector-config';
 import {Reset, Submit} from '../state/register-central-component-page-actions';
 import {
   DEFAULT_REGISTER_CENTRAL_COMPONENT_PAGE_STATE,
@@ -57,7 +58,13 @@ export class RegisterCentralComponentPageComponent
   createActionName = 'Register Central Component';
   exitLink = '/operator/central-components';
 
+  edcConfig = EDC_CONFIG;
+
   @ViewChild('stepper') stepper!: MatStepper;
+
+  get useCustomUrls(): boolean {
+    return this.form.componentTab.controls.useCustomUrls.value;
+  }
 
   private ngOnDestroy$ = new Subject();
 
@@ -102,10 +109,20 @@ export class RegisterCentralComponentPageComponent
 
   registerComponent(): void {
     const formValue = this.form.value;
+    const frontendUrl = formValue.componentTab.useCustomUrls
+      ? formValue.componentTab.frontendUrl
+      : formValue.componentTab.baseUrl;
+    const endpointUrl = formValue.componentTab.useCustomUrls
+      ? formValue.componentTab.endpointUrl
+      : new URL(
+          EDC_CONFIG.defaultPaths.dspApi,
+          formValue.componentTab.baseUrl,
+        ).toString();
+
     let request: CentralComponentCreateRequest = {
       name: formValue.componentTab.name,
-      endpointUrl: formValue.componentTab.endpointUrl,
-      homepageUrl: formValue.componentTab.frontendUrl,
+      homepageUrl: frontendUrl,
+      endpointUrl,
       certificate: formValue.certificateTab.bringOwnCert
         ? formValue.certificateTab.ownCertificate
         : formValue.certificateTab.generatedCertificate,

@@ -22,10 +22,12 @@ import {connectorUrlValidator} from 'src/app/core/utils/validators/connector-url
 import {notBlankValidator} from 'src/app/core/utils/validators/not-blank-validator';
 import {buildCertificateInputForm} from '../../../../shared/form-elements/certificate-input-form/certificate-input-form-builder';
 import {certificateInputFormEnabledCtrls} from '../../../../shared/form-elements/certificate-input-form/certificate-input-form-enabled-ctrls';
+import {connectorInputFormEnabledCtrls} from './register-connector-page-enabled-ctrls';
 import {
   CertificateTabFormModel,
   CertificateTabFormValue,
   ConnectorTabFormModel,
+  ConnectorTabFormValue,
   DEFAULT_REGISTER_CONNECTOR_PAGE_FORM_VALUE,
   RegisterConnectorPageFormModel,
   RegisterConnectorPageFormValue,
@@ -61,11 +63,21 @@ export class RegisterConnectorPageForm {
         initial.connectorTab.location,
         [Validators.required, Validators.maxLength(128), notBlankValidator()],
       ],
+      useCustomUrls: [initial.connectorTab.useCustomUrls],
+      baseUrl: [
+        initial.connectorTab.baseUrl,
+        [
+          Validators.required,
+          Validators.maxLength(512),
+          notBlankValidator(),
+          connectorUrlValidator,
+        ],
+      ],
       frontendUrl: [
         initial.connectorTab.frontendUrl,
         [
           Validators.required,
-          Validators.maxLength(128),
+          Validators.maxLength(512),
           notBlankValidator(),
           connectorUrlValidator,
         ],
@@ -74,7 +86,7 @@ export class RegisterConnectorPageForm {
         initial.connectorTab.endpointUrl,
         [
           Validators.required,
-          Validators.maxLength(128),
+          Validators.maxLength(512),
           notBlankValidator(),
           connectorUrlValidator,
         ],
@@ -83,7 +95,7 @@ export class RegisterConnectorPageForm {
         initial.connectorTab.managementUrl,
         [
           Validators.required,
-          Validators.maxLength(128),
+          Validators.maxLength(512),
           notBlankValidator(),
           connectorUrlValidator,
         ],
@@ -93,6 +105,10 @@ export class RegisterConnectorPageForm {
     const certificateTab = buildCertificateInputForm(
       this.formBuilder,
       initial.certificateTab,
+    );
+
+    switchDisabledControls<ConnectorTabFormValue>(connectorTab, (value) =>
+      connectorInputFormEnabledCtrls(value),
     );
 
     switchDisabledControls<CertificateTabFormValue>(certificateTab, (value) =>

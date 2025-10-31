@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1qsy5ei" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.13.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.1.0">
   <bpmn:collaboration id="Collaboration_0jqabuk">
-    <bpmn:participant id="Participant_0yx647y" name="Authority Portal" processRef="Process_0t6kl0l" />
+    <bpmn:participant id="Participant_0yx647y" name="Data Space Portal" processRef="Process_0t6kl0l" />
     <bpmn:participant id="Participant_1n89pyn" name="DAPS" processRef="Process_1z0oqib" />
     <bpmn:participant id="Participant_1fuha6c" name="Broker" processRef="Process_1ea1xoj" />
     <bpmn:participant id="Participant_1cw9lq4" name="Service Provider" processRef="Process_1mox6nt" />

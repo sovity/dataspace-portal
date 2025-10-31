@@ -142,63 +142,12 @@ export class AssetPropertyGridGroupBuilder {
       ...this.buildHttpDatasourceFields(dataOffer),
     ];
 
-    fields.push(...this.buildMdsProperties(dataOffer));
-
-    return {
-      groupLabel,
-      properties: fields,
-    };
-  }
-
-  private buildMdsProperties(
-    dataOffer: DataOfferDetailPageResult,
-  ): PropertyGridField[] {
-    const asset = dataOffer.asset;
-    const fields: PropertyGridField[] = [];
-    if (asset.transportMode) {
-      fields.push({
-        icon: 'commute',
-        label: 'Transport Mode',
-        ...this.propertyGridFieldService.guessValue(asset.transportMode),
-      });
-    }
-    if (asset.dataCategory) {
-      fields.push({
-        icon: 'commute',
-        label: 'Data Category',
-        ...this.propertyGridFieldService.guessValue(asset.dataCategory),
-      });
-    }
-    if (asset.dataSubcategory) {
-      fields.push({
-        icon: 'commute',
-        label: 'Data Subcategory',
-        ...this.propertyGridFieldService.guessValue(asset.dataSubcategory),
-      });
-    }
     if (asset.dataModel) {
       fields.push({
         icon: 'category',
         label: 'Data Model',
         ...this.propertyGridFieldService.guessValue(asset.dataModel),
       });
-    }
-    if (asset.geoReferenceMethod) {
-      fields.push({
-        icon: 'commute',
-        label: 'Geo Reference Method',
-        ...this.propertyGridFieldService.guessValue(asset.geoReferenceMethod),
-      });
-    }
-    if (asset.geoLocation) {
-      fields.push({
-        icon: 'location_on',
-        label: 'Geo Location',
-        ...this.propertyGridFieldService.guessValue(asset.geoLocation),
-      });
-    }
-    if (asset.nutsLocations?.length) {
-      fields.push(this.buildNutsLocationsField(asset.nutsLocations));
     }
     if (asset.sovereignLegalName) {
       fields.push({
@@ -247,7 +196,11 @@ export class AssetPropertyGridGroupBuilder {
         ),
       });
     }
-    return fields;
+
+    return {
+      groupLabel,
+      properties: fields,
+    };
   }
 
   buildAdditionalPropertiesGroups(
@@ -334,14 +287,6 @@ export class AssetPropertyGridGroupBuilder {
       },
     ];
     return {groupLabel, properties};
-  }
-
-  private buildNutsLocationsField(locations: string[]): PropertyGridField {
-    return {
-      icon: 'location_on',
-      label: 'NUTS Locations',
-      text: locations.join(', '),
-    };
   }
 
   private buildDataSampleUrlsField(

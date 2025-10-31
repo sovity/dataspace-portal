@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 import {Pipe, PipeTransform} from '@angular/core';
 import {ActiveFeatureSet} from '../../core/services/config/active-feature-set';
 import {UiFeature} from '../../core/services/config/profiles/ui-feature';

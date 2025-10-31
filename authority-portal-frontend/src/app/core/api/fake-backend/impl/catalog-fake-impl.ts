@@ -33,7 +33,7 @@ const myConnector: Pick<
   organizationId: 'MDSL1234XX',
   organizationName: 'My Organization',
   connectorId: 'MDSL1234XX.C1234XX',
-  connectorEndpoint: 'https://my-connector.my-organization.com/api/dsp',
+  connectorEndpoint: 'https://my-connector.my-organization.com/api/v1/dsp',
 };
 
 const DATA_OFFERS: DataOfferDetailPageResult[] = [

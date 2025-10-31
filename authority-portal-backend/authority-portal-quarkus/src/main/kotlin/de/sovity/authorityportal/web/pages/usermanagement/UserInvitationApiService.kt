@@ -46,7 +46,7 @@ class UserInvitationApiService(
         }
 
         // DB is source of truth, so we delete a potentially existing user in Keycloak
-        keycloakService.getUserIdByEmail(userInformation.email)?.let { keycloakService.deleteUser(it) }
+        keycloakService.getUserIdByEmailOrNull(userInformation.email)?.let { keycloakService.deleteUserSafely(it) }
 
         val userId =
             keycloakService.createUser(userInformation.email, userInformation.firstName, userInformation.lastName)

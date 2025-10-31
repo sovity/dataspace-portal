@@ -29,13 +29,9 @@ import {
 import {ApiService} from 'src/app/core/api/api.service';
 import {GlobalStateUtils} from 'src/app/core/global-state/global-state-utils';
 import {ErrorService} from 'src/app/core/services/error.service';
-import {
-  buildConnectorConfigFromLocalData,
-  buildConnectorConfigFromResponse,
-} from 'src/app/core/utils/connector-config-utils';
 import {Fetched} from 'src/app/core/utils/fetched';
 import {ToastService} from 'src/app/shared/common/toast-notifications/toast.service';
-import {deploymentEnvironmentList} from '../../../../core/api/fake-backend/impl/deployment-environment-list-fake';
+import {EDC_CONFIG} from '../../../../core/services/config/connector-config';
 import {ConfigureProvidedConnectorPageFormValue} from '../provide-connector-page/configure-provided-connector-page-form-model';
 import {
   GetConnector,
@@ -103,10 +99,9 @@ export class ConfigureProvidedConnectorPageStateImpl {
       ),
       tap((res) => {
         ctx.patchState({
-          connectorConfig: buildConnectorConfigFromResponse(
-            this.globalStateUtils.snapshot.selectedEnvironment!,
-            res,
-          ),
+          deploymentEnvironment:
+            this.globalStateUtils.snapshot.selectedEnvironment,
+          connectorId: res.id,
         });
         switch (res.status) {
           case 'OK':
@@ -181,11 +176,6 @@ export class ConfigureProvidedConnectorPageStateImpl {
     connector: ConnectorDetailsDto,
   ) {
     ctx.patchState({
-      localConnectorConfig: buildConnectorConfigFromLocalData(
-        this.globalStateUtils.snapshot.selectedEnvironment!,
-        connector.connectorId,
-        connector.clientId,
-      ),
       connectorData: connector,
     });
   }
@@ -194,10 +184,13 @@ export class ConfigureProvidedConnectorPageStateImpl {
     formValue: ConfigureProvidedConnectorPageFormValue,
   ): ConfigureProvidedConnectorWithJwksRequest {
     return {
-      frontendUrl: formValue.connectorTab.frontendUrl,
-      endpointUrl: formValue.connectorTab.endpointUrl,
-      managementUrl: formValue.connectorTab.managementUrl,
-      jwksUrl: formValue.connectorTab.jwksUrl,
+      ...this.buildCommonConfigureConnectorWithCertificateRequest(formValue),
+      jwksUrl: formValue.connectorTab.useCustomUrls
+        ? formValue.connectorTab.jwksUrl
+        : new URL(
+            EDC_CONFIG.defaultPaths.jwksUrl,
+            formValue.connectorTab.baseUrl,
+          ).toString(),
     };
   }
 
@@ -205,12 +198,36 @@ export class ConfigureProvidedConnectorPageStateImpl {
     formValue: ConfigureProvidedConnectorPageFormValue,
   ): ConfigureProvidedConnectorWithCertificateRequest {
     return {
-      frontendUrl: formValue.connectorTab.frontendUrl,
-      endpointUrl: formValue.connectorTab.endpointUrl,
-      managementUrl: formValue.connectorTab.managementUrl,
+      ...this.buildCommonConfigureConnectorWithCertificateRequest(formValue),
       certificate: formValue.certificateTab.bringOwnCert
         ? formValue.certificateTab.ownCertificate
         : formValue.certificateTab.generatedCertificate,
+    };
+  }
+
+  private buildCommonConfigureConnectorWithCertificateRequest(
+    formValue: ConfigureProvidedConnectorPageFormValue,
+  ) {
+    const frontendUrl = formValue.connectorTab.useCustomUrls
+      ? formValue.connectorTab.frontendUrl
+      : formValue.connectorTab.baseUrl;
+    const endpointUrl = formValue.connectorTab.useCustomUrls
+      ? formValue.connectorTab.endpointUrl
+      : new URL(
+          EDC_CONFIG.defaultPaths.dspApi,
+          formValue.connectorTab.baseUrl,
+        ).toString();
+    const managementUrl = formValue.connectorTab.useCustomUrls
+      ? formValue.connectorTab.managementUrl
+      : new URL(
+          EDC_CONFIG.defaultPaths.managementApi,
+          formValue.connectorTab.baseUrl,
+        ).toString();
+
+    return {
+      frontendUrl,
+      endpointUrl,
+      managementUrl,
     };
   }
 }

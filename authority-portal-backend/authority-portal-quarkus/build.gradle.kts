@@ -70,6 +70,7 @@ dependencies {
     testImplementation(libs.bundles.assertj)
     testImplementation(libs.awaitility)
     testImplementation(libs.bundles.mockito)
+    testImplementation("com.icegreen:greenmail:2.0.1")
 }
 
 quarkus {

@@ -24,6 +24,8 @@ import {
 export interface ComponentTabFormModel {
   name: FormControl<string>;
   location: FormControl<string>;
+  useCustomUrls: FormControl<boolean>;
+  baseUrl: FormControl<string>;
   frontendUrl: FormControl<string>;
   endpointUrl: FormControl<string>;
 }
@@ -32,6 +34,8 @@ export type ComponentTabFormValue = ɵFormGroupRawValue<ComponentTabFormModel>;
 export const DEFAULT_COMPONENT_TAB_FORM_VALUE: ComponentTabFormValue = {
   name: '',
   location: '',
+  useCustomUrls: false,
+  baseUrl: '',
   frontendUrl: '',
   endpointUrl: '',
 };

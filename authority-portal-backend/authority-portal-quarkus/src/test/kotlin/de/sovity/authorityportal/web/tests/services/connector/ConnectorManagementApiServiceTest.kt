@@ -495,7 +495,7 @@ class ConnectorManagementApiServiceTest {
         whenever(dapsClientService.forEnvironment(any())).thenReturn(dapsClient)
         doNothing().whenever(dapsClient).createClient(any())
         doNothing().whenever(dapsClient).addCertificate(any(), any())
-        doNothing().whenever(dapsClient).configureMappers(any(), any(), any())
+        doNothing().whenever(dapsClient).configureMappers(any())
 
         val request = CreateConnectorRequest(
             name = "Test Connector",
@@ -619,7 +619,7 @@ class ConnectorManagementApiServiceTest {
         whenever(dapsClientService.forEnvironment(any())).thenReturn(dapsClient)
         doNothing().whenever(dapsClient).createClient(any())
         doNothing().whenever(dapsClient).addCertificate(any(), any())
-        doNothing().whenever(dapsClient).configureMappers(any(), any(), any())
+        doNothing().whenever(dapsClient).configureMappers(any())
 
         val request = ConfigureProvidedConnectorWithCertificateRequest(
             frontendUrl = "https://connector.test.sovity.io/",
@@ -704,13 +704,13 @@ class ConnectorManagementApiServiceTest {
         whenever(dapsClientService.forEnvironment(any())).thenReturn(dapsClient)
         doNothing().whenever(dapsClient).createClient(any())
         doNothing().whenever(dapsClient).addJwksUrl(any(), any())
-        doNothing().whenever(dapsClient).configureMappers(any(), any())
+        doNothing().whenever(dapsClient).configureMappers(any())
 
         val request = ConfigureProvidedConnectorWithJwksRequest(
             frontendUrl = "https://connector.test.sovity.io/",
             endpointUrl = "https://connector.test.sovity.io/dsp/",
             managementUrl = "https://connector.test.sovity.io/api/management/",
-            jwksUrl = "https://connector.test.sovity.io/api/dsp/jwks",
+            jwksUrl = "https://connector.test.sovity.io/api/v1/dsp/jwks",
         )
 
         // act
@@ -741,7 +741,7 @@ class ConnectorManagementApiServiceTest {
             it.endpointUrl = "https://connector.test.sovity.io/dsp" // service should remove trailing slashes
             it.managementUrl =
                 "https://connector.test.sovity.io/api/management" // service should remove trailing slashes
-            it.jwksUrl = "https://connector.test.sovity.io/api/dsp/jwks"
+            it.jwksUrl = "https://connector.test.sovity.io/api/v1/dsp/jwks"
             it.createdBy = dummyDevUserUuid(0)
             it.createdAt = actual.createdAt
             it.onlineStatus = ConnectorOnlineStatus.OFFLINE

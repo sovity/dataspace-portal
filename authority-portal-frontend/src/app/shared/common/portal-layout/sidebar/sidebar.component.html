@@ -31,8 +31,8 @@
 
           <app-sidebar-element
             *ngFor="let menu of section.menus"
-            data-testid="nav-item"
             class="my-6"
+            data-testid="nav-item"
             #tooltip="matTooltip"
             matTooltipPosition="right"
             [matTooltipDisabled]="isExpandedMenu"

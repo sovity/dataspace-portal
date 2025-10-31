@@ -55,11 +55,21 @@ export class ConfigureProvidedConnectorPageForm {
     const initial = DEFAULT_PROVIDE_CONNECTOR_PAGE_FORM_VALUE;
 
     const connectorTab = this.formBuilder.nonNullable.group({
+      useCustomUrls: [initial.connectorTab.useCustomUrls],
+      baseUrl: [
+        initial.connectorTab.baseUrl,
+        [
+          Validators.required,
+          Validators.maxLength(512),
+          notBlankValidator(),
+          connectorUrlValidator,
+        ],
+      ],
       frontendUrl: [
         initial.connectorTab.frontendUrl,
         [
           Validators.required,
-          Validators.maxLength(128),
+          Validators.maxLength(512),
           notBlankValidator(),
           connectorUrlValidator,
         ],
@@ -68,7 +78,7 @@ export class ConfigureProvidedConnectorPageForm {
         initial.connectorTab.endpointUrl,
         [
           Validators.required,
-          Validators.maxLength(128),
+          Validators.maxLength(512),
           notBlankValidator(),
           connectorUrlValidator,
         ],
@@ -77,7 +87,7 @@ export class ConfigureProvidedConnectorPageForm {
         initial.connectorTab.managementUrl,
         [
           Validators.required,
-          Validators.maxLength(128),
+          Validators.maxLength(512),
           notBlankValidator(),
           connectorUrlValidator,
         ],
@@ -87,7 +97,7 @@ export class ConfigureProvidedConnectorPageForm {
         initial.connectorTab.jwksUrl,
         [
           Validators.required,
-          Validators.maxLength(128),
+          Validators.maxLength(512),
           notBlankValidator(),
           connectorUrlValidator,
         ],

@@ -16,6 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import {Component, HostBinding, Input} from '@angular/core';
+import {EDC_CONFIG} from 'src/app/core/services/config/connector-config';
 import {ClipboardUtils} from 'src/app/core/utils/clipboard-utils';
 
 @Component({
@@ -29,14 +30,21 @@ export class ConnectorRegisteringSuccessMessagePageComponent {
   @HostBinding('class.items-center')
   @HostBinding('class.text-center')
   @HostBinding('class.my-12')
+  @HostBinding('class.overflow-hidden')
   cls = true;
 
   @Input()
   connectorConfig: string = '...';
 
+  config = EDC_CONFIG;
+
   constructor(private clipboardUtils: ClipboardUtils) {}
 
   copyToClipboard() {
     this.clipboardUtils.copyToClipboard(this.connectorConfig);
+  }
+
+  copyToClipboardDockerImage() {
+    this.clipboardUtils.copyToClipboard(this.config.dockerImage);
   }
 }

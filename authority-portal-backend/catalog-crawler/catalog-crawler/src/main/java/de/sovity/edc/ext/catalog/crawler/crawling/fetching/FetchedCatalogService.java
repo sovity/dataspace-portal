@@ -21,10 +21,10 @@ package de.sovity.edc.ext.catalog.crawler.crawling.fetching;
 import de.sovity.edc.ext.catalog.crawler.crawling.fetching.model.FetchedCatalog;
 import de.sovity.edc.ext.catalog.crawler.crawling.fetching.model.FetchedDataOffer;
 import de.sovity.edc.ext.catalog.crawler.dao.connectors.ConnectorRef;
-import de.sovity.edc.utils.catalog.DspCatalogService;
+import de.sovity.edc.ce.libs.mappers.dsp.DspCatalogService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.eclipse.edc.connector.contract.spi.types.offer.ContractOffer;
+import org.eclipse.edc.connector.controlplane.contract.spi.types.offer.ContractOffer;
 
 @RequiredArgsConstructor
 public class FetchedCatalogService {
@@ -39,7 +39,7 @@ public class FetchedCatalogService {
      */
     @SneakyThrows
     public FetchedCatalog fetchCatalog(ConnectorRef connectorRef) {
-        var dspCatalog = dspCatalogService.fetchDataOffers(connectorRef.getEndpoint());
+        var dspCatalog = dspCatalogService.fetchDataOffers(connectorRef.getConnectorId(), connectorRef.getEndpoint());
         return catalogPatchBuilder.buildFetchedCatalog(dspCatalog, connectorRef);
     }
 }

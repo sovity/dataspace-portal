@@ -20,10 +20,10 @@ package de.sovity.edc.ext.catalog.crawler.crawling.fetching;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.sovity.edc.ext.catalog.crawler.dao.connectors.ConnectorRef;
-import de.sovity.edc.ext.wrapper.api.common.mappers.AssetMapper;
-import de.sovity.edc.ext.wrapper.api.common.mappers.PolicyMapper;
-import de.sovity.edc.ext.wrapper.api.common.model.UiAsset;
-import de.sovity.edc.utils.catalog.model.DspDataOffer;
+import de.sovity.edc.ce.libs.mappers.AssetMapper;
+import de.sovity.edc.ce.libs.mappers.PolicyMapper;
+import de.sovity.edc.ce.api.common.model.UiAsset;
+import de.sovity.edc.ce.libs.mappers.dsp.model.DspDataOffer;
 import jakarta.json.JsonObject;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

@@ -19,21 +19,9 @@ import {Injectable} from '@angular/core';
 import * as forge from 'node-forge';
 
 export interface CertificateAttributes {
-  [key: string]: string;
-}
-
-export interface CertificateGeneratorConfig {
-  country: string;
-  legalName: string;
   commonName: string;
-  email: string;
-}
-
-export interface CertificateResult {
-  pemCertificate: string;
-  p12FormatCertificate: string;
-  certificateBlob: Blob | null;
-  fileUrl: string | null;
+  countryName: string;
+  organizationName: string;
 }
 
 @Injectable({
@@ -87,7 +75,7 @@ export class CertificateGenerateService {
     let attrs: forge.pki.CertificateField[] = [
       {
         name: 'commonName',
-        value: attributes['commonName'],
+        value: attributes.commonName,
         // The naming of this attribute and the type definitions are incorrect;
         // it holds an ASN.1 type, not a class.
         // @ts-expect-error
@@ -95,37 +83,13 @@ export class CertificateGenerateService {
       },
       {
         name: 'countryName',
-        value: attributes['countryName'],
-        // @ts-expect-error
-        valueTagClass: forge.asn1.Type.UTF8,
-      },
-      {
-        shortName: 'ST',
-        value: attributes['stateName'],
-        // @ts-expect-error
-        valueTagClass: forge.asn1.Type.UTF8,
-      },
-      {
-        name: 'localityName',
-        value: attributes['localityName'],
+        value: attributes.countryName,
         // @ts-expect-error
         valueTagClass: forge.asn1.Type.UTF8,
       },
       {
         name: 'organizationName',
-        value: attributes['organizationName'],
-        // @ts-expect-error
-        valueTagClass: forge.asn1.Type.UTF8,
-      },
-      {
-        name: 'organizationalUnitName',
-        value: attributes['organizationalUnitName'],
-        // @ts-expect-error
-        valueTagClass: forge.asn1.Type.UTF8,
-      },
-      {
-        name: 'emailAddress',
-        value: attributes['emailAddress'],
+        value: attributes.organizationName,
         // @ts-expect-error
         valueTagClass: forge.asn1.Type.UTF8,
       },
@@ -186,38 +150,9 @@ export class CertificateGenerateService {
    * @returns
    */
   privateKeyToPem(privateKey: forge.pki.PrivateKey): string {
-    return forge.pki.privateKeyToPem(privateKey);
-  }
-
-  convertToP12Format(
-    privateKey: forge.pki.PrivateKey,
-    certificate: forge.pki.Certificate,
-    password: string,
-  ) {
-    const p12Asn1 = forge.pkcs12.toPkcs12Asn1(
-      privateKey,
-      [certificate],
-      password,
+    // This outputs a generic "PRIVATE KEY" header instead of "RSA PRIVATE KEY"
+    return forge.pki.privateKeyInfoToPem(
+      forge.pki.wrapRsaPrivateKey(forge.pki.privateKeyToAsn1(privateKey)),
     );
-    const p12Der = forge.asn1.toDer(p12Asn1).getBytes();
-    return btoa(p12Der);
-  }
-
-  getCertificateBlob(certificate: string) {
-    try {
-      const byteCharacters = atob(certificate);
-      const byteNumbers = new Array(byteCharacters.length);
-
-      for (let i = 0; i < byteCharacters.length; i++) {
-        byteNumbers[i] = byteCharacters.charCodeAt(i);
-      }
-
-      const byteArray = new Uint8Array(byteNumbers);
-      const blob = new Blob([byteArray], {type: 'application/x-pkcs12'});
-
-      return blob;
-    } catch (error) {
-      return null;
-    }
   }
 }

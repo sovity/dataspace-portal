@@ -29,7 +29,13 @@ if (os.platform() === 'win32') {
 let args = process.argv.slice(2);
 console.log(`CWD: ${process.cwd()}`);
 console.log(`Running: ${executable} ${args.join(' ')}`);
-const run = spawn(executable, args, {stdio: 'inherit'});
+const run = spawn(executable, args, {
+  stdio: 'inherit',
+  /**
+   * Required or on Windows Machine NPM security features will deny execution of gradlew.bat
+   */
+  shell: true,
+});
 
 run.on('close', (code) => {
   process.exit(code);

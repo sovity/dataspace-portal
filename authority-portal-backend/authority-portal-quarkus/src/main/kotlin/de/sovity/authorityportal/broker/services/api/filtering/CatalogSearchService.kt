@@ -29,8 +29,6 @@ class CatalogSearchService {
             searchQuery, listOf(
                 fields.dataOfferTable.ASSET_ID,
                 fields.dataOfferTable.ASSET_TITLE,
-                fields.dataOfferTable.DATA_CATEGORY,
-                fields.dataOfferTable.DATA_SUBCATEGORY,
                 fields.dataOfferTable.DESCRIPTION_NO_MARKDOWN,
                 fields.dataOfferTable.KEYWORDS_COMMA_JOINED,
                 fields.connectorTable.ENDPOINT_URL,

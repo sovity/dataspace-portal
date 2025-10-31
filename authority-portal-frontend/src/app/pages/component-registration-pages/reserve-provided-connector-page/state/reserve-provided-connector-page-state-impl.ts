@@ -27,7 +27,6 @@ import {
 import {ApiService} from 'src/app/core/api/api.service';
 import {GlobalStateUtils} from 'src/app/core/global-state/global-state-utils';
 import {ErrorService} from 'src/app/core/services/error.service';
-import {buildConnectorConfigFromResponse} from 'src/app/core/utils/connector-config-utils';
 import {Fetched} from 'src/app/core/utils/fetched';
 import {ToastService} from 'src/app/shared/common/toast-notifications/toast.service';
 import {ReserveProvidedConnectorPageFormValue} from '../reserve-provided-connector-page/reserve-provided-connector-page-form-model';
@@ -78,12 +77,11 @@ export class ReserveProvidedConnectorPageStateImpl {
           );
         },
       ),
-      tap((res) => {
+      tap((res: CreateConnectorResponse) => {
         ctx.patchState({
-          connectorConfig: buildConnectorConfigFromResponse(
+          deploymentEnvironment:
             this.globalStateUtils.snapshot.selectedEnvironment!,
-            res,
-          ),
+          connectorId: res.id,
         });
         switch (res.status) {
           case 'OK':

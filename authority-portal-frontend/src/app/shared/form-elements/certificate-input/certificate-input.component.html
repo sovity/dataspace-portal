@@ -1,42 +1,59 @@
-<label
-  *ngIf="showLabel"
-  class="w-full mb-2 text-sm"
-  [class.text-red-600]="ctrl.touched && ctrl.invalid"
-  [for]="ctrlId"
-  >{{ label }}</label
->
+<div class="relative">
+  <label
+    *ngIf="showLabel"
+    class="mb-2 text-sm"
+    [class.text-red-600]="ctrl.touched && ctrl.invalid"
+    [for]="ctrlId"
+    >{{ label }}</label
+  >
 
-<mat-form-field class="flex-1 text-s" appearance="outline" color="accent">
-  <textarea
-    *ngIf="!readonly"
-    data-testid="certificate-input"
-    rows="12"
-    matInput
-    [ngClass]="textAreaClasses"
-    [attr.disabled]="readonly"
-    [class.disabled]="readonly"
-    [readonly]="readonly"
-    [placeholder]="placeholder"
-    [formControl]="ctrl"
-    [attr.id]="ctrlId"></textarea>
-  <textarea
-    *ngIf="readonly"
-    rows="12"
-    matInput
-    disabled
-    readonly
-    [ngClass]="textAreaClasses"
-    [ngModel]="ctrl.value"
-    [placeholder]="placeholder"
-    [attr.id]="ctrlId"></textarea>
-  <mat-error
-    *ngIf="ctrl.touched && ctrl.dirty && ctrl.hasError('required')"
-    class="text-xs">
-    Certificate is a required field
-  </mat-error>
-  <mat-error
-    *ngIf="ctrl.touched && ctrl.dirty && ctrl.hasError('pattern')"
-    class="text-xs">
-    Certificate format is invalid
-  </mat-error>
-</mat-form-field>
+  <mat-form-field
+    class="flex-1 w-full !text-sm"
+    appearance="outline"
+    color="accent">
+    <textarea
+      *ngIf="!readonly"
+      data-testid="certificate-input"
+      rows="8"
+      matInput
+      [ngClass]="textAreaClasses"
+      [attr.disabled]="readonly"
+      [class.disabled]="readonly"
+      [readonly]="readonly"
+      [placeholder]="placeholder"
+      [formControl]="ctrl"
+      [attr.id]="ctrlId"></textarea>
+    <textarea
+      *ngIf="readonly"
+      class="overflow-x-auto whitespace-nowrap"
+      rows="6"
+      matInput
+      readonly
+      [ngClass]="textAreaClasses"
+      [ngModel]="ctrl.value"
+      [placeholder]="placeholder"
+      [attr.id]="ctrlId"></textarea>
+    <mat-error
+      *ngIf="ctrl.touched && ctrl.dirty && ctrl.hasError('required')"
+      class="text-xs">
+      Certificate is a required field
+    </mat-error>
+    <mat-error
+      *ngIf="ctrl.touched && ctrl.dirty && ctrl.hasError('pattern')"
+      class="text-xs">
+      Certificate format is invalid
+    </mat-error>
+  </mat-form-field>
+
+  <div class="absolute" style="top: 24px; right: 0">
+    <button
+      *ngIf="ctrl.value && readonly"
+      mat-icon-button
+      type="button"
+      data-testid="copy-to-clipboard-btn"
+      matTooltip="Copy to clipboard"
+      (click)="clipboardUtils.copyToClipboard(this.ctrl.value)">
+      <mat-icon>content_copy</mat-icon>
+    </button>
+  </div>
+</div>

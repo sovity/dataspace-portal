@@ -91,7 +91,7 @@
       matTooltipClass="text-sm"></mat-icon>
   </div>
 
-  <!-- User's Full Name -->
+  <!-- User Full Name -->
   <app-text-input
     class="flex-1"
     label="Main Full Name"
@@ -102,7 +102,7 @@
     [ctrl]="orgForm.controls.mainContactName"></app-text-input>
 
   <div class="flex gap-4 flex-wrap">
-    <!-- User's PhoneNumber -->
+    <!-- User PhoneNumber -->
     <app-text-input
       class="flex-1"
       label="Phone Number"
@@ -112,7 +112,7 @@
       required
       [ctrl]="orgForm.controls.mainContactPhoneNumber"></app-text-input>
 
-    <!-- User's Email -->
+    <!-- User Email -->
     <app-text-input
       class="flex-1"
       label="Email"
@@ -143,7 +143,7 @@
   </mat-checkbox>
 
   <ng-container *ngIf="!orgForm.controls.technicalContactSameAsMain.value">
-    <!-- User's Full Name -->
+    <!-- User Full Name -->
     <app-text-input
       class="flex-1"
       label="Technical Full Name"
@@ -154,7 +154,7 @@
       [ctrl]="orgForm.controls.technicalContactName"></app-text-input>
 
     <div class="flex gap-4 flex-wrap">
-      <!-- User's PhoneNumber -->
+      <!-- User PhoneNumber -->
       <app-text-input
         class="flex-1"
         label="Phone Number"
@@ -164,7 +164,7 @@
         required
         [ctrl]="orgForm.controls.technicalContactPhoneNumber"></app-text-input>
 
-      <!-- User's Email -->
+      <!-- User Email -->
       <app-text-input
         class="flex-1"
         label="Email"

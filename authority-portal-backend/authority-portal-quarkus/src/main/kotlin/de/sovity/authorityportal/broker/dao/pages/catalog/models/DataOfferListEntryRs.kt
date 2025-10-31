@@ -18,7 +18,7 @@
 package de.sovity.authorityportal.broker.dao.pages.catalog.models
 
 import de.sovity.authorityportal.db.jooq.enums.ConnectorOnlineStatus
-import de.sovity.edc.ext.wrapper.api.common.model.DataSourceAvailability
+import de.sovity.edc.ce.api.common.model.DataSourceAvailability
 import java.time.OffsetDateTime
 
 data class DataOfferListEntryRs(

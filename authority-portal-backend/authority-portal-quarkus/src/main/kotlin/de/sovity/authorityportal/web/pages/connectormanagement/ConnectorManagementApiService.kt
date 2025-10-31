@@ -48,7 +48,7 @@ import de.sovity.authorityportal.web.utils.unauthorized
 import io.quarkus.logging.Log
 import jakarta.enterprise.context.ApplicationScoped
 import java.net.MalformedURLException
-import java.net.URL
+import java.net.URI
 
 @ApplicationScoped
 class ConnectorManagementApiService(
@@ -329,7 +329,7 @@ class ConnectorManagementApiService(
 
         return try {
             listOf(frontendUrlString, endpointUrlString, managementUrlString)
-                .map { URL(it).protocol }
+                .map { URI.create(it).scheme }
                 .all { it == "https" }
         } catch (e: MalformedURLException) {
             false
@@ -387,13 +387,13 @@ class ConnectorManagementApiService(
 
         if (!certificate.isNullOrEmpty()) {
             dapsClient.addCertificate(clientId, certificate)
-            dapsClient.configureMappers(clientId, connectorId, certificate)
         } else if (!jwksUrl.isNullOrEmpty()) {
             dapsClient.addJwksUrl(clientId, jwksUrl)
-            dapsClient.configureMappers(clientId, connectorId)
         } else {
             error("Either certificate or JWKS URL must be provided, connectorId=$connectorId, clientId=$clientId.")
         }
+
+        dapsClient.configureMappers(clientId)
     }
 
     private fun buildConnectorStatusFromConnectorDetails(connector: ConnectorService.ConnectorDetailRs) =

@@ -22,7 +22,7 @@ import com.github.t9t.jooq.json.JsonbDSL
 import de.sovity.authorityportal.api.model.catalog.ConnectorOnlineStatusDto
 import de.sovity.authorityportal.db.jooq.Tables
 import de.sovity.authorityportal.db.jooq.tables.Connector
-import de.sovity.edc.ext.wrapper.api.common.model.DataSourceAvailability
+import de.sovity.edc.ce.api.common.model.DataSourceAvailability
 import jakarta.enterprise.context.ApplicationScoped
 import org.jooq.Condition
 import org.jooq.DSLContext

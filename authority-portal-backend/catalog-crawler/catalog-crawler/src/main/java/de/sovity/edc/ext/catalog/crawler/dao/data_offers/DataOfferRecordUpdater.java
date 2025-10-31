@@ -24,7 +24,7 @@ import de.sovity.edc.ext.catalog.crawler.crawling.writing.utils.ChangeTracker;
 import de.sovity.edc.ext.catalog.crawler.dao.connectors.ConnectorRef;
 import de.sovity.edc.ext.catalog.crawler.dao.utils.JsonbUtils;
 import de.sovity.edc.ext.catalog.crawler.utils.JsonUtils2;
-import de.sovity.edc.ext.wrapper.api.common.mappers.asset.utils.ShortDescriptionBuilder;
+import de.sovity.edc.ce.libs.mappers.asset.utils.ShortDescriptionBuilder;
 import lombok.RequiredArgsConstructor;
 import org.jooq.JSONB;
 
@@ -100,33 +100,9 @@ public class DataOfferRecordUpdater {
         );
 
         changes.setIfChanged(
-                blankIfNull(record.getDataCategory()),
-                blankIfNull(asset.getDataCategory()),
-                record::setDataCategory
-        );
-
-        changes.setIfChanged(
-                blankIfNull(record.getDataSubcategory()),
-                blankIfNull(asset.getDataSubcategory()),
-                record::setDataSubcategory
-        );
-
-        changes.setIfChanged(
                 blankIfNull(record.getDataModel()),
                 blankIfNull(asset.getDataModel()),
                 record::setDataModel
-        );
-
-        changes.setIfChanged(
-                blankIfNull(record.getTransportMode()),
-                blankIfNull(asset.getTransportMode()),
-                record::setTransportMode
-        );
-
-        changes.setIfChanged(
-                blankIfNull(record.getGeoReferenceMethod()),
-                blankIfNull(asset.getGeoReferenceMethod()),
-                record::setGeoReferenceMethod
         );
 
         changes.setIfChanged(

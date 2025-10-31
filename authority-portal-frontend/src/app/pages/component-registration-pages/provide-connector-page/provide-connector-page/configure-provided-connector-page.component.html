@@ -12,31 +12,62 @@
       <form class="flex flex-col w-full justify-center">
         <ng-template matStepLabel>Add Connector Details</ng-template>
         <div
-          class="select-none flex flex-col justify-center items-center my-10 w-2/3 mx-auto">
+          class="flex flex-col justify-center items-center my-10 w-2/3 mx-auto">
           <!-- Connector config info -->
           <div class="text-lg text-semibold mb-2 whitespace-nowrap">
             You can expect the following configuration for your connector
           </div>
-          <div class="relative p-4 bg-gray-100 max-w-5xl overflow-hidden mb-3">
+          <div
+            class="relative p-4 bg-gray-100 max-w-5xl overflow-hidden w-full mb-3">
             <div class="absolute top-0 right-0">
               <button
                 mat-icon-button
                 aria-label="copy button with"
-                (click)="copyPreliminaryConnectorConfig()">
+                (click)="copyInitialConnectorConfig()">
                 <mat-icon>content_copy</mat-icon>
               </button>
             </div>
 
             <code
               class="block text-left text-sm text-gray-500 whitespace-pre overflow-y-auto break-words p-3"
-              >{{ state.localConnectorConfig }}</code
+              >{{ getInitialConnectorConfig() }}</code
             >
           </div>
 
+          <!-- JWKS Support -->
+          <div class="w-full justify-start my-4">
+            <mat-slide-toggle
+              name="useJwks"
+              [formControl]="form.connectorTab.controls.useJwks"
+              >Use the Connector JWKS URL to retrieve the connector certificate
+            </mat-slide-toggle>
+          </div>
+
+          <!-- Use custom URLs toggle -->
+          <div class="w-full justify-start my-4">
+            <mat-slide-toggle
+              name="useCustomUrls"
+              [formControl]="form.connectorTab.controls.useCustomUrls"
+              >Overwrite default URLs
+            </mat-slide-toggle>
+          </div>
+
+          <!-- Base URL -->
+          <app-connector-url-input
+            *ngIf="!useCustomUrls"
+            class="w-full"
+            label="Connector Base URL"
+            ctrlId="formRegOConBaseUrl"
+            required
+            [ctrl]="
+              form.connectorTab.controls.baseUrl
+            "></app-connector-url-input>
+
           <!-- Frontend URL -->
           <app-connector-url-input
+            *ngIf="useCustomUrls"
             class="w-full"
-            label="Connector's Frontend URL"
+            label="Connector Frontend URL"
             ctrlId="formRegOConFrontendUrl"
             required
             [ctrl]="
@@ -45,40 +76,34 @@
 
           <!-- Endpoint URL -->
           <app-connector-url-input
+            *ngIf="useCustomUrls"
             class="w-full"
-            label="Connector's Endpoint URL"
+            label="Connector Endpoint URL"
             ctrlId="formRegOConEndpointUrl"
-            urlSuffix="/api/dsp"
             required
+            [urlSuffix]="edcConfig.defaultPaths.dspApi"
             [ctrl]="
               form.connectorTab.controls.endpointUrl
             "></app-connector-url-input>
 
           <!-- Management URL -->
           <app-connector-url-input
+            *ngIf="useCustomUrls"
             class="w-full"
-            label="Connector's Management URL"
+            label="Connector Management URL"
             ctrlId="formRegOConManagementUrl"
-            urlSuffix="/api/management"
             required
+            [urlSuffix]="edcConfig.defaultPaths.managementApi"
             [ctrl]="
               form.connectorTab.controls.managementUrl
             "></app-connector-url-input>
 
-          <!-- JWKS Support -->
-          <mat-checkbox
-            class="self-start gap-2"
-            [formControl]="form.connectorTab.controls.useJwks">
-            Use the Connector's JWKS URL to retrieve the connector
-            certificate</mat-checkbox
-          >
-
           <app-connector-url-input
-            *ngIf="form.connectorTab.controls.useJwks.value"
+            *ngIf="useCustomUrls && form.connectorTab.controls.useJwks.value"
             class="w-full mt-2.5"
-            label="Connector's JWKS URL"
+            label="Connector JWKS URL"
             ctrlId="formRegOConJwksUrl"
-            urlSuffix="/api/dsp/jwks"
+            [urlSuffix]="edcConfig.defaultPaths.jwksUrl"
             [ctrl]="form.connectorTab.controls.jwksUrl"
             [required]="
               form.connectorTab.controls.useJwks.value
@@ -157,7 +182,9 @@
 
       <app-connector-registering-success-message-page
         [connectorConfig]="
-          state.connectorConfig
+          form.value.connectorTab.useJwks
+            ? getInitialConnectorConfig()
+            : getFinalConnectorConfig()
         "></app-connector-registering-success-message-page>
 
       <div

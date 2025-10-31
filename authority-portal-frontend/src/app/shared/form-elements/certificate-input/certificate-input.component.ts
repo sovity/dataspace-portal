@@ -25,6 +25,7 @@ import {
 } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Subject, interval, takeUntil} from 'rxjs';
+import {ClipboardUtils} from '../../../core/utils/clipboard-utils';
 
 @Component({
   selector: 'app-certificate-input',
@@ -65,7 +66,10 @@ export class CertificateInputComponent implements AfterViewInit, OnDestroy {
 
   private _textarea: HTMLTextAreaElement | null = null;
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(
+    private elementRef: ElementRef,
+    public clipboardUtils: ClipboardUtils,
+  ) {}
 
   ngAfterViewInit() {
     interval(100)

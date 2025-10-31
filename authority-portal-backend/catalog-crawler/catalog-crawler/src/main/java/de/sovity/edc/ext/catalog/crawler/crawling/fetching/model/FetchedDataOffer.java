@@ -18,7 +18,7 @@
 
 package de.sovity.edc.ext.catalog.crawler.crawling.fetching.model;
 
-import de.sovity.edc.ext.wrapper.api.common.model.UiAsset;
+import de.sovity.edc.ce.api.common.model.UiAsset;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

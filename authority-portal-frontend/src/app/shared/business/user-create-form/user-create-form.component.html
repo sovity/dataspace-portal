@@ -1,6 +1,6 @@
 <form [formGroup]="userForm">
   <div class="flex gap-4 flex-wrap">
-    <!-- User's First Name -->
+    <!-- User First Name -->
     <app-text-input
       class="flex-1"
       label="First Name"
@@ -10,7 +10,7 @@
       required
       [ctrl]="userForm.controls.firstName"></app-text-input>
 
-    <!-- User's Last Name -->
+    <!-- User Last Name -->
     <app-text-input
       class="flex-1"
       label="Last Name"
@@ -22,7 +22,7 @@
   </div>
 
   <div class="flex gap-4 mb-4 flex-wrap">
-    <!-- User's Job Title -->
+    <!-- User Job Title -->
     <app-text-input
       class="flex-1"
       label="Job Title"
@@ -32,7 +32,7 @@
       required
       [ctrl]="userForm.controls.jobTitle"></app-text-input>
 
-    <!-- User's PhoneNumber -->
+    <!-- User PhoneNumber -->
     <app-text-input
       class="flex-1"
       label="Phone Number"
@@ -42,7 +42,7 @@
       required
       [ctrl]="userForm.controls.phoneNumber"></app-text-input>
 
-    <!-- User's Email -->
+    <!-- User Email -->
     <ng-container>
       <app-text-input
         class="flex-1"

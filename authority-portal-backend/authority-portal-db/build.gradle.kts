@@ -25,7 +25,7 @@ import org.testcontainers.containers.PostgreSQLContainer
 
 val jooqDbType = "org.jooq.meta.postgres.PostgresDatabase"
 val jdbcDriver = "org.postgresql.Driver"
-val postgresContainer = "postgres:${libs.versions.postgresDbVersion.get()}-alpine"
+val postgresContainer = libs.versions.postgresDbImage.get()
 
 val migrationsDir = "src/main/resources/db/migration"
 val jooqTargetPackage = "de.sovity.authorityportal.db.jooq"

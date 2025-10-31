@@ -22,10 +22,12 @@ import {connectorUrlValidator} from 'src/app/core/utils/validators/connector-url
 import {notBlankValidator} from 'src/app/core/utils/validators/not-blank-validator';
 import {buildCertificateInputForm} from '../../../../shared/form-elements/certificate-input-form/certificate-input-form-builder';
 import {certificateInputFormEnabledCtrls} from '../../../../shared/form-elements/certificate-input-form/certificate-input-form-enabled-ctrls';
+import {componentInputFormEnabledCtrls} from './register-central-component-enabled-ctrls';
 import {
   CertificateTabFormModel,
   CertificateTabFormValue,
   ComponentTabFormModel,
+  ComponentTabFormValue,
   DEFAULT_REGISTER_CENTRAL_COMPONENT_PAGE_FORM_VALUE,
   RegisterCentralComponentPageFormModel,
   RegisterCentralComponentPageFormValue,
@@ -61,19 +63,33 @@ export class RegisterCentralComponentPageForm {
         initial.componentTab.location,
         [Validators.required, Validators.maxLength(128), notBlankValidator()],
       ],
+      useCustomUrls: [initial.componentTab.useCustomUrls],
+      baseUrl: [
+        initial.componentTab.baseUrl,
+        [
+          Validators.required,
+          Validators.maxLength(512),
+          notBlankValidator(),
+          connectorUrlValidator,
+        ],
+      ],
       frontendUrl: [
         initial.componentTab.frontendUrl,
-        [Validators.required, connectorUrlValidator, Validators.maxLength(128)],
+        [Validators.required, connectorUrlValidator, Validators.maxLength(512)],
       ],
       endpointUrl: [
         initial.componentTab.endpointUrl,
-        [Validators.required, connectorUrlValidator, Validators.maxLength(128)],
+        [Validators.required, connectorUrlValidator, Validators.maxLength(512)],
       ],
     });
 
     const certificateTab = buildCertificateInputForm(
       this.formBuilder,
       initial.certificateTab,
+    );
+
+    switchDisabledControls<ComponentTabFormValue>(componentTab, (value) =>
+      componentInputFormEnabledCtrls(value),
     );
 
     switchDisabledControls<CertificateTabFormValue>(certificateTab, (value) =>

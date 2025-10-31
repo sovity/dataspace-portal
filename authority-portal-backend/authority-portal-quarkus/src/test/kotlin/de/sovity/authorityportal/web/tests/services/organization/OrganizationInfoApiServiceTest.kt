@@ -28,7 +28,7 @@ import de.sovity.authorityportal.web.Roles
 import de.sovity.authorityportal.web.tests.useDevUser
 import de.sovity.authorityportal.web.thirdparty.keycloak.KeycloakService
 import de.sovity.authorityportal.web.thirdparty.keycloak.model.KeycloakUserDto
-import de.sovity.edc.ext.wrapper.api.common.model.DataSourceAvailability
+import de.sovity.edc.ce.api.common.model.DataSourceAvailability
 import io.quarkus.test.InjectMock
 import io.quarkus.test.TestTransaction
 import io.quarkus.test.junit.QuarkusTest
@@ -270,7 +270,6 @@ class OrganizationInfoApiServiceTest {
             dataOffer(0, 0, 0, 0, assetApplier = {
                 it.assetId = dummyDevAssetId(0)
                 it.title = "Data Offer 0"
-                it.dataCategory = "Data Category 0"
                 it.description = "Data Offer 0 Description"
                 it.dataSourceAvailability = DataSourceAvailability.ON_REQUEST
             })
@@ -311,7 +310,6 @@ class OrganizationInfoApiServiceTest {
             dataOffer(0, 0, 0, 0, assetApplier = {
                 it.assetId = dummyDevAssetId(0)
                 it.title = "Data Offer 0"
-                it.dataCategory = "Data Category 0"
                 it.description = "Data Offer 0 Description"
                 it.dataSourceAvailability = DataSourceAvailability.ON_REQUEST
             })

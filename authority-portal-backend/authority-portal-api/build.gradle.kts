@@ -29,7 +29,7 @@ dependencies {
     api(libs.jakarta.wsRsApi)
     api(libs.jakarta.validation)
     api(libs.swaggerCore.annotations)
-    api(libs.sovity.edc.wrapperCommonApi) { isChanging = libs.sovity.edc.wrapperCommonApi.get().version?.endsWith("SNAPSHOT") ?: false }
+    api(libs.sovity.edc.api) { isChanging = libs.sovity.edc.api.get().version?.endsWith("SNAPSHOT") ?: false }
 
     implementation(libs.swaggerCore.jaxrs2)
     implementation(libs.jakarta.servletApi)
@@ -41,17 +41,20 @@ val openapiFile = "$openapiFileDir/$openapiFileFilename"
 
 var typescriptClientOutput = "../../authority-portal-frontend/src/app/core/api/client/generated"
 
-tasks.withType<io.swagger.v3.plugins.gradle.tasks.ResolveTask> {
+val resolve = tasks.withType<io.swagger.v3.plugins.gradle.tasks.ResolveTask> {
     outputDir = file(openapiFileDir)
     outputFileName = openapiFileFilename.removeSuffix(".yaml")
     prettyPrint = true
     outputFormat = io.swagger.v3.plugins.gradle.tasks.ResolveTask.Format.YAML
     classpath = sourceSets["main"].runtimeClasspath
+    // Tell the resolve task to only generate the OpenAPI spec from this folder.
+    // Otherwise, it will use the OpenAPI spec from EDC-CE.
+    resourcePackages = setOf("de.sovity.authorityportal.api")
 }
 
 task<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("openApiGenerateTypeScriptClient") {
     validateSpec.set(false)
-    dependsOn("resolve")
+    dependsOn(resolve)
     generatorName.set("typescript-fetch")
     configOptions.set(mutableMapOf(
         "supportsES6" to "true",
@@ -76,10 +79,10 @@ task<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("openApiGenera
     }
 }
 
-tasks.withType<org.gradle.jvm.tasks.Jar> {
-    dependsOn("resolve")
-    dependsOn("openApiGenerateTypeScriptClient")
-    from(openapiFileDir) {
-        include(openapiFileFilename)
-    }
+// This task acts as an optional task to create an additional jar file
+// containing the OpenAPI specification as a yaml file.
+val openapiJar by tasks.registering(Jar::class) {
+    dependsOn(resolve)
+    archiveClassifier.set("openapi")
+    from(openapiFile)
 }

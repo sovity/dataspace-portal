@@ -59,29 +59,9 @@ class CatalogFilterService(
             catalogFilterAttributeDefinitionService.buildDataSpaceFilter()
                 .takeIf { catalogDataspaceConfigService.hasMultipleDataspaces },
             catalogFilterAttributeDefinitionService.forIdOnlyField(
-                { fields: CatalogQueryFields -> fields.dataOfferTable.DATA_CATEGORY },
-                "dataCategory",
-                "Data Category"
-            ),
-            catalogFilterAttributeDefinitionService.forIdOnlyField(
-                { fields: CatalogQueryFields -> fields.dataOfferTable.DATA_SUBCATEGORY },
-                "dataSubcategory",
-                "Data Subcategory"
-            ),
-            catalogFilterAttributeDefinitionService.forIdOnlyField(
                 { fields: CatalogQueryFields -> fields.dataOfferTable.DATA_MODEL },
                 "dataModel",
                 "Data Model"
-            ),
-            catalogFilterAttributeDefinitionService.forIdOnlyField(
-                { fields: CatalogQueryFields -> fields.dataOfferTable.TRANSPORT_MODE },
-                "transportMode",
-                "Transport Mode"
-            ),
-            catalogFilterAttributeDefinitionService.forIdOnlyField(
-                { fields: CatalogQueryFields -> fields.dataOfferTable.GEO_REFERENCE_METHOD },
-                "geoReferenceMethod",
-                "Geo Reference Method"
             ),
             catalogFilterAttributeDefinitionService.forIdNameProperty(
                 { fields: CatalogQueryFields -> fields.organizationTable.ID },

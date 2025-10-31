@@ -32,6 +32,14 @@ interface DeploymentEnvironmentConfiguration {
         fun daps(): DapsConfig
         fun dataCatalog(): DataCatalogConfig
         fun loggingHouse(): Optional<LoggingHouseConfig>
+        fun centralComponents(): Map<String, CentralComponentInitConfig>
+
+        interface CentralComponentInitConfig {
+            fun clientId(): String
+            fun homepageUrl(): Optional<String>
+            fun endpointUrl(): String
+            fun certificate(): String
+        }
 
         interface DapsConfig {
             fun url(): String

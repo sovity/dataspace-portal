@@ -26,7 +26,7 @@ import de.sovity.edc.ext.catalog.crawler.dao.contract_offers.ContractOfferRecord
 import de.sovity.edc.ext.catalog.crawler.dao.data_offers.DataOfferQueries;
 import de.sovity.edc.ext.catalog.crawler.dao.data_offers.DataOfferRecordUpdater;
 import de.sovity.edc.ext.catalog.crawler.orchestration.config.CrawlerConfig;
-import de.sovity.edc.ext.wrapper.api.common.mappers.asset.utils.ShortDescriptionBuilder;
+import de.sovity.edc.ce.libs.mappers.asset.utils.ShortDescriptionBuilder;
 import lombok.Value;
 import org.eclipse.edc.spi.system.configuration.Config;
 

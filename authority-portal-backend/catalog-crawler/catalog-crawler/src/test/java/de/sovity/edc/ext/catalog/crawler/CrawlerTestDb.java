@@ -20,11 +20,11 @@ package de.sovity.edc.ext.catalog.crawler;
 
 import com.zaxxer.hikari.HikariDataSource;
 import de.sovity.edc.ext.catalog.crawler.dao.config.DslContextFactory;
-import de.sovity.edc.extension.e2e.db.TestDatabaseViaTestcontainers;
-import de.sovity.edc.extension.postgresql.FlywayExecutionParams;
-import de.sovity.edc.extension.postgresql.FlywayUtils;
-import de.sovity.edc.extension.postgresql.HikariDataSourceFactory;
-import de.sovity.edc.extension.postgresql.JdbcCredentials;
+import de.sovity.edc.ext.db.TestDatabaseViaTestcontainers;
+import de.sovity.edc.ext.db.FlywayExecutionParams;
+import de.sovity.edc.ext.db.FlywayUtils;
+import de.sovity.edc.ext.db.HikariDataSourceFactory;
+import de.sovity.edc.ext.db.JdbcCredentials;
 import org.jooq.DSLContext;
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;

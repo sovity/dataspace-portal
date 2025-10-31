@@ -1,31 +1,70 @@
 <h2 class="wizard-end-title">Finish setting up your connector!</h2>
-<p class="wizard-end-prose max-w-2xl">
-  To setup the connector, you will have to follow the Deployment Guide in the
-  EDC repository which you can find by clicking the button below. <br />
-  To get you started, we have prepared the following:
-</p>
-<div class="relative p-4 bg-gray-100 max-w-5xl overflow-hidden">
-  <div class="absolute top-0 right-0">
-    <button
-      mat-icon-button
-      data-testid="code-copy-btn"
-      aria-label="copy button with"
-      (click)="copyToClipboard()">
-      <mat-icon>content_copy</mat-icon>
-    </button>
-  </div>
 
-  <code
-    class="block text-left text-sm text-gray-500 whitespace-pre overflow-y-auto break-words p-3"
-    >{{ connectorConfig }}</code
-  >
-</div>
-<div class="mt-6">
-  <a
-    class="btn-outline"
-    href="https://github.com/sovity/edc-ce/releases"
-    target="_blank">
-    <mat-icon svgIcon="github"></mat-icon>
-    <span>Get your Connector on GitHub</span>
-  </a>
+<div class="flex text-left gap-12 overflow-hidden max-w-full">
+  <div class="flex w-1/2 flex-col gap-12">
+    <!-- Docker Image -->
+    <div class="flex flex-col gap-3">
+      <h3 class="wizard-end-subtitle">1. Get Your Connector</h3>
+      <div>
+        Ensure you are using the correct version of the sovity EDC CE Connector:
+      </div>
+      <div class="relative overflow-hidden w-full">
+        <div class="absolute top-[0.25rem] right-0">
+          <button
+            mat-icon-button
+            data-testid="code-copy-btn"
+            aria-label="copy button with"
+            (click)="copyToClipboardDockerImage()">
+            <mat-icon>content_copy</mat-icon>
+          </button>
+        </div>
+        <input
+          class="bg-gray-100 border border-gray-700 rounded-lg block text-left outline-none w-full text-gray-500 px-6 py-4"
+          type="text"
+          readonly
+          [attr.value]="config.dockerImage" />
+      </div>
+    </div>
+
+    <!-- Deployment Guide -->
+    <div class="flex flex-col gap-3">
+      <h3 class="wizard-end-subtitle">2. Prepare Your Infrastructure</h3>
+      <div>
+        Connector deployments require careful mapping of certain ports and paths
+        while securing others. Please read our productive deployment guide
+        carefully and prepare your infrastructure accordingly:
+      </div>
+      <a
+        class="text-blue-600 hover:text-blue-800 no-underline"
+        target="_blank"
+        [href]="config.deploymentGuideUrl">
+        {{ config.deploymentGuideUrl }}
+      </a>
+    </div>
+  </div>
+  <div class="flex w-1/2 flex-col gap-12">
+    <!-- Connector Config -->
+    <div class="flex flex-col gap-3">
+      <h3 class="wizard-end-subtitle">3. Configure Your Connector</h3>
+      <div>
+        To get you started more quickly, we have prepared this configuration for
+        your connector:
+      </div>
+      <div class="relative overflow-hidden">
+        <div class="absolute top-0 right-0">
+          <button
+            mat-icon-button
+            data-testid="code-copy-btn"
+            aria-label="copy button with"
+            (click)="copyToClipboard()">
+            <mat-icon>content_copy</mat-icon>
+          </button>
+        </div>
+        <code
+          class="bg-gray-100 border border-gray-700 rounded-lg block text-left text-xs text-gray-500 whitespace-pre overflow-auto max-h-[20rem] break-words px-6 py-4">
+          {{ connectorConfig }}
+        </code>
+      </div>
+    </div>
+  </div>
 </div>

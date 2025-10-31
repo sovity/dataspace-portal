@@ -39,8 +39,8 @@
 
   <!-- Industry -->
   <app-industry-select
-    data-testid="industry-selector"
     class="flex-1"
+    data-testid="industry-selector"
     required
     [ctrl]="orgForm.controls.industry"></app-industry-select>
   <!-- Industry -->
@@ -110,8 +110,8 @@
 
   <mat-checkbox
     id="formRegBillingDifferent"
-    data-testid="formRegBillingDifferent"
     class="mb-2"
+    data-testid="formRegBillingDifferent"
     [formControl]="orgForm.controls.billingAddressSameAsMain"
     ><div class="flex gap-2 items-center">
       <span class="text-sm">Billing address is same as main address</span>
@@ -207,7 +207,9 @@
     <div class="flex flex-col flex-1">
       <label class="w-full mb-2 text-sm">Legal ID Type</label>
       <mat-form-field appearance="outline">
-        <mat-select [formControl]="orgForm.controls.legalIdType" data-testid="formLegalIdTypeSelector">
+        <mat-select
+          data-testid="formLegalIdTypeSelector"
+          [formControl]="orgForm.controls.legalIdType">
           <mat-option *ngFor="let type of idTypes" [value]="type.value">
             {{ type.viewValue }}
           </mat-option>
@@ -257,7 +259,7 @@
       matTooltipClass="text-sm"></mat-icon>
   </div>
   <div class="flex gap-4 flex-wrap">
-    <!-- User's First Name -->
+    <!-- User First Name -->
     <app-text-input
       class="flex-1"
       label="Main First Name"
@@ -266,9 +268,9 @@
       placeholder="John"
       required
       [ctrl]="orgForm.controls.mainContactFirstName"></app-text-input>
-    <!-- User's First Name -->
+    <!-- User First Name -->
 
-    <!-- User's Last Name -->
+    <!-- User Last Name -->
     <app-text-input
       class="flex-1"
       label="Main Last Name"
@@ -277,11 +279,11 @@
       placeholder="Doe"
       required
       [ctrl]="orgForm.controls.mainContactLastName"></app-text-input>
-    <!-- User's Last Name -->
+    <!-- User Last Name -->
   </div>
 
   <div class="flex gap-4 flex-wrap">
-    <!-- User's PhoneNumber -->
+    <!-- User PhoneNumber -->
     <app-text-input
       class="flex-1"
       label="Phone Number"
@@ -291,9 +293,9 @@
       required
       [ctrl]="orgForm.controls.mainContactPhoneNumber"></app-text-input>
 
-    <!-- User's PhoneNumber -->
+    <!-- User PhoneNumber -->
 
-    <!-- User's Email -->
+    <!-- User Email -->
     <app-text-input
       class="flex-1"
       label="Email"
@@ -302,7 +304,7 @@
       placeholder="john.doe@my-org.com"
       required
       [ctrl]="orgForm.controls.mainContactEmail"></app-text-input>
-    <!-- User's Email -->
+    <!-- User Email -->
   </div>
 </div>
 <!-- Main Contact Form -->
@@ -318,8 +320,8 @@
   </div>
   <mat-checkbox
     id="formRegMcSameAsTc"
-    data-testid="formRegMcSameAsTc"
     class="mb-2"
+    data-testid="formRegMcSameAsTc"
     [formControl]="orgForm.controls.technicalContactSameAsMain"
     ><div class="flex gap-2 items-center">
       <span class="text-sm">Same as Main Contact</span>
@@ -328,7 +330,7 @@
 
   <ng-container *ngIf="!orgForm.controls.technicalContactSameAsMain.value">
     <div class="flex gap-4 flex-wrap">
-      <!-- User's First Name -->
+      <!-- User First Name -->
       <app-text-input
         class="flex-1"
         label="Technical First Name"
@@ -337,9 +339,9 @@
         placeholder="John"
         required
         [ctrl]="orgForm.controls.technicalContactFirstName"></app-text-input>
-      <!-- User's First Name -->
+      <!-- User First Name -->
 
-      <!-- User's Last Name -->
+      <!-- User Last Name -->
       <app-text-input
         class="flex-1"
         label="Technical Last Name"
@@ -348,11 +350,11 @@
         placeholder="Doe"
         required
         [ctrl]="orgForm.controls.technicalContactLastName"></app-text-input>
-      <!-- User's Last Name -->
+      <!-- User Last Name -->
     </div>
 
     <div class="flex gap-4 flex-wrap">
-      <!-- User's PhoneNumber -->
+      <!-- User PhoneNumber -->
       <app-text-input
         class="flex-1"
         label="Phone Number"
@@ -361,9 +363,9 @@
         placeholder="+49 1234 567890"
         required
         [ctrl]="orgForm.controls.technicalContactPhoneNumber"></app-text-input>
-      <!-- User's PhoneNumber -->
+      <!-- User PhoneNumber -->
 
-      <!-- User's Email -->
+      <!-- User Email -->
       <app-text-input
         class="flex-1"
         label="Email"
@@ -372,7 +374,7 @@
         placeholder="john.doe@my-org.com"
         required
         [ctrl]="orgForm.controls.technicalContactEmail"></app-text-input>
-      <!-- User's Email -->
+      <!-- User Email -->
     </div>
   </ng-container>
 </div>

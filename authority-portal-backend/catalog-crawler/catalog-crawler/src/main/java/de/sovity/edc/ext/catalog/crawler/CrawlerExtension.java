@@ -18,9 +18,10 @@
 
 package de.sovity.edc.ext.catalog.crawler;
 
-import de.sovity.edc.ext.wrapper.api.common.mappers.PlaceholderEndpointService;
-import org.eclipse.edc.connector.api.management.configuration.transform.ManagementApiTypeTransformerRegistry;
-import org.eclipse.edc.connector.spi.catalog.CatalogService;
+import de.sovity.edc.ce.libs.mappers.PlaceholderEndpointService;
+import de.sovity.edc.runtime.config.ConfigUtils;
+import org.eclipse.edc.transform.spi.TypeTransformerRegistry;
+import org.eclipse.edc.connector.controlplane.services.spi.catalog.CatalogService;
 import org.eclipse.edc.jsonld.spi.JsonLd;
 import org.eclipse.edc.runtime.metamodel.annotation.Inject;
 import org.eclipse.edc.runtime.metamodel.annotation.Provides;
@@ -31,13 +32,13 @@ import org.eclipse.edc.spi.types.TypeManager;
 @Provides({CrawlerExtensionContext.class})
 public class CrawlerExtension implements ServiceExtension {
 
-    public static final String EXTENSION_NAME = "Authority Portal Data Catalog Crawler";
+    public static final String EXTENSION_NAME = "Data Space Portal Data Catalog Crawler";
 
     @Inject
     private TypeManager typeManager;
 
     @Inject
-    private ManagementApiTypeTransformerRegistry typeTransformerRegistry;
+    private TypeTransformerRegistry typeTransformerRegistry;
 
     @Inject
     private JsonLd jsonLd;
@@ -63,8 +64,7 @@ public class CrawlerExtension implements ServiceExtension {
             typeManager,
             typeTransformerRegistry,
             jsonLd,
-            catalogService,
-            new PlaceholderEndpointService("http://0.0.0.0/")
+            catalogService
         );
 
         // Provide access for the tests

@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 @Schema(
     description = "Filter in form of a conjunctive normal form, meaning (A=X OR A=Y) AND (B=M or B=N). " +
             "Not selected attributes default to TRUE. Used here to let the backend be a SSOT for the available filter options, " +
-            "e.g. Transport Mode, Data Model, etc."
+            "e.g. Data Model, etc."
 )
 data class CnfFilter(
     @field:Schema(description = "Available attributes to filter by.", requiredMode = Schema.RequiredMode.REQUIRED)

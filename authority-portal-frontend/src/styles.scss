@@ -39,8 +39,8 @@
   font-style: normal;
   font-weight: 400;
   src: local('Material Icons Outlined'), local('MaterialIcons-Outlined'),
-  url('./assets/fonts/material-icons-outlined-v109-latin-regular.woff2')
-  format('woff2');
+    url('./assets/fonts/material-icons-outlined-v109-latin-regular.woff2')
+      format('woff2');
 }
 
 html {
@@ -103,6 +103,10 @@ a {
 .wizard-end-title {
   @apply mb-10;
   @apply text-3xl font-bold leading-9 text-black;
+}
+
+.wizard-end-subtitle {
+  @apply text-2xl font-bold leading-9 text-black;
 }
 
 /* TEXTS */

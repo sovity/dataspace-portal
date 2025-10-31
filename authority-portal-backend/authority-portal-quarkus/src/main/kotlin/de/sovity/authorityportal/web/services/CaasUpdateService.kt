@@ -94,7 +94,7 @@ class CaasUpdateService(
             val dapsClient = dapsClientService.forEnvironment(connector.environment)
             dapsClient.createClient(connector.clientId)
             dapsClient.addJwksUrl(connector.clientId, connector.jwksUrl)
-            dapsClient.configureMappers(connector.clientId, connector.connectorId)
+            dapsClient.configureMappers(connector.clientId)
         } catch (e: Exception) {
             Log.error(
                 "Error registering CaaS at DAPS. connectorId=${connector.connectorId}, organizationId=${connector.organizationId}.",

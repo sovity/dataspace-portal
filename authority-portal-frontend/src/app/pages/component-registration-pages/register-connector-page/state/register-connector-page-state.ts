@@ -15,14 +15,17 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import {DeploymentEnvironmentDto} from '@sovity.de/authority-portal-client';
 
 export interface RegisterConnectorPageState {
   state: 'editing' | 'submitting' | 'success' | 'error';
-  connectorConfig: string;
+  connectorId: string | null;
+  deploymentEnvironment: DeploymentEnvironmentDto | null;
 }
 
 export const DEFAULT_REGISTER_CONNECTOR_PAGE_STATE: RegisterConnectorPageState =
   {
     state: 'editing',
-    connectorConfig: '',
+    connectorId: null,
+    deploymentEnvironment: null,
   };

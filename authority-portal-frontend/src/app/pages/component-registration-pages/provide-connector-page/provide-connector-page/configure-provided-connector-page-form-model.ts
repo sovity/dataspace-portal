@@ -23,6 +23,8 @@ import {
 } from '../../../../shared/form-elements/certificate-input-form/certificate-input-form-model';
 
 export interface ConnectorTabFormModel {
+  useCustomUrls: FormControl<boolean>;
+  baseUrl: FormControl<string>;
   frontendUrl: FormControl<string>;
   endpointUrl: FormControl<string>;
   managementUrl: FormControl<string>;
@@ -31,6 +33,8 @@ export interface ConnectorTabFormModel {
 }
 export type ConnectorTabFormValue = ɵFormGroupRawValue<ConnectorTabFormModel>;
 export const DEFAULT_CONNECTOR_TAB_FORM_VALUE: ConnectorTabFormValue = {
+  useCustomUrls: false,
+  baseUrl: '',
   frontendUrl: '',
   endpointUrl: '',
   managementUrl: '',

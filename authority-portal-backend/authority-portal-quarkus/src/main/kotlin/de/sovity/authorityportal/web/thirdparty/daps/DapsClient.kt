@@ -26,9 +26,6 @@ import org.keycloak.admin.client.KeycloakBuilder
 import org.keycloak.representations.idm.ClientRepresentation
 import org.keycloak.representations.idm.ProtocolMapperRepresentation
 import java.nio.charset.StandardCharsets
-import java.security.MessageDigest
-import java.security.cert.CertificateFactory
-import java.security.cert.X509Certificate
 
 class DapsClient(dapsConfig: DapsConfig): AutoCloseable {
 
@@ -82,46 +79,55 @@ class DapsClient(dapsConfig: DapsConfig): AutoCloseable {
         keycloak.realm(realmName).clients().get(client.id).update(client)
     }
 
-    fun configureMappers(clientId: String, connectorId: String, certificate: String) {
+    fun configureMappers(clientId: String) {
         val client = getClientById(clientId) ?: error("Client not found")
-        setAccessTokenClaim(client)
 
-        val datMapper = buildDatMapper(clientId, connectorId)
-        datMapper.config["transport-certs-claim"] = generateSha256(certificate)
+        configureAudienceMapper(client)
 
-        keycloak.realm(realmName).clients().get(client.id).protocolMappers.createMapper(datMapper)
+        addHardcodedClaim(client, "nbf", "0", "long")
     }
 
-    fun configureMappers(clientId: String, connectorId: String) {
-        val client = getClientById(clientId) ?: error("Client not found")
-        setAccessTokenClaim(client)
+    private fun configureAudienceMapper(client: ClientRepresentation) {
+        val audience = "edc:dsp-api"
 
-        val datMapper = buildDatMapper(clientId, connectorId)
-        keycloak.realm(realmName).clients().get(client.id).protocolMappers.createMapper(datMapper)
-    }
+        val clientRes = keycloak.realm(realmName).clients().get(client.id)
 
-    private fun setAccessTokenClaim(client: ClientRepresentation) {
-        keycloak.realm(realmName).clients().get(client.id).protocolMappers.mappers.forEach {
-            it.config["access.token.claim"] = "false"
-            keycloak.realm(realmName).clients().get(client.id).protocolMappers.update(it.id, it)
-        }
-    }
-
-    private fun buildDatMapper(clientId: String, connectorId: String): ProtocolMapperRepresentation {
-        val datMapper = ProtocolMapperRepresentation().apply {
+        val rep = ProtocolMapperRepresentation().apply {
+            name = "audience:$audience"
             protocol = "openid-connect"
-            protocolMapper = "dat-mapper"
-            name = "DAT Mapper"
+            protocolMapper = "oidc-audience-mapper"
             config = mutableMapOf(
-                "security-profile-claim" to "idsc:BASE_SECURITY_PROFILE",
-                "audience-claim" to "idsc:IDS_CONNECTORS_ALL",
-                "scope-claim" to "idsc:IDS_CONNECTOR_ATTRIBUTES_ALL",
-                "subject-claim" to clientId,
-                "referring-connector-claim" to connectorId,
-                "access.token.claim" to "true"
+                "included.custom.audience" to audience,
+                "access.token.claim" to "true",
+                "id.token.claim" to "false",
+                "userinfo.token.claim" to "false"
             )
         }
-        return datMapper
+        clientRes.protocolMappers.createMapper(rep)
+    }
+
+    private fun addHardcodedClaim(
+        client: ClientRepresentation,
+        claimName: String,
+        claimValue: String,
+        jsonType: String = "String"
+    ) {
+        val clientRes = keycloak.realm(realmName).clients().get(client.id)
+
+        val rep = ProtocolMapperRepresentation().apply {
+            name = "hardcoded:$claimName"
+            protocol = "openid-connect"
+            protocolMapper = "oidc-hardcoded-claim-mapper"
+            config = mutableMapOf(
+                "claim.name" to claimName,
+                "claim.value" to claimValue,
+                "jsonType.label" to jsonType,
+                "access.token.claim" to "true",
+                "id.token.claim" to "false",
+                "userinfo.token.claim" to "false"
+            )
+        }
+        clientRes.protocolMappers.createMapper(rep)
     }
 
     private fun getClientById(clientId: String): ClientRepresentation? =
@@ -135,18 +141,5 @@ class DapsClient(dapsConfig: DapsConfig): AutoCloseable {
             isServiceAccountsEnabled = true
             clientAuthenticatorType = "client-jwt"
         }
-    }
-
-    private fun generateSha256(certString: String): String {
-        // DER
-        val certInputStream = certString.byteInputStream()
-        val certFactory = CertificateFactory.getInstance("X.509")
-        val certificate = certFactory.generateCertificate(certInputStream) as X509Certificate
-        val der = certificate.encoded
-
-        // SHA256
-        val sha256 = MessageDigest.getInstance("SHA-256")
-        val hash = sha256.digest(der)
-        return hash.joinToString("") { String.format("%02x", it) }
     }
 }

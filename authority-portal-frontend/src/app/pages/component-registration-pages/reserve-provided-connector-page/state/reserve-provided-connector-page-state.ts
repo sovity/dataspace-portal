@@ -15,18 +15,23 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import {OrganizationOverviewEntryDto} from '@sovity.de/authority-portal-client';
+import {
+  DeploymentEnvironmentDto,
+  OrganizationOverviewEntryDto,
+} from '@sovity.de/authority-portal-client';
 import {Fetched} from 'src/app/core/utils/fetched';
 
 export interface ReserveProvidedConnectorPageState {
   state: 'editing' | 'submitting' | 'success' | 'error';
   organizationList: Fetched<OrganizationOverviewEntryDto[]>;
-  connectorConfig: string;
+  connectorId: string | null;
+  deploymentEnvironment: DeploymentEnvironmentDto | null;
 }
 
 export const DEFAULT_RESERVE_PROVIDED_CONNECTOR_PAGE_STATE: ReserveProvidedConnectorPageState =
   {
     state: 'editing',
     organizationList: Fetched.empty(),
-    connectorConfig: '',
+    connectorId: null,
+    deploymentEnvironment: null,
   };

@@ -18,7 +18,7 @@
 
 package de.sovity.edc.ext.catalog.crawler;
 
-import de.sovity.edc.utils.config.ConfigUtils;
+import de.sovity.edc.utils.config.ConfigUtilsImpl;
 import de.sovity.edc.utils.config.model.ConfigProp;
 import de.sovity.edc.utils.config.utils.UrlPathUtils;
 import lombok.RequiredArgsConstructor;
@@ -172,20 +172,10 @@ public class CrawlerConfigProps {
 
     /* Auth */
 
-    public static final ConfigProp MY_EDC_C2C_IAM_TYPE = addCeProp(builder -> builder
-        .category(CrawlerConfigProps.Category.C2C_IAM)
-        .property("my.edc.c2c.iam.type")
-        .description("Type of Connector-to-Connector IAM / Authentication Mechanism used. " +
-            "Available values are: 'daps-sovity', 'daps-omejdn', 'mock-iam'. Default: 'daps-sovity'")
-        .warnIfOverridden(true)
-        .defaultValue("daps-sovity")
-    );
-
     public static final ConfigProp EDC_OAUTH_TOKEN_URL = addCeProp(builder -> builder
         .category(CrawlerConfigProps.Category.C2C_IAM)
         .property("edc.oauth.token.url")
         .description("OAuth2 / DAPS: Token URL")
-        .relevantIf(props -> MY_EDC_C2C_IAM_TYPE.getRaw(props).startsWith("daps"))
         .required(true)
     );
 
@@ -193,7 +183,6 @@ public class CrawlerConfigProps {
         .category(CrawlerConfigProps.Category.C2C_IAM)
         .property("edc.oauth.provider.jwks.url")
         .description("OAuth2 / DAPS: JWKS URL")
-        .relevantIf(props -> MY_EDC_C2C_IAM_TYPE.getRaw(props).startsWith("daps"))
         .required(true)
     );
 
@@ -201,7 +190,6 @@ public class CrawlerConfigProps {
         .category(CrawlerConfigProps.Category.C2C_IAM)
         .property("edc.oauth.client.id")
         .description("OAuth2 / DAPS: Client ID. Defaults to Participant ID")
-        .relevantIf(props -> MY_EDC_C2C_IAM_TYPE.getRaw(props).startsWith("daps"))
         .defaultValueFn(MY_EDC_PARTICIPANT_ID::getRaw)
     );
 
@@ -209,7 +197,6 @@ public class CrawlerConfigProps {
         .category(CrawlerConfigProps.Category.C2C_IAM)
         .property("edc.oauth.certificate.alias")
         .description("OAuth2 / DAPS: Certificate Vault Entry for the Public Key")
-        .relevantIf(props -> MY_EDC_C2C_IAM_TYPE.getRaw(props).startsWith("daps"))
         .defaultValue("daps-cert")
     );
 
@@ -217,49 +204,32 @@ public class CrawlerConfigProps {
         .category(CrawlerConfigProps.Category.C2C_IAM)
         .property("edc.oauth.private.key.alias")
         .description("OAuth2 / DAPS: Certificate Vault Entry for the Private Key")
-        .relevantIf(props -> MY_EDC_C2C_IAM_TYPE.getRaw(props).startsWith("daps"))
         .defaultValue("daps-priv")
     );
 
-    public static final ConfigProp EDC_OAUTH_PROVIDER_AUDIENCE = addCeProp(builder -> builder
+    public static final ConfigProp EDC_OAUTH_PROVIDER_AUDIENCE = addCeProp(builder ->
+        builder
         .category(CrawlerConfigProps.Category.C2C_IAM)
         .property("edc.oauth.provider.audience")
         .description("OAuth2 / DAPS: Provider Audience")
-        .relevantIf(props -> MY_EDC_C2C_IAM_TYPE.getRaw(props).startsWith("daps"))
         .warnIfOverridden(true)
-        .defaultValueFn(props -> {
-            if ("daps-omejdn".equals(MY_EDC_C2C_IAM_TYPE.getRaw(props))) {
-                return "idsc:IDS_CONNECTORS_ALL";
-            }
-
-            // daps-sovity
-            return EDC_OAUTH_TOKEN_URL.getRaw(props);
-        })
+        .defaultValueFn(EDC_OAUTH_TOKEN_URL::getRaw)
     );
 
     public static final ConfigProp EDC_OAUTH_ENDPOINT_AUDIENCE = addCeProp(builder -> builder
         .category(CrawlerConfigProps.Category.C2C_IAM)
         .property("edc.oauth.endpoint.audience")
         .description("OAuth2 / DAPS: Endpoint Audience")
-        .relevantIf(props -> MY_EDC_C2C_IAM_TYPE.getRaw(props).startsWith("daps"))
         .warnIfOverridden(true)
-        .defaultValue("idsc:IDS_CONNECTORS_ALL")
+        .defaultValue("edc:dsp-api")
     );
 
     public static final ConfigProp EDC_AGENT_IDENTITY_KEY = addCeProp(builder -> builder
         .category(CrawlerConfigProps.Category.C2C_IAM)
         .property("edc.agent.identity.key")
         .description("OAuth2 / DAPS: Agent Identity Key")
-        .relevantIf(props -> MY_EDC_C2C_IAM_TYPE.getRaw(props).startsWith("daps"))
         .warnIfOverridden(true)
-        .defaultValueFn(props -> {
-            if ("daps-omejdn".equals(MY_EDC_C2C_IAM_TYPE.getRaw(props))) {
-                return "client_id";
-            }
-
-            // daps-sovity
-            return "referringConnector";
-        })
+        .defaultValue("azp")
     );
 
     /* Advanced */
@@ -358,7 +328,7 @@ public class CrawlerConfigProps {
         .property("web.http.protocol.path")
         .description("API Group 'Protocol' must be public as it is used for connector to connector communication, this is the base path.")
         .warnIfOverridden(true)
-        .defaultValueFn(props -> UrlPathUtils.urlPathJoin(MY_EDC_BASE_PATH.getRaw(props), "api/dsp"))
+        .defaultValueFn(props -> UrlPathUtils.urlPathJoin(MY_EDC_BASE_PATH.getRaw(props), "api/v1/dsp"))
     );
 
     public static final ConfigProp WEB_HTTP_PROTOCOL_PORT = addCeProp(builder -> builder
@@ -440,7 +410,7 @@ public class CrawlerConfigProps {
         .property("edc.dsp.callback.address")
         .description("Full URL for the DSP callback address")
         .warnIfOverridden(true)
-        .defaultValueFn(ConfigUtils::getProtocolApiUrl)
+        .defaultValueFn(ConfigUtilsImpl::getProtocolApiUrl)
     );
 
     public static final ConfigProp EDC_VAULT = addCeProp(builder -> builder
@@ -451,6 +421,22 @@ public class CrawlerConfigProps {
             "It is created in the Dockerfile")
         .relevantIf(CrawlerConfigProps.NetworkType::isProduction)
         .defaultValue("/app/empty-properties-file.properties")
+    );
+
+    public static final ConfigProp EDC_OAUTH_VALIDATION_NBF_LEEWAY = addCeProp(builder -> builder
+        .category(Category.RAW_EDC_CONFIG_DEFAULTS)
+        .property("edc.oauth.validation.nbf.leeway")
+        .description("OAuth2 / DAPS: Leeway for the 'nbf' claim in seconds")
+        .warnIfOverridden(true)
+        .defaultValue("10")
+    );
+
+    public static final ConfigProp EDC_OAUTH_VALIDATION_ISSUED_AT_LEEWAY = addCeProp(builder -> builder
+        .category(Category.RAW_EDC_CONFIG_DEFAULTS)
+        .property("edc.oauth.validation.issued.at.leeway")
+        .description("OAuth2 / DAPS: Leeway for the 'iat' claim in seconds")
+        .warnIfOverridden(true)
+        .defaultValue("10")
     );
 
     /* Helpers */

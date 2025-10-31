@@ -24,14 +24,18 @@ import {
   ViewChild,
 } from '@angular/core';
 import {MatStepper} from '@angular/material/stepper';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {Subject, takeUntil} from 'rxjs';
 import {Store} from '@ngxs/store';
 import {UserInfo} from '@sovity.de/authority-portal-client';
 import {GlobalStateUtils} from 'src/app/core/global-state/global-state-utils';
 import {APP_CONFIG, AppConfig} from 'src/app/core/services/config/app-config';
+import {
+  EDC_CONFIG,
+  generateConnectorConfig,
+  generateConnectorConfigShort,
+} from 'src/app/core/services/config/connector-config';
 import {ClipboardUtils} from '../../../../core/utils/clipboard-utils';
-import {buildConnectorConfigFromLocalData} from '../../../../core/utils/connector-config-utils';
 import {
   GetConnector,
   GetOrganizations,
@@ -57,6 +61,8 @@ export class ConfigureProvidedConnectorPageComponent
   cls = true;
   state = DEFAULT_PROVIDE_CONNECTOR_PAGE_STATE;
   userInfo!: UserInfo;
+
+  edcConfig = EDC_CONFIG;
 
   createActionName = 'Provide Connector';
   exitLink = '/service-partner/provided-connectors';
@@ -85,6 +91,10 @@ export class ConfigureProvidedConnectorPageComponent
     this.store.dispatch(Reset);
     this.startListeningToState();
     this.getUserInfo();
+  }
+
+  get useCustomUrls(): boolean {
+    return this.form.connectorTab.controls.useCustomUrls.value;
   }
 
   getUserInfo() {
@@ -132,15 +142,36 @@ export class ConfigureProvidedConnectorPageComponent
     );
   }
 
-  copyPreliminaryConnectorConfig() {
-    this.clipboardUtils.copyToClipboard(this.state.localConnectorConfig);
+  copyInitialConnectorConfig() {
+    this.clipboardUtils.copyToClipboard(this.getInitialConnectorConfig());
+  }
+
+  getInitialConnectorConfig(): string {
+    return generateConnectorConfigShort({
+      participantId: this.state.connectorData?.connectorId ?? '',
+      dapsJwksUrl: this.state.connectorData?.environment?.dapsJwksUrl ?? '',
+      dapsTokenUrl: this.state.connectorData?.environment?.dapsTokenUrl ?? '',
+    });
+  }
+
+  getFinalConnectorConfig(): string {
+    const bringOwnCert = this.form.certificateTab.controls.bringOwnCert.value;
+    return generateConnectorConfig({
+      connectorBaseUrl: this.form.value.connectorTab.baseUrl,
+      certificate: bringOwnCert
+        ? this.form.certificateTab.controls.ownCertificate.value.trim()
+        : this.form.certificateTab.controls.generatedCertificate.value.trim(),
+      privateKey: bringOwnCert
+        ? '<Your Private Key Here>'
+        : this.form.certificateTab.controls.generatedPrivateKey.value.trim(),
+      participantId: this.state.connectorData?.connectorId ?? '',
+      dapsJwksUrl: this.state.connectorData?.environment?.dapsJwksUrl ?? '',
+      dapsTokenUrl: this.state.connectorData?.environment?.dapsTokenUrl ?? '',
+    });
   }
 
   ngOnDestroy() {
     this.ngOnDestroy$.next(null);
     this.ngOnDestroy$.complete();
   }
-
-  protected readonly buildConnectorConfigFromLocalData =
-    buildConnectorConfigFromLocalData;
 }

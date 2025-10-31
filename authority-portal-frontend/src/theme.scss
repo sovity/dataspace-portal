@@ -23,9 +23,7 @@
 // Import theme and theme-dependent styles
 .theme-sovity {
   @include mat.all-component-themes(sovityColors.$app-theme);
-  @include themeGeneratedVars.theme-vars(
-      sovityColors.$app-theme
-  );
+  @include themeGeneratedVars.theme-vars(sovityColors.$app-theme);
 
   --color-brand-400: #{sovityColors.$color-brand-400};
   --color-brand-500: #{sovityColors.$color-brand-500};
