@@ -24,7 +24,7 @@ import de.sovity.edc.ext.catalog.crawler.TestData;
 import de.sovity.edc.ext.catalog.crawler.crawling.fetching.model.FetchedContractOffer;
 import de.sovity.edc.ext.catalog.crawler.crawling.fetching.model.FetchedDataOffer;
 import de.sovity.edc.ext.catalog.crawler.dao.connectors.ConnectorRef;
-import de.sovity.edc.ext.wrapper.api.common.model.UiAsset;
+import de.sovity.edc.ce.api.common.model.UiAsset;
 import de.sovity.edc.utils.JsonUtils;
 import jakarta.json.Json;
 import org.apache.commons.lang3.Validate;

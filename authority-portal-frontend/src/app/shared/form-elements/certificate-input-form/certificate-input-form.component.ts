@@ -22,11 +22,7 @@ import {
   CertificateAttributes,
   CertificateGenerateService,
 } from 'src/app/core/services/certificate-generate.service';
-import {downloadFile} from 'src/app/core/utils/download-utils';
-import {
-  CertificateFormModel,
-  CertificateFormValue,
-} from './certificate-input-form-model';
+import {CertificateFormModel} from './certificate-input-form-model';
 
 @Component({
   selector: 'app-certificate-input-form',
@@ -54,9 +50,7 @@ export class CertificateInputFormComponent implements OnDestroy {
 
   get canGenerate(): boolean {
     return (
-      !this.isGenerating &&
-      !!this.organizationLegalName &&
-      (this.group.valid || this.onlyErrorIsGeneratedCert())
+      !this.isGenerating && !this.hasGenerated && !!this.organizationLegalName
     );
   }
 
@@ -65,6 +59,7 @@ export class CertificateInputFormComponent implements OnDestroy {
   }
 
   isGenerating: boolean = false;
+  hasGenerated: boolean = false;
   isDisabled: boolean = false;
 
   private ngOnDestroy$ = new Subject();
@@ -77,10 +72,12 @@ export class CertificateInputFormComponent implements OnDestroy {
     }
 
     this.isGenerating = true;
-    this.generateCertificateAndDownloadP12()
+    this.generateAndDisplayCertificateAndPrivateKey()
       .finally(() => (this.isGenerating = false))
       .then(
-        () => {},
+        () => {
+          this.hasGenerated = true;
+        },
         (e) => {
           console.error('error while generating certificate', e);
           alert('error while generating certificate. Please check console');
@@ -88,19 +85,14 @@ export class CertificateInputFormComponent implements OnDestroy {
       );
   }
 
-  private async generateCertificateAndDownloadP12() {
+  private async generateAndDisplayCertificateAndPrivateKey() {
     this.group.controls.generatedCertificate.setValue('');
-    const formValue: CertificateFormValue = this.group
-      .value as CertificateFormValue;
+    this.group.controls.generatedPrivateKey.setValue('');
 
     const certificateAttributes: CertificateAttributes = {
       commonName: this.commonName,
       countryName: this.location,
-      stateName: formValue.state,
-      localityName: formValue.city,
       organizationName: this.organizationLegalName,
-      organizationalUnitName: formValue.organizationalUnit,
-      emailAddress: formValue.email,
     };
 
     const keyPair = await this.certificateGenerateService.generateKeyPair(2048);
@@ -111,40 +103,22 @@ export class CertificateInputFormComponent implements OnDestroy {
         certificateAttributes,
         validUntil,
       );
+
     const pemCertificate = this.certificateGenerateService.certificateToPem(
       selfSignedCertificate,
     );
-    const p12FormatCertificate =
-      this.certificateGenerateService.convertToP12Format(
-        keyPair.privateKey,
-        selfSignedCertificate,
-        formValue.password,
-      );
+    const pemPrivateKey = this.certificateGenerateService.privateKeyToPem(
+      keyPair.privateKey,
+    );
 
-    const certificateBlob =
-      this.certificateGenerateService.getCertificateBlob(p12FormatCertificate);
-
-    if (certificateBlob) {
-      downloadFile(certificateBlob, 'connector-certificate.p12');
-      this.group.controls.generatedCertificate.setValue(pemCertificate);
-    }
+    this.group.controls.generatedCertificate.setValue(pemCertificate);
+    this.group.controls.generatedPrivateKey.setValue(pemPrivateKey);
   }
 
   private plusYears(date: Date, plusYears: number) {
     const copy = new Date(date);
     copy.setFullYear(date.getFullYear() + plusYears);
     return copy;
-  }
-
-  private onlyErrorIsGeneratedCert(): boolean {
-    const failedControls = Object.entries(this.group.controls)
-      .filter(([key, control]) => !control.valid && !control.disabled)
-      .map((it) => it[0]);
-    return (
-      this.group.errors == null &&
-      failedControls.length === 1 &&
-      failedControls[0] === 'generatedCertificate'
-    );
   }
 
   ngOnDestroy() {

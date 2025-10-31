@@ -42,7 +42,7 @@ class CrawlerEventLoggerTest {
                     "test",
                     "My Org",
                     "MDSL1234XX",
-                    "https://example.com/api/dsp"
+                    "https://example.com/api/v1/dsp"
             );
             crawlerEventLogger.logConnectorUpdated(dsl, connectorRef, new ConnectorChangeTracker());
             crawlerEventLogger.logConnectorOnline(dsl, connectorRef);

@@ -50,17 +50,20 @@ class CentralComponentManagementApiService(
         val centralComponents = centralComponentService.getCentralComponentsByEnvironment(envId)
 
         return centralComponents.map { centralComponent ->
-            val createdBy = userService.getUserOrThrow(centralComponent.createdBy)
-            val organization = organizationService.getOrganizationOrThrow(centralComponent.organizationId)
-
+            val createdBy = centralComponent.createdBy?.let {
+                userService.getUserOrThrow(it)
+            }
+            val organization = centralComponent.organizationId?.let {
+                organizationService.getOrganizationOrThrow(it)
+            }
             CentralComponentDto(
                 centralComponentId = centralComponent.id,
                 name = centralComponent.name,
                 homepageUrl = centralComponent.homepageUrl,
                 endpointUrl = centralComponent.endpointUrl,
-                createdByUserFullName = createdBy.firstName + " " + createdBy.lastName,
-                createdByOrgName = organization.name,
-                createdByOrganizationId = organization.id
+                createdByUserFullName = (createdBy?.firstName ?: "Unknown") + " " + (createdBy?.lastName ?: ""),
+                createdByOrgName = organization?.name ?: "Unknown",
+                createdByOrganizationId = organization?.id ?: "Unknown"
             )
         }
     }
@@ -93,7 +96,7 @@ class CentralComponentManagementApiService(
         val dapsClient = dapsClientService.forEnvironment(envId)
         dapsClient.createClient(clientId)
         dapsClient.addCertificate(clientId, centralComponentCreateRequest.certificate)
-        dapsClient.configureMappers(clientId, centralComponentId, centralComponentCreateRequest.certificate)
+        dapsClient.configureMappers(clientId)
 
         Log.info("Central component registered. centralComponentId=$centralComponentId, organizationId=$organizationId, userId=$userId, clientId=$clientId.")
         return IdResponse(centralComponentId, timeUtils.now())

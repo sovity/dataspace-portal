@@ -52,8 +52,8 @@
 
 ## About This Component
 
-Frontend for sovity's Data Space Portal, written in Angular with
-TypeScript, NGXS State Management and TailwindCSS Framework.
+Frontend for sovity's Data Space Portal, written in Angular with TypeScript,
+NGXS State Management and TailwindCSS Framework.
 
 <p align="right">(<a href="#readme-top">back to top</a>)
 

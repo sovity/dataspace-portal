@@ -28,26 +28,31 @@ import jakarta.ws.rs.WebApplicationException
 import jakarta.ws.rs.core.Response
 import org.eclipse.microprofile.config.inject.ConfigProperty
 import org.keycloak.admin.client.Keycloak
+import org.keycloak.admin.client.resource.GroupsResource
+import org.keycloak.admin.client.resource.RealmResource
+import org.keycloak.admin.client.resource.RolesResource
+import org.keycloak.admin.client.resource.UsersResource
 import org.keycloak.representations.idm.CredentialRepresentation
 import org.keycloak.representations.idm.GroupRepresentation
+import org.keycloak.representations.idm.RoleRepresentation
 import org.keycloak.representations.idm.UserRepresentation
 
 @ApplicationScoped
 class KeycloakService(
     val keycloak: Keycloak,
+
     val keycloakUserMapper: KeycloakUserMapper,
 
     @ConfigProperty(name = "quarkus.keycloak.admin-client.realm")
     val keycloakRealm: String,
-
-    @ConfigProperty(name = "quarkus.keycloak.admin-client.client-id")
-    val keycloakClientId: String,
-
-    @ConfigProperty(name = "authority-portal.base-url")
-    val baseUrl: String
 ) {
+    internal fun realmApi(): RealmResource = keycloak.realm(keycloakRealm)
+    internal fun groupsApi(): GroupsResource = realmApi().groups()
+    internal fun usersApi(): UsersResource = realmApi().users()
+    internal fun rolesApi(): RolesResource = realmApi().roles()
 
     fun createUser(email: String, firstName: String, lastName: String, password: String? = null): String {
+        require(email.isNotBlank()) { "Email must not be blank" }
         val user = UserRepresentation().also {
             it.isEnabled = true
             it.requiredActions = listOfNotNull(
@@ -70,12 +75,15 @@ class KeycloakService(
             }
         }
 
-        val response = keycloak.realm(keycloakRealm).users().create(user)
+        val response = usersApi().create(user)
 
         if (response.status == Response.Status.CONFLICT.statusCode) {
             throw WebApplicationException("User already exists", response.status)
+        } else if (response.status != Response.Status.CREATED.statusCode) {
+            throw WebApplicationException("Request failed: ${response.statusInfo.reasonPhrase}", response.status)
         }
-        return keycloak.realm(keycloakRealm).users().search(email).first().id
+
+        return getUserIdByEmailOrNull(email)!!
     }
 
     fun createKeycloakUserAndOrganization(
@@ -86,10 +94,14 @@ class KeycloakService(
         userOrganizationRole: OrganizationRole,
         userPassword: String?
     ): String {
-        // To avoid syncing issues, we assume our DB to be the source of truth, so we need to delete the potentially existing user in KC
-        val userIdIfExists = getUserIdByEmail(userEmail)
+        require(organizationId.isNotBlank()) { "Organization ID must not be blank" }
+        require(userEmail.isNotBlank()) { "User email must not be blank" }
+
+        // To avoid syncing issues, we assume our DB to be the source of truth, so we need to delete the potentially
+        // existing user in KC
+        val userIdIfExists = getUserIdByEmailOrNull(userEmail)
         if (userIdIfExists != null) {
-            deleteUser(userIdIfExists)
+            deleteUserSafely(userIdIfExists)
         }
 
         val userId = createUser(
@@ -98,58 +110,77 @@ class KeycloakService(
             lastName = userLastName,
             password = userPassword
         )
-        createOrganization(organizationId)
-        joinOrganization(userId, organizationId, userOrganizationRole)
+
+        try {
+            createOrganization(organizationId)
+            joinOrganization(userId, organizationId, userOrganizationRole)
+        } catch (e: Exception) {
+            deleteUserSafely(userId)
+            deleteOrganization(organizationId)
+            throw e
+        }
 
         return userId
     }
 
-    fun getUserIdByEmail(email: String): String? {
-        return keycloak.realm(keycloakRealm).users().search(email).firstOrNull()?.id
+    fun getUserIdByEmailOrNull(email: String): String? {
+        require(email.isNotBlank()) { "Email must not be blank" }
+        return usersApi().searchByEmail(email, true).firstOrNull()?.id
     }
 
-    fun deleteUser(userId: String) {
-        keycloak.realm(keycloakRealm).users().delete(userId)
+    fun deleteUserSafely(userId: String) {
+        require(userId.isNotBlank()) { "User ID must not be blank" }
+        usersApi().delete(userId)
     }
 
-    fun deleteUsers(userIds: List<String>) {
-        userIds.forEach { deleteUser(it) }
+    fun deleteUsersSafely(userIds: List<String>) {
+        userIds.forEach {
+            require(it.isNotBlank()) { "User ID must not be blank" }
+        }
+        userIds.forEach { deleteUserSafely(it) }
     }
 
     fun deactivateUser(userId: String) {
+        require(userId.isNotBlank()) { "User ID must not be blank" }
         setUserEnabled(userId, false)
     }
 
     fun reactivateUser(userId: String) {
+        require(userId.isNotBlank()) { "User ID must not be blank" }
         setUserEnabled(userId, true)
     }
 
     private fun setUserEnabled(userId: String, enabled: Boolean) {
-        val user = keycloak.realm(keycloakRealm).users().get(userId).toRepresentation()
+        require(userId.isNotBlank()) { "User ID must not be blank" }
+        val user = usersApi().get(userId).toRepresentation()
         user.isEnabled = enabled
-        keycloak.realm(keycloakRealm).users().get(userId).update(user)
+        usersApi().get(userId).update(user)
     }
 
     fun updateUser(userId: String, firstName: String, lastName: String, email: String?) {
-        val userResource = keycloak.realm(keycloakRealm).users().get(userId)
+        require(userId.isNotBlank()) { "User ID must not be blank" }
+        require(email == null || email.isNotBlank()) { "Email must be null or not blank"}
+
+        val userResource = usersApi().get(userId)
         val user = userResource.toRepresentation()
         user.firstName = firstName.trim()
         user.lastName = lastName.trim()
 
-        if (user != null && user.email != email) {
-            user.email = email?.trim()
+        val trimmedEmail = email?.trim()
+
+        if (trimmedEmail != null && user.email != trimmedEmail) {
+            user.email = trimmedEmail
             user.isEmailVerified = false
-            user.requiredActions = listOf(
-                RequiredAction.VERIFY_EMAIL.stringRepresentation
-            )
+            user.requiredActions = (user.requiredActions + RequiredAction.VERIFY_EMAIL.stringRepresentation).distinct()
             forceLogout(user.id)
         }
 
-        keycloak.realm(keycloakRealm).users().get(userId).update(user)
+        usersApi().get(userId).update(user)
     }
 
     fun getUserRoles(userId: String): Set<String> {
-        return keycloak.realm(keycloakRealm).users().get(userId).roles().realmLevel()
+        require(userId.isNotBlank()) { "User ID must not be blank" }
+        return usersApi().get(userId).roles().realmLevel()
             .listEffective()
             .filter { it.name.startsWith("UR_") || it.name.startsWith("AR_") }
             .map { it.name }
@@ -157,13 +188,13 @@ class KeycloakService(
     }
 
     fun getOrganizationMembers(organizationId: String): List<KeycloakUserDto> {
-        val groups = keycloak.realm(keycloakRealm).groups()
-        val orgGroupId = groups.groups().find { it.name == organizationId }?.id ?: return emptyList()
-        val subGroupIds = getSubGroupIds(orgGroupId).values
+        require(organizationId.isNotBlank()) { "Organization ID must not be blank" }
+        val orgGroupId = getOrganizationByOrganizationIdOrNull(organizationId)?.id ?: return emptyList()
+        val subGroupIds = getSubGroups(orgGroupId).map { it.id }
 
         var orgMembers: List<KeycloakUserDto> = emptyList()
         subGroupIds.forEach() { subGroupId ->
-            val subGroupMembers = groups.group(subGroupId).members().mapNotNull {
+            val subGroupMembers = groupsApi().group(subGroupId).members().mapNotNull {
                 keycloakUserMapper.buildKeycloakUserDto(it)
             }
             orgMembers = orgMembers.plus(subGroupMembers)
@@ -173,59 +204,68 @@ class KeycloakService(
     }
 
     fun getAuthorityAdmins(): List<KeycloakUserDto> {
-        val groups = keycloak.realm(keycloakRealm).groups()
-        val authorityAdminGroupId = groups.groups(ApplicationRole.AUTHORITY_ADMIN.kcGroupName, 0, 1).firstOrNull()!!.id
-        return groups.group(authorityAdminGroupId).members().mapNotNull {
+        val authorityAdminGroupId =
+            getOrganizationByOrganizationIdOrNull(ApplicationRole.AUTHORITY_ADMIN.kcGroupName)!!.id
+        return groupsApi().group(authorityAdminGroupId).members().mapNotNull {
             keycloakUserMapper.buildKeycloakUserDto(it)
         }
     }
 
     fun getParticipantAdmins(organizationId: String): List<KeycloakUserDto> {
-        val groups = keycloak.realm(keycloakRealm).groups()
-        val orgGroupId = groups.groups(organizationId, 0, 1).firstOrNull()!!.id
-        val subGroupIds = getSubGroupIds(orgGroupId)
-        val participantAdminGroupId = subGroupIds[OrganizationRole.PARTICIPANT_ADMIN.kcSubGroupName]
+        require(organizationId.isNotBlank()) { "Organization ID must not be blank" }
+        val orgGroupId = getOrganizationByOrganizationIdOrNull(organizationId)!!.id
+        val subGroupNameToIdMap = getSubGroupNameToIdMap(orgGroupId)
+        val participantAdminGroupId = subGroupNameToIdMap[OrganizationRole.PARTICIPANT_ADMIN.kcSubGroupName]
 
-        return groups.group(participantAdminGroupId).members().mapNotNull {
+        return groupsApi().group(participantAdminGroupId).members().mapNotNull {
             keycloakUserMapper.buildKeycloakUserDto(it)
         }
     }
 
-    fun createOrganization(organizationId: String) {
+    fun createOrganization(organizationId: String): String {
+        require(organizationId.isNotBlank()) { "Organization ID must not be blank" }
         val organization = GroupRepresentation().apply {
             name = organizationId
         }
 
         // Create organization group
-        keycloak.realm(keycloakRealm).groups().add(organization)
+        val organizationCreateResponse = groupsApi().add(organization)
+        if (organizationCreateResponse.status != Response.Status.CREATED.statusCode) {
+            throw WebApplicationException(
+                "Request failed: ${organizationCreateResponse.statusInfo.reasonPhrase}",
+                organizationCreateResponse.status
+            )
+        }
 
         // Create role-based subgroups
-        val orgGroupId = keycloak.realm(keycloakRealm).groups()
-            .groups(organization.name, 0, 1).firstOrNull()!!.id
+        val orgGroupId = getOrganizationByOrganizationIdOrNull(organization.name)!!.id
 
         OrganizationRole.entries.forEach {
             val subGroup = GroupRepresentation().apply {
                 name = it.kcSubGroupName
             }
-            keycloak.realm(keycloakRealm).groups().group(orgGroupId).subGroup(subGroup)
+            groupsApi().group(orgGroupId).subGroup(subGroup)
         }
 
         // Add roles to subgroups
-        val subGroupIds = getSubGroupIds(orgGroupId)
-        val roles = keycloak.realm(keycloakRealm).roles().list().associateBy { it.name }
+        val subGroupNameToIdMap = getSubGroupNameToIdMap(orgGroupId)
+        val roles: Map<String, RoleRepresentation> = rolesApi().list().associateBy { it.name }
 
         OrganizationRole.entries.forEach {
-            val subGroupId = subGroupIds[it.kcSubGroupName]!!
+            val subGroupId = subGroupNameToIdMap[it.kcSubGroupName]!!
             val role = roles[it.userRole]!!
 
-            keycloak.realm(keycloakRealm).groups().group(subGroupId)
+            groupsApi().group(subGroupId)
                 .roles().realmLevel().add(listOf(role))
         }
+
+        return orgGroupId
     }
 
     fun deleteOrganization(organizationId: String) {
-        keycloak.realm(keycloakRealm).groups().groups(organizationId, 0, 1).firstOrNull()?.let {
-            keycloak.realm(keycloakRealm).groups().group(it.id).remove()
+        require(organizationId.isNotBlank()) { "Organization ID must not be blank" }
+        getOrganizationByOrganizationIdOrNull(organizationId)?.let {
+            groupsApi().group(it.id).remove()
         }
     }
 
@@ -238,13 +278,14 @@ class KeycloakService(
      * @param role The user's role in the organization
      */
     fun joinOrganization(userId: String, organizationId: String, role: OrganizationRole) {
-        val user = keycloak.realm(keycloakRealm).users().get(userId)
-        val orgGroupId = keycloak.realm(keycloakRealm).groups()
-            .groups(organizationId, 0, 1).firstOrNull()!!.id
-        val subGroupIds = getSubGroupIds(orgGroupId)
+        require(userId.isNotBlank()) { "User ID must not be blank" }
+        require(organizationId.isNotBlank()) { "Organization ID must not be blank" }
+        val user = usersApi().get(userId)
+        val orgGroupId = getOrganizationByOrganizationIdOrNull(organizationId)!!.id
+        val subGroupNameToIdMap = getSubGroupNameToIdMap(orgGroupId)
 
         OrganizationRole.entries.forEach {
-            val subGroupId = subGroupIds[it.kcSubGroupName]!!
+            val subGroupId = subGroupNameToIdMap[it.kcSubGroupName]!!
 
             if (it == role) {
                 user.joinGroup(subGroupId)
@@ -262,11 +303,11 @@ class KeycloakService(
      * @param roles The user's roles in the authority
      */
     fun setApplicationRoles(userId: String, roles: List<ApplicationRole>) {
-        val user = keycloak.realm(keycloakRealm).users().get(userId)
+        require(userId.isNotBlank()) { "User ID must not be blank" }
+        val user = usersApi().get(userId)
 
         ApplicationRole.entries.forEach {
-            val roleGroupId = keycloak.realm(keycloakRealm).groups()
-                .groups(it.kcGroupName, 0, 1).firstOrNull()!!.id
+            val roleGroupId = getOrganizationByOrganizationIdOrNull(it.kcGroupName)!!.id
 
             if (roles.contains(it)) {
                 user.joinGroup(roleGroupId)
@@ -277,41 +318,61 @@ class KeycloakService(
     }
 
     fun clearApplicationRoles(userId: String) {
-        val user = keycloak.realm(keycloakRealm).users().get(userId)
+        require(userId.isNotBlank()) { "User ID must not be blank" }
+        val user = usersApi().get(userId)
 
         ApplicationRole.entries.forEach {
-            val roleGroupId = keycloak.realm(keycloakRealm).groups()
-                .groups(it.kcGroupName, 0, 1).firstOrNull()!!.id
+            val roleGroupId = getOrganizationByOrganizationIdOrNull(it.kcGroupName)!!.id
 
             user.leaveGroup(roleGroupId)
         }
     }
 
     fun forceLogout(userId: String) {
-        keycloak.realm(keycloakRealm).users().get(userId).logout()
+        require(userId.isNotBlank()) { "User ID must not be blank" }
+        usersApi().get(userId).logout()
         Log.info("Logging out user forcefully. userId: $userId")
     }
 
     fun sendInvitationEmail(userId: String) {
+        require(userId.isNotBlank()) { "User ID must not be blank" }
         val actions = listOf(
             RequiredAction.CONFIGURE_TOTP.stringRepresentation,
             RequiredAction.VERIFY_EMAIL.stringRepresentation
         )
-        keycloak.realm(keycloakRealm).users().get(userId).executeActionsEmail(keycloakClientId, baseUrl, actions)
+        // The overloads of executeActionsEmail with clientId and redirectUri return 400 for some reason
+        usersApi().get(userId).executeActionsEmail(actions)
     }
 
     fun sendInvitationEmailWithPasswordReset(userId: String) {
+        require(userId.isNotBlank()) { "User ID must not be blank" }
         val actions = listOf(
             RequiredAction.UPDATE_PASSWORD.stringRepresentation,
             RequiredAction.CONFIGURE_TOTP.stringRepresentation,
             RequiredAction.VERIFY_EMAIL.stringRepresentation
         )
-        keycloak.realm(keycloakRealm).users().get(userId).executeActionsEmail(keycloakClientId, baseUrl, actions)
+        // The overloads of executeActionsEmail with clientId and redirectUri return 400 for some reason
+        usersApi().get(userId).executeActionsEmail(actions)
     }
 
-    private fun getSubGroupIds(groupId: String) =
-        keycloak.realm(keycloakRealm).groups().query("", true)
-            .first { it.id == groupId }.subGroups.associate { it.name to it.id }
+    internal fun getOrganizationByOrganizationIdOrNull(organizationId: String): GroupRepresentation? {
+        require(organizationId.isNotBlank()) { "Organization ID must not be blank" }
+        return getOrganizations().find { it.name == organizationId }
+    }
+
+    internal fun getOrganizations(): List<GroupRepresentation> =
+        groupsApi().groups()
+
+    private fun getSubGroupNameToIdMap(orgGroupId: String): Map<String, String> {
+        require(orgGroupId.isNotBlank()) { "Group ID must not be blank" }
+        return getSubGroups(orgGroupId).associate { it.name to it.id }
+    }
+
+    internal fun getSubGroups(orgGroupId: String): List<GroupRepresentation> {
+        require(orgGroupId.isNotBlank()) { "Group ID must not be blank" }
+        return groupsApi()
+        .group(orgGroupId)
+        .getSubGroups(0, 1_000_000, true)
+        ?: error("Failed to find group with ID: $orgGroupId")
+    }
 }
-
-

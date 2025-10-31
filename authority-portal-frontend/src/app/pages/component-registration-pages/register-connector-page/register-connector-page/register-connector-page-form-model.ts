@@ -24,6 +24,8 @@ import {
 export interface ConnectorTabFormModel {
   name: FormControl<string>;
   location: FormControl<string>;
+  useCustomUrls: FormControl<boolean>;
+  baseUrl: FormControl<string>;
   frontendUrl: FormControl<string>;
   endpointUrl: FormControl<string>;
   managementUrl: FormControl<string>;
@@ -33,6 +35,8 @@ export type ConnectorTabFormValue = ɵFormGroupRawValue<ConnectorTabFormModel>;
 export const DEFAULT_CONNECTOR_TAB_FORM_VALUE: ConnectorTabFormValue = {
   name: '',
   location: '',
+  useCustomUrls: false,
+  baseUrl: '',
   frontendUrl: '',
   endpointUrl: '',
   managementUrl: '',

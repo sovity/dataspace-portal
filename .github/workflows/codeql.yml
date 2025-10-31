@@ -40,7 +40,7 @@ jobs:
     - uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
-        java-version: '17'
+        java-version: '21'
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
@@ -50,8 +50,8 @@ jobs:
 
     - name: "Gradle: Validate Gradle Wrapper"
       uses: gradle/wrapper-validation-action@ccb4328a959376b642e027874838f60f8e596de3
-    
-    - name: "Gradle: Build"    
+
+    - name: "Gradle: Build"
       uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
       env:
         GPR_USER: ${{ secrets.GHCR_READONLY_USER }}

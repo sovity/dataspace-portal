@@ -29,6 +29,10 @@ import {Store} from '@ngxs/store';
 import {UserInfo} from '@sovity.de/authority-portal-client';
 import {GlobalStateUtils} from 'src/app/core/global-state/global-state-utils';
 import {APP_CONFIG, AppConfig} from 'src/app/core/services/config/app-config';
+import {
+  EDC_CONFIG,
+  generateConnectorConfig,
+} from 'src/app/core/services/config/connector-config';
 import {Reset, Submit} from '../state/register-connector-page-actions';
 import {
   DEFAULT_REGISTER_CONNECTOR_PAGE_STATE,
@@ -52,6 +56,8 @@ export class RegisterConnectorPageComponent implements OnInit, OnDestroy {
   backLink = '/my-organization/connectors/new';
   exitLink = '/my-organization/connectors';
 
+  edcConfig = EDC_CONFIG;
+
   @ViewChild('stepper') stepper!: MatStepper;
 
   private ngOnDestroy$ = new Subject();
@@ -67,6 +73,10 @@ export class RegisterConnectorPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(Reset);
     this.startListeningToState();
     this.getUserInfo();
+  }
+
+  get useCustomUrls(): boolean {
+    return this.form.connectorTab.controls.useCustomUrls.value;
   }
 
   getUserInfo() {
@@ -88,14 +98,31 @@ export class RegisterConnectorPageComponent implements OnInit, OnDestroy {
 
   registerConnector(): void {
     const formValue = this.form.value;
+
+    const frontendUrl = formValue.connectorTab.useCustomUrls
+      ? formValue.connectorTab.frontendUrl
+      : formValue.connectorTab.baseUrl;
+    const endpointUrl = formValue.connectorTab.useCustomUrls
+      ? formValue.connectorTab.endpointUrl
+      : new URL(
+          EDC_CONFIG.defaultPaths.dspApi,
+          formValue.connectorTab.baseUrl,
+        ).toString();
+    const managementUrl = formValue.connectorTab.useCustomUrls
+      ? formValue.connectorTab.managementUrl
+      : new URL(
+          EDC_CONFIG.defaultPaths.managementApi,
+          formValue.connectorTab.baseUrl,
+        ).toString();
+
     this.store.dispatch(
       new Submit(
         {
           name: formValue.connectorTab.name,
-          endpointUrl: formValue.connectorTab.endpointUrl,
           location: formValue.connectorTab.location,
-          frontendUrl: formValue.connectorTab.frontendUrl,
-          managementUrl: formValue.connectorTab.managementUrl,
+          frontendUrl,
+          endpointUrl,
+          managementUrl,
           certificate: formValue.certificateTab.bringOwnCert
             ? formValue.certificateTab.ownCertificate
             : formValue.certificateTab.generatedCertificate,
@@ -109,6 +136,22 @@ export class RegisterConnectorPageComponent implements OnInit, OnDestroy {
         },
       ),
     );
+  }
+
+  getConnectorConfig(): string {
+    const bringOwnCert = this.form.certificateTab.controls.bringOwnCert.value;
+    return generateConnectorConfig({
+      connectorBaseUrl: this.form.value.connectorTab.baseUrl,
+      certificate: bringOwnCert
+        ? this.form.certificateTab.controls.ownCertificate.value.trim()
+        : this.form.certificateTab.controls.generatedCertificate.value.trim(),
+      privateKey: bringOwnCert
+        ? '<Your Private Key Here>'
+        : this.form.certificateTab.controls.generatedPrivateKey.value.trim(),
+      participantId: this.state.connectorId ?? '',
+      dapsJwksUrl: this.state.deploymentEnvironment?.dapsJwksUrl ?? '',
+      dapsTokenUrl: this.state.deploymentEnvironment?.dapsTokenUrl ?? '',
+    });
   }
 
   ngOnDestroy() {

@@ -13,28 +13,49 @@
         <ng-template matStepLabel>Add Connector Details</ng-template>
         <div
           class="select-none flex flex-col justify-center items-center my-10 w-2/3 mx-auto">
-          <!-- Connector's Name -->
+          <!-- Connector Name -->
           <app-text-input
             class="w-full"
-            label="Connector's Name"
+            label="Connector Name"
             ctrlId="formRegOConName"
             placeholder="My Connector"
             required
             [ctrl]="form.connectorTab.controls.name"></app-text-input>
 
-          <!-- Connector's Location -->
+          <!-- Connector Location -->
           <app-text-input
             class="w-full"
-            label="Connector's Location"
+            label="Connector Location"
             ctrlId="formRegOConLocation"
             placeholder="DE"
             required
             [ctrl]="form.connectorTab.controls.location"></app-text-input>
 
+          <!-- Use custom URLs toggle -->
+          <div class="w-full justify-start my-4">
+            <mat-slide-toggle
+              name="useCustomUrls"
+              [formControl]="form.connectorTab.controls.useCustomUrls"
+              >Overwrite default URLs
+            </mat-slide-toggle>
+          </div>
+
+          <!-- Base URL -->
+          <app-connector-url-input
+            *ngIf="!useCustomUrls"
+            class="w-full"
+            label="Connector Base URL"
+            ctrlId="formRegOConBaseUrl"
+            required
+            [ctrl]="
+              form.connectorTab.controls.baseUrl
+            "></app-connector-url-input>
+
           <!-- Frontend URL -->
           <app-connector-url-input
+            *ngIf="useCustomUrls"
             class="w-full"
-            label="Connector's Frontend URL"
+            label="Connector Frontend URL"
             ctrlId="formRegOConFrontendUrl"
             required
             [ctrl]="
@@ -43,22 +64,24 @@
 
           <!-- Endpoint URL -->
           <app-connector-url-input
+            *ngIf="useCustomUrls"
             class="w-full"
-            label="Connector's Endpoint URL"
+            label="Connector Endpoint URL"
             ctrlId="formRegOConEndpointUrl"
-            urlSuffix="/api/dsp"
             required
+            [urlSuffix]="edcConfig.defaultPaths.dspApi"
             [ctrl]="
               form.connectorTab.controls.endpointUrl
             "></app-connector-url-input>
 
           <!-- Management URL -->
           <app-connector-url-input
+            *ngIf="useCustomUrls"
             class="w-full"
-            label="Connector's Management URL"
+            label="Connector Management URL"
             ctrlId="formRegOConManagementUrl"
-            urlSuffix="/api/management"
             required
+            [urlSuffix]="edcConfig.defaultPaths.managementApi"
             [ctrl]="
               form.connectorTab.controls.managementUrl
             "></app-connector-url-input>
@@ -127,7 +150,7 @@
 
       <app-connector-registering-success-message-page
         [connectorConfig]="
-          state.connectorConfig
+          getConnectorConfig()
         "></app-connector-registering-success-message-page>
 
       <div

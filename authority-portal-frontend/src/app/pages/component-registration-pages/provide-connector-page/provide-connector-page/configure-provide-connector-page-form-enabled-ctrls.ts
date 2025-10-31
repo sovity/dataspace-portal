@@ -20,12 +20,15 @@ import {ConnectorTabFormValue} from './configure-provided-connector-page-form-mo
 export const configureProvideConnectorPageFormEnabledCtrls = (
   value: ConnectorTabFormValue,
 ): Record<keyof ConnectorTabFormValue, boolean> => {
-  let useJwks = value.useJwks;
+  const useCustomUrls = value.useCustomUrls;
+  const useJwks = value.useJwks;
   return {
-    frontendUrl: true,
-    endpointUrl: true,
-    managementUrl: true,
+    useCustomUrls: true,
+    baseUrl: !useCustomUrls,
+    frontendUrl: useCustomUrls,
+    endpointUrl: useCustomUrls,
+    managementUrl: useCustomUrls,
     useJwks: true,
-    jwksUrl: useJwks,
+    jwksUrl: useCustomUrls && useJwks,
   };
 };

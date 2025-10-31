@@ -29,7 +29,7 @@ import de.sovity.authorityportal.seeds.utils.dummyDevContractOfferId
 import de.sovity.authorityportal.web.environment.CatalogDataspaceConfig
 import de.sovity.authorityportal.web.environment.CatalogDataspaceConfigService
 import de.sovity.authorityportal.web.tests.useDevUser
-import de.sovity.edc.ext.wrapper.api.common.model.UiPolicyExpression
+import de.sovity.edc.ce.api.common.model.UiPolicyExpression
 import io.quarkus.test.InjectMock
 import io.quarkus.test.TestTransaction
 import io.quarkus.test.junit.QuarkusTest
@@ -75,7 +75,6 @@ class DataOfferDetailApiTest {
             dataOffer(0, 0, 0, assetApplier = {
                 it.assetId = dummyDevAssetId(0)
                 it.title = "Data Offer 0"
-                it.dataCategory = "Data Category 0"
                 it.description = "Data Offer 0 Description"
             })
             contractOffer(0, 0, 0, 0)
@@ -84,7 +83,6 @@ class DataOfferDetailApiTest {
             dataOffer(1, 0, 1, assetApplier = {
                 it.assetId = dummyDevAssetId(1)
                 it.title = "Data Offer 1"
-                it.dataCategory = "Data Category 1"
                 it.description = "Data Offer 1 Description"
             })
             contractOffer(1, 0, 1, 1)
@@ -125,7 +123,6 @@ class DataOfferDetailApiTest {
         // assert
         assertThat(result.assetId).isEqualTo(dummyDevAssetId(0))
         assertThat(result.connectorEndpoint).isEqualTo("https://connector/dsp")
-        assertThat(result.asset.dataCategory).isEqualTo("Data Category 0")
         assertThat(result.asset.title).isEqualTo("Data Offer 0")
         assertThat(result.asset.description).isEqualTo("Data Offer 0 Description")
         assertThat(result.contractOffers).hasSize(1)

@@ -47,16 +47,16 @@ The respective compatible versions can be found in the [CHANGELOG.md](../../../.
 
 ### Deployment Units
 
-| Deployment Unit                       | Version / Details                                                                          |
-|---------------------------------------|--------------------------------------------------------------------------------------------|
-| Reverse Proxy / Ingress               | _Infrastructure dependent_                                                                 |
-| Keycloak Deployment                   | Version 24.0.4 or compatible version                                                       |
-| OAuth2 Proxy                          | quay.io/oauth2-proxy/oauth2-proxy:7.5.0                                                    |
-| Caddy behind OAuth2 Proxy             | caddy:2.7                                                                                  |
-| Data Space Portal Backend             | ds-portal-backend, see [CHANGELOG.md](../../../../CHANGELOG.md) for compatible versions.   |
-| Data Space Portal Frontend            | ds-portal-frontend, see  [CHANGELOG.md](../../../../CHANGELOG.md) for compatible versions. |
-| Catalog Crawler (one per environment) | ds-portal-crawler, see [CHANGELOG.md](../../../../CHANGELOG.md) for compatible versions.   |
-| Postgresql                            | Version 16 or compatible version                                                           |
+| Deployment Unit                       | Version / Details                                                                             |
+|---------------------------------------|-----------------------------------------------------------------------------------------------|
+| Reverse Proxy / Ingress               | _Infrastructure dependent_                                                                    |
+| Keycloak Deployment                   | Version 24.0.4 or compatible version                                                          |
+| OAuth2 Proxy                          | quay.io/oauth2-proxy/oauth2-proxy:7.5.0                                                       |
+| Caddy behind OAuth2 Proxy             | caddy:2.7                                                                                     |
+| Data Space Portal Backend             | ds-portal-ce-backend, see [CHANGELOG.md](../../../../CHANGELOG.md) for compatible versions.   |
+| Data Space Portal Frontend            | ds-portal-ce-frontend, see  [CHANGELOG.md](../../../../CHANGELOG.md) for compatible versions. |
+| Catalog Crawler (one per environment) | ds-portal-ce-crawler, see [CHANGELOG.md](../../../../CHANGELOG.md) for compatible versions.   |
+| Postgresql                            | Version 16 or compatible version                                                              |
 
 ### Configuration
 
@@ -65,7 +65,7 @@ The respective compatible versions can be found in the [CHANGELOG.md](../../../.
 - Data Space Portal needs to be deployed with TLS/HTTPS.
 - The domain under which the Data Space Portal should be reachable on the internet will be referred to as `[AP_FQDN]` in this
   guide.
-- Path mapping: 
+- Path mapping:
   - Frontend: `https://[AP_FQDN]` -> `caddy:8080` -> `frontend:8080`
   - Backend: `https://[AP_FQDN]/api` -> `caddy:8080` -> `oauth2-proxy:8080` -> `caddy:8081` -> `backend:8080/api`
 
@@ -85,24 +85,33 @@ The respective compatible versions can be found in the [CHANGELOG.md](../../../.
   guide and should differ from the `[AP_FQDN]`.
 - The steps to set up the realm are the following
   - sovity theme
-      1. Copy [sovity-theme](../../../../authority-portal-keycloak/sovity-theme) directory to `{keycloakRoot}/themes/` directory
-      2. Import [realm.json](../../../../authority-portal-backend/authority-portal-quarkus/src/main/resources/realm.json) to create the `authority-portal` realm
-      3. Adjust settings for `oauth2-proxy` client (Clients > `oauth2-proxy` > Settings)
-          - `Root URL`: URL of the auth proxy, e.g. `https://authority-portal.example.url`
-          - `Home URL`: (Relative) sign in URL of auth proxy, e.g. `/oauth2/sign_in`
-          - `Valid Redirect URIs`: (Relative) callback URL of auth proxy, e.g. `/oauth2/callback`
-          - `Valid post logout redirect URIs`: `/*`
-      4. Adjust settings for `authority-portal-client` client (Clients > `authority-portal-client` > Settings)
-          - `Root URL`: URL of the authority portal, e.g. `https://authority-portal.example.url`
-          - `Home URL`: (Most likely) same as `Root URL`
-      5. Regenerate client secrets for `oauth2-proxy` and `authority-portal-client` clients
-          - Clients > `[client]` > Credentials > Regenerate (Client secret)
-      6. Select sovity theme for login & email templates
-          - Select `authority-portal` realm
-          - Realm settings > Themes > Login theme: Select `sovity-theme`
-          - Realm settings > Themes > Email theme: Select `sovity-theme`
-      7. Add email settings (Realm settings > Email)
-          - At least `From` and `Host` are required
+    1. Copy [sovity-theme](../../../../authority-portal-keycloak/sovity-theme) directory to `{keycloakRoot}/themes/` directory
+    2. Import [realm.json](../../../../authority-portal-backend/authority-portal-quarkus/src/main/resources/realm.json) to create the `authority-portal` realm
+    3. Adjust settings for `oauth2-proxy` client (Clients > `oauth2-proxy` > Settings)
+
+    - `Root URL`: URL of the auth proxy, e.g. `https://authority-portal.example.url`
+    - `Home URL`: (Relative) sign in URL of auth proxy, e.g. `/oauth2/sign_in`
+    - `Valid Redirect URIs`: (Relative) callback URL of auth proxy, e.g. `/oauth2/callback`
+    - `Valid post logout redirect URIs`: `/*`
+
+    4. Adjust settings for `authority-portal-client` client (Clients > `authority-portal-client` > Settings)
+
+    - `Root URL`: URL of the Data Space Portal, e.g. `https://authority-portal.example.url`
+    - `Home URL`: (Most likely) same as `Root URL`
+
+    5. Regenerate client secrets for `oauth2-proxy` and `authority-portal-client` clients
+
+    - Clients > `[client]` > Credentials > Regenerate (Client secret)
+
+    6. Select sovity theme for login & email templates
+
+    - Select `authority-portal` realm
+    - Realm settings > Themes > Login theme: Select `sovity-theme`
+    - Realm settings > Themes > Email theme: Select `sovity-theme`
+
+    7. Add email settings (Realm settings > Email)
+
+    - At least `From` and `Host` are required
 
 #### Caddy
 
@@ -127,11 +136,11 @@ AUTH_PROXY_UPSTREAM_HOST: auth-proxy
 OAUTH2_PROXY_PROVIDER: keycloak-oidc
 OAUTH2_PROXY_PROVIDER_DISPLAY_NAME: Keycloak
 OAUTH2_PROXY_OIDC_ISSUER_URL: https://[KC_FQDN]/realms/[KC_REALM]
-OAUTH2_PROXY_COOKIE_SECRET: [COOKIE_SECRET] # (32-bit base64 encoded secret)
+OAUTH2_PROXY_COOKIE_SECRET: [ COOKIE_SECRET ] # (32-bit base64 encoded secret)
 OAUTH2_PROXY_COOKIE_REFRESH: 30s # Access Token Lifespan - 30 seconds
 OAUTH2_PROXY_COOKIE_EXPIRE: 30m # Client Session Idle / SSO Session Idle
 OAUTH2_PROXY_CLIENT_ID: oauth2-proxy
-OAUTH2_PROXY_CLIENT_SECRET: [OA2_CLIENT_SECRET]
+OAUTH2_PROXY_CLIENT_SECRET: [ OA2_CLIENT_SECRET ]
 OAUTH2_PROXY_EMAIL_DOMAINS: "*"
 OAUTH2_PROXY_UPSTREAMS: http://caddy:8081/
 OAUTH2_PROXY_API_ROUTES: "^/api/"
@@ -142,8 +151,8 @@ OAUTH2_PROXY_SKIP_PROVIDER_BUTTON: "true"
 OAUTH2_PROXY_SHOW_DEBUG_ON_ERROR: "true"
 OAUTH2_PROXY_REDIRECT_URL: https://[AP_FQDN]/oauth2/callback
 OAUTH2_PROXY_SCOPE: openid profile
-OAUTH2_PROXY_WHITELIST_DOMAINS: [KC_FQDN]
-OAUTH2_PROXY_CUSTOM_TEMPLATES_DIR: [CUSTOM_TEMPLATES_DIR]
+OAUTH2_PROXY_WHITELIST_DOMAINS: [ KC_FQDN ]
+OAUTH2_PROXY_CUSTOM_TEMPLATES_DIR: [ CUSTOM_TEMPLATES_DIR ]
 ```
 
 #### Keycloak DAPS Client Creation
@@ -251,9 +260,17 @@ authority-portal.deployment.environments.test.daps.client-secret: "[DAPS_CLIENT_
 # Environment Logging House
 # Env: Logging House URL
 authority-portal.deployment.environments.test.logging-house.url: "https://[LOGGING_HOUSE_FQDN]"
+
+# Environment Central Component Registration
+# Example: Declaratively register a central component with the ID 'broker' on application startup
+authority-portal.deployment.environments.test.central-components.broker.client-id: BPNL1234XX.C1234XX # this should look like a valid Client ID/Participant ID, but won't be validated on startup
+authority-portal.deployment.environments.test.central-components.broker.homepage-url: https://my-central-component # optional
+authority-portal.deployment.environments.test.central-components.broker.endpoint-url: https://my-central-component/api/v1/dsp
+authority-portal.deployment.environments.test.central-components.broker.certificate: ...PEM encoded certificate...
 ```
 
 Optional configuration variables
+
 ```yaml
 # Organization ID configuration (example: prefix: BPN & length: 10 would generate Ids in the format BPNL000000000011)
 # The 'L' stands for 'Legal' and is added automatically after the prefix - the last 2 characters are the checksum
@@ -272,7 +289,7 @@ authority-portal.deployment.environments.test.daps.kuma-name: "[DAPS_KUMA_NAME]"
 
 #### Adjusting the log level at runtime
 
-The log level can be changed during runtime via a request to the `/api/config/log-level` endpoint. 
+The log level can be changed during runtime via a request to the `/api/config/log-level` endpoint.
 The API key is required for this.
 Example:
 
@@ -309,7 +326,6 @@ AUTHORITY_PORTAL_FRONTEND_UPDATE_PASSWORD_URL: https://[KC_FQDN]/realms/authorit
 - The Data Catalog only displays the Data Catalog as it exists in the database.
 - Each deployment environment requires a Data Catalog Crawler.
   - A Data Catalog Crawler is based on the EDC Connector and crawls the catalogs of all connectors in the dataspace.
-  - You will need an SKI/AKI client ID to register the crawler. Please refer to the [EDC documentation](https://github.com/sovity/edc-ce/tree/main/docs/getting-started#faq) on how to generate one.
 
 #### Reverse Proxy Configuration
 
@@ -319,77 +335,72 @@ AUTHORITY_PORTAL_FRONTEND_UPDATE_PASSWORD_URL: https://[KC_FQDN]/realms/authorit
 
 #### Catalog Crawler Configuration
 
-A productive configuration will require you to join a DAPS.
-
-For that you will need a SKI/AKI client ID. Please refer
-to [edc-extension's Getting Started Guide](https://github.com/sovity/edc-ce/tree/main/docs/getting-started#faq)
-on how to generate one.
-
-The DAPS needs to contain the claim `referringConnector=broker` for the broker.
-Although it is discouraged to do so, the expected value `broker` could be overridden by specifying a different value for `MY_EDC_PARTICIPANT_ID`.
-
 ```yaml
+# Required: EDC Participant ID
+# This should match the client id of the central component registered in the Data Space Portal.
+# Should coincide with 'authority-portal.deployment.environments.<ENV>.central-components.<CENTRAL_COMPONENT_ID>.client-id'
+my.edc.participant.id: "BPNL1234XX.C1234XX"
+
 # Required: Fully Qualified Domain Name
-MY_EDC_FQDN: "crawler.test.example.com"
+my.edc.fqdn: "crawler.test.example.com"
 
 # Required: Data Space Portal Environment ID
-CRAWLER_ENVIRONMENT_ID: test
+crawler.environment.id: test
 
 # Required: Data Space Portal Postgresql DB Access
-CRAWLER_DB_JDBC_URL: jdbc:postgresql://authority-portal:5432/portal
-CRAWLER_DB_JDBC_USER: portal
-CRAWLER_DB_JDBC_PASSWORD: portal
+crawler.db.jdbc.url: jdbc:postgresql://authority-portal:5432/portal
+crawler.db.jdbc.user: portal
+crawler.db.jdbc.password: portal
 
 # Required: DAPS credentials
 edc.oauth.token.url: 'https://daps.yourdataspace.com/token'
 edc.oauth.provider.jwks.url: 'https://daps.yourdataspace.com/jwks'
-edc.oauth.client.id: '_your SKI/AKI_'
 sovity.vault.in-memory.init.daps-cert: |
-    sovity.vault.in-memory.init.daps-cert: |
-      -----BEGIN CERTIFICATE-----
-      MIIFE...
-      -----END CERTIFICATE-----
+  sovity.vault.in-memory.init.daps-cert: |
+    -----BEGIN CERTIFICATE-----
+    MIIFE...
+    -----END CERTIFICATE-----
 sovity.vault.in-memory.init.daps-priv: |
-    -----BEGIN PRIVATE KEY-----
-    MIIJQ...
-    -----END PRIVATE KEY-----
+  -----BEGIN PRIVATE KEY-----
+  MIIJQ...
+  -----END PRIVATE KEY-----
 ```
 
 You can also optionally override the following defaults:
 
 ```yaml
 # Database Connection Pool Size
-CRAWLER_DB_CONNECTION_POOL_SIZE: 30
+crawler.db.connection.pool.size: 30
 
 # Database Connection Timeout (in ms)
-CRAWLER_DB_CONNECTION_TIMEOUT_IN_MS: 30000
+crawler.db.connection.timeout.in.ms: 30000
 
 # CRON interval for crawling ONLINE connectors
-CRAWLER_CRON_ONLINE_CONNECTOR_REFRESH: */20 * * ? * *
+crawler.cron.online.connector.refresh: */20 * * ? * *
 
-# CRON interval for crawling OFFLINE connectors
-CRAWLER_CRON_OFFLINE_CONNECTOR_REFRESH: 0 */5 * ? * *
+    # CRON interval for crawling OFFLINE connectors
+crawler.cron.offline.connector.refresh: 0 */5 * ? * *
 
 # CRON interval for crawling DEAD connectors
-CRAWLER_CRON_DEAD_CONNECTOR_REFRESH: 0 0 * ? * *
+crawler.cron.dead.connector.refresh: 0 0 * ? * *
 
 # CRON interval for marking connectors as DEAD
-CRAWLER_SCHEDULED_KILL_OFFLINE_CONNECTORS: 0 0 2 ? * *
+crawler.scheduled.kill.offline.connectors: 0 0 2 ? * *
 
 # Delete data offers / mark as dead after connector has been offline for:
-CRAWLER_KILL_OFFLINE_CONNECTORS_AFTER: P5D
+crawler.kill.offline.connectors.after: P5D
 
 # Hide data offers after connector has been offline for:
-CRAWLER_HIDE_OFFLINE_DATA_OFFERS_AFTER: P1D
+crawler.hide.offline.data.offers.after: P1D
 
 # Parallelization for Crawling
-CRAWLER_NUM_THREADS: 32
+crawler.num.threads: 32
 
 # Maximum number of Data Offers per Connector
-CRAWLER_MAX_DATA_OFFERS_PER_CONNECTOR: 50
+crawler.max.data.offers.per.connector: 50
 
 # Maximum number of Contract Offers per Data Offer
-CRAWLER_MAX_CONTRACT_OFFERS_PER_DATA_OFFER: 10
+crawler.max.contract.offers.per.data.offer: 10
 ```
 
 ## Initial Setup

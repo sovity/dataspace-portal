@@ -58,7 +58,7 @@ class OrganizationDeletionService(
         organizationService.deleteOrganization(organizationId)
         userService.deleteUsers(orgMemberIds)
 
-        keycloakService.deleteUsers(orgMemberIds)
+        keycloakService.deleteUsersSafely(orgMemberIds)
         keycloakService.deleteOrganization(organizationId)
 
         Log.info(

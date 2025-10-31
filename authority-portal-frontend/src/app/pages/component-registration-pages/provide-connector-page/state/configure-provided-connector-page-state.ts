@@ -17,6 +17,7 @@
  */
 import {
   ConnectorDetailsDto,
+  DeploymentEnvironmentDto,
   OrganizationOverviewEntryDto,
 } from '@sovity.de/authority-portal-client';
 import {Fetched} from 'src/app/core/utils/fetched';
@@ -24,8 +25,8 @@ import {Fetched} from 'src/app/core/utils/fetched';
 export interface ConfigureProvidedConnectorPageState {
   state: 'editing' | 'submitting' | 'success' | 'error';
   organizationList: Fetched<OrganizationOverviewEntryDto[]>;
-  connectorConfig: string;
-  localConnectorConfig: string;
+  connectorId: string | null;
+  deploymentEnvironment: DeploymentEnvironmentDto | null;
   connectorData: ConnectorDetailsDto | null;
 }
 
@@ -33,7 +34,7 @@ export const DEFAULT_PROVIDE_CONNECTOR_PAGE_STATE: ConfigureProvidedConnectorPag
   {
     state: 'editing',
     organizationList: Fetched.empty(),
-    connectorConfig: '',
-    localConnectorConfig: '',
+    connectorId: null,
+    deploymentEnvironment: null,
     connectorData: null,
   };

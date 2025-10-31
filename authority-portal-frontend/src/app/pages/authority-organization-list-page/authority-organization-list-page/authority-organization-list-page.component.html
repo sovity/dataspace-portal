@@ -73,8 +73,10 @@
               <ng-container
                 *ngIf="
                   state.organizations.data.length > 0 &&
-                    (state.organizations.data | sortingFilter : organizationFilter).length >
-                      0;
+                    (
+                      state.organizations.data
+                      | sortingFilter : organizationFilter
+                    ).length > 0;
                   else noRows
                 ">
                 <tbody

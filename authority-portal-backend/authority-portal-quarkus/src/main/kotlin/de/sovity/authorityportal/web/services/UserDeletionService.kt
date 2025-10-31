@@ -80,7 +80,7 @@ class UserDeletionService(
         centralComponentService.updateCentralComponentsCreator(organization.createdBy, userId)
         userService.deleteInvitationReference(userId)
         userService.deleteUser(userId)
-        keycloakService.deleteUser(userId)
+        keycloakService.deleteUserSafely(userId)
 
         Log.info(
             "User deleted. Ownership of connectors and central components handed over to organization creator. " +

@@ -51,7 +51,7 @@ The backend and the frontend can be developed separately:
 
 ### Local E2E Development
 
-Local E2E Development is what you use to integration test the backend and frontend locally. Requires JDK17, a Docker
+Local E2E Development is what you use to integration test the backend and frontend locally. Requires JDK21, a Docker
 Environment and Node 16 / NPM 7.
 
 ```shell

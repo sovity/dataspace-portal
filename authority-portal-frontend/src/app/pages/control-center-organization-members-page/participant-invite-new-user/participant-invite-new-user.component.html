@@ -61,7 +61,7 @@
         <!-- User Roles -->
         <div class="flex flex-col justify-start items-start">
           <div class="flex items-center mb-2">
-            <h4 class="text-sm">User's Role</h4>
+            <h4 class="text-sm">User Role</h4>
             <app-organization-roles-tooltip></app-organization-roles-tooltip>
           </div>
           <mat-form-field class="w-full" appearance="outline">
@@ -70,13 +70,13 @@
               placeholder="Select Role"
               [formControl]="group.controls.role">
               <mat-option *ngFor="let role of assignableRoles" [value]="role"
-              >{{ mapToReadable(role) }}
+                >{{ mapToReadable(role) }}
               </mat-option>
             </mat-select>
             <mat-error
               class="text-sm"
               appFormControlError
-              fieldName="User's Role"
+              fieldName="User Role"
               [control]="group.get('role')"></mat-error>
           </mat-form-field>
         </div>

@@ -39,7 +39,7 @@ import de.sovity.authorityportal.web.environment.CatalogDataspaceConfig
 import de.sovity.authorityportal.web.environment.CatalogDataspaceConfigService
 import de.sovity.authorityportal.web.tests.useDevUser
 import de.sovity.authorityportal.web.tests.useMockNow
-import de.sovity.edc.ext.wrapper.api.common.model.DataSourceAvailability
+import de.sovity.edc.ce.api.common.model.DataSourceAvailability
 import io.quarkus.test.InjectMock
 import io.quarkus.test.TestTransaction
 import io.quarkus.test.junit.QuarkusTest
@@ -244,33 +244,22 @@ class CatalogApiTest {
             dataOffer(0, 0, 0, assetApplier = {
                 it.title = "Data Offer 0"
                 it.description = "Data Offer 0 Description"
-                it.transportMode = "Transport Mode 1"
-                it.dataSubcategory = "Data Subcategory 1"
                 it.dataModel = "Data Model 1"
-                it.geoReferenceMethod = "Geo Reference Method 1"
                 it.dataSourceAvailability = DataSourceAvailability.LIVE
             })
             dataOffer(0, 0, 1, assetApplier = {
                 it.title = "Data Offer 1"
                 it.description = "Data Offer 1 Description"
-                it.dataCategory = "Data Category 1"
-                it.transportMode = "Transport Mode 1"
-                it.dataSubcategory = "Data Subcategory 1"
                 it.dataSourceAvailability = DataSourceAvailability.LIVE
             })
             dataOffer(0, 0, 2, assetApplier = {
                 it.title = "Data Offer 2"
                 it.description = "Data Offer 2 Description"
-                it.dataCategory = "Data Category 1"
-                it.transportMode = "Transport Mode 2"
-                it.dataSubcategory = "Data Subcategory 2"
                 it.dataSourceAvailability = DataSourceAvailability.LIVE
             })
             dataOffer(0, 0, 3, assetApplier = {
                 it.title = "Data Offer 3"
                 it.description = "Data Offer 3 Description"
-                it.dataCategory = "Data Category 1"
-                it.transportMode = ""
                 it.dataSourceAvailability = DataSourceAvailability.LIVE
             })
 
@@ -285,62 +274,26 @@ class CatalogApiTest {
 
         // assert
         assertThat(result.availableFilters.fields).allSatisfy {
-            it.id in setOf(
-                "dataCategory",
-                "dataSubcategory",
+            assertThat(it.id).isIn(setOf(
+                "dataSourceAvailability",
                 "dataModel",
-                "transportMode",
-                "geoReferenceMethod",
-                "organizationName",
-                "organizationId",
+                "organization",
                 "connectorId",
-                "connectorEndpoint"
-            )
+            ))
         }
 
         assertThat(result.availableFilters.fields).allSatisfy {
-            it.title in setOf(
-                "Data Category",
-                "Data Subcategory",
+            assertThat(it.title).isIn(setOf(
+                "Data Offer Type",
                 "Data Model",
-                "Transport Mode",
-                "Geo Reference Method",
-                "Organization Name",
-                "Organization ID",
-                "Connector ID",
-                "Connector Endpoint"
-            )
+                "Organization",
+                "Connector",
+            ))
         }
-
-        val dataCategory = getAvailableFilter(result, "dataCategory")
-        assertThat(dataCategory.values).usingRecursiveFieldByFieldElementComparator().containsExactly(
-            CnfFilterItem("Data Category 1", "Data Category 1"),
-            CnfFilterItem("dataCategory", "dataCategory"),
-        )
-
-        val dataSubcategory = getAvailableFilter(result, "dataSubcategory")
-        assertThat(dataSubcategory.values).usingRecursiveFieldByFieldElementComparator().containsExactly(
-            CnfFilterItem("Data Subcategory 1", "Data Subcategory 1"),
-            CnfFilterItem("Data Subcategory 2", "Data Subcategory 2"),
-            CnfFilterItem("", ""),
-        )
 
         val dataModel = getAvailableFilter(result, "dataModel")
         assertThat(dataModel.values).usingRecursiveFieldByFieldElementComparator().containsExactly(
             CnfFilterItem("Data Model 1", "Data Model 1"),
-            CnfFilterItem("", "")
-        )
-
-        val transportMode = getAvailableFilter(result, "transportMode")
-        assertThat(transportMode.values).usingRecursiveFieldByFieldElementComparator().containsExactly(
-            CnfFilterItem("Transport Mode 1", "Transport Mode 1"),
-            CnfFilterItem("Transport Mode 2", "Transport Mode 2"),
-            CnfFilterItem("", "")
-        )
-
-        val geoReferenceMethod = getAvailableFilter(result, "geoReferenceMethod")
-        assertThat(geoReferenceMethod.values).usingRecursiveFieldByFieldElementComparator().containsExactly(
-            CnfFilterItem("Geo Reference Method 1", "Geo Reference Method 1"),
             CnfFilterItem("", "")
         )
 
@@ -442,13 +395,11 @@ class CatalogApiTest {
             dataOffer(0, 0, 0, assetApplier = {
                 it.title = "Data Offer 0"
                 it.description = "Data Offer 0 Description"
-                it.dataCategory = "Data Category 0"
-                it.dataSubcategory = "Data Subcategory 0"
+                it.dataModel = "Data Model 0"
             })
             dataOffer(0, 0, 1, assetApplier = {
                 it.title = "Data Offer 1"
                 it.description = "Data Offer 1 Description"
-                it.dataSubcategory = "Data Subcategory 1"
             })
 
             scenarioInstaller.install(this)
@@ -460,7 +411,7 @@ class CatalogApiTest {
             query = CatalogPageQuery(
                 filter = CnfFilterValue(
                     listOf(
-                        CnfFilterValueAttribute("dataCategory", listOf("")),
+                        CnfFilterValueAttribute("dataModel", listOf("")),
                     )
                 ),
                 searchQuery = null,
@@ -469,14 +420,15 @@ class CatalogApiTest {
         )
 
         // assert
+        val dataModel = getAvailableFilter(result, "dataModel")
+        assertThat(dataModel.values).hasSize(2)
 
-        val dataCategory = getAvailableFilter(result, "dataCategory")
-        assertThat(dataCategory.values).allSatisfy { it.id in setOf("Data Category 1", "") }
-        assertThat(dataCategory.values).allSatisfy { it.title in setOf("Data Category 1", "") }
-
-        val dataSubcategory = getAvailableFilter(result, "dataSubcategory")
-        assertThat(dataSubcategory.values).allSatisfy { it.id in setOf("Data Subcategory 1") }
-        assertThat(dataSubcategory.values).allSatisfy { it.title in setOf("Data Subcategory 1") }
+        assertThat(dataModel.values).allSatisfy {
+            assertThat(it.id).isIn(setOf("Data Model 0", ""))
+        }
+        assertThat(dataModel.values).allSatisfy {
+            assertThat(it.title).isIn(setOf("Data Model 0", ""))
+        }
     }
 
     @Test
@@ -519,7 +471,9 @@ class CatalogApiTest {
 
         // assert
         assertThat(result.dataOffers).hasSize(10)
-        assertThat(result.dataOffers).allSatisfy { it.assetId.contains("my-asset") }
+        assertThat(result.dataOffers).allSatisfy {
+            assertThat(it.assetId).contains("my-asset")
+        }
 
         val actual = result.paginationMetadata
         assertThat(actual.pageOneBased).isEqualTo(1)
@@ -568,7 +522,9 @@ class CatalogApiTest {
 
         // assert
         assertThat(result.dataOffers).hasSize(5)
-        assertThat(result.dataOffers).allSatisfy { it.assetId.contains("my-asset") }
+        assertThat(result.dataOffers).allSatisfy {
+            assertThat(it.assetId).contains("my-asset")
+        }
 
         val actual = result.paginationMetadata
         assertThat(actual.pageOneBased).isEqualTo(2)

@@ -13,7 +13,7 @@
     "build": "ng build",
     "generate-config": "node config-generator.js",
     "format-all": "prettier --write .",
-    "dev:build-lib": "cd ../authority-portal-backend && node ../authority-portal-frontend/cross-platform-gradlew.cjs :authority-portal-api:clean :authority-portal-api:build"
+    "dev:build-lib": "cd ../authority-portal-backend && node ../authority-portal-frontend/cross-platform-gradlew.cjs :authority-portal-api:clean :authority-portal-api:openApiGenerateTypeScriptClient"
   },
   "private": true,
   "dependencies": {

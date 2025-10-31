@@ -25,7 +25,7 @@ import de.sovity.authorityportal.seeds.utils.ScenarioData
 import de.sovity.authorityportal.seeds.utils.ScenarioInstaller
 import de.sovity.authorityportal.seeds.utils.dummyDevAssetId
 import de.sovity.authorityportal.seeds.utils.dummyDevOrganizationId
-import de.sovity.edc.ext.wrapper.api.common.model.DataSourceAvailability
+import de.sovity.edc.ce.api.common.model.DataSourceAvailability
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.transaction.Transactional
 
@@ -36,6 +36,17 @@ class DevScenario(
 
     override val name = "dev"
 
+    object Users {
+        const val AUTHORITY_ADMIN = 1
+        const val AUTHORITY_USER = 2
+        const val PARTICIPANT_ADMIN = 3
+        const val PARTICIPANT_USER = 4
+        const val PENDING_USER = 5
+        const val BROKEN_USER = 6
+        const val SERVICE_PARTNER_ADMIN = 7
+        const val OPERATOR_ADMIN = 8
+    }
+
     @Transactional
     override fun install() {
         val scenario = init()
@@ -45,73 +56,73 @@ class DevScenario(
     override fun init(): ScenarioData {
         val scenario = ScenarioData().apply {
             // Authority
-            user(1, 1) {
+            user(Users.AUTHORITY_ADMIN, 1) {
                 it.firstName = "Authority"
                 it.lastName = "Admin"
             }
-            organization(1, 1) {
+            organization(1, Users.AUTHORITY_ADMIN) {
                 it.name = "Authority Organization"
             }
-            user(2, 1) {
+            user(Users.AUTHORITY_USER, 1) {
                 it.firstName = "Authority"
                 it.lastName = "User"
             }
 
             // Participant
-            user(3, 2) {
+            user(Users.PARTICIPANT_ADMIN, 2) {
                 it.firstName = "Participant"
                 it.lastName = "Admin"
             }
-            organization(2, 3) {
+            organization(2, Users.PARTICIPANT_ADMIN) {
                 it.name = "Participant Organization"
             }
-            user(4, 2) {
+            user(Users.PARTICIPANT_USER, 2) {
                 it.firstName = "Participant"
                 it.lastName = "User"
             }
 
             // Pending
-            user(5, 3) {
+            user(Users.PENDING_USER, 3) {
                 it.firstName = "Pending"
                 it.lastName = "User"
                 it.registrationStatus = UserRegistrationStatus.PENDING
             }
-            organization(3, 5) {
+            organization(3, Users.PENDING_USER) {
                 it.name = "Pending Organization"
                 it.registrationStatus = OrganizationRegistrationStatus.PENDING
             }
 
             // User without organization
-            user(6, null) {
+            user(Users.BROKEN_USER, null) {
                 it.firstName = "Broken"
                 it.lastName = "User"
                 it.organizationId = null
             }
 
             // Service Partner Admin
-            user(7, 4) {
+            user(Users.SERVICE_PARTNER_ADMIN, 4) {
                 it.firstName = "Service Partner"
                 it.lastName = "Admin"
             }
-            organization(4, 7) {
+            organization(4, Users.SERVICE_PARTNER_ADMIN) {
                 it.name = "Service Partner Organization"
             }
 
             // Operator Admin
-            user(8, 5) {
+            user(Users.OPERATOR_ADMIN, 5) {
                 it.firstName = "Operator"
                 it.lastName = "Admin"
             }
-            organization(5, 8) {
+            organization(5, Users.OPERATOR_ADMIN) {
                 it.name = "Operator Organization"
             }
 
             // Catalog test data
             val objectMapper = ObjectMapper()
 
-            connector(1, 1, 1)
-            connector(2, 1, 1)
-            connector(3, 1, 1)
+            connector(1, 1, Users.AUTHORITY_ADMIN)
+            connector(2, 1, Users.AUTHORITY_ADMIN)
+            connector(3, 1, Users.AUTHORITY_ADMIN)
             dataOffer(1, 1, 1, assetApplier = {
                 it.assetId = dummyDevAssetId(1)
                 it.title = "Asset Title"

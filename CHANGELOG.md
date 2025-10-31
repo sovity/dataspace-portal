@@ -23,10 +23,69 @@ _No special migration steps required_
 
 #### Compatible Versions
 
-- Authority Portal Backend Docker Image: `ghcr.io/sovity/ds-portal-backend:{{ version }}`
-- Authority Portal Frontend Docker Image: `ghcr.io/sovity/ds-portal-frontend:{{ version }}`
-- Catalog Crawler CE: `ghcr.io/sovity/ds-portal-crawler:{{ version }}`
+- Authority Portal Backend Docker Image: `ghcr.io/sovity/ds-portal-ce-backend:{{ version }}`
+- Authority Portal Frontend Docker Image: `ghcr.io/sovity/ds-portal-ce-frontend:{{ version }}`
+- Catalog Crawler CE: `ghcr.io/sovity/ds-portal-ce-crawler:{{ version }}`
 - Sovity EDC CE: {{ CE Release Link }}
+
+## [v7.0.0] - 2025-10-31
+
+### Overview
+
+Bump compatible sovity EDC CE to v16.0.0.
+
+### Detailed Changes
+
+#### Major Changes
+
+- Reworked DsP for sovity EDC 16.0.0
+  - Stronger coupling between DsP version and sovity EDC version
+  - Reworked DAPS interaction
+  - Migrate from `/api/dsp` to `/api/v1/dsp`
+  - More opinionated configuration generation
+  - **All connectors and central components will be removed from db!**
+- Keycloak: There is no longer a button to go back to the main login page after completing an email verification, TOTP configuration or password update.
+- Removed MDS fields `Data Category`, `Data Subcategory`, `Transport Mode`, `Geo Reference Method`, `Geo Location`, `NUTS Locations`
+
+- Added database migration that will delete all database entries except for organizations and users
+
+#### Minor
+
+- Central Components can now be added declaratively via config
+- Default URLs for connector and component registration
+
+#### Patch
+
+- Bumped Versions
+  - Java `17` → `21`
+  - Kotlin `1.9.22` → `2.1.10`
+  - Eclipse EDC libraries `0.2.1.4` → `0.11.1.3`
+  - sovity EDC-CE libraries `10.5.1`/`0.0.1-SNAPSHOT` → `16.0.0`
+  - Backend Red Hat OpenJDK image `ubi8` → `ubi9`
+- Added Keycloak API Integration test
+
+### Deployment Migration Notes
+
+- Data Space Portal Backend:
+  - This release will delete everything except for organizations and users.
+    - This is because the supported EDC versions of the previous DsP version cannot be migrated to the currently supported EDC version. Because of that, we chose to have no migration strategy for connectors.
+  - Please re-register your connectors and central components after the update.
+    - Central components can now be registered on startup via configuration declaratively.
+- Keycloak:
+  - A Keycloak with a DAT Mapper is no longer required. You can now use a vanilla Keycloak.
+  - Please remove all existing clients for connectors and central components from the Keycloak, since they will not be deleted by the database migration.
+- Catalog Crawler:
+  - Remove config property ~~`edc.oauth.client.id`~~
+  - Configure config property `my.edc.participant.id` with the client id the central component is registered with. This should look like a regular connector ID.
+
+#### Compatible Versions
+
+- Data Space Portal CE Backend Docker Image: `ghcr.io/sovity/ds-portal-ce-backend:7.0.0`
+- Data Space Portal CE Frontend Docker Image: `ghcr.io/sovity/ds-portal-ce-frontend:7.0.0`
+- Catalog Crawler CE: `ghcr.io/sovity/ds-portal-ce-crawler:7.0.0`
+- sovity EDC CE: [`v16.0.0`](https://github.com/sovity/edc-ce/releases/tag/v16.0.0)
+- Keycloak: `26.0.7`
+- PostgreSQL: `16`
 
 ## [v6.0.0] - 2025-04-01
 
@@ -61,9 +120,9 @@ When first contributing to the Data Space Portal, you will be asked to sign a Co
 
 #### Compatible Versions
 
-- Authority Portal Backend Docker Image: `ghcr.io/sovity/ds-portal-backend:6.0.0`
-- Authority Portal Frontend Docker Image: `ghcr.io/sovity/ds-portal-frontend:6.0.0`
-- Catalog Crawler CE: `ghcr.io/sovity/ds-portal-crawler:6.0.0`
+- Authority Portal Backend Docker Image: `ghcr.io/sovity/ds-portal-ce-backend:6.0.0`
+- Authority Portal Frontend Docker Image: `ghcr.io/sovity/ds-portal-ce-frontend:6.0.0`
+- Catalog Crawler CE: `ghcr.io/sovity/ds-portal-ce-crawler:6.0.0`
 - Sovity EDC CE: [`v10.5.1`](https://github.com/sovity/edc-ce/releases/tag/v10.5.1)
 
 ## [v5.0.0] - 2024-12-17

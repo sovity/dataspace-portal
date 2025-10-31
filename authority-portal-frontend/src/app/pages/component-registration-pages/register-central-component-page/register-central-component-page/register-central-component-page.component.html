@@ -13,7 +13,7 @@
           <app-text-input
             class="w-full"
             label="Name"
-            ctrlId="formRegCCName"
+            ctrlId="formRegCcName"
             placeholder="Broker"
             required
             [ctrl]="form.componentTab.controls.name"></app-text-input>
@@ -21,16 +21,36 @@
           <!-- Central Component Location -->
           <app-text-input
             class="w-full"
-            label="Component's Location"
+            label="Component Location"
             ctrlId="formRegCcLocation"
             placeholder="DE"
             required
             [ctrl]="form.componentTab.controls.location"></app-text-input>
 
+          <!-- Use custom URLs toggle -->
+          <div class="w-full justify-start my-4">
+            <mat-slide-toggle
+              name="useCustomUrls"
+              [formControl]="form.componentTab.controls.useCustomUrls"
+              >Overwrite default URLs
+            </mat-slide-toggle>
+          </div>
+
+          <!-- Central Component Base URL -->
+          <app-text-input
+            *ngIf="!useCustomUrls"
+            class="w-full"
+            label="Component Base URL"
+            ctrlId="formRegCcConBaseUrl"
+            placeholder="https://my-broker.my-org.com"
+            required
+            [ctrl]="form.componentTab.controls.baseUrl"></app-text-input>
+
           <!-- Central Component Frontend URL -->
           <app-text-input
+            *ngIf="useCustomUrls"
             class="w-full"
-            label="Component Home Page URL"
+            label="Component Frontend URL"
             ctrlId="formRegCcFrontendUrl"
             placeholder="https://my-broker.my-org.com"
             required
@@ -38,11 +58,14 @@
 
           <!-- Central Component Endpoint URL -->
           <app-text-input
+            *ngIf="useCustomUrls"
             class="w-full"
             label="Component Endpoint URL"
             ctrlId="formRegCcEndpointUrl"
-            placeholder="https://my-broker.my-org.com/api/dsp"
             required
+            [placeholder]="
+              'https://my-broker.my-org.com' + edcConfig.defaultPaths.dspApi
+            "
             [ctrl]="form.componentTab.controls.endpointUrl"></app-text-input>
         </div>
 

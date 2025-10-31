@@ -15,24 +15,17 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package de.sovity.edc.ext.vault.in_memory
 
-import org.eclipse.edc.connector.core.vault.InMemoryVault
-import org.eclipse.edc.runtime.metamodel.annotation.BaseExtension
+import org.eclipse.edc.boot.vault.InMemoryVault
 import org.eclipse.edc.runtime.metamodel.annotation.Extension
 import org.eclipse.edc.runtime.metamodel.annotation.Provides
-import org.eclipse.edc.spi.security.*
+import org.eclipse.edc.spi.security.Vault
 import org.eclipse.edc.spi.system.ServiceExtension
 import org.eclipse.edc.spi.system.ServiceExtensionContext
 
-@BaseExtension
 @Extension(value = "InMemoryVaultExtension")
-@Provides(
-    Vault::class,
-    PrivateKeyResolver::class,
-    CertificateResolver::class
-)
+@Provides(Vault::class)
 class InMemoryVaultExtension : ServiceExtension {
     override fun name(): String = InMemoryVaultExtension::class.java.name
 
@@ -41,11 +34,9 @@ class InMemoryVaultExtension : ServiceExtension {
     override fun initialize(context: ServiceExtensionContext) {
         val vault = getVault(context)
         context.registerService(Vault::class.java, vault)
-        context.registerService(PrivateKeyResolver::class.java, VaultPrivateKeyResolver(vault))
-        context.registerService(CertificateResolver::class.java, VaultCertificateResolver(vault))
     }
 
-    fun getVault(context: ServiceExtensionContext): Vault {
+    private fun getVault(context: ServiceExtensionContext): Vault {
         val monitor = context.monitor
         val config = context.config
         val vault = InMemoryVault(monitor)

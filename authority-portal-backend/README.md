@@ -63,7 +63,7 @@ One might argue all the these types of tests to be unit tests:
 
 ### Local E2E Development
 
-To start the backend in development mode, a JDK17 and docker are required.
+To start the backend in development mode, a JDK21 and docker are required.
 
 ```shell
 ./gradlew clean quarkusDev

@@ -17,7 +17,7 @@
  */
 package de.sovity.authorityportal.api.model.catalog
 
-import de.sovity.edc.ext.wrapper.api.common.model.DataSourceAvailability
+import de.sovity.edc.ce.api.common.model.DataSourceAvailability
 import io.swagger.v3.oas.annotations.media.Schema
 import java.time.OffsetDateTime
 

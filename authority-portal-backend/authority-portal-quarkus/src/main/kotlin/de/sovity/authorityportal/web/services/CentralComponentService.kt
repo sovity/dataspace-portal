@@ -61,11 +61,11 @@ class CentralComponentService(
 
     fun createCentralComponent(
         centralComponentId: String,
-        organizationId: String,
         environment: String,
         clientId: String,
         centralComponentCreateRequest: CentralComponentCreateRequest,
-        createdBy: String
+        organizationId: String?,
+        createdBy: String?
     ) {
         dsl.newRecord(Tables.COMPONENT).also {
             it.id = centralComponentId

@@ -25,19 +25,19 @@ import io.swagger.v3.oas.annotations.info.License
 
 @OpenAPIDefinition(
     info = Info(
-        title = "Authority Portal API",
+        title = "Data Space Portal API",
         version = "5.0.0",
-        description = "REST API for sovity's Dataspace Authority Portal.",
+        description = "REST API for sovity's Data Space Portal.",
         contact = Contact(
             name = "sovity GmbH",
             email = "contact@sovity.de",
-            url = "https://github.com/sovity/authority-portal/issues/new/choose"
+            url = "https://github.com/sovity/dataspace-portal/issues/new/choose"
         ),
-        license = License(name = "Apache License 2.0", url = "https://github.com/sovity/authority-portal/blob/main/LICENSE")
+        license = License(name = "Apache License 2.0", url = "https://github.com/sovity/dataspace-portal/blob/main/LICENSE")
     ),
     externalDocs = ExternalDocumentation(
-        description = "Authority Portal API definitions.",
-        url = "https://github.com/sovity/authority-portal/tree/main/authority-portal-api"
+        description = "Data Space Portal API definitions.",
+        url = "https://github.com/sovity/dataspace-portal/tree/main"
     )
 )
 interface ApiInformation

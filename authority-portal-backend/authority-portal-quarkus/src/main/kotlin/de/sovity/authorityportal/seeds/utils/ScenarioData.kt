@@ -38,10 +38,10 @@ import de.sovity.authorityportal.db.jooq.tables.records.DataOfferRecord
 import de.sovity.authorityportal.db.jooq.tables.records.DataOfferViewCountRecord
 import de.sovity.authorityportal.db.jooq.tables.records.OrganizationRecord
 import de.sovity.authorityportal.db.jooq.tables.records.UserRecord
-import de.sovity.edc.ext.wrapper.api.common.model.DataSourceAvailability
-import de.sovity.edc.ext.wrapper.api.common.model.UiAsset
-import de.sovity.edc.ext.wrapper.api.common.model.UiPolicy
-import de.sovity.edc.ext.wrapper.api.common.model.UiPolicyExpression
+import de.sovity.edc.ce.api.common.model.DataSourceAvailability
+import de.sovity.edc.ce.api.common.model.UiAsset
+import de.sovity.edc.ce.api.common.model.UiPolicy
+import de.sovity.edc.ce.api.common.model.UiPolicyExpression
 import org.jooq.DSLContext
 import org.jooq.JSONB
 import java.time.OffsetDateTime
@@ -212,7 +212,6 @@ class ScenarioData {
             it.title = "Asset $assetId"
             it.description = "Asset description"
             it.descriptionShortText = "shortDescription"
-            it.dataCategory = "dataCategory"
             it.keywords = listOf("keyword")
             assetApplier(it)
         }
@@ -228,10 +227,6 @@ class ScenarioData {
             it.assetTitle = uiAsset.title
             it.descriptionNoMarkdown = uiAsset.description?.let{ d -> "$d no markdown" } ?: ""
             it.shortDescriptionNoMarkdown = uiAsset.descriptionShortText ?: ""
-            it.dataCategory = uiAsset.dataCategory ?: ""
-            it.dataSubcategory = uiAsset.dataSubcategory ?: ""
-            it.transportMode = uiAsset.transportMode ?: ""
-            it.geoReferenceMethod = uiAsset.geoReferenceMethod ?: ""
             it.keywords = uiAsset.keywords ?: emptyList()
             it.keywordsCommaJoined = uiAsset.keywords?.joinToString(",") ?: ""
             it.dataModel = uiAsset.dataModel ?: ""

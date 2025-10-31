@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 eclipse-temurin:17-jre-alpine
+FROM --platform=linux/amd64 eclipse-temurin:21-jre-alpine
 
 # Install curl for healthcheck, bash for entrypoint
 RUN apk add --no-cache curl bash

@@ -27,7 +27,7 @@ import de.sovity.edc.ext.catalog.crawler.TestData;
 import de.sovity.edc.ext.catalog.crawler.crawling.fetching.model.FetchedCatalog;
 import de.sovity.edc.ext.catalog.crawler.crawling.fetching.model.FetchedContractOffer;
 import de.sovity.edc.ext.catalog.crawler.crawling.fetching.model.FetchedDataOffer;
-import de.sovity.edc.ext.wrapper.api.common.model.UiAsset;
+import de.sovity.edc.ce.api.common.model.UiAsset;
 import org.assertj.core.data.TemporalUnitLessThanOffset;
 import org.jooq.impl.DSL;
 import org.junit.jupiter.api.BeforeEach;
@@ -67,11 +67,7 @@ class ConnectorSuccessWriterTest {
                     .title("title")
                     .description("# Description\n\n**with Markdown**")
                     .descriptionShortText("descriptionShortText")
-                    .dataCategory("dataCategory")
-                    .dataSubcategory("dataSubCategory")
                     .dataModel("dataModel")
-                    .transportMode("transportMode")
-                    .geoReferenceMethod("geoReferenceMethod")
                     .keywords(List.of("a", "b"))
                     .build();
             var fetchedContractOffer = FetchedContractOffer.builder()
@@ -134,11 +130,7 @@ class ConnectorSuccessWriterTest {
             assertThat(dataOffer.getAssetTitle()).isEqualTo("title");
             assertThat(dataOffer.getDescriptionNoMarkdown()).isEqualTo("Description with Markdown");
             assertThat(dataOffer.getShortDescriptionNoMarkdown()).isEqualTo("descriptionShortText");
-            assertThat(dataOffer.getDataCategory()).isEqualTo("dataCategory");
-            assertThat(dataOffer.getDataSubcategory()).isEqualTo("dataSubCategory");
             assertThat(dataOffer.getDataModel()).isEqualTo("dataModel");
-            assertThat(dataOffer.getTransportMode()).isEqualTo("transportMode");
-            assertThat(dataOffer.getGeoReferenceMethod()).isEqualTo("geoReferenceMethod");
             assertThat(dataOffer.getKeywords()).containsExactly("a", "b");
             assertThat(dataOffer.getKeywordsCommaJoined()).isEqualTo("a, b");
             assertThat(dataOffer.getUiAssetJson().data()).isEqualTo("\"test\"");

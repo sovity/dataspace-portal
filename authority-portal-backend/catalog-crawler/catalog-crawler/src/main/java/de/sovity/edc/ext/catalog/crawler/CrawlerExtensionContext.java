@@ -23,7 +23,7 @@ import de.sovity.edc.ext.catalog.crawler.crawling.ConnectorCrawler;
 import de.sovity.edc.ext.catalog.crawler.crawling.fetching.FetchedCatalogBuilder;
 import de.sovity.edc.ext.catalog.crawler.dao.config.DslContextFactory;
 import de.sovity.edc.ext.catalog.crawler.dao.data_offers.DataOfferRecordUpdater;
-import de.sovity.edc.ext.wrapper.api.common.mappers.PolicyMapper;
+import de.sovity.edc.ce.libs.mappers.PolicyMapper;
 
 
 /**

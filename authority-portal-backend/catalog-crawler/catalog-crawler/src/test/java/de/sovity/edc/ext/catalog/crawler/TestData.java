@@ -39,7 +39,7 @@ public class TestData {
             "test",
             "My Org",
             "MDSL1234XX",
-            "https://example.com/api/dsp"
+            "https://example.com/api/v1/dsp"
     );
 
     public static void insertConnector(

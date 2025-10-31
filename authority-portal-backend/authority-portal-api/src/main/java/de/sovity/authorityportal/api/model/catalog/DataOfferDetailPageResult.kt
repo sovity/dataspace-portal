@@ -17,7 +17,7 @@
  */
 package de.sovity.authorityportal.api.model.catalog
 
-import de.sovity.edc.ext.wrapper.api.common.model.UiAsset
+import de.sovity.edc.ce.api.common.model.UiAsset
 import io.swagger.v3.oas.annotations.media.Schema
 import java.time.OffsetDateTime
 
@@ -38,7 +38,7 @@ data class DataOfferDetailPageResult(
 
     @field:Schema(
         description = "Connector Endpoint",
-        example = "https://my-test.connector/api/dsp",
+        example = "https://my-test.connector/api/v1/dsp",
         requiredMode = Schema.RequiredMode.REQUIRED
     )
     val connectorEndpoint: String,
