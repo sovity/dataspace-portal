@@ -493,7 +493,13 @@ interface UiResource {
     @Path("/authority/central-components/{centralComponentId}")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(description = "Delete a central component (e.g. a broker or logging house)")
-    fun deleteCentralComponent(@PathParam("centralComponentId") centralComponentId: String): IdResponse
+    fun deleteCentralComponent(
+        @PathParam("centralComponentId") centralComponentId: String,
+
+        @QueryParam("environmentId")
+        @Valid @NotBlank(message = "EnvironmentId cannot be blank")
+        environmentId: String,
+    ): IdResponse
 
     @GET
     @Path("/component-statuses")

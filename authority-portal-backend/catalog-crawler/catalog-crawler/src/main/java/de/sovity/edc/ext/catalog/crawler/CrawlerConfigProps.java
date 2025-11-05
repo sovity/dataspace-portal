@@ -172,17 +172,17 @@ public class CrawlerConfigProps {
 
     /* Auth */
 
-    public static final ConfigProp EDC_OAUTH_TOKEN_URL = addCeProp(builder -> builder
-        .category(CrawlerConfigProps.Category.C2C_IAM)
-        .property("edc.oauth.token.url")
-        .description("OAuth2 / DAPS: Token URL")
-        .required(true)
-    );
-
     public static final ConfigProp EDC_OAUTH_PROVIDER_JWKS_URL = addCeProp(builder -> builder
         .category(CrawlerConfigProps.Category.C2C_IAM)
         .property("edc.oauth.provider.jwks.url")
         .description("OAuth2 / DAPS: JWKS URL")
+        .required(true)
+    );
+
+    public static final ConfigProp EDC_OAUTH_TOKEN_URL = addCeProp(builder -> builder
+        .category(CrawlerConfigProps.Category.C2C_IAM)
+        .property("edc.oauth.token.url")
+        .description("OAuth2 / DAPS: Token URL")
         .required(true)
     );
 

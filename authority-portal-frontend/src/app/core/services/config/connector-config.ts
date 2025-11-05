@@ -45,8 +45,8 @@ export const EDC_CONFIG: EdcConfig = {
 
 export const generateConnectorConfigShort = (opts: {
   participantId: string;
-  dapsTokenUrl: string;
   dapsJwksUrl: string;
+  dapsTokenUrl: string;
 }) =>
   trimIndent(`
       # Full configuration reference:
@@ -54,8 +54,8 @@ export const generateConnectorConfigShort = (opts: {
 
       # --- Dataspace Roll-In ---
       "edc.participant.id": '${opts.participantId}'
-      "edc.oauth.token.url": '${opts.dapsTokenUrl}'
       "edc.oauth.provider.jwks.url": '${opts.dapsJwksUrl}'
+      "edc.oauth.token.url": '${opts.dapsTokenUrl}'
   `);
 
 export const generateConnectorConfig = (opts: {
@@ -63,8 +63,8 @@ export const generateConnectorConfig = (opts: {
   participantId: string;
   certificate: string;
   privateKey: string;
-  dapsTokenUrl: string;
   dapsJwksUrl: string;
+  dapsTokenUrl: string;
 }): string => {
   return trimIndent(
     `
@@ -73,8 +73,8 @@ export const generateConnectorConfig = (opts: {
 
         # --- Dataspace Roll-In ---
         "edc.participant.id": '${opts.participantId}'
-        "edc.oauth.token.url": '${opts.dapsTokenUrl}'
         "edc.oauth.provider.jwks.url": '${opts.dapsJwksUrl}'
+        "edc.oauth.token.url": '${opts.dapsTokenUrl}'
         "sovity.vault.kind": 'vault-in-memory'
         "sovity.vault.in-memory.init.daps-cert": |
           ${opts.certificate.split('\n').join('\n          ')}

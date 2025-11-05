@@ -262,7 +262,7 @@ authority-portal.deployment.environments.test.daps.client-secret: "[DAPS_CLIENT_
 authority-portal.deployment.environments.test.logging-house.url: "https://[LOGGING_HOUSE_FQDN]"
 
 # Environment Central Component Registration
-# Example: Declaratively register a central component with the ID 'broker' on application startup
+# Example: Declaratively register a central component with the name 'broker' on application startup
 authority-portal.deployment.environments.test.central-components.broker.client-id: BPNL1234XX.C1234XX # this should look like a valid Client ID/Participant ID, but won't be validated on startup
 authority-portal.deployment.environments.test.central-components.broker.homepage-url: https://my-central-component # optional
 authority-portal.deployment.environments.test.central-components.broker.endpoint-url: https://my-central-component/api/v1/dsp
@@ -353,8 +353,8 @@ crawler.db.jdbc.user: portal
 crawler.db.jdbc.password: portal
 
 # Required: DAPS credentials
-edc.oauth.token.url: 'https://daps.yourdataspace.com/token'
 edc.oauth.provider.jwks.url: 'https://daps.yourdataspace.com/jwks'
+edc.oauth.token.url: 'https://daps.yourdataspace.com/token'
 sovity.vault.in-memory.init.daps-cert: |
   sovity.vault.in-memory.init.daps-cert: |
     -----BEGIN CERTIFICATE-----

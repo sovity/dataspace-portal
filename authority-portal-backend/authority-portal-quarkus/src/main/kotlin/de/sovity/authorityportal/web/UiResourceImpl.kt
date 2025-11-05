@@ -245,10 +245,7 @@ class UiResourceImpl(
     override fun organizationsOverviewForProvidingConnectors(environmentId: String): OrganizationOverviewResult {
         authUtils.requiresAnyRole(Roles.UserRoles.SERVICE_PARTNER_ADMIN)
         authUtils.requiresMemberOfAnyOrganization()
-        return organizationInfoApiService.organizationsOverviewForProvidingConnectors(
-            loggedInUser.organizationId!!,
-            environmentId
-        )
+        return organizationInfoApiService.organizationsOverview(environmentId)
     }
 
     @Transactional
@@ -482,11 +479,12 @@ class UiResourceImpl(
     }
 
     @Transactional
-    override fun deleteCentralComponent(centralComponentId: String): IdResponse {
+    override fun deleteCentralComponent(centralComponentId: String, environmentId: String): IdResponse {
         authUtils.requiresRole(Roles.UserRoles.OPERATOR_ADMIN)
         authUtils.requiresMemberOfAnyOrganization()
         return centralComponentManagementApiService.deleteCentralComponentByUser(
             centralComponentId,
+            environmentId,
             loggedInUser.userId
         )
     }

@@ -31,8 +31,8 @@ class CentralComponentService(
     val timeUtils: TimeUtils
 ) {
 
-    fun getCentralComponentOrThrow(centralComponentId: String): ComponentRecord {
-        return getComponent(centralComponentId) ?: error("Component with id $centralComponentId not found")
+    fun getCentralComponentOrThrow(centralComponentId: String, envId: String): ComponentRecord {
+        return getComponent(centralComponentId, envId) ?: error("Component with id $centralComponentId for environment with id $envId not found")
     }
 
     fun getCentralComponentsByEnvironment(envId: String): List<ComponentRecord> {
@@ -51,11 +51,14 @@ class CentralComponentService(
             .fetch()
     }
 
-    private fun getComponent(centralComponentId: String): ComponentRecord? {
+    private fun getComponent(centralComponentId: String, envId: String): ComponentRecord? {
         val c = Tables.COMPONENT
 
         return dsl.selectFrom(c)
-            .where(c.ID.eq(centralComponentId))
+            .where(
+                c.ID.eq(centralComponentId),
+                c.ENVIRONMENT.eq(envId)
+            )
             .fetchOne()
     }
 
@@ -82,11 +85,14 @@ class CentralComponentService(
         }
     }
 
-    fun deleteCentralComponent(centralComponentId: String) {
+    fun deleteCentralComponent(centralComponentId: String, envId: String) {
         val c = Tables.COMPONENT
 
         dsl.deleteFrom(c)
-            .where(c.ID.eq(centralComponentId))
+            .where(
+                c.ID.eq(centralComponentId),
+                c.ENVIRONMENT.eq(envId)
+            )
             .execute()
     }
 

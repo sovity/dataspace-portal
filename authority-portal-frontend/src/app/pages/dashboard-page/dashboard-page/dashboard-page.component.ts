@@ -63,7 +63,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
       .pipe(
         map((it) => it.environmentId),
         switchMap((deploymentEnvironmentId) =>
-          this.apiService.getComponentStatus(deploymentEnvironmentId).pipe(
+          this.apiService.getComponentsStatus(deploymentEnvironmentId).pipe(
             Fetched.wrap({
               failureMessage: 'Failed fetching dashboard data',
             }),

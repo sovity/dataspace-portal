@@ -39,9 +39,9 @@ class CentralComponentInit(
         val environments = deploymentEnvironmentService.deploymentEnvironmentConfiguration.environments()
 
         environments.forEach { (envId, environment) ->
-            environment.centralComponents().forEach { centralComponentId, component ->
+            environment.centralComponents().forEach { (name, component) ->
                 registerCentralComponent(
-                    centralComponentId = centralComponentId,
+                    name = name,
                     homepageUrl = component.homepageUrl().orElse(null),
                     endpointUrl = component.endpointUrl(),
                     certificate = component.certificate(),
@@ -53,7 +53,7 @@ class CentralComponentInit(
     }
 
     private fun registerCentralComponent(
-        centralComponentId: String,
+        name: String,
         homepageUrl: String?,
         endpointUrl: String,
         certificate: String,
@@ -62,16 +62,16 @@ class CentralComponentInit(
     ) {
         if (clientIdUtils.exists(clientId)) {
             Log.info("Central component or connector with this client-id already exists in the DsP DB. Skipping "
-                + "registration of central component. centralComponentId=$centralComponentId, clientId=$clientId.")
+                + "registration of central component. name=$name, clientId=$clientId.")
             return
         }
 
         centralComponentService.createCentralComponent(
-            centralComponentId = centralComponentId,
+            centralComponentId = clientId,
             environment = envId,
             clientId = clientId,
             centralComponentCreateRequest = CentralComponentCreateRequest(
-                name = clientId,
+                name = name,
                 homepageUrl = homepageUrl,
                 endpointUrl = endpointUrl,
                 certificate = certificate
@@ -81,11 +81,10 @@ class CentralComponentInit(
         )
 
         val dapsClient = dapsClientService.forEnvironment(envId)
-        dapsClient.deleteClient(clientId)
         dapsClient.createClient(clientId)
         dapsClient.addCertificate(clientId, certificate)
         dapsClient.configureMappers(clientId)
 
-        Log.info("Central component registered. centralComponentId=$centralComponentId, clientId=$clientId.")
+        Log.info("Central component registered. name=$name, clientId=$clientId.")
     }
 }
