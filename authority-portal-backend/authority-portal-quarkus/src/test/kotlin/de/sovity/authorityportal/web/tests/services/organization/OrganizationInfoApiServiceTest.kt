@@ -101,7 +101,7 @@ class OrganizationInfoApiServiceTest {
 
     @Test
     @TestTransaction
-    fun `organization overview for service partner admins does not contain own organization`() {
+    fun `organization overview for service partner admins`() {
         // arrange
         useDevUser(0, 0, setOf(Roles.UserRoles.SERVICE_PARTNER_ADMIN))
 
@@ -127,20 +127,22 @@ class OrganizationInfoApiServiceTest {
         val result = uiResource.organizationsOverviewForProvidingConnectors("test")
 
         // assert
-        assertThat(result.organizations).hasSize(2)
+        assertThat(result.organizations).hasSize(3)
 
-        assertThat(result.organizations).noneMatch { it.id == dummyDevOrganizationId(0) }
-        assertThat(result.organizations).noneMatch { it.name == "Organization 0"}
-
-        assertThat(result.organizations[0].id).isEqualTo(dummyDevOrganizationId(1))
-        assertThat(result.organizations[0].name).isEqualTo("Organization 1")
-        assertThat(result.organizations[0].connectorCount).isEqualTo(1)
+        assertThat(result.organizations[0].id).isEqualTo(dummyDevOrganizationId(0))
+        assertThat(result.organizations[0].name).isEqualTo("Organization 0")
+        assertThat(result.organizations[0].connectorCount).isEqualTo(3)
         assertThat(result.organizations[0].userCount).isEqualTo(1)
 
-        assertThat(result.organizations[1].id).isEqualTo(dummyDevOrganizationId(2))
-        assertThat(result.organizations[1].name).isEqualTo("Organization 2")
-        assertThat(result.organizations[1].connectorCount).isEqualTo(0)
-        assertThat(result.organizations[1].userCount).isEqualTo(2)
+        assertThat(result.organizations[1].id).isEqualTo(dummyDevOrganizationId(1))
+        assertThat(result.organizations[1].name).isEqualTo("Organization 1")
+        assertThat(result.organizations[1].connectorCount).isEqualTo(1)
+        assertThat(result.organizations[1].userCount).isEqualTo(1)
+
+        assertThat(result.organizations[2].id).isEqualTo(dummyDevOrganizationId(2))
+        assertThat(result.organizations[2].name).isEqualTo("Organization 2")
+        assertThat(result.organizations[2].connectorCount).isEqualTo(0)
+        assertThat(result.organizations[2].userCount).isEqualTo(2)
     }
 
     @Test

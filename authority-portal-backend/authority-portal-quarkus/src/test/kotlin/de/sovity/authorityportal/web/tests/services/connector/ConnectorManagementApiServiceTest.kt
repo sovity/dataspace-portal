@@ -205,7 +205,7 @@ class ConnectorManagementApiServiceTest {
 
     @Test
     @TestTransaction
-    fun `get provided connectors returns all connectors where user organizationId is host but not owner`() {
+    fun `get provided connectors returns all connectors where user organizationId is host`() {
         // arrange
         useDevUser(0, 0, setOf(Roles.UserRoles.SERVICE_PARTNER_ADMIN))
 
@@ -231,12 +231,12 @@ class ConnectorManagementApiServiceTest {
         val result = uiResource.getProvidedConnectors("test")
 
         // assert
-        assertThat(result.connectors).hasSize(2)
+        assertThat(result.connectors).hasSize(3)
         assertThat(result.connectors).noneMatch { it.environment.environmentId != "test" }
-        assertThat(result.connectors).noneMatch { it.id == dummyDevConnectorId(0, 0) }
 
-        assertThat(result.connectors[0].id).isEqualTo(dummyDevConnectorId(1, 1))
-        assertThat(result.connectors[1].id).isEqualTo(dummyDevConnectorId(1, 2))
+        assertThat(result.connectors[0].id).isEqualTo(dummyDevConnectorId(0, 0))
+        assertThat(result.connectors[1].id).isEqualTo(dummyDevConnectorId(1, 1))
+        assertThat(result.connectors[2].id).isEqualTo(dummyDevConnectorId(1, 2))
     }
 
     @Test

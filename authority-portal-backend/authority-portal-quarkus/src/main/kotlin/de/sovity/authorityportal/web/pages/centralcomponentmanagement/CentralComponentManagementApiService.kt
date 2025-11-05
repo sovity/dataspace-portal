@@ -22,6 +22,7 @@ import de.sovity.authorityportal.api.model.CentralComponentCreateRequest
 import de.sovity.authorityportal.api.model.CentralComponentDto
 import de.sovity.authorityportal.api.model.IdResponse
 import de.sovity.authorityportal.db.jooq.tables.records.ComponentRecord
+import de.sovity.authorityportal.web.environment.DeploymentEnvironmentConfiguration
 import de.sovity.authorityportal.web.environment.DeploymentEnvironmentService
 import de.sovity.authorityportal.web.services.CentralComponentService
 import de.sovity.authorityportal.web.services.OrganizationService
@@ -61,9 +62,10 @@ class CentralComponentManagementApiService(
                 name = centralComponent.name,
                 homepageUrl = centralComponent.homepageUrl,
                 endpointUrl = centralComponent.endpointUrl,
+                environmentId = envId,
                 createdByUserFullName = (createdBy?.firstName ?: "Unknown") + " " + (createdBy?.lastName ?: ""),
                 createdByOrgName = organization?.name ?: "Unknown",
-                createdByOrganizationId = organization?.id ?: "Unknown"
+                createdByOrganizationId = organization?.id ?: "Unknown",
             )
         }
     }
@@ -80,7 +82,7 @@ class CentralComponentManagementApiService(
         val clientId = clientIdUtils.generateFromConnectorId(centralComponentId)
 
         if (clientIdUtils.exists(clientId)) {
-            Log.error("Component with this client-id already exists. connectorId=$centralComponentId, organizationId=$organizationId, userId=$userId, clientId=$clientId.")
+            Log.error("Component with this client-id already exists. centralComponentId=$centralComponentId, organizationId=$organizationId, userId=$userId, envId=$envId, clientId=$clientId.")
             error("Component with this client-id already exists")
         }
 
@@ -98,15 +100,17 @@ class CentralComponentManagementApiService(
         dapsClient.addCertificate(clientId, centralComponentCreateRequest.certificate)
         dapsClient.configureMappers(clientId)
 
-        Log.info("Central component registered. centralComponentId=$centralComponentId, organizationId=$organizationId, userId=$userId, clientId=$clientId.")
+        Log.info("Central component registered. centralComponentId=$centralComponentId, organizationId=$organizationId, userId=$userId, envId=$envId, clientId=$clientId.")
         return IdResponse(centralComponentId, timeUtils.now())
     }
 
-    fun deleteCentralComponentByUser(centralComponentId: String, userId: String): IdResponse {
-        val centralComponent = centralComponentService.getCentralComponentOrThrow(centralComponentId)
+    fun deleteCentralComponentByUser(centralComponentId: String, envId: String, userId: String): IdResponse {
+        deploymentEnvironmentService.assertValidEnvId(envId)
+
+        val centralComponent = centralComponentService.getCentralComponentOrThrow(centralComponentId, envId)
 
         deleteCentralComponent(centralComponent)
-        Log.info("Central component deleted. centralComponentId=$centralComponentId, organizationId=${centralComponent.organizationId}, userId=$userId, clientId=${centralComponent.clientId}.")
+        Log.info("Central component deleted. centralComponentId=$centralComponentId, envId=$envId, organizationId=${centralComponent.organizationId}, userId=$userId, clientId=${centralComponent.clientId}.")
 
         return IdResponse(centralComponentId, timeUtils.now())
     }
@@ -117,7 +121,7 @@ class CentralComponentManagementApiService(
     }
 
     private fun deleteCentralComponent(centralComponent: ComponentRecord) {
-        centralComponentService.deleteCentralComponent(centralComponent.id)
+        centralComponentService.deleteCentralComponent(centralComponent.id, centralComponent.environment)
 
         val dapsClient = dapsClientService.forEnvironment(centralComponent.environment)
         dapsClient.deleteClient(centralComponent.clientId)

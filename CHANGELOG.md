@@ -26,7 +26,39 @@ _No special migration steps required_
 - Authority Portal Backend Docker Image: `ghcr.io/sovity/ds-portal-ce-backend:{{ version }}`
 - Authority Portal Frontend Docker Image: `ghcr.io/sovity/ds-portal-ce-frontend:{{ version }}`
 - Catalog Crawler CE: `ghcr.io/sovity/ds-portal-ce-crawler:{{ version }}`
-- Sovity EDC CE: {{ CE Release Link }}
+- sovity EDC CE: [`v{{ EDC CE VERSION }}`](https://github.com/sovity/edc-ce/releases/tag/v{{ EDC CE VERSION }})
+
+## [v7.1.0] - 2025-11-05
+
+### Overview
+
+Minor bug fixes and UI improvements
+
+### Detailed Changes
+
+#### Minor
+
+- Allow selection of own organization on "Provided Connectors" page
+
+#### Patch
+
+- Fix bug where CaaS connector could not be deleted
+- Fix a bug preventing central component registration of two central components with the same central component ID or name in different environments
+  - Central components now have a name (user-chosen display text) and a Central Component ID (Client ID / Participant ID)
+- Display JWKS URL and Token URL in consistent order when registering connectors and components
+
+### Known issues
+
+### Deployment Migration Notes
+
+_No special migration steps required_
+
+#### Compatible Versions
+
+- Authority Portal Backend Docker Image: `ghcr.io/sovity/ds-portal-ce-backend:7.1.0`
+- Authority Portal Frontend Docker Image: `ghcr.io/sovity/ds-portal-ce-frontend:7.1.0`
+- Catalog Crawler CE: `ghcr.io/sovity/ds-portal-ce-crawler:7.1.0`
+- sovity EDC CE: [`v16.0.0`](https://github.com/sovity/edc-ce/releases/tag/v16.0.0)
 
 ## [v7.0.0] - 2025-10-31
 

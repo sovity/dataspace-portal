@@ -140,7 +140,6 @@ class ConnectorManagementApiService(
         deploymentEnvironmentService.assertValidEnvId(environmentId)
 
         val connectors = connectorService.getConnectorsByHostOrganizationId(organizationId, environmentId)
-            .filter { it.organizationId != it.providerOrganizationId }
         val orgNames = organizationService.getAllOrganizationNames()
 
         val connectorDtos = connectors.map {

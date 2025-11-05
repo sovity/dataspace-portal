@@ -85,7 +85,10 @@ export class CentralComponentListPageStateImpl {
     });
 
     return this.apiService
-      .deleteCentralComponent(centralComponent.centralComponentId)
+      .deleteCentralComponent(
+        centralComponent.centralComponentId,
+        centralComponent.environmentId,
+      )
       .pipe(
         switchMap(() => this.fetchCentralComponents()),
         takeUntil(

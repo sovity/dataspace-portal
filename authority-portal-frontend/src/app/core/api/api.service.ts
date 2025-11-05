@@ -369,10 +369,14 @@ export class ApiService {
     );
   }
 
-  deleteCentralComponent(centralComponentId: string): Observable<IdResponse> {
+  deleteCentralComponent(
+    centralComponentId: string,
+    environmentId: string,
+  ): Observable<IdResponse> {
     return toObservable(() =>
       this.api().deleteCentralComponent({
         centralComponentId,
+        environmentId,
       }),
     );
   }
@@ -383,7 +387,7 @@ export class ApiService {
     return toObservable(() => this.api().checkFreeCaasUsage({environmentId}));
   }
 
-  getComponentStatus(
+  getComponentsStatus(
     environmentId: string,
   ): Observable<ComponentStatusOverview> {
     return toObservable(() => this.api().getComponentsStatus({environmentId}));

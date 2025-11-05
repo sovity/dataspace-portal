@@ -34,6 +34,9 @@ data class CentralComponentDto (
     @field:Schema(description = "Endpoint URL", requiredMode = Schema.RequiredMode.REQUIRED)
     val endpointUrl: String,
 
+    @field:Schema(description = "Environment ID", requiredMode = Schema.RequiredMode.REQUIRED)
+    val environmentId: String,
+
     @field:Schema(description = "Created By Full Name", requiredMode = Schema.RequiredMode.REQUIRED)
     val createdByUserFullName: String,
 

@@ -145,8 +145,8 @@ class CaasManagementApiService(
             participantOrganizationLegalName = curatorOrganization.name,
             clearingHouseUrl = deploymentEnvironmentService.findByIdOrThrow(environmentId).loggingHouse().getOrNull()?.url(),
             brokerUrl = "https://this-field-is-deprecated",
-            dapsTokenUrl = buildDapsTokenUrl(environmentId),
             dapsJwksUrl = buildDapsJwksUrl(environmentId),
+            dapsTokenUrl = buildDapsTokenUrl(environmentId),
             securityContactFirstName = securityContactName.firstName,
             securityContactLastName = securityContactName.lastName,
             securityContactEmail = curatorOrganization.techContactEmail,
@@ -157,14 +157,14 @@ class CaasManagementApiService(
         )
     }
 
-    private fun buildDapsTokenUrl(environmentId: String): String {
-        val daps = deploymentEnvironmentService.findByIdOrThrow(environmentId).daps()
-        return daps.url() + "/realms/${daps.realmName()}/protocol/openid-connect/token"
-    }
-
     private fun buildDapsJwksUrl(environmentId: String): String {
         val daps = deploymentEnvironmentService.findByIdOrThrow(environmentId).daps()
         return daps.url() + "/realms/${daps.realmName()}/protocol/openid-connect/certs"
+    }
+
+    private fun buildDapsTokenUrl(environmentId: String): String {
+        val daps = deploymentEnvironmentService.findByIdOrThrow(environmentId).daps()
+        return daps.url() + "/realms/${daps.realmName()}/protocol/openid-connect/token"
     }
 
     data class ConfigAssertion(val valid: Boolean, val message: String)

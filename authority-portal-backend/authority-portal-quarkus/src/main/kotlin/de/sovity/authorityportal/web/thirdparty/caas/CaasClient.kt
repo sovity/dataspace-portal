@@ -48,7 +48,11 @@ class CaasClient {
     fun deleteCaas(connectorIds: List<String>) {
         val response = caasClientResource.deleteCaas(connectorIds)
 
-        expectStatusCode(response, Response.Status.OK.statusCode, "deleteCaas")
+        expectStatusCodeToBeIn(
+            response,
+            setOf(Response.Status.OK.statusCode, Response.Status.NOT_FOUND.statusCode),
+            operationName = "deleteCaas"
+        )
     }
 
     fun validateSubdomain(name: String): Boolean {
@@ -59,9 +63,9 @@ class CaasClient {
         return caasClientResource.getCaasStatus(connectorIds).value
     }
 
-    private fun expectStatusCode(response: Response, expectedStatusCode: Int, operationName: String) {
-        if (response.status != expectedStatusCode) {
-            error("CaaS API returned unexpected status code, when trying to call \"$operationName\" endpoint. Actual: ${response.status}, Expected: $expectedStatusCode")
+    private fun expectStatusCodeToBeIn(response: Response, expectedStatusCodes: Set<Int>, operationName: String) {
+        if (response.status !in expectedStatusCodes) {
+            error("CaaS API returned unexpected status code, when trying to call \"$operationName\" endpoint. Actual: ${response.status}, Expected one of: $expectedStatusCodes")
         }
     }
 }

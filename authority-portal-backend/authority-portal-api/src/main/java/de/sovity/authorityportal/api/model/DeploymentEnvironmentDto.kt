@@ -26,10 +26,10 @@ data class DeploymentEnvironmentDto(
     val environmentId: String,
     @field:Schema(description = "Environment localized name", requiredMode = Schema.RequiredMode.REQUIRED)
     val title: String,
-    @field:Schema(description = "DAPS Token URL", requiredMode = Schema.RequiredMode.REQUIRED)
-    val dapsTokenUrl: String,
     @field:Schema(description = "DAPS JWKS URL", requiredMode = Schema.RequiredMode.REQUIRED)
     val dapsJwksUrl: String,
+    @field:Schema(description = "DAPS Token URL", requiredMode = Schema.RequiredMode.REQUIRED)
+    val dapsTokenUrl: String,
     @field:Schema(description = "Logging House URL", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     val loggingHouseUrl: String?,
 )
