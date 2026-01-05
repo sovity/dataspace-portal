@@ -38,10 +38,10 @@ class CrawlerEventLoggerTest {
 
             // Test that insertions insert required fields and don't cause DB errors
             var connectorRef = new ConnectorRef(
-                    "MDSL1234XX.C1234XX",
+                    "BPNL1234XX.C1234XX",
                     "test",
                     "My Org",
-                    "MDSL1234XX",
+                    "BPNL1234XX",
                     "https://example.com/api/v1/dsp"
             );
             crawlerEventLogger.logConnectorUpdated(dsl, connectorRef, new ConnectorChangeTracker());

@@ -33,16 +33,18 @@ class ClientIdUtils {
         return connectorId
     }
 
-    fun exists(clientId: String): Boolean {
+    fun exists(clientId: String, envId: String): Boolean {
         val c = Tables.CONNECTOR
         val connectorClientIds = dsl.select(c.CLIENT_ID.`as`("clientId"))
             .from(c)
             .where(c.CLIENT_ID.eq(clientId))
+            .and(c.ENVIRONMENT.eq(envId))
 
         val cmp = Tables.COMPONENT
         val centralComponentClientIds = dsl.select(cmp.CLIENT_ID.`as`("clientId"))
             .from(cmp)
             .where(cmp.CLIENT_ID.eq(clientId))
+            .and(cmp.ENVIRONMENT.eq(envId))
 
         return dsl.fetchExists(connectorClientIds.unionAll(centralComponentClientIds))
     }

@@ -5,7 +5,6 @@
     <ol class="list-reset inline-flex items-center">
       <li>
         <span
-          *ngIf="step.link !== 'mds-home'"
           class="text-sm"
           data-testid="breadcrumb-item"
           [routerLink]="step.isLinkable && !isLast ? getLink(i) : null"

@@ -35,10 +35,10 @@ public class TestData {
     public static OffsetDateTime old = OffsetDateTime.now().withNano(0).withSecond(0).withMinute(0).withHour(0).minusDays(100);
 
     public static ConnectorRef connectorRef = new ConnectorRef(
-            "MDSL1234XX.C1234XX",
+            "BPNL1234XX.C1234XX",
             "test",
             "My Org",
-            "MDSL1234XX",
+            "BPNL1234XX",
             "https://example.com/api/v1/dsp"
     );
 

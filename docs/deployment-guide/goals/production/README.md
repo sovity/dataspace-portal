@@ -83,35 +83,23 @@ The respective compatible versions can be found in the [CHANGELOG.md](../../../.
 - You need to have a running Keycloak with the aforementioned compatible version.
 - The domain under which the Keycloak should be reachable on the internet will be referred to as `[KC_FQDN]` in this
   guide and should differ from the `[AP_FQDN]`.
-- The steps to set up the realm are the following
-  - sovity theme
-    1. Copy [sovity-theme](../../../../authority-portal-keycloak/sovity-theme) directory to `{keycloakRoot}/themes/` directory
-    2. Import [realm.json](../../../../authority-portal-backend/authority-portal-quarkus/src/main/resources/realm.json) to create the `authority-portal` realm
-    3. Adjust settings for `oauth2-proxy` client (Clients > `oauth2-proxy` > Settings)
+- Follow these steps to set up the Keycloak:
+    1. Import [realm.json](../../../../authority-portal-backend/authority-portal-quarkus/src/main/resources/realm.json) to create the `authority-portal` realm
+    2. Adjust settings for `oauth2-proxy` client (Clients > `oauth2-proxy` > Settings)
 
-    - `Root URL`: URL of the auth proxy, e.g. `https://authority-portal.example.url`
-    - `Home URL`: (Relative) sign in URL of auth proxy, e.g. `/oauth2/sign_in`
-    - `Valid Redirect URIs`: (Relative) callback URL of auth proxy, e.g. `/oauth2/callback`
-    - `Valid post logout redirect URIs`: `/*`
+       - `Root URL`: URL of the auth proxy, e.g. `https://authority-portal.example.url`
+       - `Home URL`: (Relative) sign in URL of auth proxy, e.g. `/oauth2/sign_in`
+       - `Valid Redirect URIs`: (Relative) callback URL of auth proxy, e.g. `/oauth2/callback`
+       - `Valid post logout redirect URIs`: `/*`
 
-    4. Adjust settings for `authority-portal-client` client (Clients > `authority-portal-client` > Settings)
+    3. Adjust settings for `authority-portal-client` client (Clients > `authority-portal-client` > Settings)
 
-    - `Root URL`: URL of the Data Space Portal, e.g. `https://authority-portal.example.url`
-    - `Home URL`: (Most likely) same as `Root URL`
+       - `Root URL`: URL of the Data Space Portal, e.g. `https://authority-portal.example.url`
+       - `Home URL`: (Most likely) same as `Root URL`
 
-    5. Regenerate client secrets for `oauth2-proxy` and `authority-portal-client` clients
+    4. Regenerate client secrets for `oauth2-proxy` and `authority-portal-client` clients
 
-    - Clients > `[client]` > Credentials > Regenerate (Client secret)
-
-    6. Select sovity theme for login & email templates
-
-    - Select `authority-portal` realm
-    - Realm settings > Themes > Login theme: Select `sovity-theme`
-    - Realm settings > Themes > Email theme: Select `sovity-theme`
-
-    7. Add email settings (Realm settings > Email)
-
-    - At least `From` and `Host` are required
+       - Clients > `[client]` > Credentials > Regenerate (Client secret)
 
 #### Caddy
 
@@ -243,9 +231,9 @@ authority-portal.deployment.environments.test.data-catalog.catalog-page-page-siz
 
 # Environment Connector-Dataspace association: Allows certain connectors to be associated as partnered data spaces
 # Required: Default Dataspace name
-authority-portal.deployment.environments.test.data-catalog.dataspace-names.default: "MDS"
+authority-portal.deployment.environments.test.data-catalog.dataspace-names.default: "This Data Space"
 # Optional: Additional connectors to be given a dataspace name
-authority-portal.deployment.environments.test.data-catalog.dataspace-names.connector-ids."MDSL1234XX.C1234XX": "Mobilithek"
+authority-portal.deployment.environments.test.data-catalog.dataspace-names.connector-ids."BPNL1234XX.C1234XX": "Other Data Space"
 
 # Environment DAPS
 # Env: DAPS URL

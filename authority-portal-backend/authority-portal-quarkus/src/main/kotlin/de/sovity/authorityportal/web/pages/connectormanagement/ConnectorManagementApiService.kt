@@ -180,8 +180,8 @@ class ConnectorManagementApiService(
         val connectorId = dataspaceComponentIdUtils.generateDataspaceComponentId(organizationId)
         val clientId = clientIdUtils.generateFromConnectorId(connectorId)
 
-        if (clientIdUtils.exists(clientId)) {
-            Log.error("Connector with this certificate already exists. connectorId=$connectorId, organizationId=$organizationId, userId=$userId, clientId=$clientId.")
+        if (clientIdUtils.exists(clientId, deploymentEnvId)) {
+            Log.error("Connector with this certificate already exists. connectorId=$connectorId, organizationId=$organizationId, userId=$userId, clientId=$clientId, deploymentEnvId=$deploymentEnvId.")
             return CreateConnectorResponse.error("Connector with this certificate already exists.", timeUtils.now())
         }
 
@@ -217,8 +217,8 @@ class ConnectorManagementApiService(
         val connectorId = dataspaceComponentIdUtils.generateDataspaceComponentId(connector.customerOrganizationId)
         val clientId = clientIdUtils.generateFromConnectorId(connectorId)
 
-        if (clientIdUtils.exists(clientId)) {
-            Log.error("Connector with this client ID already exists. connectorId=$connectorId, userId=$userId, clientId=$clientId.")
+        if (clientIdUtils.exists(clientId, deploymentEnvId)) {
+            Log.error("Connector with this client ID already exists. connectorId=$connectorId, userId=$userId, clientId=$clientId, deploymentEnvId=$deploymentEnvId.")
             return CreateConnectorResponse.error("Connector with this client ID already exists.", timeUtils.now())
         }
 

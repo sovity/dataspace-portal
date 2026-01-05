@@ -31,7 +31,7 @@ data class DataOfferDetailPageResult(
 
     @field:Schema(
         description = "Connector ID",
-        example = "MDSL1234XX.C1234XX",
+        example = "BPNL1234XX.C1234XX",
         requiredMode = Schema.RequiredMode.REQUIRED
     )
     val connectorId: String,
@@ -52,7 +52,7 @@ data class DataOfferDetailPageResult(
 
     @field:Schema(
         description = "Organization ID",
-        example = "MDSL1234XX",
+        example = "BPNL1234XX",
         requiredMode = Schema.RequiredMode.REQUIRED
     )
     val organizationId: String,

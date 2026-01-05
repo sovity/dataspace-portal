@@ -30,9 +30,9 @@ const myConnector: Pick<
   DataOfferDetailPageResult,
   'connectorId' | 'connectorEndpoint' | 'organizationId' | 'organizationName'
 > = {
-  organizationId: 'MDSL1234XX',
+  organizationId: 'BPNL1234XX',
   organizationName: 'My Organization',
-  connectorId: 'MDSL1234XX.C1234XX',
+  connectorId: 'BPNL1234XX.C1234XX',
   connectorEndpoint: 'https://my-connector.my-organization.com/api/v1/dsp',
 };
 
@@ -173,11 +173,11 @@ export const getCatalogPage = (
           displayType: 'ID_AND_TITLE',
           values: [
             {
-              id: 'MDSL1111AA',
+              id: 'BPNL1111AA',
               title: 'Example Organization',
             },
             {
-              id: 'MDSL2222BB',
+              id: 'BPNL2222BB',
               title: 'Other Organization',
             },
             {

@@ -60,9 +60,10 @@ class CentralComponentInit(
         envId: String,
         clientId: String,
     ) {
-        if (clientIdUtils.exists(clientId)) {
+        if (clientIdUtils.exists(clientId, envId)) {
             Log.info("Central component or connector with this client-id already exists in the DsP DB. Skipping "
-                + "registration of central component. name=$name, clientId=$clientId.")
+                + "registration of central component. name=$name, clientId=$clientId, envId=$envId."
+            )
             return
         }
 

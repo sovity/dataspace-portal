@@ -274,7 +274,7 @@ class KeycloakService(
      * Can also be used to change the user's role in the organization.
      *
      * @param userId The user's ID
-     * @param organizationId The organization's MDS-ID
+     * @param organizationId The organization's ID
      * @param role The user's role in the organization
      */
     fun joinOrganization(userId: String, organizationId: String, role: OrganizationRole) {

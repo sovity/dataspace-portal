@@ -28,7 +28,7 @@ export class UnauthenticatedPageComponent {
     @Inject(APP_CONFIG) public appConfig: AppConfig,
     private titleService: Title,
   ) {
-    this.titleService.setTitle('Unauthenticated');
+    this.titleService.setTitle(`${appConfig.portalName} - Log In or Register`);
   }
 
   get loginUrl(): string {

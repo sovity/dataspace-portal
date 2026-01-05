@@ -1387,7 +1387,7 @@ class KeycloakServiceIntegrationTest {
 
     private fun getNonDefaultOrganizations(): List<GroupRepresentation> {
         return keycloakService.getOrganizations().filter {
-            !it.name.startsWith("MDSL00000") && !it.name.startsWith("ROLE_")
+            !it.name.startsWith("BPNL00000") && !it.name.startsWith("ROLE_")
         }
     }
 

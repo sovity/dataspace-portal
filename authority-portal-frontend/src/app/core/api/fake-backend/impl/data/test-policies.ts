@@ -52,8 +52,8 @@ export namespace TestPolicies {
       ),
       multi(
         'OR',
-        constraint('REFERRING_CONNECTOR', 'EQ', 'MDSL1234XX.C1234XX'),
-        constraint('REFERRING_CONNECTOR', 'EQ', 'MDSL1234XX.C1235YY'),
+        constraint('REFERRING_CONNECTOR', 'EQ', 'BPNL1234XX.C1234XX'),
+        constraint('REFERRING_CONNECTOR', 'EQ', 'BPNL1234XX.C1235YY'),
       ),
       constraint('ALWAYS_TRUE', 'EQ', 'true'),
     ),

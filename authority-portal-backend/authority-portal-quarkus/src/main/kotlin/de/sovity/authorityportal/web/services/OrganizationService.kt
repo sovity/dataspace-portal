@@ -59,7 +59,7 @@ class OrganizationService(
     }
 
     /**
-     * Returns a map of all organizations with their MDS ID as key and their name as value.
+     * Returns a map of all organizations with their organization ID as key and their name as value.
      */
     fun getAllOrganizationNames(): Map<String, String> {
         val o = Tables.ORGANIZATION

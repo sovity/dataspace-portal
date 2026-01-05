@@ -96,7 +96,7 @@
       <bpmn:outgoing>Flow_0x2z1cy</bpmn:outgoing>
     </bpmn:task>
     <bpmn:textAnnotation id="TextAnnotation_0sm4fjh">
-      <bpmn:text>MDS ID is generated</bpmn:text>
+      <bpmn:text>Organization ID is generated</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_0gpmh4u" sourceRef="Activity_02wogp4" targetRef="TextAnnotation_0sm4fjh" />
   </bpmn:process>
