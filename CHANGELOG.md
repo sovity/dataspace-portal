@@ -28,6 +28,36 @@ _No special migration steps required_
 - Catalog Crawler CE: `ghcr.io/sovity/ds-portal-ce-crawler:{{ version }}`
 - sovity EDC CE: [`v{{ EDC CE VERSION }}`](https://github.com/sovity/edc-ce/releases/tag/v{{ EDC CE VERSION }})
 
+## [v7.2.0] - 2026-01-05
+
+### Overview
+
+Minor bug fix and chores
+
+### Detailed Changes
+
+#### Minor
+
+- Fix bug, where catalog crawler could not be registered on startup
+
+#### Patch
+
+- Display more welcoming browser tab title when user is not authenticated
+- Bump PostgreSQL version from `16` to `17`
+
+### Deployment Migration Notes
+
+_No special migration steps required_
+
+#### Compatible Versions
+
+- Data Space Portal CE Backend Docker Image: `ghcr.io/sovity/ds-portal-ce-backend:7.2.0`
+- Data Space Portal CE Frontend Docker Image: `ghcr.io/sovity/ds-portal-ce-frontend:7.2.0`
+- Catalog Crawler CE: `ghcr.io/sovity/ds-portal-ce-crawler:7.2.0`
+- sovity EDC CE: [`v16.2.2`](https://github.com/sovity/edc-ce/releases/tag/v16.2.2)
+- Keycloak: `26.0.7`
+- PostgreSQL: `17`
+
 ## [v7.1.0] - 2025-11-05
 
 ### Overview

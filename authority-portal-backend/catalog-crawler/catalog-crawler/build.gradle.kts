@@ -136,7 +136,7 @@ fun generateJvmVersions(target: Provider<RegularFile>) {
         .addModifiers(PUBLIC, FINAL)
         .addField(
             FieldSpec.builder(TypeName.get(JavaString::class.java), "POSTGRES_IMAGE_TAG")
-                .initializer("\$S", libs.versions.crawlerPostgresDbImage.get())
+                .initializer("\$S", libs.versions.postgresDbImage.get())
                 .addModifiers(PUBLIC, STATIC, FINAL)
                 .build()
         )

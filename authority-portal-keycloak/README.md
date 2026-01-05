@@ -23,7 +23,7 @@ Keycloak theme for the DSPortal.
 
 The Data Space Portal uses the Keycloak Login Page. This is due to identity federation and SSO.
 
-For consistency, the MDS wanted a custom theming.
+For consistency, we provide a custom theming.
 
 Registration processes, however, will be fully handled by the Data Space Portal.
 

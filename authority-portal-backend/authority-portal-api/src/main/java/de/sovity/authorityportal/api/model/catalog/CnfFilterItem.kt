@@ -23,7 +23,7 @@ import io.swagger.v3.oas.annotations.media.Schema
 data class CnfFilterItem(
     @field:Schema(
         description = "Value ID",
-        example = "MDSLXXXXX1",
+        example = "BPNL1234XX",
         requiredMode = Schema.RequiredMode.REQUIRED
     )
     val id: String,

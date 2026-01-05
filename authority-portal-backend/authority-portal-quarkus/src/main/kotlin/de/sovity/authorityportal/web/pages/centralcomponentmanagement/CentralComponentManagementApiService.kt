@@ -81,7 +81,7 @@ class CentralComponentManagementApiService(
         val centralComponentId = dataspaceComponentIdUtils.generateDataspaceComponentId(organizationId)
         val clientId = clientIdUtils.generateFromConnectorId(centralComponentId)
 
-        if (clientIdUtils.exists(clientId)) {
+        if (clientIdUtils.exists(clientId, envId)) {
             Log.error("Component with this client-id already exists. centralComponentId=$centralComponentId, organizationId=$organizationId, userId=$userId, envId=$envId, clientId=$clientId.")
             error("Component with this client-id already exists")
         }

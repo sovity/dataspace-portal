@@ -90,7 +90,7 @@ class CatalogApiTest {
                     dummyDevConnectorId(0, 1) to "Dataspace 1",
                     dummyDevConnectorId(0, 2) to "Dataspace 2"
                 ),
-                defaultName = "MDS"
+                defaultName = "This Data Space"
             )
         )
         whenever(catalogDataspaceConfigService.hasMultipleDataspaces).thenReturn(true)
@@ -128,7 +128,7 @@ class CatalogApiTest {
                     dummyDevConnectorId(0, 1) to "Dataspace 1",
                     dummyDevConnectorId(0, 2) to "Dataspace 2"
                 ),
-                defaultName = "MDS"
+                defaultName = "This Data Space"
             )
         )
         whenever(catalogDataspaceConfigService.hasMultipleDataspaces).thenReturn(true)
@@ -160,7 +160,7 @@ class CatalogApiTest {
         assertThat(dataspace.values).containsExactly(
             CnfFilterItem("Dataspace 1", "Dataspace 1"),
             CnfFilterItem("Dataspace 2", "Dataspace 2"),
-            CnfFilterItem("MDS", "MDS")
+            CnfFilterItem("This Data Space", "This Data Space")
         )
     }
 
@@ -179,7 +179,7 @@ class CatalogApiTest {
                     dummyDevConnectorId(0, 1) to "Dataspace 1",
                     dummyDevConnectorId(0, 2) to "Dataspace 2"
                 ),
-                defaultName = "MDS"
+                defaultName = "This Data Space"
             )
         )
 
@@ -228,7 +228,7 @@ class CatalogApiTest {
         whenever(catalogDataspaceConfigService.forEnvironment(any())).thenReturn(
             CatalogDataspaceConfig(
                 namesByConnectorId = emptyMap(),
-                defaultName = "MDS"
+                defaultName = "This Data Space"
             )
         )
 
@@ -328,7 +328,7 @@ class CatalogApiTest {
                     dummyDevConnectorId(0, 1) to "Dataspace 1",
                     dummyDevConnectorId(0, 2) to "Dataspace 2"
                 ),
-                defaultName = "MDS"
+                defaultName = "This Data Space"
             )
         )
 
@@ -379,7 +379,7 @@ class CatalogApiTest {
         whenever(catalogDataspaceConfigService.forEnvironment(any())).thenReturn(
             CatalogDataspaceConfig(
                 namesByConnectorId = emptyMap(),
-                defaultName = "MDS"
+                defaultName = "This Data Space"
             )
         )
 
@@ -443,7 +443,7 @@ class CatalogApiTest {
         whenever(catalogDataspaceConfigService.forEnvironment(any())).thenReturn(
             CatalogDataspaceConfig(
                 namesByConnectorId = emptyMap(),
-                defaultName = "MDS"
+                defaultName = "This Data Space"
             )
         )
 
@@ -494,7 +494,7 @@ class CatalogApiTest {
         whenever(catalogDataspaceConfigService.forEnvironment(any())).thenReturn(
             CatalogDataspaceConfig(
                 namesByConnectorId = emptyMap(),
-                defaultName = "MDS"
+                defaultName = "This Data Space"
             )
         )
 
@@ -542,7 +542,7 @@ class CatalogApiTest {
         whenever(catalogDataspaceConfigService.forEnvironment(any())).thenReturn(
             CatalogDataspaceConfig(
                 namesByConnectorId = emptyMap(),
-                defaultName = "MDS"
+                defaultName = "This Data Space"
             )
         )
 
@@ -601,7 +601,7 @@ class CatalogApiTest {
         whenever(catalogDataspaceConfigService.forEnvironment(any())).thenReturn(
             CatalogDataspaceConfig(
                 namesByConnectorId = emptyMap(),
-                defaultName = "MDS"
+                defaultName = "This Data Space"
             )
         )
 
@@ -645,7 +645,7 @@ class CatalogApiTest {
         whenever(catalogDataspaceConfigService.forEnvironment(any())).thenReturn(
             CatalogDataspaceConfig(
                 namesByConnectorId = emptyMap(),
-                defaultName = "MDS"
+                defaultName = "This Data Space"
             )
         )
 

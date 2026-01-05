@@ -55,7 +55,7 @@ export const SUPPORTED_POLICY_VERBS: PolicyVerbConfig[] = [
       'Participant ID, also called Connector ID, of the counter-party connector.',
     operandRightType: 'PARTICIPANT_ID',
     supportedOperators: ['EQ', 'IN'],
-    operandRightPlaceholder: 'MDSL1234XX.C1234YY',
+    operandRightPlaceholder: 'BPNL1234XX.C1234YY',
     operandRightHint: 'Multiple values can be joined by comma',
     adapter: stringArrayOrCommaJoinedAdapter,
   },

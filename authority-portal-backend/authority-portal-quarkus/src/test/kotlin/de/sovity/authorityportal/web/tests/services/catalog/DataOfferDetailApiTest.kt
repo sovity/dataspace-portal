@@ -107,7 +107,7 @@ class DataOfferDetailApiTest {
                     dummyDevConnectorId(0, 1) to "Dataspace 1",
                     dummyDevConnectorId(0, 2) to "Dataspace 2"
                 ),
-                defaultName = "MDS"
+                defaultName = "This Data Space"
             )
         )
 

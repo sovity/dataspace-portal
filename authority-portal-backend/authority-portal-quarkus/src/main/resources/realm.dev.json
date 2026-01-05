@@ -488,13 +488,13 @@
   "groups": [
     {
       "id": "b1e09852-611d-427a-8a53-f65387c94ae1",
-      "name": "MDSL000001",
-      "path": "/MDSL000001",
+      "name": "BPNL000001",
+      "path": "/BPNL000001",
       "subGroups": [
         {
           "id": "0c52315e-1f69-46ae-90d4-ecf3478b1678",
           "name": "Participant Admin",
-          "path": "/MDSL000001/Participant Admin",
+          "path": "/BPNL000001/Participant Admin",
           "parentId": "b1e09852-611d-427a-8a53-f65387c94ae1",
           "subGroups": [],
           "attributes": {},
@@ -506,7 +506,7 @@
         {
           "id": "d8cdd787-09c5-4a20-8686-438c9356c84e",
           "name": "Participant Curator",
-          "path": "/MDSL000001/Participant Curator",
+          "path": "/BPNL000001/Participant Curator",
           "parentId": "b1e09852-611d-427a-8a53-f65387c94ae1",
           "subGroups": [],
           "attributes": {},
@@ -518,7 +518,7 @@
         {
           "id": "cd7aae86-95fe-4b81-8551-6836f1695512",
           "name": "Participant User",
-          "path": "/MDSL000001/Participant User",
+          "path": "/BPNL000001/Participant User",
           "parentId": "b1e09852-611d-427a-8a53-f65387c94ae1",
           "subGroups": [],
           "attributes": {},
@@ -534,13 +534,13 @@
     },
     {
       "id": "54d8dae0-2e9f-471b-b449-b5f77345553f",
-      "name": "MDSL000002",
-      "path": "/MDSL000002",
+      "name": "BPNL000002",
+      "path": "/BPNL000002",
       "subGroups": [
         {
           "id": "41d733bf-1d87-4d53-85b2-0918f4d7cd9d",
           "name": "Participant Admin",
-          "path": "/MDSL000002/Participant Admin",
+          "path": "/BPNL000002/Participant Admin",
           "parentId": "54d8dae0-2e9f-471b-b449-b5f77345553f",
           "subGroups": [],
           "attributes": {},
@@ -552,7 +552,7 @@
         {
           "id": "f1ef1ed7-4b5b-4db7-a38c-8a28cdca99c0",
           "name": "Participant Curator",
-          "path": "/MDSL000002/Participant Curator",
+          "path": "/BPNL000002/Participant Curator",
           "parentId": "54d8dae0-2e9f-471b-b449-b5f77345553f",
           "subGroups": [],
           "attributes": {},
@@ -564,7 +564,7 @@
         {
           "id": "f526043d-899e-4c2c-a37b-c6f62539da20",
           "name": "Participant User",
-          "path": "/MDSL000002/Participant User",
+          "path": "/BPNL000002/Participant User",
           "parentId": "54d8dae0-2e9f-471b-b449-b5f77345553f",
           "subGroups": [],
           "attributes": {},
@@ -580,13 +580,13 @@
     },
     {
       "id": "fb61c1f6-120a-4f27-8dc6-ca12178101df",
-      "name": "MDSL000003",
-      "path": "/MDSL000003",
+      "name": "BPNL000003",
+      "path": "/BPNL000003",
       "subGroups": [
         {
           "id": "a4f878bb-d1f8-418b-baf9-655fe88f1017",
           "name": "Participant Admin",
-          "path": "/MDSL000003/Participant Admin",
+          "path": "/BPNL000003/Participant Admin",
           "parentId": "fb61c1f6-120a-4f27-8dc6-ca12178101df",
           "subGroups": [],
           "attributes": {},
@@ -598,7 +598,7 @@
         {
           "id": "68dac581-b243-4ccb-9bf4-3c055bdceaa0",
           "name": "Participant Curator",
-          "path": "/MDSL000003/Participant Curator",
+          "path": "/BPNL000003/Participant Curator",
           "parentId": "fb61c1f6-120a-4f27-8dc6-ca12178101df",
           "subGroups": [],
           "attributes": {},
@@ -610,7 +610,7 @@
         {
           "id": "2184e93f-d24b-4a38-8d70-93196c6acd1f",
           "name": "Participant User",
-          "path": "/MDSL000003/Participant User",
+          "path": "/BPNL000003/Participant User",
           "parentId": "fb61c1f6-120a-4f27-8dc6-ca12178101df",
           "subGroups": [],
           "attributes": {},
@@ -626,13 +626,13 @@
     },
     {
       "id": "1016a4bb-4ebe-44ab-9135-2818308876bf",
-      "name": "MDSL000004",
-      "path": "/MDSL000004",
+      "name": "BPNL000004",
+      "path": "/BPNL000004",
       "subGroups": [
         {
           "id": "e4ea2a78-9f15-4bd6-b47a-58448347befd",
           "name": "Participant Admin",
-          "path": "/MDSL000004/Participant Admin",
+          "path": "/BPNL000004/Participant Admin",
           "parentId": "1016a4bb-4ebe-44ab-9135-2818308876bf",
           "subGroups": [],
           "attributes": {},
@@ -644,7 +644,7 @@
         {
           "id": "156f0f11-641f-43b3-ad5f-fcaf2e29a733",
           "name": "Participant Curator",
-          "path": "/MDSL000004/Participant Curator",
+          "path": "/BPNL000004/Participant Curator",
           "parentId": "1016a4bb-4ebe-44ab-9135-2818308876bf",
           "subGroups": [],
           "attributes": {},
@@ -656,7 +656,7 @@
         {
           "id": "7870697b-69d2-4860-a95b-addd34898b63",
           "name": "Participant User",
-          "path": "/MDSL000004/Participant User",
+          "path": "/BPNL000004/Participant User",
           "parentId": "1016a4bb-4ebe-44ab-9135-2818308876bf",
           "subGroups": [],
           "attributes": {},
@@ -672,13 +672,13 @@
     },
     {
       "id": "d4d72e65-b015-4d39-9ea6-bc00891e1db7",
-      "name": "MDSL000005",
-      "path": "/MDSL000005",
+      "name": "BPNL000005",
+      "path": "/BPNL000005",
       "subGroups": [
         {
           "id": "1c815c28-6ee7-4c5d-8cba-e3ae4071d3e9",
           "name": "Participant Admin",
-          "path": "/MDSL000005/Participant Admin",
+          "path": "/BPNL000005/Participant Admin",
           "parentId": "d4d72e65-b015-4d39-9ea6-bc00891e1db7",
           "subGroups": [],
           "attributes": {},
@@ -690,7 +690,7 @@
         {
           "id": "97eed38d-99fa-4b7c-9955-7b209819938a",
           "name": "Participant Curator",
-          "path": "/MDSL000005/Participant Curator",
+          "path": "/BPNL000005/Participant Curator",
           "parentId": "d4d72e65-b015-4d39-9ea6-bc00891e1db7",
           "subGroups": [],
           "attributes": {},
@@ -702,7 +702,7 @@
         {
           "id": "d8c18adf-aaca-4eb0-91dd-bc9d78556657",
           "name": "Participant User",
-          "path": "/MDSL000005/Participant User",
+          "path": "/BPNL000005/Participant User",
           "parentId": "d4d72e65-b015-4d39-9ea6-bc00891e1db7",
           "subGroups": [],
           "attributes": {},
@@ -854,7 +854,7 @@
       ],
       "notBefore": 0,
       "groups": [
-        "/MDSL000001/Participant Admin",
+        "/BPNL000001/Participant Admin",
         "/ROLE_AUTHORITY_ADMIN"
       ]
     },
@@ -876,7 +876,7 @@
       ],
       "notBefore": 0,
       "groups": [
-        "/MDSL000001/Participant User",
+        "/BPNL000001/Participant User",
         "/ROLE_AUTHORITY_USER"
       ]
     },
@@ -898,7 +898,7 @@
       ],
       "notBefore": 0,
       "groups": [
-        "/MDSL000002/Participant Admin"
+        "/BPNL000002/Participant Admin"
       ]
     },
     {
@@ -919,7 +919,7 @@
       ],
       "notBefore": 0,
       "groups": [
-        "/MDSL000003/Participant User"
+        "/BPNL000003/Participant User"
       ]
     },
     {
@@ -940,7 +940,7 @@
       ],
       "notBefore": 0,
       "groups": [
-        "/MDSL000003/Participant Admin"
+        "/BPNL000003/Participant Admin"
       ]
     },
     {
@@ -980,7 +980,7 @@
       ],
       "notBefore": 0,
       "groups": [
-        "/MDSL000004/Participant Admin",
+        "/BPNL000004/Participant Admin",
         "/ROLE_SERVICE_PARTNER_ADMIN"
       ]
     },
@@ -1002,7 +1002,7 @@
       ],
       "notBefore": 0,
       "groups": [
-        "/MDSL000005/Participant User",
+        "/BPNL000005/Participant User",
         "/ROLE_OPERATOR_ADMIN"
       ]
     }

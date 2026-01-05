@@ -43,7 +43,7 @@ export const rejectOrganization = (organizationId: string): IdResponse => {
 
 export let TEST_ORGANIZATIONS: OrganizationDetailsDto[] = [
   {
-    id: 'MDSL1111AA',
+    id: 'BPNL1111AA',
     name: 'Dev Organization 1',
     businessUnit: 'Business Unit 1',
     industry: 'Information and communication technology',
@@ -88,7 +88,7 @@ export let TEST_ORGANIZATIONS: OrganizationDetailsDto[] = [
   },
 
   {
-    id: 'MDSL2222BB',
+    id: 'BPNL2222BB',
     name: 'Dev Organization 2',
     businessUnit: 'Business Unit 2',
     industry: 'Software development',
@@ -134,7 +134,7 @@ export let TEST_ORGANIZATIONS: OrganizationDetailsDto[] = [
   },
 
   {
-    id: 'MDSL3333CC',
+    id: 'BPNL3333CC',
     name: 'Test Orga',
     businessUnit: 'Business Unit 1',
     industry: 'Software development',
@@ -179,7 +179,7 @@ export let TEST_ORGANIZATIONS: OrganizationDetailsDto[] = [
   },
 
   {
-    id: 'MDSL3331C1',
+    id: 'BPNL3331C1',
     name: 'Dev Organization 3.1',
     businessUnit: 'Business Unit 1',
     industry: 'Software development',
@@ -224,7 +224,7 @@ export let TEST_ORGANIZATIONS: OrganizationDetailsDto[] = [
   },
 
   {
-    id: 'MDSL3332C2',
+    id: 'BPNL3332C2',
     name: 'Dev Organization 3.2',
     businessUnit: 'Business Unit 1',
     industry: 'Software development',
@@ -269,7 +269,7 @@ export let TEST_ORGANIZATIONS: OrganizationDetailsDto[] = [
   },
 
   {
-    id: 'MDSL3333C3',
+    id: 'BPNL3333C3',
     name: 'Dev Organization 3.3',
     businessUnit: 'Business Unit 1',
     industry: 'Software development',
@@ -314,7 +314,7 @@ export let TEST_ORGANIZATIONS: OrganizationDetailsDto[] = [
   },
 
   {
-    id: 'MDSL3334C4',
+    id: 'BPNL3334C4',
     name: 'Dev Organization 3.4',
     businessUnit: 'Business Unit 1',
     industry: 'Software development',
@@ -359,7 +359,7 @@ export let TEST_ORGANIZATIONS: OrganizationDetailsDto[] = [
   },
 
   {
-    id: 'MDSL7777AA',
+    id: 'BPNL7777AA',
     name: 'Service Partner Organization',
     businessUnit: 'Business Unit 7',
     industry: 'Software development',
@@ -404,7 +404,7 @@ export let TEST_ORGANIZATIONS: OrganizationDetailsDto[] = [
   },
 
   {
-    id: 'MDSL8888EE',
+    id: 'BPNL8888EE',
     name: 'Operator Organization',
     businessUnit: 'Business Unit 8',
     industry: 'Software development',
@@ -448,7 +448,7 @@ export let TEST_ORGANIZATIONS: OrganizationDetailsDto[] = [
     techContactPhone: '+49 9876 543210',
   },
   {
-    id: 'MDSL6666EE',
+    id: 'BPNL6666EE',
     name: 'Rejected Organization',
     businessUnit: 'Business Unit 6',
     industry: 'Software development',
@@ -485,7 +485,7 @@ export let TEST_ORGANIZATIONS: OrganizationDetailsDto[] = [
     techContactPhone: '+49 9876 543210',
   },
   {
-    id: 'MDSL9111ZZ',
+    id: 'BPNL9111ZZ',
     name: 'Three Users',
     businessUnit: 'Business Unit 1',
     industry: 'Software development',
@@ -655,7 +655,7 @@ export const inviteOrganization = (
 export const onboardOrganization = (
   request: OnboardingOrganizationUpdateDto,
 ): IdResponse => {
-  return {id: 'MDSL8888EE', changedDate: new Date()};
+  return {id: 'BPNL8888EE', changedDate: new Date()};
 };
 
 export const deleteOrganization = (organizationId: string) => {

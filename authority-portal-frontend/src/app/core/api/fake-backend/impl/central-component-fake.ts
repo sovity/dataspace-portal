@@ -24,7 +24,7 @@ import {
 let centralComponents: Record<string, CentralComponentDto[]> = {
   development: [
     {
-      centralComponentId: 'MDSL1234XX.C0001XX',
+      centralComponentId: 'BPNL1234XX.C0001XX',
       name: 'Broker',
       homepageUrl: 'https://broker.dev.my-dataspace.sovity.io',
       endpointUrl:
@@ -32,18 +32,18 @@ let centralComponents: Record<string, CentralComponentDto[]> = {
       environmentId: 'development',
       createdByUserFullName: 'Your Name',
       createdByOrgName: 'Your Org Name',
-      createdByOrganizationId: 'MDSL1234XX',
+      createdByOrganizationId: 'BPNL1234XX',
     },
     {
-      centralComponentId: 'MDSL1234XX.C0002XX',
-      name: 'Broker MDS 2.0 Test',
+      centralComponentId: 'BPNL1234XX.C0002XX',
+      name: 'Broker 2.0 Test',
       homepageUrl: 'https://broker2.dev.my-dataspace.sovity.io',
       endpointUrl:
         'https://broker2.dev.my-dataspace.sovity.io/backend/api/v1/dsp',
       environmentId: 'development',
       createdByUserFullName: 'Your Name',
       createdByOrgName: 'Your Org Name',
-      createdByOrganizationId: 'MDSL1234XX',
+      createdByOrganizationId: 'BPNL1234XX',
     },
   ],
 };
@@ -58,12 +58,12 @@ export const createCentralComponent = (
 ): IdResponse => {
   const newCentralComponent: CentralComponentDto = {
     centralComponentId:
-      'MDSL1234XX.C' + Math.random().toString().substring(2).substring(0, 6),
+      'BPNL1234XX.C' + Math.random().toString().substring(2).substring(0, 6),
     name: request.name,
     homepageUrl: request.homepageUrl,
     endpointUrl: request.endpointUrl,
     environmentId,
-    createdByOrganizationId: 'MDSL1234XX',
+    createdByOrganizationId: 'BPNL1234XX',
     createdByOrgName: 'Your Org Name',
     createdByUserFullName: 'Your Name',
   };

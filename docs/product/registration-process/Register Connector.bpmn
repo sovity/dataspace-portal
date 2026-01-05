@@ -120,7 +120,7 @@
     <bpmn:task id="Activity_1qgz9x9" name="Connector gets registered">
       <bpmn:outgoing>Flow_00nh3g0</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:task id="Activity_186fz24" name="Enter MDS ID of participant">
+    <bpmn:task id="Activity_186fz24" name="Enter Organization ID of participant">
       <bpmn:incoming>Flow_1gw8rlv</bpmn:incoming>
       <bpmn:outgoing>Flow_0hwtuj3</bpmn:outgoing>
     </bpmn:task>

@@ -26,7 +26,7 @@ import java.time.ZoneOffset
  * Our Dev User IDs also need to be UUIDs, as they are expected to exist in the keycloak.
  */
 fun dummyDevUserUuid(i: Int): String = "00000000-0000-0000-0000-${i.toString().padStart(12, '0')}"
-fun dummyDevOrganizationId(i: Int): String = "MDSL${i.toString().padStart(6, '0')}"
+fun dummyDevOrganizationId(i: Int): String = "BPNL${i.toString().padStart(6, '0')}"
 fun dummyDevOrganizationName(i: Int): String = "Organization $i"
 fun dummyDevConnectorId(orgId: Int, connectorId: Int) =
     "${dummyDevOrganizationId(orgId)}.${dummyDevConnectorIdComponent(connectorId)}"
