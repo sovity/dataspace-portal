@@ -14,7 +14,11 @@ body:
          - label: Digital Twin Registry
          - label: EDC
          - label: ECU App
-         - label: Traceability App (TA)
+         - label: Quintari Core
+         - label: Quintari Blocking Notifications
+         - label: Quintari Quality Notifications
+         - label: Quintari CCM
+         - label: Quintari PCF
          - label: sovity Hub
          - label: Other
   - type: input
