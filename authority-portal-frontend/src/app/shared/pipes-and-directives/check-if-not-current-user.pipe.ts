@@ -21,7 +21,10 @@ import {map} from 'rxjs/operators';
 import {UserInfo} from '@sovity.de/authority-portal-client';
 import {GlobalStateUtils} from 'src/app/core/global-state/global-state-utils';
 
-@Pipe({name: 'CheckIfNotCurrentUser'})
+@Pipe({
+    name: 'CheckIfNotCurrentUser',
+    standalone: false
+})
 export class CheckIfNotCurrentUserPipe implements PipeTransform {
   constructor(private globalStateUtils: GlobalStateUtils) {}
   transform(userId: string | false | null): Observable<boolean> {

@@ -25,8 +25,9 @@ import {
 import {CatalogDataOffer} from '@sovity.de/authority-portal-client';
 
 @Component({
-  selector: 'broker-data-offer-cards',
-  templateUrl: './broker-data-offer-cards.component.html',
+    selector: 'broker-data-offer-cards',
+    templateUrl: './broker-data-offer-cards.component.html',
+    standalone: false
 })
 export class BrokerDataOfferCardsComponent {
   @HostBinding('class.flex')

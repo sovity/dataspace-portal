@@ -23,6 +23,7 @@ import de.sovity.authorityportal.api.model.catalog.DataOfferDetailPageQuery
 import de.sovity.authorityportal.api.model.catalog.DataOfferDetailPageResult
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.validation.Valid
 import jakarta.ws.rs.Consumes
 import jakarta.ws.rs.POST
 import jakarta.ws.rs.Path
@@ -38,7 +39,10 @@ interface CatalogResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(description = "Query the Broker's Catalog of Data Offers")
-    fun catalogPage(@QueryParam("environmentId") environmentId: String, query: CatalogPageQuery): CatalogPageResult
+    fun catalogPage(
+        @QueryParam("environmentId") environmentId: String,
+        @Valid query: CatalogPageQuery?
+    ): CatalogPageResult
 
     @POST
     @Path("data-offer-detail-page")

@@ -22,8 +22,9 @@ import {
 } from '@sovity.de/authority-portal-client';
 
 @Component({
-  selector: 'app-shared-organization-detail',
-  templateUrl: './shared-organization-detail.component.html',
+    selector: 'app-shared-organization-detail',
+    templateUrl: './shared-organization-detail.component.html',
+    standalone: false
 })
 export class SharedOrganizationDetailComponent {
   @HostBinding('class.flex')

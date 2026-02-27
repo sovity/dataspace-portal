@@ -50,9 +50,10 @@ import {ConfigureProvidedConnectorPageStateImpl} from '../state/configure-provid
 import {ConfigureProvidedConnectorPageForm} from './configure-provided-connector-page-form.service';
 
 @Component({
-  selector: 'app-provide-connector-page',
-  templateUrl: './configure-provided-connector-page.component.html',
-  providers: [ConfigureProvidedConnectorPageForm],
+    selector: 'app-provide-connector-page',
+    templateUrl: './configure-provided-connector-page.component.html',
+    providers: [ConfigureProvidedConnectorPageForm],
+    standalone: false
 })
 export class ConfigureProvidedConnectorPageComponent
   implements OnInit, OnDestroy
@@ -108,7 +109,8 @@ export class ConfigureProvidedConnectorPageComponent
   private startListeningToState() {
     this.store
       .select<ConfigureProvidedConnectorPageState>(
-        ConfigureProvidedConnectorPageStateImpl,
+        (state) =>
+          state.ProvideConnectorPage as ConfigureProvidedConnectorPageState,
       )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {

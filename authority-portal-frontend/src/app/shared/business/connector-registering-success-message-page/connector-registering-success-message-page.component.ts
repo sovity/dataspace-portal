@@ -20,8 +20,9 @@ import {EDC_CONFIG} from 'src/app/core/services/config/connector-config';
 import {ClipboardUtils} from 'src/app/core/utils/clipboard-utils';
 
 @Component({
-  selector: 'app-connector-registering-success-message-page',
-  templateUrl: './connector-registering-success-message-page.component.html',
+    selector: 'app-connector-registering-success-message-page',
+    templateUrl: './connector-registering-success-message-page.component.html',
+    standalone: false
 })
 export class ConnectorRegisteringSuccessMessagePageComponent {
   @HostBinding('class.flex')

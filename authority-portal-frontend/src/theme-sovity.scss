@@ -24,7 +24,8 @@
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
@@ -97,15 +98,15 @@ $md-black-palette: (
   ),
 );
 
-$app-primary: mat.define-palette($md-primary-palette);
-$app-accent: mat.define-palette($md-black-palette);
+$app-primary: mat.m2-define-palette($md-primary-palette);
+$app-accent: mat.m2-define-palette($md-black-palette);
 
 // The warn palette is optional (defaults to red).
-$app-warn: mat.define-palette(mat.$red-palette);
+$app-warn: mat.m2-define-palette(mat.$m2-red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$app-theme: mat.define-light-theme(
+$app-theme: mat.m2-define-light-theme(
   (
     color: (
       primary: $app-primary,

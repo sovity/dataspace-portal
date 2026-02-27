@@ -41,17 +41,17 @@ class CatalogApiService(
     val deploymentEnvironmentService: DeploymentEnvironmentService,
 ) {
 
-    fun catalogPage(environment: String, query: CatalogPageQuery): CatalogPageResult {
+    fun catalogPage(environment: String, query: CatalogPageQuery?): CatalogPageResult {
         val brokerConfig = deploymentEnvironmentService.findByIdOrThrow(environment).dataCatalog()
-        val filters = catalogFilterService.getCatalogQueryFilters(query.filter)
+        val filters = catalogFilterService.getCatalogQueryFilters(query?.filter)
 
         val pageQuery = paginationMetadataUtils.getPageQuery(
-            query.pageOneBased,
+            query?.pageOneBased,
             brokerConfig.catalogPagePageSize()
         )
 
         val availableSortings = buildAvailableSortings()
-        var sorting = query.sorting
+        var sorting = query?.sorting
         if (sorting == null) {
             sorting = availableSortings[0].sorting
         }
@@ -59,14 +59,14 @@ class CatalogApiService(
         // execute db query
         val catalogPageRs = catalogQueryService.queryCatalogPage(
             environment = environment,
-            searchQuery = query.searchQuery,
+            searchQuery = query?.searchQuery,
             filters = filters,
             sorting = sorting,
             pageQuery = pageQuery
         )
 
         val paginationMetadata = paginationMetadataUtils.buildPaginationMetadata(
-            query.pageOneBased,
+            query?.pageOneBased,
             brokerConfig.catalogPagePageSize(),
             catalogPageRs.dataOffers.size,
             catalogPageRs.numTotalDataOffers
@@ -115,7 +115,7 @@ class CatalogApiService(
                 CatalogPageSortingType.TITLE,
                 CatalogPageSortingType.ORIGINATOR,
                 CatalogPageSortingType.VIEW_COUNT
-            ).map { it: CatalogPageSortingType -> CatalogPageSortingItem(it, it.title) }
+            ).map { sortingType: CatalogPageSortingType -> CatalogPageSortingItem(sortingType, sortingType.title) }
                 .toList()
         }
     }

@@ -30,8 +30,9 @@ import {ActiveFeatureSet} from '../../../../core/services/config/active-feature-
 import {SidebarSection} from './sidebar.model';
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
+    selector: 'app-sidebar',
+    templateUrl: './sidebar.component.html',
+    standalone: false
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   isExpandedMenu: boolean = true;

@@ -24,8 +24,9 @@ import {RefreshUserInfo} from './core/global-state/global-state-actions';
 import {GlobalStateImpl} from './core/global-state/global-state-impl';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    standalone: false
 })
 export class AppComponent implements OnInit, OnDestroy {
   state!: GlobalState;
@@ -55,9 +56,11 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private startListeningToGlobalState() {
-    this.store.select<GlobalState>(GlobalStateImpl).subscribe((state) => {
-      this.state = state;
-    });
+    this.store
+      .select<GlobalState>((state) => state.GlobalState as GlobalState)
+      .subscribe((state) => {
+        this.state = state;
+      });
   }
 
   ngOnDestroy(): void {

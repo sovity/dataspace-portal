@@ -18,8 +18,9 @@
 import {Component, HostBinding, Input} from '@angular/core';
 
 @Component({
-  selector: 'truncated-short-description',
-  templateUrl: './truncated-short-description.component.html',
+    selector: 'truncated-short-description',
+    templateUrl: './truncated-short-description.component.html',
+    standalone: false
 })
 export class TruncatedShortDescription {
   @Input() text!: string | undefined;

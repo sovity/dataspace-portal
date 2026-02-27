@@ -30,11 +30,11 @@ import {
   AuthorityOrganizationUserDetailState,
   DEFAULT_AUTHORITY_ORGANIZATION_USER_DETAIL_STATE,
 } from '../../state/authority-organization-detail-page-state';
-import {AuthorityOrganizationDetailPageStateImpl} from '../../state/authority-organization-detail-page-state-impl';
 
 @Component({
   selector: 'app-organization-user-detail',
   templateUrl: './organization-user-detail.component.html',
+  standalone: false,
 })
 export class OrganizationUserDetailComponent implements OnInit, OnDestroy {
   @Input() userDetailPageConfig!: UserDetailPageConfig;
@@ -60,7 +60,9 @@ export class OrganizationUserDetailComponent implements OnInit, OnDestroy {
   startListeningToState() {
     this.store
       .select<AuthorityOrganizationUserDetailState>(
-        AuthorityOrganizationDetailPageStateImpl.openedUserDetailState,
+        (state) =>
+          state.AuthorityOrganizationDetailPageState
+            .openedUserDetail as AuthorityOrganizationUserDetailState,
       )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {

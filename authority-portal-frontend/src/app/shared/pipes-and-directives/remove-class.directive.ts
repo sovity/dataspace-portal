@@ -29,7 +29,8 @@ import {
  * But if you don't use their directives, the scrollbars in dialogs break, for example.
  */
 @Directive({
-  selector: '[removeClass]',
+    selector: '[removeClass]',
+    standalone: false
 })
 export class RemoveClassDirective implements AfterViewChecked, AfterViewInit {
   @Input()

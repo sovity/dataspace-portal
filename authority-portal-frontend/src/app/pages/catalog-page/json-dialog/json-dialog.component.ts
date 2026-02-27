@@ -36,8 +36,9 @@ import {cleanJson} from './clean-json';
 import {DialogToolbarButton, JsonDialogData} from './json-dialog.data';
 
 @Component({
-  selector: 'app-json-dialog',
-  templateUrl: './json-dialog.component.html',
+    selector: 'app-json-dialog',
+    templateUrl: './json-dialog.component.html',
+    standalone: false
 })
 export class JsonDialogComponent implements OnInit, AfterViewInit, OnDestroy {
   busy = false;

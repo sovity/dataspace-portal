@@ -21,8 +21,9 @@ import {DeploymentEnvironmentDto} from '@sovity.de/authority-portal-client';
 import {GlobalStateUtils} from 'src/app/core/global-state/global-state-utils';
 
 @Component({
-  selector: 'app-env-banner',
-  templateUrl: './env-banner.component.html',
+    selector: 'app-env-banner',
+    templateUrl: './env-banner.component.html',
+    standalone: false
 })
 export class EnvBannerComponent {
   selectedEnvironment$!: Observable<DeploymentEnvironmentDto>;

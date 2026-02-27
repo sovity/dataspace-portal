@@ -20,8 +20,9 @@ import {APP_CONFIG, AppConfig} from 'src/app/core/services/config/app-config';
 import {FooterLink} from './footer-link.model';
 
 @Component({
-  selector: 'app-footer-links',
-  templateUrl: './footer-links.component.html',
+    selector: 'app-footer-links',
+    templateUrl: './footer-links.component.html',
+    standalone: false
 })
 export class FooterLinksComponent {
   @HostBinding('class.flex')

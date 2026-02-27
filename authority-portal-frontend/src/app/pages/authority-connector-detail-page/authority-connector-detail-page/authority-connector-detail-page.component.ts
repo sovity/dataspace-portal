@@ -48,6 +48,7 @@ import {AuthorityConnectorDetailPageStateImpl} from '../state/authority-connecto
 @Component({
   selector: 'app-authority-connector-detail-page',
   templateUrl: './authority-connector-detail-page.component.html',
+  standalone: false,
 })
 export class AuthorityConnectorDetailPageComponent
   implements OnInit, OnDestroy
@@ -89,7 +90,8 @@ export class AuthorityConnectorDetailPageComponent
   private startListeningToState() {
     this.store
       .select<AuthorityConnectorDetailPageState>(
-        AuthorityConnectorDetailPageStateImpl,
+        (state) =>
+          state.AuthorityConnectorDetailPageState as AuthorityConnectorDetailPageState,
       )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {
@@ -101,9 +103,10 @@ export class AuthorityConnectorDetailPageComponent
               label: 'Delete Connector',
               icon: 'delete',
               event: () => this.deleteConnectorMenuItemClick(),
-              isDisabled:
-                !this.userInfo?.roles.includes(UserRoleDto.OperatorAdmin) ??
-                true,
+              isDisabled: !(
+                this.userInfo?.roles?.includes(UserRoleDto.OperatorAdmin) ??
+                false
+              ),
             },
           ],
         };

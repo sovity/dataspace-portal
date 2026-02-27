@@ -39,8 +39,9 @@ import {
 import {AuthorityInviteNewOrganizationPageStateImpl} from './state/authority-invite-new-organization-page-state-impl';
 
 @Component({
-  selector: 'app-authority-invite-new-organization',
-  templateUrl: './authority-invite-new-organization.component.html',
+    selector: 'app-authority-invite-new-organization',
+    templateUrl: './authority-invite-new-organization.component.html',
+    standalone: false
 })
 export class AuthorityInviteNewOrganizationComponent {
   state = DEFAULT_AUTHORITY_INVITE_NEW_ORGANIZATION_PAGE_STATE;
@@ -97,7 +98,8 @@ export class AuthorityInviteNewOrganizationComponent {
   startListeningToState() {
     this.store
       .select<AuthorityInviteNewOrganizationPageState>(
-        AuthorityInviteNewOrganizationPageStateImpl,
+        (state) =>
+          state.AuthorityInviteNewOrganizationPageState as AuthorityInviteNewOrganizationPageState,
       )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {

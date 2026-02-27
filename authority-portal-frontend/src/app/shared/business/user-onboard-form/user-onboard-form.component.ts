@@ -20,8 +20,9 @@ import {FormGroup} from '@angular/forms';
 import {UserOnboardFormModel} from './user-onboard-form-model';
 
 @Component({
-  selector: 'app-user-onboard-form',
-  templateUrl: './user-onboard-form.component.html',
+    selector: 'app-user-onboard-form',
+    templateUrl: './user-onboard-form.component.html',
+    standalone: false
 })
 export class UserOnboardFormComponent {
   @Input() userForm!: FormGroup<UserOnboardFormModel>;

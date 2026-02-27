@@ -18,8 +18,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-delete-connector-modal',
-  templateUrl: './delete-connector-modal.component.html',
+    selector: 'app-delete-connector-modal',
+    templateUrl: './delete-connector-modal.component.html',
+    standalone: false
 })
 export class DeleteConnectorModalComponent {
   @Input() visible!: boolean;

@@ -19,8 +19,9 @@ import {Component, HostBinding, Input, booleanAttribute} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 @Component({
-  selector: 'app-text-input',
-  templateUrl: './text-input.component.html',
+    selector: 'app-text-input',
+    templateUrl: './text-input.component.html',
+    standalone: false
 })
 export class TextInputComponent {
   @HostBinding('class.select-none')

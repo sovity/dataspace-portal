@@ -48,8 +48,9 @@ import {
 import {AuthorityConnectorListPageStateImpl} from '../state/authority-connector-list-page-state-impl';
 
 @Component({
-  selector: 'app-authority-connector-list-page',
-  templateUrl: './authority-connector-list-page.component.html',
+    selector: 'app-authority-connector-list-page',
+    templateUrl: './authority-connector-list-page.component.html',
+    standalone: false
 })
 export class AuthorityConnectorListPageComponent implements OnInit, OnDestroy {
   state = DEFAULT_AUTHORITY_CONNECTOR_LIST_PAGE_STATE;
@@ -124,7 +125,8 @@ export class AuthorityConnectorListPageComponent implements OnInit, OnDestroy {
   private startListeningToState() {
     this.store
       .select<AuthorityConnectorListPageState>(
-        AuthorityConnectorListPageStateImpl,
+        (state) =>
+          state.AuthorityConnectorListPageState as AuthorityConnectorListPageState,
       )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {

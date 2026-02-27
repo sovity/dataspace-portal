@@ -22,7 +22,10 @@ import {UiFeature} from '../../core/services/config/profiles/ui-feature';
 /**
  * Easily check for active features in angular templates.
  */
-@Pipe({name: 'isActiveFeature'})
+@Pipe({
+    name: 'isActiveFeature',
+    standalone: false
+})
 export class IsActiveFeaturePipe implements PipeTransform {
   constructor(private activeFeatureSet: ActiveFeatureSet) {}
 

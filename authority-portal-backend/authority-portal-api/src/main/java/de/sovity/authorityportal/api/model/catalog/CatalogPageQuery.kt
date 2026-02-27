@@ -18,6 +18,7 @@
 package de.sovity.authorityportal.api.model.catalog
 
 import io.swagger.v3.oas.annotations.media.Schema
+import jakarta.validation.constraints.Min
 
 @Schema(description = "Filterable Catalog Page Query")
 data class CatalogPageQuery(
@@ -30,13 +31,14 @@ data class CatalogPageQuery(
     @field:Schema(description = "Sorting", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
     val sorting: CatalogPageSortingType?,
 
+    @field:Min(1)
     @field:Schema(
         description = "Page number, one based, meaning the first page is page 1.",
         example = "1",
+        minimum = "1",
         defaultValue = "1",
         type = "n",
         requiredMode = Schema.RequiredMode.NOT_REQUIRED
     )
     val pageOneBased: Int = 1,
 )
-

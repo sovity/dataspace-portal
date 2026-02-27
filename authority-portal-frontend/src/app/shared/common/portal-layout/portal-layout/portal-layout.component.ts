@@ -18,8 +18,9 @@
 import {Component, HostBinding} from '@angular/core';
 
 @Component({
-  selector: 'app-portal-layout',
-  templateUrl: './portal-layout.component.html',
+    selector: 'app-portal-layout',
+    templateUrl: './portal-layout.component.html',
+    standalone: false
 })
 export class PortalLayoutComponent {
   @HostBinding('class.flex')

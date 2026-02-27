@@ -20,8 +20,9 @@ import {Title} from '@angular/platform-browser';
 import {APP_CONFIG, AppConfig} from 'src/app/core/services/config/app-config';
 
 @Component({
-  selector: 'app-organization-rejected-page',
-  templateUrl: './organization-rejected-page.component.html',
+    selector: 'app-organization-rejected-page',
+    templateUrl: './organization-rejected-page.component.html',
+    standalone: false
 })
 export class OrganizationRejectedPageComponent {
   constructor(

@@ -22,7 +22,8 @@ import {
 } from '@sovity.de/authority-portal-client';
 
 @Pipe({
-  name: 'sortingFilter',
+    name: 'sortingFilter',
+    standalone: false
 })
 export class FilterByRegistrationStatusPipe implements PipeTransform {
   transform(

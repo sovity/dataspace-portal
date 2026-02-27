@@ -25,8 +25,9 @@ import {humanizeDuration} from 'src/app/core/utils/time-utils';
 import {DonutChartData} from '../donut-chart/donut-chart-data';
 
 @Component({
-  selector: 'app-dashboard-component-uptime-card',
-  templateUrl: './dashboard-component-uptime-card.component.html',
+    selector: 'app-dashboard-component-uptime-card',
+    templateUrl: './dashboard-component-uptime-card.component.html',
+    standalone: false
 })
 export class DashboardComponentUptimeCardComponent {
   @HostBinding('class.flex')

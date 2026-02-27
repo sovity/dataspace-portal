@@ -20,7 +20,10 @@ import {Pipe, PipeTransform} from '@angular/core';
 /**
  * `Object.values(...)` can't be used from angular templates.
  */
-@Pipe({name: 'values'})
+@Pipe({
+    name: 'values',
+    standalone: false
+})
 export class ValuesPipe implements PipeTransform {
   transform<T>(obj: T | undefined): T[keyof T][] {
     return Object.values(obj || {});

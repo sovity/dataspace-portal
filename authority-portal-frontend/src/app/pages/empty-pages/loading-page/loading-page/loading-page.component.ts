@@ -23,8 +23,9 @@ import {GlobalState} from 'src/app/core/global-state/global-state';
 import {GlobalStateImpl} from 'src/app/core/global-state/global-state-impl';
 
 @Component({
-  selector: 'app-loading-page',
-  templateUrl: './loading-page.component.html',
+    selector: 'app-loading-page',
+    templateUrl: './loading-page.component.html',
+    standalone: false
 })
 export class LoadingPageComponent implements OnInit, OnDestroy {
   state!: GlobalState;
@@ -41,7 +42,7 @@ export class LoadingPageComponent implements OnInit, OnDestroy {
 
   private startListeningToGlobalState() {
     this.store
-      .select<GlobalState>(GlobalStateImpl)
+      .select<GlobalState>((state) => state.GlobalState as GlobalState)
       .subscribe((state) => (this.state = state));
   }
 

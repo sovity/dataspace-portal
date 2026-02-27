@@ -19,8 +19,9 @@ import {Component, Input} from '@angular/core';
 import {PolicyExpressionMapped} from '../../model/policy-expression-mapped';
 
 @Component({
-  selector: 'app-policy-renderer',
-  templateUrl: './policy-renderer.component.html',
+    selector: 'app-policy-renderer',
+    templateUrl: './policy-renderer.component.html',
+    standalone: false
 })
 export class PolicyRendererComponent {
   @Input()

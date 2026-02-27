@@ -45,9 +45,10 @@ import {ReserveProvidedConnectorPageStateImpl} from '../state/reserve-provided-c
 import {ReserveProvidedConnectorPageForm} from './reserve-provided-connector-page-form';
 
 @Component({
-  selector: 'app-reserve-provided-connector-page',
-  templateUrl: './reserve-provided-connector-page.component.html',
-  providers: [ReserveProvidedConnectorPageForm],
+    selector: 'app-reserve-provided-connector-page',
+    templateUrl: './reserve-provided-connector-page.component.html',
+    providers: [ReserveProvidedConnectorPageForm],
+    standalone: false
 })
 export class ReserveProvidedConnectorPageComponent
   implements OnInit, OnDestroy
@@ -100,7 +101,8 @@ export class ReserveProvidedConnectorPageComponent
   private startListeningToState() {
     this.store
       .select<ReserveProvidedConnectorPageState>(
-        ReserveProvidedConnectorPageStateImpl,
+        (state) =>
+          state.ReserveProvidedConnectorPage as ReserveProvidedConnectorPageState,
       )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {

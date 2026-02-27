@@ -26,9 +26,8 @@
       </mat-form-field>
 
       <!-- Selected Filters Bar -->
-      <mat-chip-list
-        *ngIf="state.isPageReady && state.activeFilterPills.length">
-        <mat-chip
+      <mat-chip-set *ngIf="state.isPageReady && state.activeFilterPills.length">
+        <mat-chip-row
           *ngFor="let item of state.activeFilterPills"
           class="!font-bold"
           (removed)="onRemoveActiveFilterItem(item)">
@@ -40,8 +39,8 @@
           <button matChipRemove>
             <mat-icon>cancel</mat-icon>
           </button>
-        </mat-chip>
-      </mat-chip-list>
+        </mat-chip-row>
+      </mat-chip-set>
 
       <!-- Paginator Bar -->
       <div

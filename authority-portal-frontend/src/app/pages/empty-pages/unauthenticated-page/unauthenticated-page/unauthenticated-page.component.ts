@@ -20,8 +20,9 @@ import {Title} from '@angular/platform-browser';
 import {APP_CONFIG, AppConfig} from 'src/app/core/services/config/app-config';
 
 @Component({
-  selector: 'app-unauthenticated-page',
-  templateUrl: './unauthenticated-page.component.html',
+    selector: 'app-unauthenticated-page',
+    templateUrl: './unauthenticated-page.component.html',
+    standalone: false
 })
 export class UnauthenticatedPageComponent {
   constructor(

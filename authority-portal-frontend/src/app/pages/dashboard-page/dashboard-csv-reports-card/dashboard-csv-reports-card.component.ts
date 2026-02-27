@@ -31,8 +31,9 @@ export interface ReportLink {
 }
 
 @Component({
-  selector: 'app-dashboard-csv-reports-card',
-  templateUrl: './dashboard-csv-reports-card.component.html',
+    selector: 'app-dashboard-csv-reports-card',
+    templateUrl: './dashboard-csv-reports-card.component.html',
+    standalone: false
 })
 export class DashboardCsvReportsCardComponent implements OnInit, OnDestroy {
   @HostBinding('class.border')

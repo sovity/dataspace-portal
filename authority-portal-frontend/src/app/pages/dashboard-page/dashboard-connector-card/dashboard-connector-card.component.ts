@@ -34,8 +34,9 @@ export interface ConnectorKpi {
 }
 
 @Component({
-  selector: 'app-dashboard-connector-card',
-  templateUrl: './dashboard-connector-card.component.html',
+    selector: 'app-dashboard-connector-card',
+    templateUrl: './dashboard-connector-card.component.html',
+    standalone: false
 })
 export class DashboardConnectorCardComponent {
   @HostBinding('class.flex')

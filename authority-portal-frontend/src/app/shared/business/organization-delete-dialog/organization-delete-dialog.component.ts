@@ -26,8 +26,9 @@ import {Fetched} from 'src/app/core/utils/fetched';
 import {OrganizationDeleteDialog} from './organization-delete-dialog.model';
 
 @Component({
-  selector: 'app-organization-delete-dialog',
-  templateUrl: './organization-delete-dialog.component.html',
+    selector: 'app-organization-delete-dialog',
+    templateUrl: './organization-delete-dialog.component.html',
+    standalone: false
 })
 export class OrganizationDeleteDialogComponent implements OnInit, OnDestroy {
   modalData: Fetched<OrganizationDeletionCheck> = Fetched.empty();

@@ -41,8 +41,9 @@ import {
 import {CentralComponentListPageStateImpl} from '../state/central-component-list-page-state-impl';
 
 @Component({
-  selector: 'app-central-component-list-page',
-  templateUrl: './central-component-list-page.component.html',
+    selector: 'app-central-component-list-page',
+    templateUrl: './central-component-list-page.component.html',
+    standalone: false
 })
 export class CentralComponentListPageComponent implements OnInit, OnDestroy {
   @HostBinding('class.overflow-y-auto')
@@ -117,7 +118,10 @@ export class CentralComponentListPageComponent implements OnInit, OnDestroy {
 
   private startListeningToState() {
     this.store
-      .select<CentralComponentListPageState>(CentralComponentListPageStateImpl)
+      .select<CentralComponentListPageState>(
+        (state) =>
+          state.CentralComponentListPageState as CentralComponentListPageState,
+      )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {
         this.state = state;

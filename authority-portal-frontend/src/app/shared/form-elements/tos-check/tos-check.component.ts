@@ -20,8 +20,9 @@ import {FormControl} from '@angular/forms';
 import {APP_CONFIG, AppConfig} from 'src/app/core/services/config/app-config';
 
 @Component({
-  selector: 'app-tos-check',
-  templateUrl: './tos-check.component.html',
+    selector: 'app-tos-check',
+    templateUrl: './tos-check.component.html',
+    standalone: false
 })
 export class TosCheckComponent {
   @Input()

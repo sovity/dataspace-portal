@@ -19,8 +19,9 @@ import {Component, HostBinding, Input} from '@angular/core';
 import {PolicyExpressionMapped} from '../../model/policy-expression-mapped';
 
 @Component({
-  selector: 'policy-expression',
-  templateUrl: './policy-expression.component.html',
+    selector: 'policy-expression',
+    templateUrl: './policy-expression.component.html',
+    standalone: false
 })
 export class PolicyExpressionComponent {
   @HostBinding('class.flex')

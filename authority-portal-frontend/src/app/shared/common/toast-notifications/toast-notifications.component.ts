@@ -20,8 +20,9 @@ import {Subject, takeUntil} from 'rxjs';
 import {ToastNotification, ToastService} from './toast.service';
 
 @Component({
-  selector: 'app-toast-notifications',
-  templateUrl: './toast-notifications.component.html',
+    selector: 'app-toast-notifications',
+    templateUrl: './toast-notifications.component.html',
+    standalone: false
 })
 export class ToastNotificationsComponent implements OnInit, OnDestroy {
   toasts: ToastNotification[] = [];

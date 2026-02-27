@@ -20,8 +20,9 @@ import {AvatarConfig} from '../avatar/avatar.component';
 import {ControlCenterModel} from './control-center.model';
 
 @Component({
-  selector: 'app-control-center',
-  templateUrl: './control-center.component.html',
+    selector: 'app-control-center',
+    templateUrl: './control-center.component.html',
+    standalone: false
 })
 export class ControlCenterComponent implements OnChanges {
   @Input() userData!: ControlCenterModel;

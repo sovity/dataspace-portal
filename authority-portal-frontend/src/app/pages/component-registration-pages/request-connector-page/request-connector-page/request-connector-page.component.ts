@@ -33,9 +33,10 @@ import {RequestConnectorPageStateImpl} from '../state/request-connector-page-sta
 import {RequestConnectorPageForm} from './request-connector-page-form';
 
 @Component({
-  selector: 'app-request-connector-page',
-  templateUrl: './request-connector-page.component.html',
-  providers: [RequestConnectorPageForm],
+    selector: 'app-request-connector-page',
+    templateUrl: './request-connector-page.component.html',
+    providers: [RequestConnectorPageForm],
+    standalone: false
 })
 export class RequestConnectorPageComponent implements OnInit {
   state = DEFAULT_REQUEST_CONNECTOR_STATE;
@@ -100,7 +101,9 @@ export class RequestConnectorPageComponent implements OnInit {
 
   startListeningToState() {
     this.store
-      .select<RequestConnectorPageState>(RequestConnectorPageStateImpl)
+      .select<RequestConnectorPageState>(
+        (state) => state.RequestConnectorPage as RequestConnectorPageState,
+      )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {
         this.state = state;

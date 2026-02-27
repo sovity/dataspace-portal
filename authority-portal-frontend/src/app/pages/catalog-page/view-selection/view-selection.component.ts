@@ -20,8 +20,9 @@ import {ViewModeEnum} from './view-mode-enum';
 import {ViewModeItem} from './view-mode-item';
 
 @Component({
-  selector: 'view-selection',
-  templateUrl: './view-selection.component.html',
+    selector: 'view-selection',
+    templateUrl: './view-selection.component.html',
+    standalone: false
 })
 export class ViewSelectionComponent {
   @Input() selected!: ViewModeEnum;

@@ -28,8 +28,9 @@ import {
 import {ControlCenterUserProfilePageStateImpl} from '../state/control-center-user-profile-page-state-impl';
 
 @Component({
-  selector: 'app-control-center-user-profile-page',
-  templateUrl: './control-center-user-profile-page.component.html',
+    selector: 'app-control-center-user-profile-page',
+    templateUrl: './control-center-user-profile-page.component.html',
+    standalone: false
 })
 export class ControlCenterUserProfilePageComponent
   implements OnInit, OnDestroy
@@ -58,7 +59,8 @@ export class ControlCenterUserProfilePageComponent
   startListeningToState(): void {
     this.store
       .select<ControlCenterUserProfilePageState>(
-        ControlCenterUserProfilePageStateImpl,
+        (state) =>
+          state.ControlCenterUserProfilePageState as ControlCenterUserProfilePageState,
       )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {

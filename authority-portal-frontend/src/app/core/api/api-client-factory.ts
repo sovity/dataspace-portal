@@ -49,7 +49,9 @@ export class ApiClientFactory {
   }
 
   private buildHeaders(): Record<string, string> {
-    const globalState = this.store.selectSnapshot<GlobalState>(GlobalStateImpl);
+    const globalState = this.store.selectSnapshot<GlobalState>(
+      (state) => state.GlobalState as GlobalState,
+    );
     if (!globalState.e2eDevUser) {
       return {};
     }

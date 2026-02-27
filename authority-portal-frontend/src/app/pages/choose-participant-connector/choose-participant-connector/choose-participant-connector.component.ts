@@ -20,8 +20,9 @@ import {SelectionBoxModel} from 'src/app/shared/common/selection-box/selection-b
 import {APP_CONFIG, AppConfig} from '../../../core/services/config/app-config';
 
 @Component({
-  selector: 'app-choose-participant-connector',
-  templateUrl: './choose-participant-connector.component.html',
+    selector: 'app-choose-participant-connector',
+    templateUrl: './choose-participant-connector.component.html',
+    standalone: false
 })
 export class ChooseParticipantConnectorComponent {
   constructor(@Inject(APP_CONFIG) public appConfig: AppConfig) {}

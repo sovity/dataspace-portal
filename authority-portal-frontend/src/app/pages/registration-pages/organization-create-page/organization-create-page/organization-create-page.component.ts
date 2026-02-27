@@ -46,8 +46,9 @@ import {
 } from './organization-create-page.form-model';
 
 @Component({
-  selector: 'app-organization-create',
-  templateUrl: './organization-create-page.component.html',
+    selector: 'app-organization-create',
+    templateUrl: './organization-create-page.component.html',
+    standalone: false
 })
 export class OrganizationCreatePageComponent implements OnInit, OnDestroy {
   state = DEFAULT_ORGANIZATION_REGISTRATION_PAGE_STATE;
@@ -120,7 +121,8 @@ export class OrganizationCreatePageComponent implements OnInit, OnDestroy {
   startListeningToState() {
     this.store
       .select<OrganizationRegistrationPageState>(
-        OrganizationCreatePageStateImpl,
+        (state) =>
+          state.OrganizationCreatePage as OrganizationRegistrationPageState,
       )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {

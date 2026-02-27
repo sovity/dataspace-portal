@@ -24,8 +24,9 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'app-delete-icon-button',
-  templateUrl: './delete-icon-button.component.html',
+    selector: 'app-delete-icon-button',
+    templateUrl: './delete-icon-button.component.html',
+    standalone: false
 })
 export class DeleteIconButtonComponent {
   @Input()

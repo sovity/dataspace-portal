@@ -31,8 +31,9 @@ import {HeaderBarConfig} from 'src/app/shared/common/header-bar/header-bar.model
 import {ConnectorData} from '../dashboard-connector-card/dashboard-connector-card.component';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard-page.component.html',
+    selector: 'app-dashboard',
+    templateUrl: './dashboard-page.component.html',
+    standalone: false
 })
 export class DashboardPageComponent implements OnInit, OnDestroy {
   headerConfig: HeaderBarConfig = {

@@ -33,8 +33,9 @@ import {
 } from 'src/app/shared/common/filter-bar/filter-bar.model';
 
 @Component({
-  selector: 'app-filter-bar',
-  templateUrl: './filter-bar.component.html',
+    selector: 'app-filter-bar',
+    templateUrl: './filter-bar.component.html',
+    standalone: false
 })
 export class FilterBarComponent implements OnInit, OnDestroy {
   @Input() filterBarConfig!: FilterBarConfig;

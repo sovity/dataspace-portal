@@ -25,8 +25,9 @@ import {APP_CONFIG, AppConfig} from '../../../core/services/config/app-config';
 import {inferArticle} from '../../../core/utils/string-utils';
 
 @Component({
-  selector: 'app-choose-participant-caas',
-  templateUrl: './choose-participant-caas.component.html',
+    selector: 'app-choose-participant-caas',
+    templateUrl: './choose-participant-caas.component.html',
+    standalone: false
 })
 export class ChooseParticipantCaasComponent implements OnInit, OnDestroy {
   sponsoredCaasAmount: number = 1;

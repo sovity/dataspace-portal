@@ -19,8 +19,9 @@ import {Component, HostBinding, Input, booleanAttribute} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
-  selector: 'app-password-repeat-input',
-  templateUrl: './password-repeat-input.component.html',
+    selector: 'app-password-repeat-input',
+    templateUrl: './password-repeat-input.component.html',
+    standalone: false
 })
 export class PasswordRepeatInputComponent {
   @HostBinding('class.select-none')

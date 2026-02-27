@@ -53,8 +53,9 @@ import {
 import {SpConnectorListPageStateImpl} from '../state/sp-connector-list-page-state-impl';
 
 @Component({
-  selector: 'app-sp-connector-list-page',
-  templateUrl: './sp-connector-list-page.component.html',
+    selector: 'app-sp-connector-list-page',
+    templateUrl: './sp-connector-list-page.component.html',
+    standalone: false
 })
 export class SpConnectorListPageComponent implements OnInit, OnDestroy {
   state = DEFAULT_SP_CONNECTOR_LIST_PAGE_STATE;
@@ -139,7 +140,9 @@ export class SpConnectorListPageComponent implements OnInit, OnDestroy {
 
   startListeningToState() {
     this.store
-      .select<SpConnectorListPageState>(SpConnectorListPageStateImpl)
+      .select<SpConnectorListPageState>(
+        (state) => state.SpConnectorListPageState as SpConnectorListPageState,
+      )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {
         this.state = state;

@@ -19,8 +19,9 @@ import {Component, HostBinding, Input, booleanAttribute} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 @Component({
-  selector: 'app-password-input',
-  templateUrl: './password-input.component.html',
+    selector: 'app-password-input',
+    templateUrl: './password-input.component.html',
+    standalone: false
 })
 export class PasswordInputComponent {
   @HostBinding('class.select-none')

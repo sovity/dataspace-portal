@@ -19,8 +19,9 @@ import {Component, HostBinding, Input, booleanAttribute} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 @Component({
-  selector: 'app-connector-url-input',
-  templateUrl: './connector-url-input.component.html',
+    selector: 'app-connector-url-input',
+    templateUrl: './connector-url-input.component.html',
+    standalone: false
 })
 export class ConnectorUrlInputComponent {
   @HostBinding('class.select-none')

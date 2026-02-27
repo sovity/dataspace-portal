@@ -19,8 +19,9 @@ import {Component, Inject} from '@angular/core';
 import {APP_CONFIG, AppConfig} from 'src/app/core/services/config/app-config';
 
 @Component({
-  selector: 'logout-button',
-  templateUrl: './logout-button.component.html',
+    selector: 'logout-button',
+    templateUrl: './logout-button.component.html',
+    standalone: false
 })
 export class LogoutButtonComponent {
   constructor(@Inject(APP_CONFIG) public appConfig: AppConfig) {}

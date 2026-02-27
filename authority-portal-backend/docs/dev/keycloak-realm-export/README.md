@@ -9,8 +9,12 @@ from the running Quarkus Devservice Keycloak Container, exporting the realm "aut
 
 To run this script, execute the following command from the backend project's root.
 
-```shell
-./docs/dev/keycloak-realm-export/extract-realm.sh
+ ```shell
+# Bash or WSL
+./docs/dev/keycloak-realm-export/export-realm.sh
+
+# Git Bash
+MSYS_NO_PATHCONV=1 ./docs/dev/keycloak-realm-export/export-realm.sh
 ```
 
 After the script has run, the exported [realm.json](../../../authority-portal-quarkus/src/main/resources/realm.json) may contain unrecognized fields which leads to an import error on next startup.

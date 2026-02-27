@@ -28,6 +28,37 @@ _No special migration steps required_
 - Catalog Crawler CE: `ghcr.io/sovity/ds-portal-ce-crawler:{{ version }}`
 - sovity EDC CE: [`v{{ EDC CE VERSION }}`](https://github.com/sovity/edc-ce/releases/tag/v{{ EDC CE VERSION }})
 
+
+## [v7.3.0] - 2026-02-27
+
+### Overview
+
+Minor fixes and Keycloak update.
+
+### Detailed Changes
+
+#### Patch
+
+- Add refresh token time skew to prevent late token refresh
+- Fix error when sending catalog page request without setting a value for `pageOneBased` in request body
+- Add feature list to product documentation
+- Update Keycloak version to `26.4.7`
+- Update dependencies
+
+### Deployment Migration Notes
+
+_No special migration steps required_
+
+#### Compatible Versions
+
+- Data Space Portal CE Backend Docker Image: `ghcr.io/sovity/ds-portal-ce-backend:7.3.0`
+- Data Space Portal CE Frontend Docker Image: `ghcr.io/sovity/ds-portal-ce-frontend:7.3.0`
+- Catalog Crawler CE: `ghcr.io/sovity/ds-portal-ce-crawler:7.3.0`
+- sovity EDC CE: [`v16.4.2`](https://github.com/sovity/edc-ce/releases/tag/v16.4.2)
+- Keycloak: `26.4.7`
+- PostgreSQL: `17`
+
+
 ## [v7.2.0] - 2026-01-05
 
 ### Overview

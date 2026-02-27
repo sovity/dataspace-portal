@@ -28,8 +28,9 @@ import {RefreshUserInfo} from 'src/app/core/global-state/global-state-actions';
 import {GlobalStateUtils} from 'src/app/core/global-state/global-state-utils';
 
 @Component({
-  selector: 'app-fake-backend-user-switcher',
-  templateUrl: './fake-backend-user-switcher.component.html',
+    selector: 'app-fake-backend-user-switcher',
+    templateUrl: './fake-backend-user-switcher.component.html',
+    standalone: false
 })
 export class FakeBackendUserSwitcherComponent implements OnInit, OnDestroy {
   @HostBinding('class.flex')

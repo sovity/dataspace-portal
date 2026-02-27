@@ -38,7 +38,7 @@ import {GlobalStateImpl} from './global-state-impl';
 @Injectable({providedIn: 'root'})
 export class GlobalStateUtils {
   userInfo$: Observable<UserInfo> = this.store
-    .select<GlobalState>(GlobalStateImpl)
+    .select<GlobalState>((state) => state.GlobalState as GlobalState)
     .pipe(
       map((state) => state.userInfo),
       distinctUntilChanged(),
@@ -48,8 +48,9 @@ export class GlobalStateUtils {
     );
 
   get userInfo(): UserInfo {
-    return this.store.selectSnapshot<GlobalState>(GlobalStateImpl).userInfo
-      .data;
+    return this.store.selectSnapshot<GlobalState>(
+      (state) => state.GlobalState as GlobalState,
+    ).userInfo.data;
   }
 
   get userId(): string {
@@ -57,7 +58,7 @@ export class GlobalStateUtils {
   }
 
   deploymentEnvironment$: Observable<DeploymentEnvironmentDto> = this.store
-    .select<GlobalState>(GlobalStateImpl)
+    .select<GlobalState>((state) => state.GlobalState as GlobalState)
     .pipe(
       map((state) => state.selectedEnvironment),
       filter(
@@ -72,7 +73,9 @@ export class GlobalStateUtils {
   );
 
   get snapshot(): GlobalState {
-    return this.store.selectSnapshot<GlobalState>(GlobalStateImpl);
+    return this.store.selectSnapshot<GlobalState>(
+      (state) => state.GlobalState as GlobalState,
+    );
   }
 
   constructor(private store: Store) {}
@@ -84,12 +87,14 @@ export class GlobalStateUtils {
     );
   }
   getDeploymentEnvironments(): Observable<DeploymentEnvironmentDto[]> {
-    return this.store.select<GlobalState>(GlobalStateImpl).pipe(
-      map((state) => state.deploymentEnvironments),
-      filter((it) => it.isReady),
-      map((it) => it.data),
-      distinctUntilChanged(),
-    );
+    return this.store
+      .select<GlobalState>((state) => state.GlobalState as GlobalState)
+      .pipe(
+        map((state) => state.deploymentEnvironments),
+        filter((it) => it.isReady),
+        map((it) => it.data),
+        distinctUntilChanged(),
+      );
   }
 
   onDeploymentEnvironmentChangeSkipFirst(opt: {

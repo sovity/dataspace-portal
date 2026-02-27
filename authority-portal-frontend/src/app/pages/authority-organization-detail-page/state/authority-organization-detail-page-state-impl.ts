@@ -47,8 +47,6 @@ import {
 } from './authority-organization-detail-page-actions';
 import {
   AuthorityOrganizationDetailPageState,
-  AuthorityOrganizationDetailState,
-  AuthorityOrganizationUserDetailState,
   DEFAULT_AUTHORITY_ORGANIZATION_DETAIL_PAGE_STATE,
   DEFAULT_AUTHORITY_ORGANIZATION_DETAIL_STATE,
 } from './authority-organization-detail-page-state';
@@ -350,19 +348,5 @@ export class AuthorityOrganizationDetailPageStateImpl {
       }),
       ignoreElements(),
     );
-  }
-
-  @Selector()
-  static organizationDetailState(
-    state: AuthorityOrganizationDetailPageState,
-  ): AuthorityOrganizationDetailState {
-    return state.organizationDetail;
-  }
-
-  @Selector()
-  static openedUserDetailState(
-    state: AuthorityOrganizationDetailPageState,
-  ): AuthorityOrganizationUserDetailState {
-    return state.openedUserDetail;
   }
 }

@@ -39,7 +39,7 @@ class CatalogResourceImpl(
 ) : CatalogResource {
 
     @Transactional
-    override fun catalogPage(environmentId: String, query: CatalogPageQuery): CatalogPageResult {
+    override fun catalogPage(environmentId: String, query: CatalogPageQuery?): CatalogPageResult {
         authUtils.requiresAuthenticated()
         authUtils.requiresMemberOfAnyOrganization()
         return catalogApiService.catalogPage(environmentId, query)

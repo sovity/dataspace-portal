@@ -18,7 +18,8 @@
 import {AfterViewInit, Directive, ElementRef} from '@angular/core';
 
 @Directive({
-  selector: '[autofocus]',
+    selector: '[autofocus]',
+    standalone: false
 })
 export class AutofocusDirective implements AfterViewInit {
   constructor(private elementRef: ElementRef) {}

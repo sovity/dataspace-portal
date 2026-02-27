@@ -1,4 +1,4 @@
-FROM docker.io/nginxinc/nginx-unprivileged:1.27-alpine3.20
+FROM docker.io/nginxinc/nginx-unprivileged:1.29-alpine3.23
 
 # Temporarily switch to root to install packages and create symlink in restricted location
 USER root

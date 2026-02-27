@@ -33,8 +33,9 @@ import {FilterBoxItem} from './filter-box-item';
 import {FilterBoxVisibleState} from './filter-box-visible-state';
 
 @Component({
-  selector: 'filter-box',
-  templateUrl: './filter-box.component.html',
+    selector: 'filter-box',
+    templateUrl: './filter-box.component.html',
+    standalone: false
 })
 export class FilterBoxComponent implements OnInit, OnChanges, OnDestroy {
   @HostBinding('class.flex')

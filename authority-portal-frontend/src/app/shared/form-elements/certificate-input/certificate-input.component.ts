@@ -28,8 +28,9 @@ import {Subject, interval, takeUntil} from 'rxjs';
 import {ClipboardUtils} from '../../../core/utils/clipboard-utils';
 
 @Component({
-  selector: 'app-certificate-input',
-  templateUrl: './certificate-input.component.html',
+    selector: 'app-certificate-input',
+    templateUrl: './certificate-input.component.html',
+    standalone: false
 })
 export class CertificateInputComponent implements AfterViewInit, OnDestroy {
   @HostBinding('class.flex')

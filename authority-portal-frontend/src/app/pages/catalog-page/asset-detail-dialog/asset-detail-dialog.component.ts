@@ -37,9 +37,10 @@ import {AssetDetailDialogData} from './asset-detail-dialog-data';
  * All in one! If that's a good idea remains to be seen.
  */
 @Component({
-  selector: 'asset-detail-dialog',
-  templateUrl: './asset-detail-dialog.component.html',
-  styleUrls: ['./asset-detail-dialog.component.scss'],
+    selector: 'asset-detail-dialog',
+    templateUrl: './asset-detail-dialog.component.html',
+    styleUrls: ['./asset-detail-dialog.component.scss'],
+    standalone: false
 })
 export class AssetDetailDialogComponent implements OnDestroy {
   data!: AssetDetailDialogData;

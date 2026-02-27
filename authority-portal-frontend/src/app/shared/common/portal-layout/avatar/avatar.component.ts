@@ -22,8 +22,9 @@ export interface AvatarConfig {
   lastName: string;
 }
 @Component({
-  selector: 'app-avatar',
-  templateUrl: './avatar.component.html',
+    selector: 'app-avatar',
+    templateUrl: './avatar.component.html',
+    standalone: false
 })
 export class AvatarComponent implements OnChanges {
   @Input() name!: AvatarConfig;

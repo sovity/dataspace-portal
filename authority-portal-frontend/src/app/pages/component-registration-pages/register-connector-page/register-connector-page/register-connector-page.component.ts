@@ -42,9 +42,10 @@ import {RegisterConnectorPageStateImpl} from '../state/register-connector-page-s
 import {RegisterConnectorPageForm} from './register-connector-page-form';
 
 @Component({
-  selector: 'app-register-connector-page',
-  templateUrl: './register-connector-page.component.html',
-  providers: [RegisterConnectorPageForm],
+    selector: 'app-register-connector-page',
+    templateUrl: './register-connector-page.component.html',
+    providers: [RegisterConnectorPageForm],
+    standalone: false
 })
 export class RegisterConnectorPageComponent implements OnInit, OnDestroy {
   @HostBinding('class.overflow-y-auto')
@@ -89,7 +90,9 @@ export class RegisterConnectorPageComponent implements OnInit, OnDestroy {
 
   private startListeningToState() {
     this.store
-      .select<RegisterConnectorPageState>(RegisterConnectorPageStateImpl)
+      .select<RegisterConnectorPageState>(
+        (state) => state.RegisterConnectorPage as RegisterConnectorPageState,
+      )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {
         this.state = state;

@@ -20,8 +20,9 @@ import {MatDialogRef} from '@angular/material/dialog';
 import {Subject} from 'rxjs';
 
 @Component({
-  selector: 'app-asset-not-available-dialog',
-  templateUrl: './asset-not-available-dialog.component.html',
+    selector: 'app-asset-not-available-dialog',
+    templateUrl: './asset-not-available-dialog.component.html',
+    standalone: false
 })
 export class AssetNotAvailableDialogComponent implements OnDestroy {
   constructor(

@@ -61,8 +61,9 @@ import {
 } from './organization-onboard-page.form-model';
 
 @Component({
-  selector: 'app-organization-onboard-page',
-  templateUrl: './organization-onboard-page.component.html',
+    selector: 'app-organization-onboard-page',
+    templateUrl: './organization-onboard-page.component.html',
+    standalone: false
 })
 export class OrganizationOnboardPageComponent implements OnInit {
   state = DEFAULT_ORGANIZATION_ONBOARD_PAGE_PAGE_STATE;
@@ -106,7 +107,10 @@ export class OrganizationOnboardPageComponent implements OnInit {
 
   private setupFormOnce() {
     this.store
-      .select<OrganizationOnboardPageState>(OrganizationOnboardPageStateImpl)
+      .select<OrganizationOnboardPageState>(
+        (state) =>
+          state.OrganizationOnboardPageState as OrganizationOnboardPageState,
+      )
       .pipe(
         map((it) => it.details),
         filter((it) => it.isReady),
@@ -124,7 +128,10 @@ export class OrganizationOnboardPageComponent implements OnInit {
 
   private startListeningToState() {
     this.store
-      .select<OrganizationOnboardPageState>(OrganizationOnboardPageStateImpl)
+      .select<OrganizationOnboardPageState>(
+        (state) =>
+          state.OrganizationOnboardPageState as OrganizationOnboardPageState,
+      )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {
         this.state = state;

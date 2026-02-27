@@ -21,7 +21,10 @@ import {map} from 'rxjs/operators';
 import {UserRoleDto} from '@sovity.de/authority-portal-client';
 import {GlobalStateUtils} from 'src/app/core/global-state/global-state-utils';
 
-@Pipe({name: 'hasAnyRole'})
+@Pipe({
+    name: 'hasAnyRole',
+    standalone: false
+})
 export class HasAnyRolePipe implements PipeTransform {
   constructor(private globalStateUtils: GlobalStateUtils) {}
 

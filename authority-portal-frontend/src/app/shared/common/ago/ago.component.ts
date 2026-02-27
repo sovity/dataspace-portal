@@ -23,10 +23,11 @@ import {Component, Input} from '@angular/core';
  * But also shows the full date as a tooltip.
  */
 @Component({
-  selector: 'ago',
-  template: `<span [title]="date | date : 'EEEE yyyy-MM-dd hh:mm'">{{
+    selector: 'ago',
+    template: `<span [title]="date | date : 'EEEE yyyy-MM-dd hh:mm'">{{
     date | ago | async
   }}</span>`,
+    standalone: false
 })
 export class AgoComponent {
   @Input()

@@ -55,6 +55,10 @@ class PaginationMetadataUtils {
     }
 
     private fun getPageZeroBased(pageOneBased: Int?): Int {
-        return if (pageOneBased == null) 0 else (pageOneBased - 1)
+        if (pageOneBased == null) {
+            return 0
+        }
+        require(pageOneBased > 0) { "pageOneBased must be greater than 0. Was: $pageOneBased" }
+        return pageOneBased - 1
     }
 }

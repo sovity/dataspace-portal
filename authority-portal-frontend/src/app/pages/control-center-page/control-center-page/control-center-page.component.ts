@@ -25,8 +25,9 @@ export interface ControlCenterTab {
 }
 
 @Component({
-  selector: 'app-control-center-page',
-  templateUrl: './control-center-page.component.html',
+    selector: 'app-control-center-page',
+    templateUrl: './control-center-page.component.html',
+    standalone: false
 })
 export class ControlCenterPageComponent {
   tabs: ControlCenterTab[] = this.buildControlCenterTabs();

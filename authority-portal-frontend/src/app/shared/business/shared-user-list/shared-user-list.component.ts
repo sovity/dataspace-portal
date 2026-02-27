@@ -30,8 +30,9 @@ export interface Members extends MemberInfo {
 }
 
 @Component({
-  selector: 'app-shared-user-list',
-  templateUrl: './shared-user-list.component.html',
+    selector: 'app-shared-user-list',
+    templateUrl: './shared-user-list.component.html',
+    standalone: false
 })
 export class SharedUserListComponent implements OnInit {
   @Input() organizationId!: string;

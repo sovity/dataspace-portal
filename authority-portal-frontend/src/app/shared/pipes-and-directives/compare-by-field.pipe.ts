@@ -20,7 +20,10 @@ import {Pipe, PipeTransform} from '@angular/core';
 /**
  * Creates Compare By Function for Angular Material compareWith parameters
  */
-@Pipe({name: 'compareByField'})
+@Pipe({
+    name: 'compareByField',
+    standalone: false
+})
 export class CompareByFieldPipe implements PipeTransform {
   transform(key: string): (a: any, b: any) => boolean {
     return (a, b) =>

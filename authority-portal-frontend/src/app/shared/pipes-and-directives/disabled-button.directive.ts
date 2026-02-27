@@ -17,7 +17,10 @@
  */
 import {Directive, HostBinding, Input} from '@angular/core';
 
-@Directive({selector: '[disabledBtn]'})
+@Directive({
+    selector: '[disabledBtn]',
+    standalone: false
+})
 export class DisabledButtonDirective {
   @Input()
   @HostBinding('disabled')

@@ -33,8 +33,9 @@ import {SimpleChangesTyped} from 'src/app/core/utils/angular-utils';
 const COLLAPSED_DESCRIPTION_HEIGHT = 280;
 
 @Component({
-  selector: 'markdown-description',
-  templateUrl: './markdown-description.component.html',
+    selector: 'markdown-description',
+    templateUrl: './markdown-description.component.html',
+    standalone: false
 })
 export class MarkdownDescriptionComponent
   implements OnInit, OnChanges, AfterViewInit

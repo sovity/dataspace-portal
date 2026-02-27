@@ -33,8 +33,9 @@ import {
 import {AuthorityOrganizationEditPageStateImpl} from '../state/authority-organization-edit-page-state-impl';
 
 @Component({
-  selector: 'app-control-center-organization-edit-page',
-  templateUrl: './authority-organization-edit-page.component.html',
+    selector: 'app-control-center-organization-edit-page',
+    templateUrl: './authority-organization-edit-page.component.html',
+    standalone: false
 })
 export class AuthorityOrganizationEditPageComponent
   implements OnInit, OnDestroy
@@ -64,7 +65,8 @@ export class AuthorityOrganizationEditPageComponent
   startListeningToState(): void {
     this.store
       .select<AuthorityOrganizationEditPageState>(
-        AuthorityOrganizationEditPageStateImpl,
+        (state) =>
+          state.AuthorityOrganizationEditPageState as AuthorityOrganizationEditPageState,
       )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {

@@ -28,8 +28,9 @@ import {
 import {ControlCenterOrganizationProfilePageStateImpl} from '../state/control-center-organization-profile-page-state-impl';
 
 @Component({
-  selector: 'app-control-center-organization-profile-page',
-  templateUrl: './control-center-organization-profile-page.component.html',
+    selector: 'app-control-center-organization-profile-page',
+    templateUrl: './control-center-organization-profile-page.component.html',
+    standalone: false
 })
 export class ControlCenterOrganizationProfilePageComponent
   implements OnInit, OnDestroy
@@ -58,7 +59,8 @@ export class ControlCenterOrganizationProfilePageComponent
   startListeningToState(): void {
     this.store
       .select<ControlCenterOrganizationProfilePageState>(
-        ControlCenterOrganizationProfilePageStateImpl,
+        (state) =>
+          state.ControlCenterOrganizationProfilePageState as ControlCenterOrganizationProfilePageState,
       )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {

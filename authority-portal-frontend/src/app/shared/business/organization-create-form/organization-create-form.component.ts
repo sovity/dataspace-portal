@@ -29,8 +29,9 @@ export const LEGAL_ID_TYPES: {value: string; viewValue: string}[] = [
 ];
 
 @Component({
-  selector: 'app-organization-create-form',
-  templateUrl: './organization-create-form.component.html',
+    selector: 'app-organization-create-form',
+    templateUrl: './organization-create-form.component.html',
+    standalone: false
 })
 export class OrganizationCreateFormComponent implements OnDestroy {
   @Input()

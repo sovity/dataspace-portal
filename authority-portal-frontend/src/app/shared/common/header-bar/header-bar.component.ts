@@ -19,8 +19,9 @@ import {Component, Input} from '@angular/core';
 import {HeaderBarConfig} from './header-bar.model';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header-bar.component.html',
+    selector: 'app-header',
+    templateUrl: './header-bar.component.html',
+    standalone: false
 })
 export class HeaderBarComponent {
   @Input() headerConfig!: HeaderBarConfig;

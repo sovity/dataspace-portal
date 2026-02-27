@@ -19,8 +19,9 @@ import {Component, HostBinding, Input} from '@angular/core';
 import {DonutChartData} from './donut-chart-data';
 
 @Component({
-  selector: 'donut-chart',
-  templateUrl: './donut-chart.component.html',
+    selector: 'donut-chart',
+    templateUrl: './donut-chart.component.html',
+    standalone: false
 })
 export class DonutChartComponent {
   @HostBinding('class.flex')

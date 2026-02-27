@@ -21,8 +21,9 @@ import {ClipboardUtils} from 'src/app/core/utils/clipboard-utils';
 import {getConnectorStatusText} from '../../../core/utils/mappers/dto-ui-mapper';
 
 @Component({
-  selector: 'app-shared-connector-detail',
-  templateUrl: './shared-connector-detail.component.html',
+    selector: 'app-shared-connector-detail',
+    templateUrl: './shared-connector-detail.component.html',
+    standalone: false
 })
 export class SharedConnectorDetailComponent {
   @HostBinding('class.flex')

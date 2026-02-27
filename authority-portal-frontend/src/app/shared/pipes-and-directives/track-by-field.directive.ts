@@ -27,7 +27,8 @@ export const newTrackByFn =
  * Creates Track By Function for ngFor loops
  */
 @Directive({
-  selector: '[trackByField]',
+    selector: '[trackByField]',
+    standalone: false
 })
 export class TrackByFieldDirective {
   constructor(

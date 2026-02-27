@@ -27,8 +27,9 @@ import {Fetched} from 'src/app/core/utils/fetched';
 import {UserDeleteDialog} from './user-delete-dialog.model';
 
 @Component({
-  selector: 'app-user-delete-dialog',
-  templateUrl: './user-delete-dialog.component.html',
+    selector: 'app-user-delete-dialog',
+    templateUrl: './user-delete-dialog.component.html',
+    standalone: false
 })
 export class UserDeleteDialogComponent implements OnInit, OnDestroy {
   modalData: Fetched<UserDeletionCheck> = Fetched.empty();

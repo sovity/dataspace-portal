@@ -30,8 +30,9 @@ import {ControlCenterOrganizationEditPageStateImpl} from '../state/control-cente
 import {ControlCenterOrganizationEditPageForm} from './control-center-organization-edit-page.form';
 
 @Component({
-  selector: 'app-control-center-organization-edit-page',
-  templateUrl: './control-center-organization-edit-page.component.html',
+    selector: 'app-control-center-organization-edit-page',
+    templateUrl: './control-center-organization-edit-page.component.html',
+    standalone: false
 })
 export class ControlCenterOrganizationEditPageComponent
   implements OnInit, OnDestroy
@@ -54,7 +55,8 @@ export class ControlCenterOrganizationEditPageComponent
   startListeningToState(): void {
     this.store
       .select<ControlCenterOrganizationEditPageState>(
-        ControlCenterOrganizationEditPageStateImpl,
+        (state) =>
+          state.ControlCenterOrganizationEditPageState as ControlCenterOrganizationEditPageState,
       )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {

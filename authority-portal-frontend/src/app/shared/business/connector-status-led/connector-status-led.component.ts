@@ -24,8 +24,9 @@ import {
 import {getConnectorStatusText} from '../../../core/utils/mappers/dto-ui-mapper';
 
 @Component({
-  selector: 'app-connector-status-led',
-  templateUrl: './connector-status-led.component.html',
+    selector: 'app-connector-status-led',
+    templateUrl: './connector-status-led.component.html',
+    standalone: false
 })
 export class ConnectorStatusLedComponent {
   @Input()

@@ -18,7 +18,8 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-footer-for-full-page',
-  templateUrl: './footer-for-full-page.component.html',
+    selector: 'app-footer-for-full-page',
+    templateUrl: './footer-for-full-page.component.html',
+    standalone: false
 })
 export class FooterForFullPageComponent {}

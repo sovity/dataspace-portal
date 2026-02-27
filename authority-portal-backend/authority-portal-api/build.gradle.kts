@@ -26,6 +26,7 @@ dependencies {
     annotationProcessor(libs.lombok)
     compileOnly(libs.lombok)
 
+    api(libs.jackson.kotlin)
     api(libs.jakarta.wsRsApi)
     api(libs.jakarta.validation)
     api(libs.swaggerCore.annotations)

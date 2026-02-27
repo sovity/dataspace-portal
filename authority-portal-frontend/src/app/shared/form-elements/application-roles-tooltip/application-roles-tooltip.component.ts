@@ -18,8 +18,9 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-application-roles-tooltip',
-  templateUrl: './application-roles-tooltip.component.html',
+    selector: 'app-application-roles-tooltip',
+    templateUrl: './application-roles-tooltip.component.html',
+    standalone: false
 })
 export class ApplicationRolesTooltipComponent {
   // may need refinements

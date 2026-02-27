@@ -43,9 +43,10 @@ import {RegisterCentralComponentPageStateImpl} from '../state/register-central-c
 import {RegisterCentralComponentPageForm} from './register-central-component-page-form';
 
 @Component({
-  selector: 'app-register-central-component-page',
-  templateUrl: './register-central-component-page.component.html',
-  providers: [RegisterCentralComponentPageForm],
+    selector: 'app-register-central-component-page',
+    templateUrl: './register-central-component-page.component.html',
+    providers: [RegisterCentralComponentPageForm],
+    standalone: false
 })
 export class RegisterCentralComponentPageComponent
   implements OnInit, OnDestroy
@@ -99,7 +100,8 @@ export class RegisterCentralComponentPageComponent
   private startListeningToState() {
     this.store
       .select<RegisterCentralComponentPageState>(
-        RegisterCentralComponentPageStateImpl,
+        (state) =>
+          state.RegisterCentralComponentPage as RegisterCentralComponentPageState,
       )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {

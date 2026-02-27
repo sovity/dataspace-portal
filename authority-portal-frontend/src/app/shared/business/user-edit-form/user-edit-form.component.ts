@@ -20,8 +20,9 @@ import {FormGroup} from '@angular/forms';
 import {UserEditFormModel} from './user-edit-form-model';
 
 @Component({
-  selector: 'app-user-edit-form',
-  templateUrl: './user-edit-form.component.html',
+    selector: 'app-user-edit-form',
+    templateUrl: './user-edit-form.component.html',
+    standalone: false
 })
 export class UserEditFormComponent {
   @Input() userForm!: FormGroup<UserEditFormModel>;

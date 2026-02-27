@@ -35,8 +35,9 @@ import {
 import {SpConnectorDetailPageStateImpl} from '../state/sp-connector-detail-page-state-impl';
 
 @Component({
-  selector: 'app-sp-connector-detail-page',
-  templateUrl: './sp-connector-detail-page.component.html',
+    selector: 'app-sp-connector-detail-page',
+    templateUrl: './sp-connector-detail-page.component.html',
+    standalone: false
 })
 export class SpConnectorDetailPageComponent implements OnInit, OnDestroy {
   connectorId!: string;
@@ -63,7 +64,10 @@ export class SpConnectorDetailPageComponent implements OnInit, OnDestroy {
 
   private startListeningToState() {
     this.store
-      .select<SpConnectorDetailPageState>(SpConnectorDetailPageStateImpl)
+      .select<SpConnectorDetailPageState>(
+        (state) =>
+          state.SpConnectorDetailPageState as SpConnectorDetailPageState,
+      )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {
         this.state = state;

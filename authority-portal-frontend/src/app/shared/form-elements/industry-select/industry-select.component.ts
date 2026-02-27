@@ -19,8 +19,9 @@ import {Component, HostBinding, Input, booleanAttribute} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 @Component({
-  selector: 'app-industry-select',
-  templateUrl: './industry-select.component.html',
+    selector: 'app-industry-select',
+    templateUrl: './industry-select.component.html',
+    standalone: false
 })
 export class IndustrySelectComponent {
   @HostBinding('class.flex')

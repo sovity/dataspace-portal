@@ -18,8 +18,9 @@
 import {Component, HostBinding, Input} from '@angular/core';
 
 @Component({
-  selector: 'app-readonly-text-input',
-  templateUrl: './readonly-text-input.component.html',
+    selector: 'app-readonly-text-input',
+    templateUrl: './readonly-text-input.component.html',
+    standalone: false
 })
 export class ReadonlyTextInputComponent {
   @HostBinding('class.select-none')

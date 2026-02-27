@@ -28,8 +28,9 @@ import {ToastService} from 'src/app/shared/common/toast-notifications/toast.serv
 import {UserDetailConfig} from './shared-user-detail.model';
 
 @Component({
-  selector: 'app-shared-user-detail',
-  templateUrl: './shared-user-detail.component.html',
+    selector: 'app-shared-user-detail',
+    templateUrl: './shared-user-detail.component.html',
+    standalone: false
 })
 export class SharedUserDetailComponent {
   @HostBinding('class.flex')

@@ -31,8 +31,9 @@ import {isEllipsisActive} from 'src/app/core/utils/text-ellipsis-utils';
 import {MenuOption, TitleBarConfig} from './title-bar.model';
 
 @Component({
-  selector: 'app-title-bar',
-  templateUrl: './title-bar.component.html',
+    selector: 'app-title-bar',
+    templateUrl: './title-bar.component.html',
+    standalone: false
 })
 export class TitleBarComponent implements OnDestroy {
   isEllipsisActive: boolean = true;

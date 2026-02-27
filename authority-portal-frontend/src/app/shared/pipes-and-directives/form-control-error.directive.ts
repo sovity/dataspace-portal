@@ -21,7 +21,8 @@ import {Subscription} from 'rxjs';
 import {debounceTime, map} from 'rxjs/operators';
 
 @Directive({
-  selector: '[appFormControlError]',
+    selector: '[appFormControlError]',
+    standalone: false
 })
 export class FormControlErrorDirective implements OnInit, OnDestroy {
   @Input() control!: AbstractControl | null;

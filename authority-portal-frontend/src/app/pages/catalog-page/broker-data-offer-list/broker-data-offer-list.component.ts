@@ -19,8 +19,9 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CatalogDataOffer} from '@sovity.de/authority-portal-client';
 
 @Component({
-  selector: 'broker-data-offer-list',
-  templateUrl: './broker-data-offer-list.component.html',
+    selector: 'broker-data-offer-list',
+    templateUrl: './broker-data-offer-list.component.html',
+    standalone: false
 })
 export class BrokerDataOfferList {
   @Input()

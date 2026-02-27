@@ -24,8 +24,9 @@ import {getHighestRoleString} from 'src/app/core/utils/user-role-utils';
 import {ControlCenterModel} from '../control-center/control-center.model';
 
 @Component({
-  selector: 'app-toolbar',
-  templateUrl: './toolbar.component.html',
+    selector: 'app-toolbar',
+    templateUrl: './toolbar.component.html',
+    standalone: false
 })
 export class ToolbarComponent {
   userInfo: UserInfo | null = null;

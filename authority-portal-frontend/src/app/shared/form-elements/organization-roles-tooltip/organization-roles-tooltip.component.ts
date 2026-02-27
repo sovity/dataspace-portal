@@ -18,8 +18,9 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-organization-roles-tooltip',
-  templateUrl: './organization-roles-tooltip.component.html',
+    selector: 'app-organization-roles-tooltip',
+    templateUrl: './organization-roles-tooltip.component.html',
+    standalone: false
 })
 export class OrganizationRolesTooltipComponent {
   organizationRolesTooltip = `

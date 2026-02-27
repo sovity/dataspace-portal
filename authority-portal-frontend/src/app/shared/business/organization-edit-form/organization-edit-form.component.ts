@@ -21,8 +21,9 @@ import {Subject} from 'rxjs';
 import {OrganizationEditFormModel} from './organization-edit-form-model';
 
 @Component({
-  selector: 'app-organization-edit-form',
-  templateUrl: './organization-edit-form.component.html',
+    selector: 'app-organization-edit-form',
+    templateUrl: './organization-edit-form.component.html',
+    standalone: false
 })
 export class OrganizationEditFormComponent implements OnDestroy {
   @Input()

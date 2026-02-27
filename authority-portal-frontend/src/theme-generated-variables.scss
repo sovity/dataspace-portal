@@ -20,7 +20,7 @@
 @use '@angular/material' as mat;
 
 @mixin theme-vars($theme) {
-  --warn-color: #{mat.get-color-from-palette(map-get($theme, warn))};
+  --warn-color: #{mat.m2-get-color-from-palette(map-get($theme, warn))};
 
   --ngx-json-string: black; // color of string values
   --ngx-json-number: black; // color of number values

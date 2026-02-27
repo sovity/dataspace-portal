@@ -18,9 +18,10 @@
 import {Component, HostBinding, Input} from '@angular/core';
 
 @Component({
-  selector: 'asset-card-tag-list',
-  templateUrl: './asset-card-tag-list.component.html',
-  styleUrls: ['./asset-card-tag-list.component.css'],
+    selector: 'asset-card-tag-list',
+    templateUrl: './asset-card-tag-list.component.html',
+    styleUrls: ['./asset-card-tag-list.component.css'],
+    standalone: false
 })
 export class AssetCardTagListComponent {
   @HostBinding('class.block')

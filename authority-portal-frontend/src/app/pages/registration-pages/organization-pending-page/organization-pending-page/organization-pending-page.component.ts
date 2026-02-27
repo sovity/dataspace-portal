@@ -23,8 +23,9 @@ import {
 } from '../../../../core/services/config/app-config';
 
 @Component({
-  selector: 'app-organization-pending-page',
-  templateUrl: './organization-pending-page.component.html',
+    selector: 'app-organization-pending-page',
+    templateUrl: './organization-pending-page.component.html',
+    standalone: false
 })
 export class OrganizationPendingPageComponent {
   constructor(

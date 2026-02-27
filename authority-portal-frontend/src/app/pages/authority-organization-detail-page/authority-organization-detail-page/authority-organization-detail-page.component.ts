@@ -62,8 +62,9 @@ import {
 } from './authority-organization-detail-page.model';
 
 @Component({
-  selector: 'app-organization-detail-page',
-  templateUrl: './authority-organization-detail-page.component.html',
+    selector: 'app-organization-detail-page',
+    templateUrl: './authority-organization-detail-page.component.html',
+    standalone: false
 })
 export class AuthorityOrganizationDetailPageComponent
   implements OnInit, OnDestroy
@@ -119,7 +120,8 @@ export class AuthorityOrganizationDetailPageComponent
   startListeningToState() {
     this.store
       .select<AuthorityOrganizationDetailPageState>(
-        AuthorityOrganizationDetailPageStateImpl,
+        (state) =>
+          state.AuthorityOrganizationDetailPageState as AuthorityOrganizationDetailPageState,
       )
       .pipe(
         takeUntil(this.ngOnDestroy$),

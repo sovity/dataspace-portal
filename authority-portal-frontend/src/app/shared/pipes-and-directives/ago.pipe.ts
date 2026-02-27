@@ -39,7 +39,10 @@ export function formatDateAgo(date?: DateInput | null): string {
 /**
  * Displays a date as estimated relative time (e.g. "3 days ago").
  */
-@Pipe({name: 'ago'})
+@Pipe({
+    name: 'ago',
+    standalone: false
+})
 export class AgoPipe implements PipeTransform {
   interval$ = concat(of({}), interval(3000));
 

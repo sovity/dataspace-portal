@@ -56,8 +56,9 @@ import {
 import {AuthorityOrganizationListPageStateImpl} from './state/authority-organization-list-page-state-impl';
 
 @Component({
-  selector: 'app-authority-organization-list-page',
-  templateUrl: './authority-organization-list-page.component.html',
+    selector: 'app-authority-organization-list-page',
+    templateUrl: './authority-organization-list-page.component.html',
+    standalone: false
 })
 export class AuthorityOrganizationListPageComponent
   implements OnInit, OnDestroy
@@ -136,7 +137,8 @@ export class AuthorityOrganizationListPageComponent
   private startListeningToState() {
     this.store
       .select<AuthorityOrganizationListPageState>(
-        AuthorityOrganizationListPageStateImpl,
+        (state) =>
+          state.AuthorityOrganizationListPageState as AuthorityOrganizationListPageState,
       )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {
@@ -159,7 +161,8 @@ export class AuthorityOrganizationListPageComponent
     const stateReady: Observable<AuthorityOrganizationListPageState> =
       this.store
         .select<AuthorityOrganizationListPageState>(
-          AuthorityOrganizationListPageStateImpl,
+          (state) =>
+            state.AuthorityOrganizationListPageState as AuthorityOrganizationListPageState,
         )
         .pipe(filter((state) => state.organizations.state === 'ready'));
 

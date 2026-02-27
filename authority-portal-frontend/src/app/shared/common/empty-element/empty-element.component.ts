@@ -18,8 +18,9 @@
 import {Component, HostBinding, Input} from '@angular/core';
 
 @Component({
-  selector: 'app-empty-element',
-  templateUrl: './empty-element.component.html',
+    selector: 'app-empty-element',
+    templateUrl: './empty-element.component.html',
+    standalone: false
 })
 export class EmptyElementComponent {
   @HostBinding('class.flex')

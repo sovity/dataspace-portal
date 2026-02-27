@@ -23,8 +23,9 @@ import {OrganizationEditFormModel} from '../../../shared/business/organization-e
 import {AuthorityOrganizationEditFormModel} from './authority-organization-edit-form-model';
 
 @Component({
-  selector: 'app-authority-organization-edit-form',
-  templateUrl: './authority-organization-edit-form.component.html',
+    selector: 'app-authority-organization-edit-form',
+    templateUrl: './authority-organization-edit-form.component.html',
+    standalone: false
 })
 export class AuthorityOrganizationEditFormComponent implements OnDestroy {
   @Input()

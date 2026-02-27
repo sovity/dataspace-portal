@@ -25,8 +25,9 @@ import {
 import {CertificateFormModel} from './certificate-input-form-model';
 
 @Component({
-  selector: 'app-certificate-input-form',
-  templateUrl: './certificate-input-form.component.html',
+    selector: 'app-certificate-input-form',
+    templateUrl: './certificate-input-form.component.html',
+    standalone: false
 })
 export class CertificateInputFormComponent implements OnDestroy {
   @HostBinding('class.flex')

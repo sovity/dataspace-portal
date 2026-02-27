@@ -21,8 +21,9 @@ import {OrganizationOverviewEntryDto} from '@sovity.de/authority-portal-client';
 import {Fetched} from 'src/app/core/utils/fetched';
 
 @Component({
-  selector: 'app-organization-select',
-  templateUrl: './organization-select.component.html',
+    selector: 'app-organization-select',
+    templateUrl: './organization-select.component.html',
+    standalone: false
 })
 export class OrganizationSelectComponent {
   @HostBinding('class.flex')

@@ -52,8 +52,9 @@ import {
 import {ParticipantOwnConnectorListPageStateImpl} from '../state/participant-own-connector-list-page-state-impl';
 
 @Component({
-  selector: 'app-participant-own-connector-list-page',
-  templateUrl: './participant-own-connector-list-page.component.html',
+    selector: 'app-participant-own-connector-list-page',
+    templateUrl: './participant-own-connector-list-page.component.html',
+    standalone: false
 })
 export class ParticipantOwnConnectorListPageComponent
   implements OnInit, OnDestroy
@@ -140,7 +141,8 @@ export class ParticipantOwnConnectorListPageComponent
   private startListeningToState() {
     this.store
       .select<ParticipantOwnConnectorListPageState>(
-        ParticipantOwnConnectorListPageStateImpl,
+        (state) =>
+          state.ParticipantOwnConnectorListPageState as ParticipantOwnConnectorListPageState,
       )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {

@@ -19,8 +19,9 @@ import {Component, Input} from '@angular/core';
 import {SidebarMenu} from './sidebar-element.model';
 
 @Component({
-  selector: 'app-sidebar-element',
-  templateUrl: './sidebar-element.component.html',
+    selector: 'app-sidebar-element',
+    templateUrl: './sidebar-element.component.html',
+    standalone: false
 })
 export class SidebarElementComponent {
   @Input() sidebarMenu!: SidebarMenu;

@@ -18,7 +18,8 @@
 import {AfterViewInit, Directive, ElementRef} from '@angular/core';
 
 @Directive({
-  selector: '[externalLink]',
+    selector: '[externalLink]',
+    standalone: false
 })
 export class ExternalLinkDirective implements AfterViewInit {
   constructor(private elementRef: ElementRef) {}

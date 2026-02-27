@@ -24,8 +24,9 @@ import {SwitchEnvironment} from 'src/app/core/global-state/global-state-actions'
 import {GlobalStateUtils} from 'src/app/core/global-state/global-state-utils';
 
 @Component({
-  selector: 'app-env-switcher',
-  templateUrl: './env-switcher.component.html',
+    selector: 'app-env-switcher',
+    templateUrl: './env-switcher.component.html',
+    standalone: false
 })
 export class EnvSwitcherComponent implements OnInit, OnDestroy {
   @Input() deploymentEnvironments: DeploymentEnvironmentDto[] = [];

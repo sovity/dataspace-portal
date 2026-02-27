@@ -19,8 +19,9 @@ import {Component, HostBinding, Input, TrackByFunction} from '@angular/core';
 import {PropertyGridField} from './property-grid-field';
 
 @Component({
-  selector: 'property-grid',
-  templateUrl: './property-grid.component.html',
+    selector: 'property-grid',
+    templateUrl: './property-grid.component.html',
+    standalone: false
 })
 export class PropertyGridComponent {
   @Input()

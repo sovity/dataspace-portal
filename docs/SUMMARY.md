@@ -2,6 +2,7 @@
 
 * [Welcome](product/user-documentation/General%20Overview.md)
 * [FAQ](product/user-documentation/faq.md)
+* [Feature List](product/user-documentation/feature-list.md)
 
 ## User Guide
 

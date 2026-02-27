@@ -40,6 +40,7 @@ data class PaginationMetadata(
     @field:Schema(
         description = "Page number, one based, meaning the first page is page 1.",
         example = "1",
+        minimum = "1",
         defaultValue = "1",
         type = "n",
         requiredMode = Schema.RequiredMode.REQUIRED

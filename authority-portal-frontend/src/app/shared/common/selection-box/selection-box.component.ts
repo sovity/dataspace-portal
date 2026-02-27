@@ -21,8 +21,9 @@ import {APP_CONFIG, AppConfig} from '../../../core/services/config/app-config';
 import {SelectionBoxModel} from './selection-box.model';
 
 @Component({
-  selector: 'app-selection-box',
-  templateUrl: './selection-box.component.html',
+    selector: 'app-selection-box',
+    templateUrl: './selection-box.component.html',
+    standalone: false
 })
 export class SelectionBoxComponent {
   @Input() selectionBoxConfig!: SelectionBoxModel;

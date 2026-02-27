@@ -22,8 +22,9 @@ import {
 } from '../../../../core/services/config/app-config';
 
 @Component({
-  selector: 'app-footer-copyright',
-  templateUrl: './footer-copyright.component.html',
+    selector: 'app-footer-copyright',
+    templateUrl: './footer-copyright.component.html',
+    standalone: false
 })
 export class FooterCopyrightComponent {
   @HostBinding('class.flex')

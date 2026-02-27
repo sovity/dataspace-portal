@@ -19,8 +19,9 @@ import {Component} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-page-not-found',
-  templateUrl: './page-not-found-page.component.html',
+    selector: 'app-page-not-found',
+    templateUrl: './page-not-found-page.component.html',
+    standalone: false
 })
 export class PageNotFoundPageComponent {
   constructor(private titleService: Title) {

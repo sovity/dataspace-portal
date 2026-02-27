@@ -23,8 +23,9 @@ import {BreadcrumbItem} from './breadcrumb.model';
 import {BreadcrumbService} from './breadcrumb.service';
 
 @Component({
-  selector: 'app-breadcrumb',
-  templateUrl: './breadcrumb.component.html',
+    selector: 'app-breadcrumb',
+    templateUrl: './breadcrumb.component.html',
+    standalone: false
 })
 export class BreadcrumbComponent implements OnDestroy {
   breadcrumb: BreadcrumbItem[] = [];

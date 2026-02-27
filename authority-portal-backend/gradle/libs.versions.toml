@@ -12,10 +12,11 @@ junit = "5.10.0"
 flyway = "9.0.1"
 jsonAssert = "1.5.1"
 
-quarkus = "3.18.1"
-quarkus-jooq = "2.0.0"
+quarkus = "3.30.2"
+quarkus-jooq = "2.1.0"
 
 javapoet = "1.13.0"
+jackson = "2.21.0"
 jakarta-servletApi = "5.0.0"
 jakarta-validation = "3.0.2"
 jakarta-wsRsApi = "3.1.0"
@@ -27,7 +28,7 @@ postgresDbVersion = "17"
 postgresDbImage = "postgres:17-alpine"
 postgresql = "42.7.2"
 swaggerCore = "2.2.15"
-testcontainers = "1.18.3"
+testcontainers = "1.21.4"
 
 assertj = "3.23.1"
 mockito = "5.4.0"
@@ -74,6 +75,7 @@ edc-transferProcessApi = { module = "org.eclipse.edc:transfer-process-api", vers
 
 quarkus-universeBom = { module = "io.quarkus.platform:quarkus-bom", version.ref = "quarkus" }
 quarkus-jooq = { module = "io.quarkiverse.jooq:quarkus-jooq", version.ref = "quarkus-jooq" }
+jackson-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson" }
 jakarta-servletApi = { module = "jakarta.servlet:jakarta.servlet-api", version.ref = "jakarta-servletApi" }
 jakarta-validation = { module = "jakarta.validation:jakarta.validation-api", version.ref = "jakarta-validation" }
 jakarta-wsRsApi = { module = "jakarta.ws.rs:jakarta.ws.rs-api", version.ref = "jakarta-wsRsApi" }

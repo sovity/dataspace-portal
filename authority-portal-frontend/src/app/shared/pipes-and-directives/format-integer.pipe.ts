@@ -19,7 +19,8 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {FormatService} from '../../core/services/format.service';
 
 @Pipe({
-  name: 'formatInteger',
+    name: 'formatInteger',
+    standalone: false
 })
 export class FormatIntegerPipe implements PipeTransform {
   constructor(private formatService: FormatService) {}

@@ -18,8 +18,9 @@
 import {Component, HostBinding, Input} from '@angular/core';
 
 @Component({
-  selector: 'app-error-element',
-  templateUrl: './error-element.component.html',
+    selector: 'app-error-element',
+    templateUrl: './error-element.component.html',
+    standalone: false
 })
 export class ErrorElementComponent {
   @HostBinding('class.flex')

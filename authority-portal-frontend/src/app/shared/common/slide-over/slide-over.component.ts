@@ -33,8 +33,9 @@ import {
 } from './slide-over.model';
 
 @Component({
-  selector: 'app-slide-over',
-  templateUrl: './slide-over.component.html',
+    selector: 'app-slide-over',
+    templateUrl: './slide-over.component.html',
+    standalone: false
 })
 export class SlideOverComponent implements OnChanges, OnDestroy {
   @Input() component: any;

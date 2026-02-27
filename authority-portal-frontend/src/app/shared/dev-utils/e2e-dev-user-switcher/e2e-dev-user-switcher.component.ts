@@ -27,8 +27,9 @@ import {E2eDevUser} from './e2e-dev-user';
 import {E2E_DEV_USERS} from './e2e-dev-users';
 
 @Component({
-  selector: 'app-e2e-dev-user-switcher',
-  templateUrl: './e2e-dev-user-switcher.component.html',
+    selector: 'app-e2e-dev-user-switcher',
+    templateUrl: './e2e-dev-user-switcher.component.html',
+    standalone: false
 })
 export class E2EDevUserSwitcherComponent {
   minimize = true;

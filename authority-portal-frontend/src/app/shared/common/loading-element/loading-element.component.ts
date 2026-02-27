@@ -18,8 +18,9 @@
 import {Component, HostBinding} from '@angular/core';
 
 @Component({
-  selector: 'app-loading-element',
-  templateUrl: './loading-element.component.html',
+    selector: 'app-loading-element',
+    templateUrl: './loading-element.component.html',
+    standalone: false
 })
 export class LoadingElementComponent {
   @HostBinding('class.flex')

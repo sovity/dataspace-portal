@@ -27,8 +27,9 @@ import {ControlCenterUserEditPageStateImpl} from '../state/control-center-user-e
 import {ControlCenterUserEditPageForm} from './control-center-user-edit-page.form';
 
 @Component({
-  selector: 'app-control-center-user-edit-page',
-  templateUrl: './control-center-user-edit-page.component.html',
+    selector: 'app-control-center-user-edit-page',
+    templateUrl: './control-center-user-edit-page.component.html',
+    standalone: false
 })
 export class ControlCenterUserEditPageComponent implements OnInit, OnDestroy {
   form: ControlCenterUserEditPageForm | null = null;
@@ -49,7 +50,8 @@ export class ControlCenterUserEditPageComponent implements OnInit, OnDestroy {
   startListeningToState(): void {
     this.store
       .select<ControlCenterUserEditPageState>(
-        ControlCenterUserEditPageStateImpl,
+        (state) =>
+          state.ControlCenterUserEditPageState as ControlCenterUserEditPageState,
       )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {

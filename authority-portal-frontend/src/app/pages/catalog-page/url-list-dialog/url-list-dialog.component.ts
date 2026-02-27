@@ -20,8 +20,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {UrlListDialogData} from './url-list-dialog.data';
 
 @Component({
-  selector: 'app-json-dialog',
-  templateUrl: './url-list-dialog.component.html',
+    selector: 'app-json-dialog',
+    templateUrl: './url-list-dialog.component.html',
+    standalone: false
 })
 export class UrlListDialogComponent {
   constructor(

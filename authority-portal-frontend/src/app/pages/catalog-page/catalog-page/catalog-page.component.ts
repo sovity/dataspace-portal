@@ -47,8 +47,9 @@ import {CatalogPageState} from './state/catalog-page-state';
 import {CatalogPageStateModel} from './state/catalog-page-state-model';
 
 @Component({
-  selector: 'catalog-page',
-  templateUrl: './catalog-page.component.html',
+    selector: 'catalog-page',
+    templateUrl: './catalog-page.component.html',
+    standalone: false
 })
 export class CatalogPageComponent implements OnInit, OnDestroy {
   @HostBinding('class.flex')
@@ -139,7 +140,9 @@ export class CatalogPageComponent implements OnInit, OnDestroy {
 
   private startListeningToStore() {
     this.store
-      .select<CatalogPageStateModel>(CatalogPageState)
+      .select<CatalogPageStateModel>(
+        (state) => state.CatalogPageState as CatalogPageStateModel,
+      )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {
         this.state = state;

@@ -16,7 +16,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 import {CommonModule} from '@angular/common';
-import {HttpClientModule} from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
@@ -66,71 +66,62 @@ import {SpConnectorDetailPageModule} from './pages/sp-connector-detail-page/sp-c
 import {SpConnectorListPageModule} from './pages/sp-connector-list-page/sp-connector-list-page.module';
 import {SharedModule} from './shared/shared.module';
 
-@NgModule({
-  declarations: [AppComponent],
-  providers: [
-    provideAppConfig(),
-    ApiService,
-    ApiClientFactory,
-    CatalogApiService,
-  ],
-  bootstrap: [AppComponent],
-  imports: [
-    // Angular
-    CommonModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-
-    // Ngxs
-    NgxsModule.forRoot([GlobalStateImpl], {
-      developmentMode: true,
-      executionStrategy: NgxsInZoneExecutionStrategy,
-    }),
-    NgxsReduxDevtoolsPluginModule.forRoot(),
-
-    // Authority Portal
-    SharedModule,
-
-    // Authority Portal pages
-    AuthorityConnectorDetailPageModule,
-    AuthorityConnectorListPageModule,
-    AuthorityOrganizationDetailPageModule,
-    AuthorityOrganizationListPageModule,
-    AuthorityOrganizationEditPageModule,
-    CatalogPageModule,
-    CentralComponentListPageModule,
-    ChooseParticipantCaasModule,
-    ChooseParticipantConnectorModule,
-    ControlCenterOrganizationEditPageModule,
-    ControlCenterOrganizationMemberDetailPageModule,
-    ControlCenterOrganizationMembersPageModule,
-    ControlCenterOrganizationProfilePageModule,
-    ControlCenterPageModule,
-    ControlCenterUserEditPageModule,
-    ControlCenterUserProfilePageModule,
-    DashboardPageModule,
-    LoadingPageModule,
-    OrganizationCreatePageModule,
-    OrganizationOnboardPageModule,
-    OrganizationPendingPageModule,
-    OrganizationRejectedPageModule,
-    PageNotFoundPageModule,
-    ParticipantOwnConnectorDetailPageModule,
-    ParticipantOwnConnectorListPageModule,
-    ConfigureProvidedConnectorPageModule,
-    RegisterCentralComponentPageModule,
-    RegisterConnectorPageModule,
-    RequestConnectorPageModule,
-    ReserveProvidedConnectorPageModule,
-    SpConnectorDetailPageModule,
-    SpConnectorListPageModule,
-    UnauthenticatedPageModule,
-
-    // Routing Module
-    AppRoutingModule,
-  ],
-})
+@NgModule({ declarations: [AppComponent],
+    bootstrap: [AppComponent], imports: [
+        // Angular
+        CommonModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        // Ngxs
+        NgxsModule.forRoot([GlobalStateImpl], {
+            developmentMode: true,
+            executionStrategy: NgxsInZoneExecutionStrategy,
+        }),
+        NgxsReduxDevtoolsPluginModule.forRoot(),
+        // Authority Portal
+        SharedModule,
+        // Authority Portal pages
+        AuthorityConnectorDetailPageModule,
+        AuthorityConnectorListPageModule,
+        AuthorityOrganizationDetailPageModule,
+        AuthorityOrganizationListPageModule,
+        AuthorityOrganizationEditPageModule,
+        CatalogPageModule,
+        CentralComponentListPageModule,
+        ChooseParticipantCaasModule,
+        ChooseParticipantConnectorModule,
+        ControlCenterOrganizationEditPageModule,
+        ControlCenterOrganizationMemberDetailPageModule,
+        ControlCenterOrganizationMembersPageModule,
+        ControlCenterOrganizationProfilePageModule,
+        ControlCenterPageModule,
+        ControlCenterUserEditPageModule,
+        ControlCenterUserProfilePageModule,
+        DashboardPageModule,
+        LoadingPageModule,
+        OrganizationCreatePageModule,
+        OrganizationOnboardPageModule,
+        OrganizationPendingPageModule,
+        OrganizationRejectedPageModule,
+        PageNotFoundPageModule,
+        ParticipantOwnConnectorDetailPageModule,
+        ParticipantOwnConnectorListPageModule,
+        ConfigureProvidedConnectorPageModule,
+        RegisterCentralComponentPageModule,
+        RegisterConnectorPageModule,
+        RequestConnectorPageModule,
+        ReserveProvidedConnectorPageModule,
+        SpConnectorDetailPageModule,
+        SpConnectorListPageModule,
+        UnauthenticatedPageModule,
+        // Routing Module
+        AppRoutingModule], providers: [
+        provideAppConfig(),
+        ApiService,
+        ApiClientFactory,
+        CatalogApiService,
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AppModule {}

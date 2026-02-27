@@ -19,8 +19,9 @@ import {Component, HostBinding, Input, booleanAttribute} from '@angular/core';
 import {FormControl} from '@angular/forms';
 
 @Component({
-  selector: 'app-text-area',
-  templateUrl: './text-area.component.html',
+    selector: 'app-text-area',
+    templateUrl: './text-area.component.html',
+    standalone: false
 })
 export class TextAreaComponent {
   @HostBinding('class.select-none')

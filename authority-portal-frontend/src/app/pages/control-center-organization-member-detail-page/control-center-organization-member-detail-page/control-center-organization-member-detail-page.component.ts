@@ -28,9 +28,9 @@ import {
 import {ControlCenterOrganizationMemberDetailPageStateImpl} from '../state/control-center-organization-member-detail-page-state-impl';
 
 @Component({
-  selector: 'app-control-center-organization-member-detail-page',
-  templateUrl:
-    './control-center-organization-member-detail-page.component.html',
+    selector: 'app-control-center-organization-member-detail-page',
+    templateUrl: './control-center-organization-member-detail-page.component.html',
+    standalone: false
 })
 export class ControlCenterOrganizationMemberDetailPageComponent
   implements OnInit, OnDestroy
@@ -60,7 +60,8 @@ export class ControlCenterOrganizationMemberDetailPageComponent
   startListeningToState(): void {
     this.store
       .select<ControlCenterOrganizationMemberDetailPageState>(
-        ControlCenterOrganizationMemberDetailPageStateImpl,
+        (state) =>
+          state.ControlCenterOrganizationMemberDetailPageState as ControlCenterOrganizationMemberDetailPageState,
       )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {

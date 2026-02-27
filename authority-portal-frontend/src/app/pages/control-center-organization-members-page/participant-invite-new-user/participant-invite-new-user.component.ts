@@ -42,8 +42,9 @@ import {
 import {ParticipantInviteNewUserPageStateImpl} from './state/participant-invite-new-user-page-state-impl';
 
 @Component({
-  selector: 'app-participant-invite-new-user',
-  templateUrl: './participant-invite-new-user.component.html',
+    selector: 'app-participant-invite-new-user',
+    templateUrl: './participant-invite-new-user.component.html',
+    standalone: false
 })
 export class ParticipantInviteNewUserComponent {
   state = DEFAULT_PARTICIPANT_INVITE_NEW_USER_PAGE_STATE;
@@ -91,7 +92,8 @@ export class ParticipantInviteNewUserComponent {
   startListeningToState() {
     this.store
       .select<ParticipantInviteNewUserPageState>(
-        ParticipantInviteNewUserPageStateImpl,
+        (state) =>
+          state.ParticipantInviteNewUserPageState as ParticipantInviteNewUserPageState,
       )
       .pipe(takeUntil(this.ngOnDestroy$))
       .subscribe((state) => {
