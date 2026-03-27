@@ -59,7 +59,7 @@ jobs:
           java-version: "21"
           distribution: "temurin"
       - name: "Gradle: Validate Gradle Wrapper"
-        uses: gradle/actions/wrapper-validation@d9c87d481d55275bb5441eef3fe0e46805f9ef70 # v3.5.0
+        uses: gradle/actions/wrapper-validation@ed408507eac070d1f99cc633dbcf757c94c7933a # v4.4.3
       - name: "Gradle: Set up Gradle"
         uses: gradle/actions/setup-gradle@f29f5a9d7b09a7c6b29859002d29d24e1674c884 # v5.0.1
       - name: "Gradle: Build"
@@ -138,7 +138,7 @@ jobs:
           java-version: "21"
           distribution: "temurin"
       - name: "Gradle: Validate Gradle Wrapper"
-        uses: gradle/actions/wrapper-validation@d9c87d481d55275bb5441eef3fe0e46805f9ef70 # v3.5.0
+        uses: gradle/actions/wrapper-validation@ed408507eac070d1f99cc633dbcf757c94c7933a # v4.4.3
       - name: "Gradle: Set up Gradle"
         uses: gradle/actions/setup-gradle@f29f5a9d7b09a7c6b29859002d29d24e1674c884 # v5.0.1
       - name: "Gradle: Generate TypeScript Library Code"
