@@ -18,8 +18,6 @@
 
 package de.sovity.authorityportal.web.thirdparty.uptimekuma.model
 
-import de.sovity.authorityportal.web.thirdparty.uptimekuma.model.ComponentStatus.entries
-
 
 enum class ComponentStatus(val intValue: Int) {
     UP(1),

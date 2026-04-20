@@ -40,7 +40,7 @@ class CatalogResourceImpl(
 
     @Transactional
     override fun catalogPage(environmentId: String, query: CatalogPageQuery?): CatalogPageResult {
-        authUtils.requiresAuthenticated()
+        authUtils.requiresActiveUser()
         authUtils.requiresMemberOfAnyOrganization()
         return catalogApiService.catalogPage(environmentId, query)
     }
@@ -50,7 +50,7 @@ class CatalogResourceImpl(
         environmentId: String,
         query: DataOfferDetailPageQuery
     ): DataOfferDetailPageResult {
-        authUtils.requiresAuthenticated()
+        authUtils.requiresActiveUser()
         authUtils.requiresMemberOfAnyOrganization()
         return dataOfferDetailApiService.dataOfferDetailPage(environmentId, query)
     }

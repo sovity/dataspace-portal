@@ -41,12 +41,10 @@ import de.sovity.authorityportal.web.thirdparty.caas.model.CaasDetails
 import de.sovity.authorityportal.web.thirdparty.caas.model.CaasPortalResponse
 import de.sovity.authorityportal.web.utils.idmanagement.ClientIdUtils
 import io.quarkus.test.InjectMock
-import io.quarkus.test.TestTransaction
 import io.quarkus.test.junit.QuarkusTest
 import io.quarkus.test.security.TestSecurity
 import jakarta.inject.Inject
 import org.assertj.core.api.Assertions.assertThat
-import org.flywaydb.core.Flyway
 import org.jooq.DSLContext
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test

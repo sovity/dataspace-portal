@@ -63,6 +63,7 @@ class OrganizationRegistrationApiServiceTest {
             organization(1, 1) {
                 it.registrationStatus = OrganizationRegistrationStatus.PENDING
             }
+            user(0, null)
             user(1, 1) {
                 it.registrationStatus = UserRegistrationStatus.PENDING
                 it.onboardingType = UserOnboardingType.SELF_REGISTRATION
@@ -107,6 +108,7 @@ class OrganizationRegistrationApiServiceTest {
             organization(1, 1) {
                 it.registrationStatus = OrganizationRegistrationStatus.PENDING
             }
+            user(0, null)
             user(1, 1) {
                 it.registrationStatus = UserRegistrationStatus.PENDING
                 it.onboardingType = UserOnboardingType.SELF_REGISTRATION
@@ -151,6 +153,7 @@ class OrganizationRegistrationApiServiceTest {
             organization(1, 1) {
                 it.registrationStatus = OrganizationRegistrationStatus.ACTIVE
             }
+            user(0, null)
             user(1, 1) {
                 it.registrationStatus = UserRegistrationStatus.ACTIVE
                 it.onboardingType = UserOnboardingType.SELF_REGISTRATION

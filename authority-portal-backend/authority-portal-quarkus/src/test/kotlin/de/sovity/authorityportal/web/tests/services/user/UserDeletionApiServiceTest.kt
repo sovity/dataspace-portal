@@ -70,9 +70,16 @@ class UserDeletionApiServiceTest {
     lateinit var dapsClientService: DapsClientService
 
     @Test
+    @TestTransaction
     fun `checkUserDeletion fails because user is not admin and target is not self`() {
         // arrange
         useDevUser(0, 0, setOf(Roles.UserRoles.PARTICIPANT_USER))
+
+        ScenarioData().apply {
+            organization(0, 0)
+            user(0, 0)
+            scenarioInstaller.install(this)
+        }
 
         // act & assert
         assertThatThrownBy {

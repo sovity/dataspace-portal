@@ -64,9 +64,16 @@ class OrganizationDeletionApiServiceTest {
     lateinit var dapsClientService: DapsClientService
 
     @Test
+    @TestTransaction
     fun `checkOrganizationDeletion fails because user is not admin`() {
         // arrange
         useDevUser(0, 0, setOf(Roles.UserRoles.PARTICIPANT_USER))
+
+        ScenarioData().apply {
+            organization(0, 0)
+            user(0, 0)
+            scenarioInstaller.install(this)
+        }
 
         // act & assert
         assertThatThrownBy {
@@ -132,9 +139,16 @@ class OrganizationDeletionApiServiceTest {
     }
 
     @Test
+    @TestTransaction
     fun `deleteOrganization fails because user is not admin`() {
         // arrange
         useDevUser(0, 0, setOf(Roles.UserRoles.PARTICIPANT_USER))
+
+        ScenarioData().apply {
+            organization(0, 0)
+            user(0, 0)
+            scenarioInstaller.install(this)
+        }
 
         // act & assert
         assertThatThrownBy {

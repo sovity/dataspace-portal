@@ -22,7 +22,6 @@ import de.sovity.authorityportal.db.jooq.Tables
 import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject
 import org.jooq.DSLContext
-import java.util.Locale
 
 @ApplicationScoped
 class ClientIdUtils {

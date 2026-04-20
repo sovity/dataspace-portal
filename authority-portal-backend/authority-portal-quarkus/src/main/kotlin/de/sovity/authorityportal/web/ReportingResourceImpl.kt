@@ -48,7 +48,7 @@ class ReportingResourceImpl(
 
     @Transactional
     override fun createConnectorsCsvReport(environmentId: String): Response {
-        authUtils.requiresAuthenticated()
+        authUtils.requiresActiveUser()
         authUtils.requiresMemberOfAnyOrganization()
 
         val isAuthority = loggedInUser.roles
@@ -72,7 +72,7 @@ class ReportingResourceImpl(
 
     @Transactional
     override fun createUsersAndRolesCsvReport(): Response {
-        authUtils.requiresAuthenticated()
+        authUtils.requiresActiveUser()
         authUtils.requiresAnyRole(Roles.UserRoles.AUTHORITY_ADMIN, Roles.UserRoles.AUTHORITY_USER)
         val csv = userCsvReportService.generateUserDetailsCsvReport()
         val filename = "${localDate()}_user_details.csv"
@@ -81,7 +81,7 @@ class ReportingResourceImpl(
 
     @Transactional
     override fun createDataOffersCsvReport(environmentId: String): Response {
-        authUtils.requiresAuthenticated()
+        authUtils.requiresActiveUser()
         val csv = dataOfferCsvReportService.generateDataOffersCsvReport(environmentId)
         val filename = "${localDate()}_data_offers_$environmentId.csv"
         return attachment(csv, filename)
@@ -89,7 +89,7 @@ class ReportingResourceImpl(
 
     @Transactional
     override fun createSystemStabilityCsvReport(environmentId: String): Response {
-        authUtils.requiresAuthenticated()
+        authUtils.requiresActiveUser()
         val csv = systemStabilityCsvReportService.generateSystemStabilityCsvReport(environmentId)
         val filename = "${localDate()}_system_stability_$environmentId.csv"
         return attachment(csv, filename)

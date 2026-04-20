@@ -29,6 +29,32 @@ _No special migration steps required_
 - sovity EDC CE: [`v{{ EDC CE VERSION }}`](https://github.com/sovity/edc-ce/releases/tag/v{{ EDC CE VERSION }})
 
 
+## [v7.3.2] - 2026-04-20
+
+### Overview
+
+Security fix for unauthorized API access after self-registration.
+
+### Detailed Changes
+
+#### Patch
+
+- Fix unauthorized API access for pending users after self-registration
+
+### Deployment Migration Notes
+
+_No special migration steps required_
+
+#### Compatible Versions
+
+- Data Space Portal CE Backend Docker Image: `ghcr.io/sovity/ds-portal-ce-backend:7.3.2`
+- Data Space Portal CE Frontend Docker Image: `ghcr.io/sovity/ds-portal-ce-frontend:7.3.2`
+- Catalog Crawler CE: `ghcr.io/sovity/ds-portal-ce-crawler:7.3.2`
+- sovity EDC CE: [`v16.5.0`](https://github.com/sovity/edc-ce/releases/tag/v16.5.0)
+- Keycloak: `26.4.7`
+- PostgreSQL: `17`
+
+
 ## [v7.3.0] - 2026-02-27
 
 ### Overview

@@ -79,6 +79,7 @@ import jakarta.transaction.Transactional
 
 @PermitAll
 @ApplicationScoped
+@Suppress("LongParameterList", "TooManyFunctions")
 class UiResourceImpl(
     val authUtils: AuthUtils,
     val loggedInUser: LoggedInUser,
@@ -109,7 +110,7 @@ class UiResourceImpl(
 
     @Transactional
     override fun userDetails(userId: String): UserDetailDto {
-        authUtils.requiresAuthenticated()
+        authUtils.requiresActiveOrOnboardingUser()
         authUtils.requires(
             authUtils.hasRole(Roles.UserRoles.AUTHORITY_USER) ||
                 (authUtils.hasRole(Roles.UserRoles.PARTICIPANT_USER) && authUtils.isMemberOfSameOrganizationAs(userId)),
@@ -128,6 +129,7 @@ class UiResourceImpl(
     // Organization management (Internal)
     @Transactional
     override fun changeParticipantRole(userId: String, role: UserRoleDto): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.PARTICIPANT_ADMIN)
         authUtils.requiresTargetNotSelf(userId)
         authUtils.requiresMemberOfSameOrganizationAs(userId)
@@ -141,6 +143,7 @@ class UiResourceImpl(
 
     @Transactional
     override fun inviteUser(invitationInformation: InviteParticipantUserRequest): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.PARTICIPANT_ADMIN)
         authUtils.requiresMemberOfAnyOrganization()
         return userInvitationApiService.inviteParticipantUser(
@@ -152,6 +155,7 @@ class UiResourceImpl(
 
     @Transactional
     override fun deactivateParticipantUser(userId: String): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.PARTICIPANT_ADMIN)
         authUtils.requiresTargetRegistrationStatus(userId, UserRegistrationStatus.ACTIVE)
         authUtils.requiresTargetNotSelf(userId)
@@ -161,6 +165,7 @@ class UiResourceImpl(
 
     @Transactional
     override fun reactivateParticipantUser(userId: String): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.PARTICIPANT_ADMIN)
         authUtils.requiresTargetRegistrationStatus(userId, UserRegistrationStatus.DEACTIVATED)
         authUtils.requiresMemberOfSameOrganizationAs(userId)
@@ -170,6 +175,7 @@ class UiResourceImpl(
     // Organization management (Authority)
     @Transactional
     override fun changeApplicationRoles(userId: String, roles: List<UserRoleDto>): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresAnyRole(
             Roles.UserRoles.AUTHORITY_ADMIN,
             Roles.UserRoles.OPERATOR_ADMIN,
@@ -184,6 +190,7 @@ class UiResourceImpl(
 
     @Transactional
     override fun clearApplicationRoles(userId: String): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresAnyRole(
             Roles.UserRoles.AUTHORITY_ADMIN,
             Roles.UserRoles.OPERATOR_ADMIN,
@@ -198,6 +205,7 @@ class UiResourceImpl(
 
     @Transactional
     override fun deactivateAnyUser(userId: String): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.AUTHORITY_ADMIN)
         authUtils.requiresTargetRegistrationStatus(userId, UserRegistrationStatus.ACTIVE)
         authUtils.requiresTargetNotSelf(userId)
@@ -206,6 +214,7 @@ class UiResourceImpl(
 
     @Transactional
     override fun reactivateAnyUser(userId: String): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.AUTHORITY_ADMIN)
         authUtils.requiresTargetRegistrationStatus(userId, UserRegistrationStatus.DEACTIVATED)
         return userDeactivationApiService.reactivateUser(userId, loggedInUser.userId)
@@ -213,6 +222,7 @@ class UiResourceImpl(
 
     @Transactional
     override fun checkUserDeletion(userId: String): UserDeletionCheck {
+        authUtils.requiresActiveUser()
         if (!authUtils.hasRole(Roles.UserRoles.AUTHORITY_ADMIN)) {
             if (authUtils.hasRole(Roles.UserRoles.PARTICIPANT_ADMIN)) {
                 authUtils.requiresMemberOfSameOrganizationAs(userId)
@@ -225,6 +235,7 @@ class UiResourceImpl(
 
     @Transactional
     override fun deleteUser(userId: String, successorUserId: String?): IdResponse {
+        authUtils.requiresActiveUser()
         if (!authUtils.hasRole(Roles.UserRoles.AUTHORITY_ADMIN)) {
             if (authUtils.hasRole(Roles.UserRoles.PARTICIPANT_ADMIN)) {
                 authUtils.requiresMemberOfSameOrganizationAs(userId)
@@ -237,19 +248,25 @@ class UiResourceImpl(
 
     @Transactional
     override fun organizationsOverviewForAuthority(environmentId: String): OrganizationOverviewResult {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.AUTHORITY_USER)
         return organizationInfoApiService.organizationsOverview(environmentId)
     }
 
     @Transactional
     override fun organizationsOverviewForProvidingConnectors(environmentId: String): OrganizationOverviewResult {
+        authUtils.requiresActiveUser()
         authUtils.requiresAnyRole(Roles.UserRoles.SERVICE_PARTNER_ADMIN)
         authUtils.requiresMemberOfAnyOrganization()
         return organizationInfoApiService.organizationsOverview(environmentId)
     }
 
     @Transactional
-    override fun reserveProvidedConnector(environmentId: String, connectorReserveRequest: ReserveConnectorRequest): CreateConnectorResponse {
+    override fun reserveProvidedConnector(
+        environmentId: String,
+        connectorReserveRequest: ReserveConnectorRequest
+    ): CreateConnectorResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.SERVICE_PARTNER_ADMIN)
         authUtils.requiresMemberOfAnyOrganization()
         return connectorManagementApiService.reserveProvidedConnector(
@@ -262,37 +279,46 @@ class UiResourceImpl(
 
     @Transactional
     override fun getConnector(connectorId: String): ConnectorDetailsDto {
+        authUtils.requiresActiveUser()
         authUtils.requiresAnyRole(Roles.UserRoles.AUTHORITY_USER, Roles.UserRoles.OPERATOR_ADMIN)
         return connectorManagementApiService.getAuthorityConnectorDetails(connectorId)
     }
 
     @Transactional
     override fun getAllConnectors(environmentId: String): ConnectorOverviewResult {
+        authUtils.requiresActiveUser()
         authUtils.requiresAnyRole(Roles.UserRoles.AUTHORITY_USER, Roles.UserRoles.OPERATOR_ADMIN)
         return connectorManagementApiService.listAllConnectors(environmentId)
     }
 
     @Transactional
     override fun ownOrganizationDetails(environmentId: String): OwnOrganizationDetailsDto {
+        authUtils.requiresActiveOrOnboardingUser()
         authUtils.requiresRole(Roles.UserRoles.PARTICIPANT_USER)
         authUtils.requiresMemberOfAnyOrganization()
         return organizationInfoApiService.getOwnOrganizationInformation(loggedInUser.organizationId!!, environmentId)
     }
 
     @Transactional
-    override fun organizationDetailsForAuthority(organizationId: String, environmentId: String): OrganizationDetailsDto {
+    override fun organizationDetailsForAuthority(
+        organizationId: String,
+        environmentId: String
+    ): OrganizationDetailsDto {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.AUTHORITY_USER)
         return organizationInfoApiService.getOrganizationInformation(organizationId, environmentId)
     }
 
     @Transactional
     override fun organizationDetails(organizationId: String, environmentId: String): OrganizationDetailsDto {
+        authUtils.requiresActiveUser()
         authUtils.requiresAnyRole(Roles.UserRoles.SERVICE_PARTNER_ADMIN, Roles.UserRoles.OPERATOR_ADMIN)
         return organizationInfoApiService.getOrganizationInformation(organizationId, environmentId)
     }
 
     @Transactional
     override fun getProvidedConnectors(environmentId: String): ProvidedConnectorOverviewResult {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.SERVICE_PARTNER_ADMIN)
         authUtils.requiresMemberOfAnyOrganization()
         return connectorManagementApiService.listServiceProvidedConnectors(
@@ -303,6 +329,7 @@ class UiResourceImpl(
 
     @Transactional
     override fun getProvidedConnectorDetails(connectorId: String): ConnectorDetailsDto {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.SERVICE_PARTNER_ADMIN)
         authUtils.requiresMemberOfAnyOrganization()
         return connectorManagementApiService.getConnectorDetails(
@@ -314,6 +341,7 @@ class UiResourceImpl(
 
     @Transactional
     override fun deleteProvidedConnector(connectorId: String): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresAnyRole(Roles.UserRoles.SERVICE_PARTNER_ADMIN, Roles.UserRoles.OPERATOR_ADMIN)
 
         if (!authUtils.hasRole(Roles.UserRoles.OPERATOR_ADMIN)) {
@@ -331,18 +359,21 @@ class UiResourceImpl(
 
     @Transactional
     override fun inviteOrganization(invitationInformation: InviteOrganizationRequest): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.AUTHORITY_USER)
         return organizationInvitationApiService.inviteOrganization(invitationInformation, loggedInUser.userId)
     }
 
     @Transactional
     override fun approveOrganization(organizationId: String): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.AUTHORITY_USER)
         return organizationRegistrationApiService.approveOrganization(organizationId, loggedInUser.userId)
     }
 
     @Transactional
     override fun rejectOrganization(organizationId: String): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.AUTHORITY_USER)
         return organizationRegistrationApiService.rejectOrganization(organizationId, loggedInUser.userId)
     }
@@ -350,6 +381,7 @@ class UiResourceImpl(
     // Connector management
     @Transactional
     override fun ownOrganizationConnectors(environmentId: String): ConnectorOverviewResult {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.PARTICIPANT_USER)
         authUtils.requiresMemberOfAnyOrganization()
         return connectorManagementApiService.listOrganizationConnectors(loggedInUser.organizationId!!, environmentId)
@@ -357,6 +389,7 @@ class UiResourceImpl(
 
     @Transactional
     override fun ownOrganizationConnectorDetails(connectorId: String): ConnectorDetailsDto {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.PARTICIPANT_USER)
         authUtils.requiresMemberOfAnyOrganization()
         return connectorManagementApiService.ownOrganizationConnectorDetails(
@@ -368,6 +401,7 @@ class UiResourceImpl(
 
     @Transactional
     override fun createOwnConnector(environmentId: String, connector: CreateConnectorRequest): CreateConnectorResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.PARTICIPANT_CURATOR)
         authUtils.requiresMemberOfAnyOrganization()
         return connectorManagementApiService.createOwnConnector(
@@ -380,6 +414,7 @@ class UiResourceImpl(
 
     @Transactional
     override fun deleteOwnConnector(connectorId: String): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.PARTICIPANT_CURATOR)
         authUtils.requiresMemberOfOwningOrganization(connectorId)
         return connectorManagementApiService.deleteConnectorById(
@@ -396,6 +431,7 @@ class UiResourceImpl(
         environmentId: String,
         connector: ConfigureProvidedConnectorWithCertificateRequest
     ): CreateConnectorResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.SERVICE_PARTNER_ADMIN)
         authUtils.requiresMemberOfAnyOrganization()
         return connectorManagementApiService.configureProvidedConnectorWithCertificate(
@@ -414,6 +450,7 @@ class UiResourceImpl(
         environmentId: String,
         connector: ConfigureProvidedConnectorWithJwksRequest
     ): CreateConnectorResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.SERVICE_PARTNER_ADMIN)
         authUtils.requiresMemberOfAnyOrganization()
         return connectorManagementApiService.configureProvidedConnectorWithJwks(
@@ -427,6 +464,7 @@ class UiResourceImpl(
 
     @Lock
     override fun createCaas(environmentId: String, caasRequest: CreateCaasRequest): CreateConnectorResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.PARTICIPANT_CURATOR)
         authUtils.requiresMemberOfAnyOrganization()
         return caasManagementApiService.createCaas(
@@ -439,6 +477,7 @@ class UiResourceImpl(
 
     @Transactional
     override fun checkFreeCaasUsage(environmentId: String): CaasAvailabilityResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.PARTICIPANT_CURATOR)
         authUtils.requiresMemberOfAnyOrganization()
         return caasManagementApiService.getCaasAvailabilityForOrganization(loggedInUser.organizationId!!, environmentId)
@@ -458,6 +497,7 @@ class UiResourceImpl(
 
     @Transactional
     override fun getCentralComponents(environmentId: String): List<CentralComponentDto> {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.OPERATOR_ADMIN)
         authUtils.requiresMemberOfAnyOrganization()
         return centralComponentManagementApiService.listCentralComponents(environmentId)
@@ -468,6 +508,7 @@ class UiResourceImpl(
         environmentId: String,
         componentRegistrationRequest: CentralComponentCreateRequest
     ): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.OPERATOR_ADMIN)
         authUtils.requiresMemberOfAnyOrganization()
         return centralComponentManagementApiService.registerCentralComponent(
@@ -480,6 +521,7 @@ class UiResourceImpl(
 
     @Transactional
     override fun deleteCentralComponent(centralComponentId: String, environmentId: String): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.OPERATOR_ADMIN)
         authUtils.requiresMemberOfAnyOrganization()
         return centralComponentManagementApiService.deleteCentralComponentByUser(
@@ -507,12 +549,14 @@ class UiResourceImpl(
 
     @Transactional
     override fun updateUser(userId: String, updateUserDto: UpdateUserDto): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresSelfOrRole(userId, Roles.UserRoles.AUTHORITY_ADMIN)
         return userUpdateApiService.updateUserDetails(userId, updateUserDto)
     }
 
     @Transactional
     override fun updateOwnOrganizationDetails(organizationDto: UpdateOwnOrganizationDto): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.PARTICIPANT_ADMIN)
         authUtils.requiresMemberOfAnyOrganization()
         return organizationUpdateApiService.updateOwnOrganization(loggedInUser.organizationId!!, organizationDto)
@@ -520,28 +564,34 @@ class UiResourceImpl(
 
     @Transactional
     override fun updateOrganizationDetails(organizationId: String, organizationDto: UpdateOrganizationDto): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.AUTHORITY_ADMIN)
         return organizationUpdateApiService.updateOrganization(organizationId, organizationDto)
     }
 
     @Transactional
     override fun getComponentsStatus(environmentId: String): ComponentStatusOverview {
-        authUtils.requiresAuthenticated()
+        authUtils.requiresActiveUser()
         authUtils.requiresMemberOfAnyOrganization()
         if (authUtils.hasRole(Roles.UserRoles.AUTHORITY_USER)) {
             return componentStatusApiService.getComponentsStatus(environmentId)
         }
-        return componentStatusApiService.getComponentsStatusForOrganizationId(environmentId, loggedInUser.organizationId!!)
+        return componentStatusApiService.getComponentsStatusForOrganizationId(
+            environmentId,
+            loggedInUser.organizationId!!
+        )
     }
 
     @Transactional
     override fun checkOrganizationDeletion(organizationId: String): OrganizationDeletionCheck {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.AUTHORITY_ADMIN)
         return organizationDeletionApiService.checkOrganizationDeletion(organizationId)
     }
 
     @Transactional
     override fun deleteOrganization(organizationId: String): IdResponse {
+        authUtils.requiresActiveUser()
         authUtils.requiresRole(Roles.UserRoles.AUTHORITY_ADMIN)
         return organizationDeletionApiService.deleteOrganizationAndDependencies(organizationId, loggedInUser.userId)
     }

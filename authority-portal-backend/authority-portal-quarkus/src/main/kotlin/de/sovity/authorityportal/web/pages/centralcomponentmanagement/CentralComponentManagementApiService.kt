@@ -22,7 +22,6 @@ import de.sovity.authorityportal.api.model.CentralComponentCreateRequest
 import de.sovity.authorityportal.api.model.CentralComponentDto
 import de.sovity.authorityportal.api.model.IdResponse
 import de.sovity.authorityportal.db.jooq.tables.records.ComponentRecord
-import de.sovity.authorityportal.web.environment.DeploymentEnvironmentConfiguration
 import de.sovity.authorityportal.web.environment.DeploymentEnvironmentService
 import de.sovity.authorityportal.web.services.CentralComponentService
 import de.sovity.authorityportal.web.services.OrganizationService

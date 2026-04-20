@@ -18,7 +18,6 @@
 
 package de.sovity.edc.ext.db;
 
-import de.sovity.edc.ext.db.JdbcCredentials;
 import org.junit.jupiter.api.extension.AfterAllCallback;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;

@@ -34,6 +34,16 @@ class AuthUtils(
     val organizationService: OrganizationService,
     val connectorService: ConnectorService
 ) {
+    fun requiresActiveUser() {
+        requiresAuthenticated()
+        requiresRegistrationStatus(UserRegistrationStatus.ACTIVE)
+    }
+
+    fun requiresActiveOrOnboardingUser() {
+        requiresAuthenticated()
+        requiresRegistrationStatus(UserRegistrationStatus.ACTIVE, UserRegistrationStatus.ONBOARDING)
+    }
+
     fun requiresAuthenticated() {
         if (!loggedInUser.authenticated) {
             Log.error("User is not authenticated.")
@@ -66,13 +76,13 @@ class AuthUtils(
         }
     }
 
-    fun requiresRegistrationStatus(status: UserRegistrationStatus) {
+    fun requiresRegistrationStatus(vararg statuses: UserRegistrationStatus) {
         requiresAuthenticated()
         val userRegistrationStatus = userService.getUserOrThrow(loggedInUser.userId).registrationStatus
 
-        if (userRegistrationStatus != status) {
-            Log.error("User registration status is invalid. userRegistrationStatus: $userRegistrationStatus, expectedRegistrationStatus: $status, userId=${loggedInUser.userId}.")
-            unauthorized("User registration status is invalid. Expected: $status. Has: $userRegistrationStatus")
+        if (userRegistrationStatus !in statuses) {
+            Log.error("User registration status is invalid. userRegistrationStatus: $userRegistrationStatus, expectedRegistrationStatuses: ${statuses.toSet()}, userId=${loggedInUser.userId}.")
+            unauthorized("User registration status is invalid. Expected one of: ${statuses.toSet()}. Has: $userRegistrationStatus")
         }
     }
 

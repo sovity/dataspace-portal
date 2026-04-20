@@ -45,9 +45,16 @@ class UserRoleApiServiceTest {
     lateinit var scenarioInstaller: ScenarioInstaller
 
     @Test
+    @TestTransaction
     fun `changeParticipantRole fails because of insufficient permissions`() {
         // arrange
         useDevUser(0, 0, setOf(Roles.UserRoles.PARTICIPANT_USER))
+
+        ScenarioData().apply {
+            organization(0, 0)
+            user(0, 0)
+            scenarioInstaller.install(this)
+        }
 
         // act & assert
         assertThatThrownBy {
@@ -56,9 +63,16 @@ class UserRoleApiServiceTest {
     }
 
     @Test
+    @TestTransaction
     fun `changeParticipantRole fails because target is self`() {
         // arrange
         useDevUser(0, 0, setOf(Roles.UserRoles.PARTICIPANT_ADMIN))
+
+        ScenarioData().apply {
+            organization(0, 0)
+            user(0, 0)
+            scenarioInstaller.install(this)
+        }
 
         // act & assert
         assertThatThrownBy {

@@ -18,9 +18,6 @@
 
 package de.sovity.edc.ext.catalog.crawler;
 
-import de.sovity.edc.ce.libs.mappers.PlaceholderEndpointService;
-import de.sovity.edc.runtime.config.ConfigUtils;
-import org.eclipse.edc.transform.spi.TypeTransformerRegistry;
 import org.eclipse.edc.connector.controlplane.services.spi.catalog.CatalogService;
 import org.eclipse.edc.jsonld.spi.JsonLd;
 import org.eclipse.edc.runtime.metamodel.annotation.Inject;
@@ -28,6 +25,7 @@ import org.eclipse.edc.runtime.metamodel.annotation.Provides;
 import org.eclipse.edc.spi.system.ServiceExtension;
 import org.eclipse.edc.spi.system.ServiceExtensionContext;
 import org.eclipse.edc.spi.types.TypeManager;
+import org.eclipse.edc.transform.spi.TypeTransformerRegistry;
 
 @Provides({CrawlerExtensionContext.class})
 public class CrawlerExtension implements ServiceExtension {

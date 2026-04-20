@@ -803,6 +803,12 @@ class ConnectorManagementApiServiceTest {
         // arrange
         useDevUser(0, 0, setOf(Roles.UserRoles.PARTICIPANT_CURATOR))
 
+        ScenarioData().apply {
+            organization(0, 0)
+            user(0, 0)
+            scenarioInstaller.install(this)
+        }
+
         val request = ConfigureProvidedConnectorWithCertificateRequest(
             frontendUrl = "https://connector.test.sovity.io/",
             endpointUrl = "https://connector.test.sovity.io/dsp/",
